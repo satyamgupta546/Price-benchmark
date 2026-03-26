@@ -1,0 +1,229 @@
+# ============================================================
+# Price Benchmark — Central Configuration
+# ============================================================
+# This file documents ALL configurable settings for the project.
+# Runtime settings are loaded from backend/.env (see below).
+# ============================================================
+
+# ----------------------------------------------------------
+# Project Info
+# ----------------------------------------------------------
+project:
+  name: "Price Benchmark"
+  version: "1.0.0"
+  description: "Quick Commerce Assortment Tracker"
+  port: 6789                          # Unified server port (backend + frontend)
+
+# ----------------------------------------------------------
+# Server Configuration (backend/.env)
+# ----------------------------------------------------------
+server:
+  app_env: "development"              # development | production
+  host: "0.0.0.0"
+  port: 6789
+  cors_origins: "http://localhost:6789"
+  timeout_keep_alive: 600             # seconds — long timeout for scraping
+
+# ----------------------------------------------------------
+# Scraping Engine
+# ----------------------------------------------------------
+scraper:
+  headless: true                      # Run Chromium in headless mode
+  scrape_delay: 3                     # Delay (seconds) between requests
+  max_retries: 3                      # Retry count on failures
+  max_products_per_platform: 10000    # Max products to collect per platform
+  scroll_times_per_category: 8        # Number of scrolls per category page
+  scroll_delay: 1.0                   # Delay (seconds) between scroll events
+  search_wait: 1.5                    # Wait time after page navigation
+  page_timeout: 15000                 # Page load timeout (ms)
+  browser_args:
+    - "--disable-blink-features=AutomationControlled"
+    - "--no-sandbox"
+  viewport:
+    width: 1366
+    height: 768
+
+# ----------------------------------------------------------
+# Platforms
+# ----------------------------------------------------------
+platforms:
+  blinkit:
+    name: "Blinkit"
+    base_url: "https://blinkit.com"
+    color: "#F8C723"
+    search_url: "/s/?q={term}"
+    category_count: 65                # Hardcoded category paths
+    location_method: "cookies"        # __pincode, gr_1_lat, gr_1_lng
+    scrape_strategy: "categories_first + search"
+
+  zepto:
+    name: "Zepto"
+    base_url: "https://www.zeptonow.com"
+    color: "#8B22CF"
+    search_url: "/search?query={term}"
+    location_method: "cookies + localStorage + UI"
+    scrape_strategy: "categories + search + __NEXT_DATA__"
+
+  instamart:
+    name: "Swiggy Instamart"
+    base_url: "https://www.swiggy.com/instamart"
+    color: "#FC8019"
+    search_url: "/instamart/search?custom_back=true&query={term}"
+    location_method: "cookies + localStorage + UI"
+    scrape_strategy: "categories + search"
+
+  jiomart:
+    name: "JioMart"
+    base_url: "https://www.jiomart.com"
+    color: "#0078AD"
+    search_url: "/search/{term}"
+    location_method: "cookies + UI pincode"
+    scrape_strategy: "categories + search"
+
+  flipkart_minutes:
+    name: "Flipkart Minutes"
+    base_url: "https://www.flipkart.com"
+    color: "#2874F0"
+    search_url: "/search?q={term}&marketplace=GROCERY"
+    location_method: "UI pincode"
+    scrape_strategy: "search + grocery categories"
+
+# ----------------------------------------------------------
+# Search Terms (120+ grocery items)
+# ----------------------------------------------------------
+search_terms:
+  staples:
+    - rice, atta, dal, oil, sugar, salt, flour, wheat, maida, sooji
+    - poha, besan, chana dal, moong dal, masoor dal, rajma, toor dal, urad dal
+    - basmati rice, mustard oil, sunflower oil, refined oil, jaggery, sago
+  dairy:
+    - milk, curd, paneer, butter, cheese, ghee, cream, yogurt, dahi
+    - lassi, buttermilk, milk powder, condensed milk
+  fruits:
+    - banana, apple, orange, mango, grapes, papaya, watermelon, pomegranate
+    - guava, kiwi, pineapple, lemon, coconut, litchi, pear
+  vegetables:
+    - onion, potato, tomato, spinach, capsicum, carrot, cucumber, ginger
+    - garlic, cabbage, cauliflower, brinjal, ladyfinger, peas, beans
+    - mushroom, corn, beetroot, radish, pumpkin, bitter gourd, bottle gourd
+    - green chilli, coriander leaves, curry leaves, mint
+  snacks:
+    - chips, biscuit, namkeen, cookies, chocolate, candy, cake, rusk
+    - popcorn, makhana, mixture, wafer, kurkure, lays
+  beverages:
+    - juice, water, cold drink, cola, soda, energy drink, coconut water
+  breakfast:
+    - bread, maggi, noodles, oats, cornflakes, muesli, cereal, jam
+    - honey, peanut butter, nutella, pasta, vermicelli
+  tea_coffee:
+    - tea, coffee, green tea, filter coffee, tea bags, instant coffee
+  masala:
+    - turmeric, chilli powder, garam masala, cumin, coriander powder, pepper
+    - ketchup, sauce, mayonnaise, vinegar, pickle, papad
+  non_veg:
+    - egg, chicken, mutton, fish, prawn
+  personal_care:
+    - soap, shampoo, toothpaste, toothbrush, facewash, deodorant
+    - body wash, hair oil, body lotion, razor, sanitary pad, sunscreen
+  cleaning:
+    - detergent, dishwash, floor cleaner, toilet cleaner, harpic, vim
+    - surf excel, colin, phenyl, mop, broom
+  baby_health:
+    - diaper, baby food, cerelac, protein powder, vitamin, horlicks, bournvita
+  kitchen:
+    - tissue, aluminium foil, cling wrap, garbage bag, candle, matchbox
+  frozen:
+    - frozen, ice cream, pizza, burger, samosa, paratha, momos, french fries
+  dry_fruits:
+    - almonds, cashew, raisins, walnut, dates, peanuts, pistachio
+
+# ----------------------------------------------------------
+# Pincode → Coordinates (sample, full in base_scraper.py)
+# ----------------------------------------------------------
+pincode_coords:
+  "11": { lat: 28.6139, lng: 77.2090, city: "Delhi" }
+  "40": { lat: 19.0760, lng: 72.8777, city: "Mumbai" }
+  "56": { lat: 12.9716, lng: 77.5946, city: "Bangalore" }
+  "50": { lat: 17.3850, lng: 78.4867, city: "Hyderabad" }
+  "60": { lat: 13.0827, lng: 80.2707, city: "Chennai" }
+  "70": { lat: 22.5726, lng: 88.3639, city: "Kolkata" }
+  "38": { lat: 23.0225, lng: 72.5714, city: "Ahmedabad" }
+  "41": { lat: 18.5204, lng: 73.8567, city: "Pune" }
+  "30": { lat: 26.9124, lng: 75.7873, city: "Jaipur" }
+  "80": { lat: 25.6093, lng: 85.1376, city: "Patna" }
+  # ... 80+ prefixes — see base_scraper.py PINCODE_COORDS
+
+# ----------------------------------------------------------
+# Frontend
+# ----------------------------------------------------------
+frontend:
+  framework: "React 18 + Vite 5"
+  styling: "Tailwind CSS 3"
+  dark_mode: "class-based (tailwind darkMode: 'class')"
+  theme_persistence: "localStorage key: 'theme'"
+  default_theme: "dark"
+  build_output: "frontend/dist/"
+  dev_port: 6789
+
+# ----------------------------------------------------------
+# Data Sources
+# ----------------------------------------------------------
+data:
+  pincodes_file: "data/pincodes.json"
+  states_count: 29
+  union_territories: 3                # Delhi, Chandigarh, Puducherry
+  cities_count: "300+"
+  pincodes_count: "2000+"
+
+# ----------------------------------------------------------
+# CSV Export
+# ----------------------------------------------------------
+export:
+  format: "comparison"                # One row per product, platform prices as columns
+  columns:
+    static:
+      - sr_no
+      - product_name
+      - brand
+      - unit
+      - category
+      - pincode
+    per_platform:                      # Repeated for each active platform
+      - "{Platform}_price"
+      - "{Platform}_mrp"
+      - "{Platform}_stock"
+    computed:
+      - cheapest_platform
+      - cheapest_price
+      - price_diff                    # max_price - min_price
+  filename_pattern: "PriceBenchmark_{pincode}_{date}.csv"
+
+# ----------------------------------------------------------
+# API Endpoints
+# ----------------------------------------------------------
+api:
+  base_path: "/api"
+  endpoints:
+    - method: POST
+      path: /api/scrape
+      description: "Scrape products for pincodes × platforms"
+      body: "{ pincodes: string[], platforms: string[], max_products_per_platform: number }"
+      response: "ScrapeResponse"
+
+    - method: GET
+      path: /api/pincodes
+      description: "State → City → Pincode mapping"
+      response: "{ [state]: { [city]: string[] } }"
+
+    - method: GET
+      path: /api/export/csv
+      description: "Download comparison CSV"
+      params: "pincode (comma-separated), platforms (comma-separated)"
+
+    - method: GET
+      path: /api/categories/{platform}
+      description: "Category list for a platform"
+
+    - method: GET
+      path: /api/health
+      description: "Health check"
