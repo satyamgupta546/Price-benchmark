@@ -20,6 +20,10 @@ router = APIRouter()
 # In-memory store for last scrape results
 _scrape_cache: dict[str, list[Product]] = {}
 
+# Limit concurrent browser instances to prevent CPU/memory overload
+MAX_CONCURRENT_SCRAPERS = 2
+_scrape_semaphore = asyncio.Semaphore(MAX_CONCURRENT_SCRAPERS)
+
 SCRAPER_MAP = {
     "blinkit": BlinkitScraper,
     "jiomart": JioMartScraper,
@@ -44,32 +48,34 @@ async def _scrape_platform(platform: str, pincode: str, max_products: int,
             error_message=f"Unknown platform: {platform}",
         )
 
-    start = time.time()
-    try:
-        scraper = scraper_cls(pincode=pincode, max_products=max_products,
-                              progress_callback=progress_callback,
-                              selected_categories=selected_categories)
-        products = await scraper.scrape_all()
-        duration = time.time() - start
-        return PlatformResult(
-            platform=platform,
-            pincode=pincode,
-            status="success" if products else "partial",
-            total_products=len(products),
-            scrape_duration_seconds=round(duration, 2),
-            products=products,
-        )
-    except Exception as e:
-        duration = time.time() - start
-        return PlatformResult(
-            platform=platform,
-            pincode=pincode,
-            status="failed",
-            total_products=0,
-            scrape_duration_seconds=round(duration, 2),
-            products=[],
-            error_message=str(e),
-        )
+    # Limit concurrent browsers to prevent CPU/memory overload
+    async with _scrape_semaphore:
+        start = time.time()
+        try:
+            scraper = scraper_cls(pincode=pincode, max_products=max_products,
+                                  progress_callback=progress_callback,
+                                  selected_categories=selected_categories)
+            products = await scraper.scrape_all()
+            duration = time.time() - start
+            return PlatformResult(
+                platform=platform,
+                pincode=pincode,
+                status="success" if products else "partial",
+                total_products=len(products),
+                scrape_duration_seconds=round(duration, 2),
+                products=products,
+            )
+        except Exception as e:
+            duration = time.time() - start
+            return PlatformResult(
+                platform=platform,
+                pincode=pincode,
+                status="failed",
+                total_products=0,
+                scrape_duration_seconds=round(duration, 2),
+                products=[],
+                error_message=str(e),
+            )
 
 
 @router.post("/scrape", response_model=ScrapeResponse)
