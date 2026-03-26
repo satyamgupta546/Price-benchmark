@@ -148,21 +148,45 @@ function handleSSEEvent(event, payload, setPlatformProgress, completedResults, s
 export function usePincodes() {
   const [pincodes, setPincodes] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const retryRef = useRef(null)
 
   const fetchPincodes = useCallback(async () => {
     if (pincodes) return pincodes
     setLoading(true)
+    setError(null)
     try {
       const res = await fetch(`${API_BASE}/pincodes`)
+      if (!res.ok) throw new Error(`Server error: ${res.status}`)
       const data = await res.json()
+      if (data.error) throw new Error(data.error)
       setPincodes(data)
+      if (retryRef.current) { clearInterval(retryRef.current); retryRef.current = null }
       return data
-    } catch {
+    } catch (err) {
+      setError('Backend server is not running. Start it with: ./start.sh')
+      // Auto-retry every 3 seconds
+      if (!retryRef.current) {
+        retryRef.current = setInterval(async () => {
+          try {
+            const res = await fetch(`${API_BASE}/pincodes`)
+            if (res.ok) {
+              const data = await res.json()
+              if (!data.error) {
+                setPincodes(data)
+                setError(null)
+                clearInterval(retryRef.current)
+                retryRef.current = null
+              }
+            }
+          } catch {}
+        }, 3000)
+      }
       return null
     } finally {
       setLoading(false)
     }
   }, [pincodes])
 
-  return { pincodes, loading, fetchPincodes }
+  return { pincodes, loading, error, fetchPincodes }
 }
