@@ -7,6 +7,12 @@ echo   Price Benchmark — Starting...
 echo =========================================
 echo.
 
+REM Kill any existing servers on these ports
+echo Killing existing servers...
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8000 ^| findstr LISTENING') do taskkill /PID %%a /F >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr :6789 ^| findstr LISTENING') do taskkill /PID %%a /F >nul 2>&1
+timeout /t 1 /noq >nul
+
 REM Start Backend
 echo Starting Backend (port 8000)...
 cd backend
