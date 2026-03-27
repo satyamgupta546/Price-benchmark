@@ -52,31 +52,76 @@ class FlipkartMinutesScraper(BaseScraper):
                     const text = div.innerText || '';
                     const hasPrice = text.includes('₹');
                     const childCount = div.children.length;
-                    // Card-like: has image, has price, reasonable size
                     if (hasImg && hasPrice && childCount >= 2 && childCount <= 20 &&
                         text.length > 20 && text.length < 500) {
-                        cards.push(div);
+                        // Check this is a leaf card (no nested card inside)
+                        let isLeaf = true;
+                        for (const child of div.children) {
+                            const ct = child.innerText?.trim() || '';
+                            if (ct.includes('₹') && child.querySelector('img[src*="rukminim"]') && ct.length > 20) {
+                                isLeaf = false;
+                                break;
+                            }
+                        }
+                        if (isLeaf) cards.push(div);
                     }
                 }
 
-                // Dedupe by keeping smallest enclosing card
                 const seen = new Set();
+                // Words/patterns to skip as product names
+                const skipPatterns = [
+                    /^↓?\d+%$/,              // ↓10%, 15%
+                    /^₹/,                     // starts with ₹
+                    /^\d+(\.\d+)?\s*(g|kg|ml|l|L|mg|pc|pcs|pack|unit|units|box|pouch|sachet|bottle|can|jar|tube|set)/i,  // "500 g", "1 kg", "200 ml"
+                    /^\d+(\.\d+)?\s*(g|kg|ml|l|L)\s/i,  // "210 g Box"
+                    /^set of \d+/i,           // "Set of 6"
+                    /^\d+ units/i,            // "210 Units"
+                    /^add$/i,                 // "Add"
+                    /^add to/i,               // "Add to cart"
+                    /% off$/i,                // "10% off"
+                    /^off$/i,                 // "OFF"
+                    /^free delivery/i,
+                    /^sponsored/i,
+                    /^bestseller/i,
+                    /^\d+$/,                  // just numbers
+                    /^\d+\.\d+$/,             // just decimals like "4.5"
+                    /^\(\d/,                  // "(4.5)"
+                    /^★/,                     // star rating
+                    /^delivery by/i,
+                    /^in stock/i,
+                    /^out of stock/i,
+                    /^sold out/i,
+                    /^save ₹/i,
+                    /^you save/i,
+                    /^combo/i,
+                ];
+
                 for (const card of cards) {
                     const text = card.innerText?.trim();
                     if (!text || seen.has(text)) continue;
                     seen.add(text);
 
                     const lines = text.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
-                    // Find product name (first non-price, non-discount line)
+
+                    // Find product name: must be real product text, not discount/unit/junk
                     let name = '';
+                    let unit = null;
                     for (const line of lines) {
-                        if (!line.startsWith('₹') && !line.includes('% off') && !line.includes('OFF') &&
-                            !line.includes('Add to') && line.length > 3 && line.length < 200) {
+                        if (line.startsWith('₹')) continue;
+
+                        const isJunk = skipPatterns.some(p => p.test(line));
+                        if (isJunk) continue;
+
+                        if (!name && line.length >= 5 && line.length < 200 && /[a-zA-Z]/.test(line)) {
+                            // Must contain letters and be reasonably long
                             name = line;
-                            break;
+                        } else if (name && !unit && line.length < 50 &&
+                                   /\d/.test(line) &&
+                                   (/\b(g|kg|ml|l|L|gm|ltr|pc|pcs|pack|unit|units|box|pouch|sachet)\b/i.test(line))) {
+                            unit = line;
                         }
                     }
-                    if (!name) continue;
+                    if (!name || name.length < 5) continue;
 
                     // Extract prices
                     const prices = [...text.matchAll(/₹([\\d,]+)/g)].map(m => parseFloat(m[1].replace(/,/g, '')));
@@ -85,8 +130,8 @@ class FlipkartMinutesScraper(BaseScraper):
 
                     const img = card.querySelector('img[src*="rukminim"]')?.src || null;
 
-                    if (price > 0 && name.length > 3) {
-                        results.push({ name, price, mrp: mrp !== price ? mrp : null, img });
+                    if (price > 0 && name.length >= 5) {
+                        results.push({ name, price, mrp: mrp !== price ? mrp : null, unit, img });
                     }
                 }
                 return results;
@@ -101,10 +146,10 @@ class FlipkartMinutesScraper(BaseScraper):
 
                 self.products.append(Product(
                     product_name=p['name'],
-                    brand=p['name'].split()[0],
+                    brand=p['name'].split()[0] if len(p['name'].split()) > 1 else '',
                     price=p['price'],
                     mrp=p['mrp'],
-                    unit=None,
+                    unit=p.get('unit'),
                     category=None,
                     sub_category=None,
                     platform=self.platform_name,
