@@ -4,3 +4,4 @@ playwright
 pydantic
 python-dotenv
 httpx
+openpyxl

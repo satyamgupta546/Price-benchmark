@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { API_BASE } from '../utils/constants'
-import { downloadCSV } from '../utils/csvExport'
+import { downloadExcel } from '../utils/csvExport'
 
 export function useScrapeData() {
   const [data, setData] = useState(null)
@@ -84,10 +84,9 @@ export function useScrapeData() {
           }
           setData(finalData)
 
-          // Auto-download CSV if products found
-          const allProducts = resultsData.results.flatMap(r => r.products || [])
-          if (allProducts.length > 0) {
-            downloadCSV(allProducts, pincodes.join(','))
+          // Auto-download Excel if products found
+          if (resultsData.total_products > 0) {
+            downloadExcel(pincodes.join(','), platforms.join(','))
           }
           return finalData
         }

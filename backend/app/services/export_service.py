@@ -1,6 +1,9 @@
-import csv
 import io
 from datetime import datetime
+
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 
 from app.models.product import Product
 
@@ -12,83 +15,137 @@ PLATFORM_NAMES = {
     "flipkart_minutes": "Flipkart Minutes",
 }
 
+PLATFORM_COLORS = {
+    "blinkit": "FFF8C723",
+    "zepto": "FF8B22CF",
+    "instamart": "FFFC8019",
+    "jiomart": "FF0078AD",
+    "flipkart_minutes": "FF2874F0",
+}
 
-def generate_csv(products: list[Product], pincode: str) -> tuple[str, str]:
-    """Generate comparison-format CSV: one row per product, platform prices as columns."""
-    date_str = datetime.now().strftime("%Y-%m-%d")
-    filename = f"PriceBenchmark_{pincode}_{date_str}.csv"
+HEADERS = ["Sr No", "Product Name", "Brand", "Category", "Pincode", "Price", "MRP"]
 
-    # Find active platforms
-    active_platforms = sorted(set(p.platform for p in products))
+# Styles
+HEADER_FONT = Font(bold=True, color="FFFFFF", size=11)
+HEADER_FILL = PatternFill(start_color="FF333333", end_color="FF333333", fill_type="solid")
+HEADER_ALIGN = Alignment(horizontal="center", vertical="center", wrap_text=True)
+THIN_BORDER = Border(
+    left=Side(style="thin", color="DDDDDD"),
+    right=Side(style="thin", color="DDDDDD"),
+    top=Side(style="thin", color="DDDDDD"),
+    bottom=Side(style="thin", color="DDDDDD"),
+)
 
-    # Group by normalized product name
-    product_map: dict[str, dict] = {}
-    for p in products:
-        key = (p.product_name or "").lower().strip()
-        if not key:
-            continue
-        if key not in product_map:
-            product_map[key] = {
-                "product_name": p.product_name,
-                "brand": p.brand or "",
-                "unit": p.unit or "",
-                "category": p.category or "",
-                "pincode": p.pincode or "",
-                "prices": {},
-            }
-        if p.platform not in product_map[key]["prices"] or p.price > 0:
-            product_map[key]["prices"][p.platform] = {
-                "price": p.price,
-                "mrp": p.mrp,
-                "in_stock": p.in_stock,
-            }
 
-    rows = sorted(product_map.values(), key=lambda x: x["product_name"])
+def _write_sheet(ws, products: list[Product], sheet_color: str = None):
+    """Write products to a worksheet. Each product is a separate row — no dedup."""
+    if sheet_color:
+        ws.sheet_properties.tabColor = sheet_color
 
-    output = io.StringIO()
-    writer = csv.writer(output)
+    # Write headers
+    for col_idx, header in enumerate(HEADERS, 1):
+        cell = ws.cell(row=1, column=col_idx, value=header)
+        cell.font = HEADER_FONT
+        cell.fill = HEADER_FILL
+        cell.alignment = HEADER_ALIGN
+        cell.border = THIN_BORDER
 
-    # Headers
-    headers = ["sr_no", "product_name", "brand", "unit", "category", "pincode"]
-    for plat in active_platforms:
-        name = PLATFORM_NAMES.get(plat, plat)
-        headers.extend([f"{name}_price", f"{name}_mrp", f"{name}_stock"])
-    headers.extend(["cheapest_platform", "cheapest_price", "price_diff"])
-    writer.writerow(headers)
+    # Sort by pincode, then product name
+    sorted_products = sorted(products, key=lambda p: (p.pincode, p.product_name.lower()))
 
-    # Data rows
-    for idx, item in enumerate(rows, 1):
-        row = [
+    # Write data rows
+    for idx, p in enumerate(sorted_products, 1):
+        row = idx + 1  # +1 for header
+        values = [
             idx,
-            item["product_name"],
-            item["brand"],
-            item["unit"],
-            item["category"],
-            item["pincode"],
+            p.product_name,
+            p.brand or "",
+            p.category or "",
+            p.pincode,
+            p.price,
+            p.mrp if p.mrp else "",
         ]
+        for col_idx, val in enumerate(values, 1):
+            cell = ws.cell(row=row, column=col_idx, value=val)
+            cell.border = THIN_BORDER
+            if col_idx in (6, 7) and isinstance(val, (int, float)):
+                cell.number_format = '#,##0.00'
+            if col_idx == 5:  # pincode
+                cell.alignment = Alignment(horizontal="center")
 
-        valid_prices = []
-        for plat in active_platforms:
-            info = item["prices"].get(plat)
-            if info:
-                row.append(f"{info['price']:.2f}" if info["price"] > 0 else "")
-                row.append(f"{info['mrp']:.2f}" if info["mrp"] and info["mrp"] > 0 else "")
-                row.append("Yes" if info["in_stock"] else "No")
-                if info["price"] > 0:
-                    valid_prices.append((PLATFORM_NAMES.get(plat, plat), info["price"]))
-            else:
-                row.extend(["", "", ""])
+    # Auto-fit column widths
+    col_widths = [8, 50, 20, 20, 10, 12, 12]
+    for i, width in enumerate(col_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
 
-        if valid_prices:
-            valid_prices.sort(key=lambda x: x[1])
-            cheapest_name, cheapest_price = valid_prices[0]
-            most_expensive = valid_prices[-1][1]
-            row.append(cheapest_name)
-            row.append(f"{cheapest_price:.2f}")
-            row.append(f"{most_expensive - cheapest_price:.2f}" if len(valid_prices) > 1 else "0.00")
-        else:
-            row.extend(["", "", ""])
+    # Freeze header row
+    ws.freeze_panes = "A2"
 
-        writer.writerow(row)
+
+def generate_excel(products: list[Product], pincodes: str) -> tuple[bytes, str]:
+    """Generate Excel with sheets: All + one per platform. Every product row kept as-is."""
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    filename = f"PriceBenchmark_{pincodes}_{date_str}.xlsx"
+
+    wb = Workbook()
+
+    # Sheet 1: All products
+    ws_all = wb.active
+    ws_all.title = "All"
+    # Add platform column for All sheet
+    all_headers = ["Sr No", "Product Name", "Brand", "Category", "Platform", "Pincode", "Price", "MRP"]
+
+    # Write All sheet manually (has extra Platform column)
+    ws_all.sheet_properties.tabColor = "FF4CAF50"
+    for col_idx, header in enumerate(all_headers, 1):
+        cell = ws_all.cell(row=1, column=col_idx, value=header)
+        cell.font = HEADER_FONT
+        cell.fill = HEADER_FILL
+        cell.alignment = HEADER_ALIGN
+        cell.border = THIN_BORDER
+
+    sorted_all = sorted(products, key=lambda p: (p.pincode, p.platform, p.product_name.lower()))
+    for idx, p in enumerate(sorted_all, 1):
+        row = idx + 1
+        values = [
+            idx,
+            p.product_name,
+            p.brand or "",
+            p.category or "",
+            PLATFORM_NAMES.get(p.platform, p.platform),
+            p.pincode,
+            p.price,
+            p.mrp if p.mrp else "",
+        ]
+        for col_idx, val in enumerate(values, 1):
+            cell = ws_all.cell(row=row, column=col_idx, value=val)
+            cell.border = THIN_BORDER
+            if col_idx in (7, 8) and isinstance(val, (int, float)):
+                cell.number_format = '#,##0.00'
+            if col_idx == 6:
+                cell.alignment = Alignment(horizontal="center")
+
+    all_widths = [8, 50, 20, 20, 18, 10, 12, 12]
+    for i, width in enumerate(all_widths, 1):
+        ws_all.column_dimensions[get_column_letter(i)].width = width
+    ws_all.freeze_panes = "A2"
+
+    # Per-platform sheets
+    platforms_in_data = sorted(set(p.platform for p in products))
+    for platform in platforms_in_data:
+        platform_products = [p for p in products if p.platform == platform]
+        if not platform_products:
+            continue
+
+        sheet_name = PLATFORM_NAMES.get(platform, platform)
+        # Excel sheet names max 31 chars
+        ws = wb.create_sheet(title=sheet_name[:31])
+        color = PLATFORM_COLORS.get(platform, "FF666666").replace("FF", "", 1)
+        _write_sheet(ws, platform_products, sheet_color=color)
+
+    # Write to bytes
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
 
     return output.getvalue(), filename

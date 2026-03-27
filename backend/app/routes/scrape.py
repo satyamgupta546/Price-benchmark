@@ -13,7 +13,7 @@ from app.scrapers.flipkart_minutes_scraper import FlipkartMinutesScraper
 from app.scrapers.jiomart_scraper import JioMartScraper
 from app.scrapers.zepto_scraper import ZeptoScraper
 from app.scrapers.instamart_scraper import InstamartScraper
-from app.services.export_service import generate_csv
+from app.services.export_service import generate_excel
 
 router = APIRouter()
 
@@ -232,12 +232,11 @@ async def get_results(pincodes: str = Query(..., description="Comma-separated pi
     }
 
 
-@router.get("/export/csv")
-async def export_csv(
+@router.get("/export/excel")
+async def export_excel(
     pincode: str = Query(..., description="Comma-separated pincodes to export data for"),
     platforms: str = Query("", description="Comma-separated platform names to filter"),
 ):
-    # Try exact key match, then individual pincodes
     pincodes_requested = [p.strip() for p in pincode.split(",")]
     cache_key = ",".join(sorted(pincodes_requested))
     products = _scrape_cache.get(cache_key, [])
@@ -253,11 +252,12 @@ async def export_csv(
     if not products:
         return {"error": "No data found. Run a scrape first."}
 
-    csv_content, filename = generate_csv(products, pincodes_requested[0] if len(pincodes_requested) == 1 else "multi")
+    pincodes_str = ",".join(pincodes_requested) if len(pincodes_requested) <= 3 else f"{len(pincodes_requested)}_pincodes"
+    excel_bytes, filename = generate_excel(products, pincodes_str)
 
     return StreamingResponse(
-        iter([csv_content]),
-        media_type="text/csv",
+        iter([excel_bytes]),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         headers={"Content-Disposition": f"attachment; filename={filename}"},
     )
 

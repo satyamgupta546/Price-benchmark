@@ -72,7 +72,7 @@ export default function App() {
                 </>
               )}
             </button>
-            <ExportButton products={allProducts} pincode={selectedPincodes.join(',')} disabled={loading} />
+            <ExportButton products={allProducts} pincode={selectedPincodes.join(',')} platforms={selectedPlatforms} disabled={loading} />
             {selectedPincodes.length === 0 && <span className="text-sm text-red-500 dark:text-red-400 font-medium">Select at least one pincode</span>}
             {selectedPlatforms.length === 0 && <span className="text-sm text-red-500 dark:text-red-400 font-medium">Select at least one platform</span>}
           </div>
