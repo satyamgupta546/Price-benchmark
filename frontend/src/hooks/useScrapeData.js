@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { API_BASE } from '../utils/constants'
+import { downloadCSV } from '../utils/csvExport'
 
 export function useScrapeData() {
   const [data, setData] = useState(null)
@@ -61,7 +62,7 @@ export function useScrapeData() {
           } else if (line.startsWith('data: ') && eventType) {
             try {
               const payload = JSON.parse(line.slice(6))
-              handleSSEEvent(eventType, payload, setPlatformProgress, completedResults, setData, pincodes)
+              handleSSEEvent(eventType, payload, setPlatformProgress, completedResults)
             } catch {
               // ignore malformed JSON
             }
@@ -70,7 +71,45 @@ export function useScrapeData() {
         }
       }
 
-      return data
+      // SSE done — now fetch full results with products from backend cache
+      const resultsRes = await fetch(`${API_BASE}/results?pincodes=${pincodes.join(',')}`)
+      if (resultsRes.ok) {
+        const resultsData = await resultsRes.json()
+        if (!resultsData.error) {
+          const finalData = {
+            pincodes,
+            results: resultsData.results,
+            total_products: resultsData.total_products,
+            total_duration_seconds: completedResults.reduce((s, r) => Math.max(s, r.scrape_duration_seconds || 0), 0),
+          }
+          setData(finalData)
+
+          // Auto-download CSV if products found
+          const allProducts = resultsData.results.flatMap(r => r.products || [])
+          if (allProducts.length > 0) {
+            downloadCSV(allProducts, pincodes.join(','))
+          }
+          return finalData
+        }
+      }
+
+      // Fallback: use SSE data (without products)
+      const fallbackData = {
+        pincodes,
+        results: completedResults.map(r => ({
+          platform: r.platform,
+          pincode: r.pincode,
+          status: r.status,
+          total_products: r.total_products,
+          scrape_duration_seconds: r.scrape_duration_seconds,
+          products: [],
+          error_message: r.error_message,
+        })),
+        total_products: completedResults.reduce((s, r) => s + (r.total_products || 0), 0),
+        total_duration_seconds: completedResults.reduce((s, r) => Math.max(s, r.scrape_duration_seconds || 0), 0),
+      }
+      setData(fallbackData)
+      return fallbackData
     } catch (err) {
       if (err.name !== 'AbortError') {
         setError(err.message || 'Failed to fetch data')
@@ -85,7 +124,7 @@ export function useScrapeData() {
   return { data, loading, error, scrape, platformProgress }
 }
 
-function handleSSEEvent(event, payload, setPlatformProgress, completedResults, setData, pincodes) {
+function handleSSEEvent(event, payload, setPlatformProgress, completedResults) {
   const key = payload.platform && payload.pincode ? `${payload.platform}_${payload.pincode}` : null
 
   switch (event) {
@@ -127,20 +166,7 @@ function handleSSEEvent(event, payload, setPlatformProgress, completedResults, s
       break
 
     case 'done':
-      setData({
-        pincodes,
-        results: completedResults.map(r => ({
-          platform: r.platform,
-          pincode: r.pincode,
-          status: r.status,
-          total_products: r.total_products,
-          scrape_duration_seconds: r.scrape_duration_seconds,
-          products: r.products || [],
-          error_message: r.error_message,
-        })),
-        total_products: payload.total_products,
-        total_duration_seconds: payload.total_duration_seconds,
-      })
+      // Data will be fetched from /api/results after SSE completes
       break
   }
 }
@@ -165,7 +191,6 @@ export function usePincodes() {
       return data
     } catch (err) {
       setError('Backend server is not running. Start it with: ./start.sh')
-      // Auto-retry every 3 seconds
       if (!retryRef.current) {
         retryRef.current = setInterval(async () => {
           try {

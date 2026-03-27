@@ -19,9 +19,10 @@ router = APIRouter()
 
 # In-memory store for last scrape results
 _scrape_cache: dict[str, list[Product]] = {}
+_results_cache: dict[str, list[dict]] = {}  # platform results without products
 
 # Limit concurrent browser instances to prevent CPU/memory overload
-MAX_CONCURRENT_SCRAPERS = 2
+MAX_CONCURRENT_SCRAPERS = 10
 _scrape_semaphore = asyncio.Semaphore(MAX_CONCURRENT_SCRAPERS)
 
 SCRAPER_MAP = {
@@ -126,6 +127,7 @@ async def scrape_products_stream(request: ScrapeRequest):
         result = await _scrape_platform(platform, pincode, max_per,
                                         selected_categories=request.categories.get(platform),
                                         progress_callback=progress_callback)
+        # Don't send products in SSE — too large for browser to parse
         await queue.put({
             "event": "platform_complete",
             "data": {
@@ -134,7 +136,6 @@ async def scrape_products_stream(request: ScrapeRequest):
                 "status": result.status,
                 "total_products": result.total_products,
                 "scrape_duration_seconds": result.scrape_duration_seconds,
-                "products": [p.model_dump() for p in result.products],
                 "error_message": result.error_message,
             },
         })
@@ -176,12 +177,22 @@ async def scrape_products_stream(request: ScrapeRequest):
         total_products = sum(r.total_products for r in results)
 
         all_products = []
+        results_summary = []
         for r in results:
             all_products.extend(r.products)
+            results_summary.append({
+                "platform": r.platform,
+                "pincode": r.pincode,
+                "status": r.status,
+                "total_products": r.total_products,
+                "scrape_duration_seconds": r.scrape_duration_seconds,
+                "error_message": r.error_message,
+            })
         cache_key = ",".join(sorted(request.pincodes))
         _scrape_cache[cache_key] = all_products
+        _results_cache[cache_key] = results_summary
 
-        yield f"event: done\ndata: {json.dumps({'total_products': total_products, 'total_duration_seconds': total_duration, 'pincodes': request.pincodes})}\n\n"
+        yield f"event: done\ndata: {json.dumps({'total_products': total_products, 'total_duration_seconds': total_duration, 'pincodes': request.pincodes, 'cache_key': cache_key})}\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
@@ -194,6 +205,31 @@ async def get_pincodes():
             return json.load(f)
     except FileNotFoundError:
         return {"error": "Pincodes data not found"}
+
+
+@router.get("/results")
+async def get_results(pincodes: str = Query(..., description="Comma-separated pincodes")):
+    """Get cached scrape results (summary + products)."""
+    pincodes_list = [p.strip() for p in pincodes.split(",")]
+    cache_key = ",".join(sorted(pincodes_list))
+
+    products = _scrape_cache.get(cache_key, [])
+    results_summary = _results_cache.get(cache_key, [])
+
+    if not products and not results_summary:
+        return {"error": "No cached data found"}
+
+    return {
+        "pincodes": pincodes_list,
+        "results": [
+            {
+                **r,
+                "products": [p.model_dump() for p in products if p.platform == r["platform"] and p.pincode == r["pincode"]],
+            }
+            for r in results_summary
+        ],
+        "total_products": len(products),
+    }
 
 
 @router.get("/export/csv")
