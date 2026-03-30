@@ -120,6 +120,152 @@ class BlinkitScraper(BaseScraper):
                 cids.add(m.group(1))
         return cids
 
+    async def _extract_products_from_dom(self) -> int:
+        """Extract products from Blinkit's DOM as fallback when API interception misses products."""
+        try:
+            products = await self.page.evaluate("""() => {
+                const results = [];
+                const seen = new Set();
+                const allDivs = document.querySelectorAll('div');
+                const cards = [];
+
+                for (const div of allDivs) {
+                    const hasImg = div.querySelector('img[src*="grofers.com"], img[src*="blinkit"]');
+                    const text = div.innerText || '';
+                    const hasPrice = text.includes('\\u20b9');
+                    const cc = div.children.length;
+                    if (hasImg && hasPrice && cc >= 2 && cc <= 15 &&
+                        text.length > 20 && text.length < 400) {
+                        let isLeaf = true;
+                        for (const child of div.children) {
+                            const ct = child.innerText?.trim() || '';
+                            if (ct.includes('\\u20b9') && child.querySelector('img') && ct.length > 20) {
+                                isLeaf = false;
+                                break;
+                            }
+                        }
+                        if (isLeaf) cards.push(div);
+                    }
+                }
+
+                for (const card of cards) {
+                    const text = card.innerText?.trim();
+                    if (!text || seen.has(text)) continue;
+                    seen.add(text);
+
+                    const lines = text.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
+
+                    let name = '';
+                    for (const line of lines) {
+                        if (line.startsWith('\\u20b9')) continue;
+                        if (/^(add|ADD|Add)$/i.test(line)) continue;
+                        if (/^\\d+\\s*(g|kg|ml|l|L|pc|pcs|pack|gm|ltr)$/i.test(line)) continue;
+                        if (/^\\d+(%|\\s*min)/i.test(line)) continue;
+                        if (line.length >= 3 && line.length < 200 && /[a-zA-Z]/.test(line)) {
+                            name = line;
+                            break;
+                        }
+                    }
+                    if (!name || name.length < 3) continue;
+
+                    const priceSet = new Set();
+                    for (const el of card.querySelectorAll('*')) {
+                        const t = el.textContent?.trim() || '';
+                        if (t.includes('\\u20b9') && t.length <= 20 && el.childElementCount <= 1) {
+                            const match = t.match(/\\u20b9([\\d,]+\\.?\\d*)/);
+                            if (match) {
+                                const p = parseFloat(match[1].replace(/,/g, ''));
+                                if (p > 0 && p <= 10000) priceSet.add(p);
+                            }
+                        }
+                    }
+                    let prices = [...priceSet];
+                    if (prices.length === 0) {
+                        prices = [...text.matchAll(/\\u20b9([\\d,]+\\.?\\d*)/g)]
+                            .map(m => parseFloat(m[1].replace(/,/g, '')))
+                            .filter(p => p > 0 && p <= 10000);
+                    }
+
+                    const price = prices.length > 0 ? Math.min(...prices) : 0;
+                    const mrp = prices.length > 1 ? Math.max(...prices) : null;
+                    const img = card.querySelector('img[src*="grofers.com"], img[src*="blinkit"]')?.src || null;
+
+                    if (price > 0) {
+                        results.push({ name, price, mrp: mrp !== price ? mrp : null, img });
+                    }
+                }
+                return results;
+            }""")
+
+            count = 0
+            for p in (products or []):
+                pid = p['name'].lower().strip()
+                if pid in self._seen_ids:
+                    continue
+                self._seen_ids.add(pid)
+                self.products.append(Product(
+                    product_name=p['name'],
+                    brand=p['name'].split()[0] if len(p['name'].split()) > 1 else '',
+                    price=p['price'],
+                    mrp=p.get('mrp'),
+                    unit=None,
+                    category=None,
+                    sub_category=None,
+                    platform=self.platform_name,
+                    pincode=self.pincode,
+                    in_stock=True,
+                    scraped_at=self.now_iso(),
+                    image_url=p.get('img'),
+                ))
+                count += 1
+            return count
+        except Exception:
+            return 0
+
+    async def _visit_and_collect(self, url, scroll_times=5):
+        """Override to scroll more aggressively and add DOM extraction fallback."""
+        try:
+            await self.page.goto(url, wait_until="domcontentloaded", timeout=20000)
+            await self._wait_for_network_settle(0.5, 3.0)
+            await self._scroll_page(times=max(scroll_times, 12), delay=0.8)
+            count = self._process_responses()
+
+            # DOM extraction fallback — catches products missed by API interception
+            dom_count = await self._extract_products_from_dom()
+            count += dom_count
+
+            await self._report_progress()
+            return count
+        except Exception as e:
+            print(f"[{self.platform_name}] Visit {url} error: {e}")
+            return 0
+
+    async def _search_and_capture(self, search_url_fn):
+        """Override to use _visit_and_collect (includes DOM extraction + more scrolling)."""
+        consecutive_empty = 0
+        max_consecutive_empty = 10
+        for term in self._get_filtered_search_terms():
+            if len(self.products) >= self.max_products:
+                break
+            if consecutive_empty >= max_consecutive_empty:
+                print(f"[{self.platform_name}] Early exit: {max_consecutive_empty} consecutive empty searches. "
+                      f"Total: {len(self.products)}.")
+                break
+            try:
+                before = len(self.products)
+                url = search_url_fn(term)
+                await self._visit_and_collect(url, scroll_times=12)
+
+                after = len(self.products)
+                if after > before:
+                    consecutive_empty = 0
+                else:
+                    consecutive_empty += 1
+            except Exception as e:
+                print(f"[{self.platform_name}] Search '{term}' error: {e}")
+                consecutive_empty += 1
+                continue
+
     async def _discover_links_on_page(self) -> list[str]:
         """Extract all /cn/ links from the current page."""
         try:

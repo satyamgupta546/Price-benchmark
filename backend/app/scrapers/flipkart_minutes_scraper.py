@@ -94,6 +94,7 @@ class FlipkartMinutesScraper(BaseScraper):
                     /^save ₹/i,
                     /^you save/i,
                     /^combo/i,
+                    /^\d+\s*[x×]\s*\d+/i,           // "12 x 70 g", "6 × 100 ml"
                 ];
 
                 for (const card of cards) {
@@ -123,8 +124,31 @@ class FlipkartMinutesScraper(BaseScraper):
                     }
                     if (!name || name.length < 5) continue;
 
-                    // Extract prices
-                    const prices = [...text.matchAll(/₹([\\d,]+)/g)].map(m => parseFloat(m[1].replace(/,/g, '')));
+                    // Strip leading numbering like "1. ", "23. " from product names
+                    name = name.replace(/^\\d+\\.\\s+/, '');
+                    if (name.length < 5) continue;
+
+                    // Extract prices from INDIVIDUAL DOM elements instead of full innerText.
+                    // Flipkart splits price display across inline spans (e.g. <span>₹918</span><span>46</span>)
+                    // which innerText concatenates into "₹91846". Checking leaf elements avoids this.
+                    const priceSet = new Set();
+                    for (const el of card.querySelectorAll('*')) {
+                        const t = el.textContent?.trim() || '';
+                        if (t.includes('₹') && (t.length <= 25 || el.childElementCount === 0)) {
+                            for (const m of t.matchAll(/₹([\\d,]+\\.?\\d*)/g)) {
+                                const p = parseFloat(m[1].replace(/,/g, ''));
+                                if (p > 0 && p <= 10000) priceSet.add(p);
+                            }
+                        }
+                    }
+                    let prices = [...priceSet];
+                    // Fallback: full text if element-level found nothing
+                    if (prices.length === 0) {
+                        prices = [...text.matchAll(/₹([\\d,]+\\.?\\d*)/g)]
+                            .map(m => parseFloat(m[1].replace(/,/g, '')))
+                            .filter(p => p > 0 && p <= 10000);
+                    }
+
                     const price = prices.length > 0 ? Math.min(...prices) : 0;
                     const mrp = prices.length > 1 ? Math.max(...prices) : null;
 

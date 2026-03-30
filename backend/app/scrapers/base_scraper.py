@@ -277,6 +277,9 @@ class BaseScraper(ABC):
                     except (ValueError, TypeError):
                         continue
             pricing = p.get("pricing", p.get("priceInfo", {}))
+            # Also check if "price" key itself holds a nested dict (common in Blinkit API)
+            if isinstance(p.get("price"), dict):
+                pricing = p["price"]
             if isinstance(pricing, dict) and price == 0:
                 for key in ["price", "selling_price", "finalPrice", "sp", "offer_price"]:
                     val = pricing.get(key)

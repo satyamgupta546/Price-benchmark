@@ -63,9 +63,13 @@ export default function PincodeInput({ pincodes: selectedPincodes, onPincodesCha
     const allNew = target.filter(p => !selectedPincodes.includes(p))
     onPincodesChange(allNew.length > 0 ? [...selectedPincodes, ...allNew] : selectedPincodes.filter(p => !target.includes(p)))
   }
-  const addManualPincode = () => {
-    const val = manualInput.replace(/\D/g, '').slice(0, 6)
-    if (val.length === 6 && !selectedPincodes.includes(val)) { onPincodesChange([...selectedPincodes, val]); setManualInput('') }
+  const addManualPincode = (text) => {
+    const input = text ?? manualInput
+    const pins = (input.match(/\d{6}/g) || []).filter(p => !selectedPincodes.includes(p))
+    if (pins.length > 0) {
+      onPincodesChange([...selectedPincodes, ...new Set(pins)])
+      setManualInput('')
+    }
   }
   const closeAll = () => {
     setStateDropdownOpen(false); setCityDropdownOpen(false); setPincodeDropdownOpen(false)
@@ -162,9 +166,13 @@ export default function PincodeInput({ pincodes: selectedPincodes, onPincodesCha
         <div>
           <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">Add Pincode</label>
           <div className="flex gap-2">
-            <input type="text" value={manualInput} onChange={e => setManualInput(e.target.value.replace(/\D/g, '').slice(0, 6))} onKeyDown={e => e.key === 'Enter' && addManualPincode()} placeholder="e.g. 800001" maxLength={6}
+            <input type="text" value={manualInput}
+              onChange={e => setManualInput(e.target.value.replace(/[^\d,\s]/g, ''))}
+              onKeyDown={e => e.key === 'Enter' && addManualPincode()}
+              onPaste={e => { e.preventDefault(); const t = e.clipboardData.getData('text'); const pins = (t.match(/\d{6}/g) || []).filter(p => !selectedPincodes.includes(p)); if (pins.length > 0) { onPincodesChange([...selectedPincodes, ...new Set(pins)]); setManualInput(''); } else { setManualInput(t.replace(/[^\d,\s]/g, '')); } }}
+              placeholder="e.g. 800001, 110001, 560001"
               className="flex-1 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2.5 text-sm text-gray-900 dark:text-gray-200 font-mono focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 focus:border-blue-500 dark:focus:border-purple-500 placeholder-gray-400 dark:placeholder-gray-500" />
-            <button onClick={addManualPincode} disabled={manualInput.length !== 6}
+            <button onClick={() => addManualPincode()} disabled={!(manualInput.match(/\d{6}/g) || []).length}
               className="px-3.5 py-2.5 bg-blue-600 dark:bg-purple-600 text-white rounded-lg text-sm font-bold disabled:opacity-30 hover:bg-blue-700 dark:hover:bg-purple-500 transition-colors">+</button>
           </div>
         </div>
