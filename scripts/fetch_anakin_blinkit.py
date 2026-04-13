@@ -32,6 +32,7 @@ FIELDS = [
     ("Unit",                     138749),
     ("Unit_Value",               138785),
     ("Mrp",                      138772),
+    ("Image_Link",               138781),
     ("Blinkit_Product_Url",      138776),
     ("Blinkit_Product_Id",       138758),
     ("Blinkit_Item_Name",        138764),
