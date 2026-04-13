@@ -143,6 +143,21 @@ class BaseScraper(ABC):
         "pet_care": [
             "dog food", "cat food", "pet food", "pet shampoo",
         ],
+        "brands_top": [
+            "amul", "patanjali", "haldirams", "colgate", "himalaya", "everest",
+            "nivea", "dettol", "cadbury", "nestle", "britannia", "parle",
+            "tata", "dabur", "godrej", "lifebuoy", "surf excel", "vim",
+            "maggi", "sunfeast", "good day", "kurkure", "lays",
+            "horlicks", "bournvita", "complan", "boost",
+            "fortune", "aashirvaad", "saffola", "sundrop",
+            "pampers", "whisper", "stayfree", "mamy poko",
+            "harpic", "lizol", "domex", "odonil",
+            "head shoulders", "dove", "pantene", "clinic plus",
+            "closeup", "pepsodent", "oral b", "sensodyne",
+            "pepsi", "coca cola", "thumbs up", "sprite", "fanta", "limca",
+            "real juice", "tropicana", "paper boat", "sting",
+            "mtr", "saffola", "catch", "mdh",
+        ],
     }
 
     # Flat list of all search terms (union of all groups, deduplicated, order preserved)
@@ -281,7 +296,7 @@ class BaseScraper(ABC):
             if isinstance(p.get("price"), dict):
                 pricing = p["price"]
             if isinstance(pricing, dict) and price == 0:
-                for key in ["price", "selling_price", "finalPrice", "sp", "offer_price"]:
+                for key in ["offer_price", "selling_price", "sp", "finalPrice", "salePrice", "sale_price", "price"]:
                     val = pricing.get(key)
                     if val:
                         try:
@@ -356,8 +371,27 @@ class BaseScraper(ABC):
                     elif isinstance(img, dict):
                         image = img.get("url") or img.get("src")
 
+            # Extract platform-native product ID (e.g. Blinkit's prid)
+            product_id = None
+            for key in ["id", "product_id", "productId", "prid", "pid", "sku", "slug"]:
+                val = p.get(key)
+                if val and not isinstance(val, (dict, list)):
+                    product_id = str(val).strip()
+                    if product_id:
+                        break
+
+            # Extract PDP URL if present in the JSON
+            product_url = None
+            for key in ["url", "product_url", "productUrl", "deeplink", "pdp_url", "permalink"]:
+                val = p.get(key)
+                if val and isinstance(val, str) and val.startswith(("http", "/")):
+                    product_url = val
+                    break
+
             return Product(
-                product_name=name, brand=brand, price=price, mrp=mrp, unit=unit,
+                product_name=name, brand=brand,
+                product_id=product_id, product_url=product_url,
+                price=price, mrp=mrp, unit=unit,
                 category=category, sub_category=None, platform=self.platform_name,
                 pincode=self.pincode, in_stock=in_stock, scraped_at=self.now_iso(), image_url=image,
             )

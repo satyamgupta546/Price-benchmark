@@ -1,0 +1,183 @@
+{
+  "_comment": "Platform configuration for SAM Price Benchmark. All platforms listed with their settings.",
+
+  "platforms": {
+    "blinkit": {
+      "name": "Blinkit",
+      "browser": "chromium",
+      "headless": true,
+      "base_url": "https://blinkit.com",
+      "search_url_template": "{base}/s/?q={query}",
+      "pdp_url_pattern": "/prn/{slug}/prid/{product_id}",
+      "product_id_regex": "/prid/(\\d+)",
+      "location_method": "localStorage + cookies",
+      "location_keys": {
+        "localStorage": "location",
+        "cookies": ["__pincode", "gr_1_lat", "gr_1_lon"]
+      },
+      "anakin_tracked": true,
+      "anakin_fields": {
+        "product_url": "Blinkit_Product_Url",
+        "product_id": "Blinkit_Product_Id",
+        "item_name": "Blinkit_Item_Name",
+        "selling_price": "Blinkit_Selling_Price",
+        "mrp_price": "Blinkit_Mrp_Price",
+        "in_stock": "Blinkit_In_Stock_Remark",
+        "status": "Blinkit_Status",
+        "partial": "Blinkit_Partial",
+        "factor": "Blinkit_Factor"
+      },
+      "scraper_class": "BlinkitScraper",
+      "pdp_scraper": "scripts/scrape_blinkit_pdps.py",
+      "compare_script": "scripts/compare_pdp.py",
+      "max_parallel_tabs": 2,
+      "notes": "gr_1_lon NOT gr_1_lng. Use API response interception for prices."
+    },
+
+    "jiomart": {
+      "name": "JioMart",
+      "browser": "firefox",
+      "headless": true,
+      "base_url": "https://www.jiomart.com",
+      "search_url_template": "{base}/search/{query}",
+      "pdp_url_pattern": "/p/groceries/{slug}/{product_id}",
+      "product_id_regex": "/(\\d{9,})$",
+      "location_method": "cookies",
+      "location_keys": {
+        "cookies": ["pincode", "address_pincode"]
+      },
+      "anakin_tracked": true,
+      "anakin_fields": {
+        "product_url": "Jiomart_Product_Url",
+        "product_id": "Jiomart_Product_Id",
+        "item_name": "Jiomart_Item_Name",
+        "selling_price": "Jiomart_Selling_Price",
+        "mrp_price": "Jiomart_Mrp_Price",
+        "in_stock": "Jiomart_In_Stock_Remark",
+        "status": "Jiomart_Status",
+        "partial": "Jiomart_Partial",
+        "factor": "Jiomart_Factor"
+      },
+      "scraper_class": "JioMartScraper",
+      "pdp_scraper": "scripts/scrape_jiomart_pdps.py",
+      "compare_script": "scripts/compare_pdp_jiomart.py",
+      "max_parallel_tabs": 2,
+      "notes": "MUST use Firefox — Chromium gets 403 from Akamai CDN. Use JSON-LD for prices."
+    },
+
+    "dmart": {
+      "name": "DMart Ready",
+      "browser": "chromium",
+      "headless": true,
+      "base_url": "https://www.dmart.in",
+      "search_url_template": "{base}/search?searchText={query}",
+      "pdp_url_pattern": "/product/{slug}",
+      "location_method": "cookies + UI picker",
+      "anakin_tracked": true,
+      "anakin_fields": {
+        "product_url": "Dmart_Product_Url",
+        "product_id": "Dmart_Product_Id",
+        "item_name": "Dmart_Item_Name",
+        "selling_price": "Dmart_Selling_Price",
+        "mrp_price": "Dmart_Mrp_Price",
+        "in_stock": "Dmart_In_Stock_Remark",
+        "status": "Dmart_Status",
+        "partial": "Dmart_Partial",
+        "factor": "Dmart_Factor"
+      },
+      "scraper_class": null,
+      "pdp_scraper": null,
+      "compare_script": null,
+      "max_parallel_tabs": 2,
+      "notes": "Anakin column exists but ALL 4 cities return NA. DMart not available in Ranchi/Kolkata/Raipur/Hazaribagh. Build scraper when needed for Mumbai/Bangalore."
+    },
+
+    "zepto": {
+      "name": "Zepto",
+      "browser": "chromium",
+      "headless": true,
+      "base_url": "https://www.zeptonow.com",
+      "search_url_template": "{base}/search?query={query}",
+      "pdp_url_pattern": "/pn/{slug}/pvid/{product_id}",
+      "location_method": "cookies + localStorage + UI fallback",
+      "anakin_tracked": false,
+      "scraper_class": "ZeptoScraper",
+      "pdp_scraper": null,
+      "compare_script": null,
+      "max_parallel_tabs": 2,
+      "notes": "Anakin doesn't track Zepto. Need to build our own mapping via Stage 2/3 cascade."
+    },
+
+    "instamart": {
+      "name": "Swiggy Instamart",
+      "browser": "chromium",
+      "headless": true,
+      "base_url": "https://www.swiggy.com/instamart",
+      "search_url_template": "https://www.swiggy.com/instamart/search?custom_back=true&query={query}",
+      "location_method": "Swiggy cookies + WAF bypass",
+      "anakin_tracked": false,
+      "scraper_class": "InstamartScraper",
+      "pdp_scraper": null,
+      "compare_script": null,
+      "max_parallel_tabs": 2,
+      "notes": "Must visit swiggy.com first for WAF. Anakin doesn't track. Build mapping via cascade."
+    },
+
+    "flipkart_minutes": {
+      "name": "Flipkart Minutes",
+      "browser": "chromium",
+      "headless": true,
+      "base_url": "https://www.flipkart.com",
+      "search_url_template": "{base}/search?q={query}&marketplace=GROCERY",
+      "pdp_url_pattern": "/product-slug/p/{pid}",
+      "location_method": "press_sequentially pincode form",
+      "anakin_tracked": false,
+      "scraper_class": "FlipkartMinutesScraper",
+      "pdp_scraper": null,
+      "compare_script": null,
+      "max_parallel_tabs": 2,
+      "notes": "Must use press_sequentially() NOT fill() for React pincode form. DOM extraction (server-rendered). Anakin doesn't track."
+    }
+  },
+
+  "cities": {
+    "834002": {"name": "Ranchi", "state": "Jharkhand", "anakin_tracked": true},
+    "712232": {"name": "Kolkata", "state": "West Bengal", "anakin_tracked": true},
+    "492001": {"name": "Raipur", "state": "Chhattisgarh", "anakin_tracked": true},
+    "825301": {"name": "Hazaribagh", "state": "Jharkhand", "anakin_tracked": true}
+  },
+
+  "stages": {
+    "stage1": {
+      "name": "PDP Direct (ID-based)",
+      "description": "Visit Anakin's cached product URLs directly, scrape live price",
+      "input": "Anakin mapped URLs (Blinkit_Product_Url / Jiomart_Product_Url)",
+      "output": "Exact item_code → price match (no fuzzy)",
+      "applicable_when": "Platform has Anakin URL mapping",
+      "fallback_to": "stage2"
+    },
+    "stage2": {
+      "name": "Brand-first Cascade",
+      "description": "Brand → Product Type → Weight → Name fuzzy match",
+      "input": "Stage 1 failures (no_price + errors) + Anakin NA SKUs",
+      "output": "New mappings from BFS scrape pool",
+      "applicable_when": "Always (all platforms)",
+      "fallback_to": "stage3"
+    },
+    "stage3": {
+      "name": "Type/MRP Cascade",
+      "description": "Product Type → Name token → Weight → MRP ±15% filter",
+      "input": "Stage 2 failures + weak matches",
+      "output": "Additional mappings with MRP-based verification",
+      "applicable_when": "Always",
+      "fallback_to": "stage4"
+    },
+    "stage4": {
+      "name": "Manual Review Queue",
+      "description": "Export CSV with top candidates for human verification",
+      "input": "Stage 3 failures + all weak matches",
+      "output": "CSV with human_decision column",
+      "applicable_when": "Always — final safety net"
+    }
+  }
+}

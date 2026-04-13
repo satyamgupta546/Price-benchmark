@@ -3,7 +3,7 @@ import json
 import time
 from pathlib import Path
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, UploadFile, File
 from fastapi.responses import StreamingResponse
 
 from app.config import settings
@@ -14,12 +14,19 @@ from app.scrapers.jiomart_scraper import JioMartScraper
 from app.scrapers.zepto_scraper import ZeptoScraper
 from app.scrapers.instamart_scraper import InstamartScraper
 from app.services.export_service import generate_excel
+from app.services.compare_service import parse_reference_excel, compare_with_reference, ALL_PLATFORM_IDS
 
 router = APIRouter()
 
 # In-memory store for last scrape results
 _scrape_cache: dict[str, list[Product]] = {}
 _results_cache: dict[str, list[dict]] = {}  # platform results without products
+
+# In-memory store for compare workflow
+_compare_file: dict[str, bytes] = {}  # "file" -> uploaded file bytes
+_compare_products: dict[str, list[dict]] = {}  # "products" -> parsed products
+_compare_result: dict[str, bytes] = {}  # "excel" -> result excel bytes
+_compare_filename: dict[str, str] = {}  # "filename" -> result filename
 
 # Limit concurrent browser instances to prevent CPU/memory overload
 MAX_CONCURRENT_SCRAPERS = 10
@@ -269,3 +276,105 @@ async def get_categories(platform: str):
         return {"error": f"Unknown platform: {platform}"}
 
     return {"platform": platform, "categories": list(scraper_cls.CATEGORY_MAP.keys())}
+
+
+# ── Compare endpoints ──────────────────────────────────────────────
+
+
+@router.post("/compare/upload")
+async def compare_upload(file: UploadFile = File(...)):
+    """Upload reference Excel file and parse products."""
+    if not file.filename.endswith((".xlsx", ".xls")):
+        return {"error": "Please upload an Excel file (.xlsx)"}
+
+    file_bytes = await file.read()
+    try:
+        products = parse_reference_excel(file_bytes)
+    except Exception as e:
+        return {"error": f"Failed to parse Excel: {str(e)}"}
+
+    if not products:
+        return {"error": "No products found in the uploaded file"}
+
+    _compare_file["file"] = file_bytes
+    _compare_products["products"] = products
+
+    return {
+        "total": len(products),
+        "filename": file.filename,
+        "sample": products[:3],
+    }
+
+
+@router.post("/compare/stream")
+async def compare_stream(
+    pincode: str = Query(...),
+    platforms: str = Query("", description="Comma-separated platform IDs (default: all 5)"),
+):
+    """SSE stream that runs multi-platform comparison against uploaded reference."""
+    if "products" not in _compare_products:
+        async def error_gen():
+            yield f"event: error\ndata: {json.dumps({'message': 'No file uploaded. Upload a reference Excel first.'})}\n\n"
+        return StreamingResponse(error_gen(), media_type="text/event-stream")
+
+    file_bytes = _compare_file.get("file")
+    if not file_bytes:
+        async def error_gen():
+            yield f"event: error\ndata: {json.dumps({'message': 'File data not found. Re-upload the Excel.'})}\n\n"
+        return StreamingResponse(error_gen(), media_type="text/event-stream")
+
+    # Parse platform list (default all)
+    platform_list = [p.strip() for p in platforms.split(",") if p.strip()] if platforms else ALL_PLATFORM_IDS
+
+    queue: asyncio.Queue = asyncio.Queue()
+
+    async def progress_callback(event: str, data: dict):
+        await queue.put({"event": event, "data": data})
+
+    async def event_generator():
+        task = asyncio.create_task(
+            compare_with_reference(file_bytes, pincode, platform_list, progress_callback)
+        )
+
+        try:
+            while not task.done():
+                try:
+                    msg = await asyncio.wait_for(queue.get(), timeout=30.0)
+                    yield f"event: {msg['event']}\ndata: {json.dumps(msg['data'])}\n\n"
+                    if msg["event"] == "done":
+                        break
+                except asyncio.TimeoutError:
+                    yield f"event: heartbeat\ndata: {json.dumps({'alive': True})}\n\n"
+
+            # Get result
+            excel_bytes, filename = await task
+            _compare_result["excel"] = excel_bytes
+            _compare_filename["filename"] = filename
+
+            # Drain any remaining messages
+            while not queue.empty():
+                msg = await queue.get()
+                yield f"event: {msg['event']}\ndata: {json.dumps(msg['data'])}\n\n"
+
+        except Exception as e:
+            yield f"event: error\ndata: {json.dumps({'message': str(e)})}\n\n"
+            if not task.done():
+                task.cancel()
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@router.get("/compare/download")
+async def compare_download():
+    """Download the comparison result Excel."""
+    excel_bytes = _compare_result.get("excel")
+    filename = _compare_filename.get("filename", "comparison.xlsx")
+
+    if not excel_bytes:
+        return {"error": "No comparison result available. Run a comparison first."}
+
+    return StreamingResponse(
+        iter([excel_bytes]),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f"attachment; filename={filename}"},
+    )

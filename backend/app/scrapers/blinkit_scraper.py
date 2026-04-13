@@ -190,8 +190,20 @@ class BlinkitScraper(BaseScraper):
                     const mrp = prices.length > 1 ? Math.max(...prices) : null;
                     const img = card.querySelector('img[src*="grofers.com"], img[src*="blinkit"]')?.src || null;
 
+                    // Extract Blinkit product ID from PDP link inside the card.
+                    // Blinkit URL pattern: /prn/<slug>/prid/<id>
+                    let prid = null;
+                    let purl = null;
+                    const linkEl = card.querySelector('a[href*="/prid/"]') || card.closest('a[href*="/prid/"]');
+                    if (linkEl) {
+                        const href = linkEl.getAttribute('href') || '';
+                        purl = href.startsWith('http') ? href : ('https://blinkit.com' + href);
+                        const m = href.match(/\\/prid\\/(\\d+)/);
+                        if (m) prid = m[1];
+                    }
+
                     if (price > 0) {
-                        results.push({ name, price, mrp: mrp !== price ? mrp : null, img });
+                        results.push({ name, price, mrp: mrp !== price ? mrp : null, img, prid, purl });
                     }
                 }
                 return results;
@@ -199,13 +211,17 @@ class BlinkitScraper(BaseScraper):
 
             count = 0
             for p in (products or []):
-                pid = p['name'].lower().strip()
+                # Prefer Blinkit's prid as the dedup key when available — name-based dedup
+                # collapses different SKUs that share a name.
+                pid = p.get('prid') or p['name'].lower().strip()
                 if pid in self._seen_ids:
                     continue
                 self._seen_ids.add(pid)
                 self.products.append(Product(
                     product_name=p['name'],
                     brand=p['name'].split()[0] if len(p['name'].split()) > 1 else '',
+                    product_id=p.get('prid'),
+                    product_url=p.get('purl'),
                     price=p['price'],
                     mrp=p.get('mrp'),
                     unit=None,
@@ -227,7 +243,7 @@ class BlinkitScraper(BaseScraper):
         try:
             await self.page.goto(url, wait_until="domcontentloaded", timeout=20000)
             await self._wait_for_network_settle(0.5, 3.0)
-            await self._scroll_page(times=max(scroll_times, 12), delay=0.8)
+            await self._scroll_page(times=max(scroll_times, 25), delay=0.6)
             count = self._process_responses()
 
             # DOM extraction fallback — catches products missed by API interception
@@ -243,7 +259,7 @@ class BlinkitScraper(BaseScraper):
     async def _search_and_capture(self, search_url_fn):
         """Override to use _visit_and_collect (includes DOM extraction + more scrolling)."""
         consecutive_empty = 0
-        max_consecutive_empty = 10
+        max_consecutive_empty = 25
         for term in self._get_filtered_search_terms():
             if len(self.products) >= self.max_products:
                 break
@@ -345,7 +361,7 @@ class BlinkitScraper(BaseScraper):
                 visited.add(cat_path)
 
                 url = f"{self.base_url}{cat_path}" if cat_path.startswith('/') else cat_path
-                new = await self._visit_and_collect(url, scroll_times=8)
+                new = await self._visit_and_collect(url, scroll_times=20)
 
                 if new > 0:
                     consecutive_empty = 0

@@ -1,0 +1,536 @@
+"""
+Stage 1: Direct PDP (Product Detail Page) scraping for Blinkit.
+
+Reads Anakin's cached Blinkit_Product_Url list, visits each PDP in parallel,
+and scrapes live price/stock. Saves output keyed by Apna item_code for
+exact-join comparison.
+
+Flow:
+    1. Load data/anakin/blinkit_<pincode>_<date>.json
+    2. Extract every (item_code, Blinkit_Product_Url, Blinkit_Product_Id) where URL != "NA"
+    3. Init ONE Chromium browser with Ranchi location set (Blinkit-specific setup)
+    4. Spawn N parallel tabs (default 5), each pulling URLs from a queue
+    5. For each PDP: page.goto, wait for product card, extract name/price/mrp/stock
+    6. Save to data/sam/blinkit_pdp_<pincode>_<ts>.json
+
+Usage:
+    cd backend && ./venv/bin/python ../scripts/scrape_blinkit_pdps.py 834002 [num_tabs]
+"""
+import asyncio
+import json
+import sys
+from datetime import datetime
+from pathlib import Path
+
+# Line-buffered stdout for real-time progress
+sys.stdout.reconfigure(line_buffering=True)
+sys.stderr.reconfigure(line_buffering=True)
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
+
+from playwright.async_api import async_playwright  # noqa: E402
+from app.scrapers.base_scraper import get_coords, USER_AGENTS  # noqa: E402
+import random  # noqa: E402
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+
+def latest_anakin_file(pincode: str) -> Path | None:
+    cands = sorted((PROJECT_ROOT / "data" / "anakin").glob(f"blinkit_{pincode}_*.json"))
+    return cands[-1] if cands else None
+
+
+async def init_blinkit_browser(pincode: str, num_tabs: int):
+    """Start Chromium, set Blinkit location on EVERY new page via init_script + cookies.
+    Returns (playwright, browser, context, pages)."""
+    lat, lng = get_coords(pincode)
+    print(f"[pdp] Init browser for pincode {pincode} ({lat}, {lng}) with {num_tabs} tabs", flush=True)
+
+    pw = await async_playwright().start()
+    browser = await pw.chromium.launch(
+        headless=True,
+        args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
+    )
+    context = await browser.new_context(
+        user_agent=random.choice(USER_AGENTS),
+        viewport={"width": 1366, "height": 768},
+        locale="en-IN",
+        timezone_id="Asia/Kolkata",
+    )
+
+    # Set cookies at the context level — applies to ALL pages in this context
+    await context.add_cookies([
+        {"name": "__pincode", "value": pincode, "domain": ".blinkit.com", "path": "/"},
+        {"name": "gr_1_lat", "value": str(lat), "domain": ".blinkit.com", "path": "/"},
+        {"name": "gr_1_lon", "value": str(lng), "domain": ".blinkit.com", "path": "/"},
+    ])
+
+    # Init scripts run on EVERY new document (every page.goto).
+    # This sets localStorage before Blinkit's own JS reads it.
+    location_data = json.dumps({
+        "coords": {
+            "isDefault": False,
+            "lat": lat,
+            "lon": lng,
+            "locality": "Selected Location",
+            "id": None,
+            "isTopCity": False,
+            "cityName": "Selected",
+            "landmark": None,
+            "addressId": None,
+        }
+    })
+    await context.add_init_script(f"""
+        Object.defineProperty(navigator, 'webdriver', {{get: () => undefined}});
+        window.chrome = {{runtime: {{}}}};
+        try {{
+            localStorage.setItem('location', {json.dumps(location_data)});
+        }} catch(e) {{}}
+    """)
+
+    # Warm-up: load blinkit homepage once so Chromium binds the origin.
+    warm = await context.new_page()
+    try:
+        await warm.goto("https://blinkit.com", wait_until="domcontentloaded", timeout=20000)
+        await asyncio.sleep(1)
+    except Exception:
+        pass
+    await warm.close()
+
+    # Create worker tabs — each will also run the init_script on goto
+    pages = []
+    for _ in range(num_tabs):
+        pages.append(await context.new_page())
+
+    return pw, browser, context, pages
+
+
+def _find_product_in_json(data, target_pid: str, depth: int = 0):
+    """Recursively walk a JSON tree looking for a product object matching target_pid.
+    A product object must have BOTH:
+      - a matching product_id/id field
+      - at least one price-like field (mrp, price, offer_price, etc.)
+      - at least one name-like field (name, product_name, display_name, title)
+    This prevents matching page-level metadata (tracking.le_meta) which has 'id' but no prices.
+    Returns the matching dict or None."""
+    if depth > 12:
+        return None
+    if isinstance(data, dict):
+        # Check multiple ID field names
+        this_id = str(data.get("product_id") or data.get("productId") or data.get("prid") or "")
+        # Only fall back to generic "id" if the dict also has product-like fields
+        if not this_id:
+            raw_id = data.get("id")
+            if raw_id is not None and any(k in data for k in ("product_name", "display_name", "brand", "unit")):
+                this_id = str(raw_id)
+
+        if this_id == str(target_pid):
+            has_price = any(k in data for k in ("mrp", "price", "offer_price", "selling_price", "sellingPrice"))
+            has_name = any(k in data for k in ("name", "product_name", "display_name", "title"))
+            if has_price and has_name:
+                return data
+            # Even without name, if it has price + product_id (not just 'id'), accept it
+            if has_price and "product_id" in data:
+                return data
+
+        for v in data.values():
+            found = _find_product_in_json(v, target_pid, depth + 1)
+            if found:
+                return found
+    elif isinstance(data, list):
+        for item in data:
+            found = _find_product_in_json(item, target_pid, depth + 1)
+            if found:
+                return found
+    return None
+
+
+def _extract_price_from_product_dict(p: dict) -> tuple[float | None, float | None]:
+    """Pull selling_price and mrp out of a Blinkit product dict, handling nested pricing objects."""
+    sp = None
+    mrp = None
+
+    # MRP first — Blinkit usually has a clean top-level 'mrp'
+    for k in ("mrp", "marked_price", "max_price", "original_price"):
+        v = p.get(k)
+        if v:
+            try:
+                mrp = float(str(v).replace(",", "").replace("₹", "").strip())
+                if mrp > 50000:
+                    mrp /= 100  # paise → rupees
+                if mrp > 0:
+                    break
+            except (ValueError, TypeError):
+                pass
+
+    # SP: try top-level first, then nested
+    for k in ("offer_price", "selling_price", "sellingPrice", "finalPrice", "sp"):
+        v = p.get(k)
+        if v and not isinstance(v, (dict, list)):
+            try:
+                sp = float(str(v).replace(",", "").replace("₹", "").strip())
+                if sp > 50000:
+                    sp /= 100
+                if sp > 0:
+                    break
+            except (ValueError, TypeError):
+                pass
+
+    # Sometimes 'price' itself is a dict like {mrp: .., offer_price: ..}
+    if sp is None and isinstance(p.get("price"), dict):
+        inner = p["price"]
+        for k in ("offer_price", "selling_price", "sp"):
+            v = inner.get(k)
+            if v:
+                try:
+                    sp = float(str(v).replace(",", "").replace("₹", "").strip())
+                    if sp > 50000:
+                        sp /= 100
+                    if sp > 0:
+                        break
+                except (ValueError, TypeError):
+                    pass
+        if mrp is None:
+            mv = inner.get("mrp")
+            if mv:
+                try:
+                    mrp = float(str(mv).replace(",", "").replace("₹", "").strip())
+                    if mrp > 50000:
+                        mrp /= 100
+                except (ValueError, TypeError):
+                    pass
+
+    # Top-level 'price' as scalar number
+    if sp is None:
+        v = p.get("price")
+        if v and not isinstance(v, (dict, list)):
+            try:
+                sp = float(str(v).replace(",", "").replace("₹", "").strip())
+                if sp > 50000:
+                    sp /= 100
+            except (ValueError, TypeError):
+                pass
+
+    return sp, mrp
+
+
+async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_retries: int = 3) -> dict:
+    """Visit a single Blinkit PDP, intercept product JSON API responses, extract price/stock/name.
+    Retries on transient network errors with exponential backoff."""
+    out = {
+        "item_code": item_code,
+        "blinkit_product_id": blinkit_pid,
+        "blinkit_product_url": url,
+        "scraped_at": datetime.now(tz=None).isoformat(),
+    }
+    captured: list = []
+
+    async def on_response(response):
+        try:
+            ct = response.headers.get("content-type", "")
+            if "json" not in ct or response.status != 200:
+                return
+            body = await response.text()
+            if len(body) < 50:
+                return
+            low = body.lower()
+            if not any(kw in low for kw in ("mrp", "price", "product")):
+                return
+            try:
+                data = json.loads(body)
+                captured.append(data)
+            except json.JSONDecodeError:
+                pass
+        except Exception:
+            pass
+
+    page.on("response", on_response)
+    try:
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                await page.goto(url, wait_until="domcontentloaded", timeout=18000)
+                last_error = None
+                break
+            except Exception as e:
+                err_str = str(e)
+                last_error = err_str
+                # Transient network errors — worth retrying
+                transient = any(k in err_str for k in (
+                    "ERR_INTERNET_DISCONNECTED",
+                    "ERR_NETWORK_CHANGED",
+                    "ERR_NAME_NOT_RESOLVED",
+                    "ERR_CONNECTION_RESET",
+                    "ERR_TIMED_OUT",
+                    "ERR_CONNECTION_REFUSED",
+                    "Timeout",
+                ))
+                if transient and attempt < max_retries - 1:
+                    backoff = 5 * (2 ** attempt)  # 5s, 10s, 20s
+                    await asyncio.sleep(backoff)
+                    continue
+                break
+        if last_error is not None:
+            out["status"] = "error"
+            out["error"] = f"goto (after {attempt+1} attempts): {last_error[:150]}"
+            return out
+
+        # Wait briefly for API responses to arrive
+        await asyncio.sleep(1.2)
+
+        # ── Try 1: Find the exact product in captured JSON via product_id ──
+        product_dict = None
+        for payload in captured:
+            found = _find_product_in_json(payload, blinkit_pid)
+            if found:
+                product_dict = found
+                break
+
+        sp = mrp = None
+        name = None
+        unit = None
+        in_stock = True
+
+        if product_dict:
+            sp, mrp = _extract_price_from_product_dict(product_dict)
+            for k in ("name", "product_name", "display_name", "productName", "title"):
+                v = product_dict.get(k)
+                if v and isinstance(v, str):
+                    name = v.strip()
+                    break
+            for k in ("unit", "weight", "quantity", "pack_size", "packSize"):
+                v = product_dict.get(k)
+                if v and isinstance(v, (str, int, float)):
+                    unit = str(v).strip()
+                    break
+            for k in ("inventory", "in_stock", "inStock", "available"):
+                v = product_dict.get(k)
+                if v is not None:
+                    if isinstance(v, bool):
+                        in_stock = v
+                    elif isinstance(v, (int, float)):
+                        in_stock = v > 0
+
+        # ── Try 2: DOM fallback using meta tags + h1-anchored price ──
+        if sp is None or not name:
+            dom_data = await page.evaluate("""() => {
+                // Product name from h1 or og:title
+                let name = '';
+                const h1 = document.querySelector('h1');
+                if (h1) name = (h1.innerText || '').trim();
+                if (!name) {
+                    const og = document.querySelector('meta[property="og:title"]');
+                    if (og) name = (og.getAttribute('content') || '').trim();
+                }
+
+                // Price from og meta tags (cleanest)
+                const metaPriceEl = document.querySelector('meta[property="product:price:amount"], meta[property="og:price:amount"]');
+                let sp_meta = null;
+                if (metaPriceEl) {
+                    const v = parseFloat((metaPriceEl.getAttribute('content') || '').replace(',', ''));
+                    if (v > 0) sp_meta = v;
+                }
+
+                // Try to find product price near the h1 (within 800px below)
+                let sp_near_h1 = null, mrp_near_h1 = null;
+                if (h1) {
+                    const h1Rect = h1.getBoundingClientRect();
+                    const spans = document.querySelectorAll('span, div, p, strong');
+                    const candidates = [];
+                    for (const el of spans) {
+                        const t = (el.textContent || '').trim();
+                        if (!t.includes('\\u20B9')) continue;
+                        if (t.length > 30) continue;  // must be a short price label
+                        const m = t.match(/\\u20B9\\s*([\\d,]+\\.?\\d*)/);
+                        if (!m) continue;
+                        const price = parseFloat(m[1].replace(/,/g, ''));
+                        if (price <= 0 || price > 20000) continue;
+                        const r = el.getBoundingClientRect();
+                        // Must be near the h1 (above or below within 800px, same viewport column area)
+                        if (Math.abs(r.top - h1Rect.top) > 800) continue;
+                        candidates.push({ price, top: r.top });
+                    }
+                    // Pick the highest-price number near the top (title area usually has the main price)
+                    candidates.sort((a, b) => Math.abs(a.top - h1Rect.top) - Math.abs(b.top - h1Rect.top));
+                    // Among the closest 5, separate into distinct SP/MRP by frequency
+                    const near = candidates.slice(0, 8).map(c => c.price);
+                    const uniq = [...new Set(near)].sort((a, b) => b - a);
+                    if (uniq.length >= 2) {
+                        mrp_near_h1 = uniq[0];
+                        sp_near_h1 = uniq[1];
+                    } else if (uniq.length === 1) {
+                        sp_near_h1 = uniq[0];
+                    }
+                }
+
+                // Stock / availability
+                const bodyLower = (document.body.innerText || '').toLowerCase();
+                let in_stock = true;
+                if (bodyLower.includes('currently unavailable') ||
+                    bodyLower.includes('notify me when available') ||
+                    bodyLower.includes('out of stock') ||
+                    bodyLower.includes('sold out')) {
+                    in_stock = false;
+                }
+
+                // Unit
+                let unit = '';
+                const unitEl = document.querySelector('[class*="Weight"], [class*="weight"], [class*="pack-size"]');
+                if (unitEl) unit = (unitEl.innerText || '').trim();
+
+                return { name, sp_meta, sp_near_h1, mrp_near_h1, in_stock, unit };
+            }""")
+
+            if not name:
+                name = dom_data.get("name") or None
+            if sp is None:
+                sp = dom_data.get("sp_meta") or dom_data.get("sp_near_h1")
+            if mrp is None:
+                mrp = dom_data.get("mrp_near_h1")
+            if unit is None:
+                unit = dom_data.get("unit") or None
+            in_stock = dom_data.get("in_stock", in_stock)
+
+        out.update({
+            "sam_product_name": name,
+            "sam_selling_price": sp,
+            "sam_mrp": mrp,
+            "sam_in_stock": bool(in_stock),
+            "sam_unit": unit,
+            "status": "ok" if sp else "no_price",
+        })
+    except Exception as e:
+        out["status"] = "error"
+        out["error"] = str(e)[:200]
+    finally:
+        try:
+            page.remove_listener("response", on_response)
+        except Exception:
+            pass
+    return out
+
+
+def save_snapshot(pincode: str, results: list, anakin_file: str, duration: float, partial: bool) -> Path:
+    """Save current results to JSON. Used for incremental snapshots + final save."""
+    out_dir = PROJECT_ROOT / "data" / "sam"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    suffix = "_partial" if partial else ""
+    out_path = out_dir / f"blinkit_pdp_{pincode}_latest{suffix}.json"
+    ok = sum(1 for r in results if r.get("status") == "ok")
+    no_price = sum(1 for r in results if r.get("status") == "no_price")
+    errs = sum(1 for r in results if r.get("status") == "error")
+    with open(out_path, "w") as f:
+        json.dump({
+            "pincode": pincode,
+            "source": "anakin_url_seed",
+            "anakin_file": anakin_file,
+            "scraped_at": datetime.now().isoformat(),
+            "duration_seconds": round(duration, 1),
+            "partial": partial,
+            "total_scraped": len(results),
+            "ok": ok,
+            "no_price": no_price,
+            "errors": errs,
+            "products": results,
+        }, f, indent=2, default=str)
+    return out_path
+
+
+async def worker(worker_id: int, page, queue: asyncio.Queue, results: list,
+                 progress_counter: list, total: int, pincode: str, anakin_file: str, start_time):
+    while True:
+        try:
+            item_code, url, blinkit_pid = queue.get_nowait()
+        except asyncio.QueueEmpty:
+            break
+        result = await scrape_one_pdp(page, item_code, url, blinkit_pid)
+        results.append(result)
+        progress_counter[0] += 1
+        if progress_counter[0] % 20 == 0:
+            ok = sum(1 for r in results if r.get("status") == "ok")
+            print(f"[pdp] [worker {worker_id}] {progress_counter[0]}/{total} — {ok} with price", flush=True)
+        # Incremental snapshot every 200
+        if progress_counter[0] % 200 == 0:
+            duration = (datetime.now() - start_time).total_seconds()
+            snap_path = save_snapshot(pincode, results, anakin_file, duration, partial=True)
+            print(f"[pdp] snapshot saved to {snap_path.name} ({len(results)} so far)", flush=True)
+
+
+async def main(pincode: str, num_tabs: int = 5):
+    ana_path = latest_anakin_file(pincode)
+    if not ana_path:
+        print(f"[pdp] ERROR: no Anakin file for pincode {pincode}", file=sys.stderr)
+        sys.exit(1)
+
+    ana = json.load(open(ana_path))
+    # Extract mapped URLs
+    urls_to_scrape = []
+    for rec in ana["records"]:
+        pid = (rec.get("Blinkit_Product_Id") or "").strip()
+        url = (rec.get("Blinkit_Product_Url") or "").strip()
+        ic = (rec.get("Item_Code") or "").strip()
+        if pid and pid != "NA" and url and url.startswith("http"):
+            urls_to_scrape.append((ic, url, pid))
+
+    print(f"[pdp] Loaded {len(urls_to_scrape)} mapped URLs from {ana_path.name}", flush=True)
+    print(f"[pdp] Scraping with {num_tabs} parallel tabs", flush=True)
+
+    start = datetime.now()
+    pw = browser = None
+    try:
+        pw, browser, context, pages = await init_blinkit_browser(pincode, num_tabs)
+
+        # Load queue
+        queue: asyncio.Queue = asyncio.Queue()
+        for item in urls_to_scrape:
+            queue.put_nowait(item)
+
+        results: list = []
+        progress: list = [0]
+
+        workers = [
+            worker(i, pages[i], queue, results, progress, len(urls_to_scrape),
+                   pincode, ana_path.name, start)
+            for i in range(num_tabs)
+        ]
+        await asyncio.gather(*workers)
+    finally:
+        try:
+            if browser:
+                await browser.close()
+            if pw:
+                await pw.stop()
+        except Exception:
+            pass
+
+    duration = (datetime.now() - start).total_seconds()
+    ok = sum(1 for r in results if r.get("status") == "ok")
+    err = sum(1 for r in results if r.get("status") == "error")
+    no_price = sum(1 for r in results if r.get("status") == "no_price")
+    print(f"\n[pdp] DONE in {duration:.0f}s — {ok} OK, {no_price} no-price, {err} errors (of {len(results)})", flush=True)
+
+    # Save
+    out_dir = PROJECT_ROOT / "data" / "sam"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    out_path = out_dir / f"blinkit_pdp_{pincode}_{ts}.json"
+    with open(out_path, "w") as f:
+        json.dump({
+            "pincode": pincode,
+            "source": "anakin_url_seed",
+            "anakin_file": ana_path.name,
+            "scraped_at": datetime.now().isoformat(),
+            "duration_seconds": round(duration, 1),
+            "total_urls": len(urls_to_scrape),
+            "ok": ok,
+            "no_price": no_price,
+            "errors": err,
+            "products": results,
+        }, f, indent=2, default=str)
+    print(f"[pdp] Saved to {out_path}", flush=True)
+
+
+if __name__ == "__main__":
+    pincode = sys.argv[1] if len(sys.argv) > 1 else "834002"
+    num_tabs = int(sys.argv[2]) if len(sys.argv) > 2 else 5
+    asyncio.run(main(pincode, num_tabs))

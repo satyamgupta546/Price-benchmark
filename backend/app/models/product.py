@@ -4,6 +4,8 @@ from pydantic import BaseModel
 class Product(BaseModel):
     product_name: str
     brand: str
+    product_id: str | None = None       # platform-native id (e.g. Blinkit prid 32390)
+    product_url: str | None = None      # PDP URL on the platform
     price: float
     mrp: float | None = None
     unit: str | None = None

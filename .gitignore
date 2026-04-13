@@ -33,3 +33,11 @@ test-results/
 # Misc
 *.log
 .claude/
+
+# Data files (large, contains scraped/anakin data — not for git)
+data/anakin/
+data/sam/
+data/comparisons/
+data/exports/
+data/logs/
+data/hmlg

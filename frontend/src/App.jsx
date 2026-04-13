@@ -5,6 +5,7 @@ import PlatformSelector from './components/PlatformSelector'
 import CategorySelector from './components/CategorySelector'
 import ProductTable from './components/ProductTable'
 import ComparisonView from './components/ComparisonView'
+import DeltaCompare from './components/DeltaCompare'
 import ExportButton from './components/ExportButton'
 import LoadingSpinner from './components/LoadingSpinner'
 import ErrorBanner from './components/ErrorBanner'
@@ -19,7 +20,7 @@ export default function App() {
   const [selectedPincodes, setSelectedPincodes] = useState([])
   const [selectedPlatforms, setSelectedPlatforms] = useState(['blinkit', 'zepto', 'instamart', 'jiomart', 'flipkart_minutes'])
   const [selectedCategories, setSelectedCategories] = useState({})
-  const [view, setView] = useState('table')
+  const [view, setView] = useState('table')  // 'table' | 'compare' | 'delta'
   const { data, loading, error, scrape, platformProgress } = useScrapeData()
 
   useEffect(() => {
@@ -78,83 +79,99 @@ export default function App() {
           </div>
         </div>
 
-        {error && <ErrorBanner message={error} type="error" />}
-        {data?.results?.filter(r => r.status === 'failed').map((r, i) => (
-          <ErrorBanner key={`${r.platform}-${r.pincode}-${i}`} type="warning"
-            message={`${PLATFORMS.find(p => p.id === r.platform)?.name || r.platform} (${r.pincode}): ${r.error_message || 'Not available'}`} />
-        ))}
+        {/* View Toggle — always visible */}
+        <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 w-fit">
+          {[
+            { id: 'table', label: 'Product Table' },
+            { id: 'compare', label: 'Price Comparison' },
+            { id: 'delta', label: 'Delta Compare' },
+          ].map(v => (
+            <button key={v.id} onClick={() => setView(v.id)}
+              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${view === v.id ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}>
+              {v.label}
+            </button>
+          ))}
+        </div>
 
-        {loading && (
-          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800">
-            <LoadingSpinner platforms={selectedPlatforms} platformProgress={platformProgress} />
+        {/* Delta Compare Tab */}
+        {view === 'delta' && (
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm dark:shadow-none">
+            <DeltaCompare />
           </div>
         )}
 
-        {!loading && data && (
+        {/* Scrape views */}
+        {view !== 'delta' && (
           <>
-            {/* Summary Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-              {[...new Set(data.results?.map(r => r.platform))].map(platform => {
-                const pl = PLATFORMS.find(p => p.id === platform)
-                const results = data.results.filter(r => r.platform === platform)
-                const total = results.reduce((s, r) => s + r.total_products, 0)
-                const avgDur = (results.reduce((s, r) => s + r.scrape_duration_seconds, 0) / results.length).toFixed(1)
-                const allFailed = results.every(r => r.status === 'failed')
-                const hasPartialZero = !allFailed && total === 0
-                const failedResult = results.find(r => r.status === 'failed')
-                return (
-                  <div key={platform} className={`bg-white dark:bg-gray-900 rounded-xl border p-3.5 shadow-sm dark:shadow-none ${
-                    allFailed ? 'border-red-200 dark:border-red-900/50' :
-                    hasPartialZero ? 'border-amber-200 dark:border-amber-900/50' :
-                    'border-gray-200 dark:border-gray-800'
-                  }`}>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="w-3 h-3 rounded-full" style={{ backgroundColor: pl?.color }}></span>
-                      <span className="text-xs font-bold text-gray-600 dark:text-gray-300 truncate">{pl?.name}</span>
-                    </div>
-                    {allFailed ? (
-                      <>
-                        <p className="text-sm font-bold text-red-500 dark:text-red-400">Failed</p>
-                        {failedResult?.error_message && (
-                          <p className="text-xs text-red-400 dark:text-red-500 truncate mt-0.5" title={failedResult.error_message}>
-                            {failedResult.error_message.substring(0, 50)}{failedResult.error_message.length > 50 ? '...' : ''}
-                          </p>
-                        )}
-                      </>
-                    ) : hasPartialZero ? (
-                      <>
-                        <p className="text-xl font-bold text-amber-600 dark:text-amber-400">0</p>
-                        <p className="text-xs text-amber-500 dark:text-amber-500">products &bull; {avgDur}s</p>
-                      </>
-                    ) : (
-                      <><p className="text-xl font-bold text-gray-900 dark:text-white">{total}</p><p className="text-xs text-gray-400 dark:text-gray-500">products &bull; {avgDur}s</p></>
-                    )}
-                  </div>
-                )
-              })}
-              <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-3.5 shadow-sm dark:shadow-none">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-3 h-3 rounded-full bg-blue-500 dark:bg-purple-500"></span>
-                  <span className="text-xs font-bold text-gray-600 dark:text-gray-300">Total</span>
-                </div>
-                <p className="text-xl font-bold text-gray-900 dark:text-white">{data.total_products}</p>
-                <p className="text-xs text-gray-400 dark:text-gray-500">{data.total_duration_seconds}s &bull; {selectedPincodes.length} pin{selectedPincodes.length > 1 ? 's' : ''}</p>
+            {error && <ErrorBanner message={error} type="error" />}
+            {data?.results?.filter(r => r.status === 'failed').map((r, i) => (
+              <ErrorBanner key={`${r.platform}-${r.pincode}-${i}`} type="warning"
+                message={`${PLATFORMS.find(p => p.id === r.platform)?.name || r.platform} (${r.pincode}): ${r.error_message || 'Not available'}`} />
+            ))}
+
+            {loading && (
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800">
+                <LoadingSpinner platforms={selectedPlatforms} platformProgress={platformProgress} />
               </div>
-            </div>
+            )}
 
-            {/* View Toggle */}
-            <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 w-fit">
-              {['table', 'compare'].map(v => (
-                <button key={v} onClick={() => setView(v)}
-                  className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${view === v ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}>
-                  {v === 'table' ? 'Product Table' : 'Price Comparison'}
-                </button>
-              ))}
-            </div>
+            {!loading && data && (
+              <>
+                {/* Summary Cards */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                  {[...new Set(data.results?.map(r => r.platform))].map(platform => {
+                    const pl = PLATFORMS.find(p => p.id === platform)
+                    const results = data.results.filter(r => r.platform === platform)
+                    const total = results.reduce((s, r) => s + r.total_products, 0)
+                    const avgDur = (results.reduce((s, r) => s + r.scrape_duration_seconds, 0) / results.length).toFixed(1)
+                    const allFailed = results.every(r => r.status === 'failed')
+                    const hasPartialZero = !allFailed && total === 0
+                    const failedResult = results.find(r => r.status === 'failed')
+                    return (
+                      <div key={platform} className={`bg-white dark:bg-gray-900 rounded-xl border p-3.5 shadow-sm dark:shadow-none ${
+                        allFailed ? 'border-red-200 dark:border-red-900/50' :
+                        hasPartialZero ? 'border-amber-200 dark:border-amber-900/50' :
+                        'border-gray-200 dark:border-gray-800'
+                      }`}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="w-3 h-3 rounded-full" style={{ backgroundColor: pl?.color }}></span>
+                          <span className="text-xs font-bold text-gray-600 dark:text-gray-300 truncate">{pl?.name}</span>
+                        </div>
+                        {allFailed ? (
+                          <>
+                            <p className="text-sm font-bold text-red-500 dark:text-red-400">Failed</p>
+                            {failedResult?.error_message && (
+                              <p className="text-xs text-red-400 dark:text-red-500 truncate mt-0.5" title={failedResult.error_message}>
+                                {failedResult.error_message.substring(0, 50)}{failedResult.error_message.length > 50 ? '...' : ''}
+                              </p>
+                            )}
+                          </>
+                        ) : hasPartialZero ? (
+                          <>
+                            <p className="text-xl font-bold text-amber-600 dark:text-amber-400">0</p>
+                            <p className="text-xs text-amber-500 dark:text-amber-500">products &bull; {avgDur}s</p>
+                          </>
+                        ) : (
+                          <><p className="text-xl font-bold text-gray-900 dark:text-white">{total}</p><p className="text-xs text-gray-400 dark:text-gray-500">products &bull; {avgDur}s</p></>
+                        )}
+                      </div>
+                    )
+                  })}
+                  <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-3.5 shadow-sm dark:shadow-none">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-3 h-3 rounded-full bg-blue-500 dark:bg-purple-500"></span>
+                      <span className="text-xs font-bold text-gray-600 dark:text-gray-300">Total</span>
+                    </div>
+                    <p className="text-xl font-bold text-gray-900 dark:text-white">{data.total_products}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">{data.total_duration_seconds}s &bull; {selectedPincodes.length} pin{selectedPincodes.length > 1 ? 's' : ''}</p>
+                  </div>
+                </div>
 
-            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm dark:shadow-none">
-              {view === 'table' ? <ProductTable data={data} selectedPlatforms={selectedPlatforms} /> : <ComparisonView data={data} selectedPlatforms={selectedPlatforms} />}
-            </div>
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm dark:shadow-none">
+                  {view === 'table' ? <ProductTable data={data} selectedPlatforms={selectedPlatforms} /> : <ComparisonView data={data} selectedPlatforms={selectedPlatforms} />}
+                </div>
+              </>
+            )}
           </>
         )}
       </main>
