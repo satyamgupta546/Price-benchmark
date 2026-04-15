@@ -12,138 +12,34 @@ Usage:
     python3 scripts/cascade_match.py 834002
 """
 import json
-import re
 import sys
 from difflib import SequenceMatcher
 from datetime import datetime
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+from utils import (
+    clean_str, normalize, parse_num,
+    UNIT_ALIASES, parse_unit, to_base_unit, units_compatible,
+    normalize_brand, latest_file, PROJECT_ROOT,
+)
+
+# ── EAN map (loaded once at startup) ──
+EAN_MAP: dict[str, str] = {}
 
 
-# ── Text normalization ──────────────────────────────────────────
+def load_ean_map():
+    """Load item_code→EAN mapping from data/ean_map.json."""
+    global EAN_MAP
+    ean_path = PROJECT_ROOT / "data" / "ean_map.json"
+    if ean_path.exists():
+        EAN_MAP = json.load(open(ean_path))
+        print(f"[cascade] EAN map loaded: {len(EAN_MAP)} barcodes")
 
-def normalize(s: str) -> str:
-    if not s:
-        return ""
-    s = s.lower()
-    s = re.sub(r"[^\w\s]", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
 
+# ── Local tokens (different from utils.tokens — no length/stopword filtering) ──
 
 def tokens(s: str) -> set[str]:
     return set(normalize(s).split())
-
-
-def clean_str(v) -> str:
-    """Return empty string for sentinel missing values (NA, nan, null, empty)."""
-    if v is None:
-        return ""
-    s = str(v).strip()
-    if s.lower() in ("", "na", "nan", "null", "none"):
-        return ""
-    return s
-
-
-def parse_num(v):
-    """Parse number, handling NA/nan/null sentinels and ₹ / comma formatting."""
-    if v is None:
-        return None
-    s = str(v).strip()
-    if s.lower() in ("", "na", "nan", "null", "none"):
-        return None
-    # Strip common currency prefixes and separators
-    s = s.replace("₹", "").replace("Rs.", "").replace("Rs", "").replace(",", "").strip()
-    s = s.rstrip("/-").strip()
-    try:
-        return float(s)
-    except (ValueError, TypeError):
-        return None
-
-
-# ── Unit parsing ────────────────────────────────────────────────
-
-UNIT_ALIASES = {
-    "g": "g", "gm": "g", "gms": "g", "gram": "g", "grams": "g",
-    "kg": "kg", "kgs": "kg", "kilo": "kg", "kilogram": "kg", "kilograms": "kg",
-    "ml": "ml", "mls": "ml", "millilitre": "ml", "milliliter": "ml",
-    "l": "l", "ltr": "l", "ltrs": "l", "liter": "l", "litre": "l", "liters": "l", "litres": "l",
-    "pc": "pc", "pcs": "pc", "piece": "pc", "pieces": "pc", "n": "pc",
-    "unit": "pc", "units": "pc", "pack": "pc",
-}
-
-
-def parse_unit(text: str) -> tuple[float | None, str | None]:
-    """Parse a unit string like '500 g', '1.5 kg', '2 x 100ml' into (value, normalized_unit)."""
-    if not text:
-        return None, None
-    s = str(text).strip().lower()
-
-    # Handle half / fraction notation: "1/2 kg" → "0.5 kg"
-    m_frac = re.match(r"^\s*(\d+)\s*/\s*(\d+)\s+(.+)$", s)
-    if m_frac:
-        try:
-            num = float(m_frac.group(1))
-            den = float(m_frac.group(2))
-            if den != 0:
-                s = f"{num/den} {m_frac.group(3)}"
-        except ValueError:
-            pass
-
-    # Handle multipack "N x M unit" → return total (N * M)
-    m = re.search(r"(\d+\.?\d*)\s*[x×]\s*(\d+\.?\d*)\s*(g|gm|kg|ml|l|ltr|pc|pcs|piece|n|unit|units|pack)", s)
-    if m:
-        try:
-            count = float(m.group(1))
-            each = float(m.group(2))
-            unit = UNIT_ALIASES.get(m.group(3), m.group(3))
-            return count * each, unit
-        except ValueError:
-            pass
-
-    # Single pack "500 g"
-    m = re.search(r"(\d+\.?\d*)\s*(g|gm|kg|ml|l|ltr|pc|pcs|piece|n|unit|units|pack)\b", s)
-    if m:
-        try:
-            val = float(m.group(1))
-            unit = UNIT_ALIASES.get(m.group(2), m.group(2))
-            return val, unit
-        except ValueError:
-            pass
-
-    return None, None
-
-
-def to_base_unit(value: float, unit: str) -> tuple[float, str]:
-    """Convert to a canonical base: g / ml / pc."""
-    if unit == "kg":
-        return value * 1000, "g"
-    if unit == "l":
-        return value * 1000, "ml"
-    return value, unit
-
-
-def units_compatible(u1: str, u2: str) -> bool:
-    """True if the two units are comparable (same base family)."""
-    if not u1 or not u2:
-        return False
-    base1 = "g" if u1 in ("g", "kg") else ("ml" if u1 in ("ml", "l") else u1)
-    base2 = "g" if u2 in ("g", "kg") else ("ml" if u2 in ("ml", "l") else u2)
-    return base1 == base2
-
-
-# ── Brand normalization ─────────────────────────────────────────
-
-BRAND_STOPWORDS = {"private", "limited", "ltd", "pvt", "company", "co", "the", "and"}
-
-
-def normalize_brand(b: str) -> str:
-    if not b:
-        return ""
-    s = normalize(b)
-    toks = [t for t in s.split() if t not in BRAND_STOPWORDS]
-    return " ".join(toks)
 
 
 # ── Core matcher ────────────────────────────────────────────────
@@ -193,8 +89,9 @@ def find_match(ana_sku: dict, sam_products: list[dict], debug: bool = False) -> 
             if debug:
                 print(f"    stage 2b → {len(candidates)} candidates by product_type overlap")
 
-    # ─── STAGE 2c: Weight filter (±20% tolerance) ────
-    if ana_uv and ana_unit:
+    # ─── STAGE 2c: Weight filter (±10% tolerance) ────
+    weight_available = bool(ana_uv and ana_unit)
+    if weight_available:
         ana_base_val, ana_base_unit = to_base_unit(ana_uv, ana_unit)
         weight_match = []
         for p in candidates:
@@ -203,15 +100,20 @@ def find_match(ana_sku: dict, sam_products: list[dict], debug: bool = False) -> 
                 p_base_val, _ = to_base_unit(p_uv, p_unit)
                 if p_base_val > 0 and ana_base_val > 0:
                     ratio = p_base_val / ana_base_val
-                    if 0.8 <= ratio <= 1.25:
+                    if 0.9 <= ratio <= 1.1:
                         weight_match.append((p, abs(1 - ratio)))
         if weight_match:
             weight_match.sort(key=lambda x: x[1])
             candidates = [p for p, _ in weight_match]
             if debug:
                 print(f"    stage 2c → {len(candidates)} candidates by weight filter")
+        else:
+            # No weight-compatible candidates — reject to avoid sachet→family pack mismatches
+            return None, "no_weight", 0.0
 
     # ─── STAGE 2d: Name fuzzy match on filtered set ──
+    # When weight is NA, require HIGHER name score (0.70) to compensate
+    min_name_score = 0.55 if weight_available else 0.70
     ana_name_n = normalize(ana_name)
     best = None
     best_score = 0.0
@@ -224,19 +126,50 @@ def find_match(ana_sku: dict, sam_products: list[dict], debug: bool = False) -> 
             best_score = score
             best = p
 
-    if best and best_score >= 0.4:
-        return best, "cascaded", best_score
-    return None, "no_name_score", best_score
+    if not best or best_score < min_name_score:
+        return None, "no_name_score", best_score
+
+    # ─── STAGE 2e: Price cross-check ──
+    # Try MRP first, fall back to SP if MRP unavailable
+    ana_mrp = parse_num(ana_sku.get("Mrp"))
+    sam_mrp = parse_num(best.get("mrp"))
+    ana_sp = parse_num(ana_sku.get("Blinkit_Selling_Price") or ana_sku.get("Jiomart_Selling_Price"))
+    sam_sp = parse_num(best.get("price"))
+
+    price_rejected = False
+    if ana_mrp and sam_mrp and ana_mrp > 0 and sam_mrp > 0:
+        mrp_diff = abs(ana_mrp - sam_mrp) / ana_mrp
+        if mrp_diff > 0.15:
+            price_rejected = True
+    elif ana_sp and sam_sp and ana_sp > 0 and sam_sp > 0:
+        # MRP unavailable — use SP as fallback (stricter: 25%)
+        sp_diff = abs(ana_sp - sam_sp) / ana_sp
+        if sp_diff > 0.25:
+            price_rejected = True
+
+    if price_rejected:
+        if debug:
+            print(f"    stage 2e → rejected: price mismatch")
+        return None, "price_mismatch", best_score
+
+    # ─── STAGE 2f: EAN cross-verification ──
+    # If both Apna and SAM product have barcodes, they MUST match
+    ic = ana_sku.get("Item_Code", "")
+    apna_ean = EAN_MAP.get(str(ic), "")
+    sam_ean = str(best.get("barcode") or best.get("ean") or "").strip()
+    if apna_ean and sam_ean and len(sam_ean) >= 8:
+        if apna_ean != sam_ean:
+            if debug:
+                print(f"    stage 2f → rejected: EAN mismatch ({apna_ean} != {sam_ean})")
+            return None, "ean_mismatch", best_score
+
+    return best, "cascaded", best_score
 
 
 # ── Main ────────────────────────────────────────────────────────
 
-def latest_file(subdir: str, pattern: str) -> Path | None:
-    cands = sorted((PROJECT_ROOT / "data" / subdir).glob(pattern))
-    return cands[-1] if cands else None
-
-
 def main(pincode: str, platform: str = "blinkit"):
+    load_ean_map()
     # Platform-aware field names
     PLATFORM_FIELDS = {
         "blinkit": {"product_id": "Blinkit_Product_Id", "selling_price": "Blinkit_Selling_Price",

@@ -4,6 +4,7 @@ import random
 import re
 from abc import ABC, abstractmethod
 from datetime import datetime, timezone
+from pathlib import Path
 
 from playwright.async_api import async_playwright
 
@@ -204,18 +205,64 @@ class BaseScraper(ABC):
             terms.extend(self.SEARCH_TERMS_BY_CATEGORY.get(group, []))
         return terms
 
-    async def init_browser(self):
+    @staticmethod
+    def _load_proxy_config() -> dict | None:
+        """Try to load proxy config from config/proxies.json. Returns Playwright proxy dict or None."""
+        try:
+            from app.proxy.proxy_manager import ProxyManager
+            config_path = Path(__file__).resolve().parents[3] / "config" / "proxies.json"
+            if not config_path.exists():
+                return None
+            with open(config_path) as f:
+                data = json.load(f)
+            if not data.get("enabled", False):
+                return None
+            manager = ProxyManager()
+            manager.load_from_file(str(config_path))
+            proxy = manager.get_best()
+            if proxy is None:
+                return None
+            print(f"[proxy] Using proxy: {proxy.label} ({proxy.server})")
+            return proxy.to_playwright_config()
+        except Exception as e:
+            print(f"[proxy] Failed to load proxy config, using direct connection: {e}")
+            return None
+
+    async def init_browser(self, proxy_config: dict | None = None):
+        """Initialize browser with optional proxy support.
+        proxy_config: Playwright proxy dict {"server": "http://...", "username": "...", "password": "..."}
+                      Pass None to auto-detect from config/proxies.json (falls back to direct if unavailable).
+                      Pass False (explicitly) to force direct connection.
+        """
+        # Auto-load proxy from config if not explicitly provided
+        if proxy_config is None:
+            proxy_config = self._load_proxy_config()
+
         self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(
+        launch_kwargs = dict(
             headless=settings.HEADLESS,
             args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
         )
-        self.context = await self.browser.new_context(
+        if proxy_config:
+            launch_kwargs["proxy"] = proxy_config
+
+        try:
+            self.browser = await self.playwright.chromium.launch(**launch_kwargs)
+        except Exception as e:
+            if proxy_config:
+                print(f"[proxy] Browser launch with proxy failed ({e}), retrying without proxy")
+                launch_kwargs.pop("proxy", None)
+                self.browser = await self.playwright.chromium.launch(**launch_kwargs)
+            else:
+                raise
+
+        context_kwargs = dict(
             user_agent=random.choice(USER_AGENTS),
             viewport={"width": 1366, "height": 768},
             locale="en-IN",
             timezone_id="Asia/Kolkata",
         )
+        self.context = await self.browser.new_context(**context_kwargs)
         await self.context.add_init_script("""
             Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
             window.chrome = {runtime: {}};
@@ -388,9 +435,19 @@ class BaseScraper(ABC):
                     product_url = val
                     break
 
+            # Extract barcode / EAN / UPC / GTIN
+            barcode = None
+            for key in ["barcode", "ean", "upc", "gtin", "ean13", "bar_code",
+                         "ean_code", "product_barcode", "ean_number", "upc_code",
+                         "gtin13", "gtin14"]:
+                val = p.get(key)
+                if val and str(val).strip():
+                    barcode = str(val).strip()
+                    break
+
             return Product(
                 product_name=name, brand=brand,
-                product_id=product_id, product_url=product_url,
+                product_id=product_id, product_url=product_url, barcode=barcode,
                 price=price, mrp=mrp, unit=unit,
                 category=category, sub_category=None, platform=self.platform_name,
                 pincode=self.pincode, in_stock=in_stock, scraped_at=self.now_iso(), image_url=image,

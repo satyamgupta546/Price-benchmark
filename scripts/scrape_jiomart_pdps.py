@@ -69,15 +69,23 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
     """Walk JSON tree looking for a product object matching target_pid."""
     if depth > 10:
         return None
+    price_keys = ("mrp", "price", "offer_price", "buybox_mrp",
+                  "sellingPrice", "final_price", "base_price")
     if isinstance(data, dict):
         this_id = str(
             data.get("code") or data.get("id") or data.get("product_id") or
             data.get("productId") or data.get("sku") or ""
         )
         if this_id == str(target_pid):
-            if any(k in data for k in ("mrp", "price", "offer_price", "buybox_mrp",
-                                       "sellingPrice", "final_price", "base_price")):
+            # Check for price keys at this level
+            if any(k in data for k in price_keys):
                 return data
+            # Also check nested subtree (e.g. variants[0].attributes.buybox_mrp)
+            for v in data.values():
+                if isinstance(v, (dict, list)):
+                    subtree_str = json.dumps(v)
+                    if any(pk in subtree_str for pk in ("buybox_mrp", "price", "mrp", "selling_price")):
+                        return data
         for v in data.values():
             found = _find_product_in_json(v, target_pid, depth + 1)
             if found:
@@ -96,7 +104,15 @@ def _extract_price_from_jiomart_dict(p: dict) -> tuple[float | None, float | Non
     mrp = None
 
     # buybox_mrp pipe format: "store|qty|seller||mrp|price||discount|..."
+    # Check at top level first, then dig into variants[0].attributes
     bb = p.get("buybox_mrp")
+    if bb is None:
+        # Google Retail catalog nesting: variants[0].attributes.buybox_mrp
+        variants = p.get("variants")
+        if isinstance(variants, list) and variants:
+            attrs = variants[0] if isinstance(variants[0], dict) else {}
+            attrs = attrs.get("attributes", attrs)
+            bb = attrs.get("buybox_mrp")
     if isinstance(bb, dict):
         texts = bb.get("text", [])
         if texts:
@@ -134,6 +150,9 @@ def _extract_price_from_jiomart_dict(p: dict) -> tuple[float | None, float | Non
                 except (ValueError, TypeError):
                     pass
 
+    # If MRP not found but SP exists, MRP = SP (no discount)
+    if sp and not mrp:
+        mrp = sp
     return sp, mrp
 
 
@@ -189,7 +208,7 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
             out["error"] = f"goto: {last_error[:150]}"
             return out
 
-        await asyncio.sleep(1.5)  # Firefox + Akamai needs longer settle
+        await asyncio.sleep(2.5)  # Firefox + Akamai needs longer settle
 
         # Try: Find product in captured JSON by matching product_id
         product_dict = None
@@ -207,14 +226,28 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
 
         if product_dict:
             sp, mrp = _extract_price_from_jiomart_dict(product_dict)
-            for k in ("name", "title", "product_name", "display_name"):
-                v = product_dict.get(k)
-                if v and isinstance(v, str):
-                    name = v.strip()
-                    break
+            # Google Retail format: "name" = catalog path (projects/...),
+            # actual title in variants[0].title or product.title
+            # Check variant-level title first (most specific), then product-level
+            variants = product_dict.get("variants")
+            if isinstance(variants, list) and variants and isinstance(variants[0], dict):
+                vt = variants[0].get("title")
+                if vt and isinstance(vt, str) and not vt.startswith("projects/"):
+                    name = vt.strip()
+            if not name:
+                for k in ("title", "product_name", "display_name", "name"):
+                    v = product_dict.get(k)
+                    if v and isinstance(v, str):
+                        candidate = v.strip()
+                        # Skip Google Retail catalog paths
+                        if candidate.startswith("projects/"):
+                            continue
+                        name = candidate
+                        break
 
-        # DOM fallback
-        if sp is None or not name:
+        # DOM fallback — also triggered when name is a Google Retail catalog path
+        _name_bad = not name or (isinstance(name, str) and name.startswith("projects/"))
+        if sp is None or _name_bad:
             dom_data = await page.evaluate("""() => {
                 let name = '';
                 let sp_val = null, mrp_val = null;
@@ -279,41 +312,8 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                     }
                 }
 
-                // ─── TRY 4: Price from all ₹ occurrences (fallback, brittle) ───
-                if (!sp_val) {
-                    const bodyText = document.body.innerText || '';
-                    const prices = [...bodyText.matchAll(/\\u20B9\\s*([\\d,]+\\.?\\d*)/g)]
-                        .map(m => parseFloat(m[1].replace(/,/g, '')))
-                        .filter(p => p > 0 && p < 100000);
-                    const uniq = [...new Set(prices)].sort((a, b) => a - b);
-                    // Take median-ish (skip delivery fees at the bottom)
-                    if (uniq.length >= 3) {
-                        // Find prices that appear at least twice (likely the main product)
-                        const freq = {};
-                        for (const p of prices) freq[p] = (freq[p] || 0) + 1;
-                        const repeated = Object.entries(freq)
-                            .filter(([_, c]) => c >= 2)
-                            .map(([p, _]) => parseFloat(p))
-                            .sort((a, b) => b - a);  // highest first
-                        if (repeated.length >= 2) {
-                            mrp_val = repeated[0];
-                            sp_val = repeated[1];
-                        } else if (repeated.length === 1) {
-                            sp_val = repeated[0];
-                        } else {
-                            // Pick the highest stable value (avoid tiny delivery fees)
-                            const nonTrivial = uniq.filter(p => p >= 10);
-                            if (nonTrivial.length >= 2) {
-                                sp_val = nonTrivial[0];
-                                mrp_val = nonTrivial[nonTrivial.length - 1];
-                            } else if (nonTrivial.length === 1) {
-                                sp_val = nonTrivial[0];
-                            }
-                        }
-                    } else if (uniq.length >= 1) {
-                        sp_val = uniq[uniq.length - 1];
-                    }
-                }
+                // ─── TRY 4: DISABLED — body text ₹ regex picks up carousel/bundle prices ───
+                // no_price is better than wrong price
 
                 // Stock
                 const bodyLower = (document.body.innerText || '').toLowerCase();
@@ -328,13 +328,20 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                 return { name, sp_val, mrp_val, in_stock };
             }""")
 
-            if not name:
+            if not name or (isinstance(name, str) and name.startswith("projects/")):
                 name = dom_data.get("name") or None
             if sp is None:
                 sp = dom_data.get("sp_val")
             if mrp is None:
                 mrp = dom_data.get("mrp_val")
             in_stock = dom_data.get("in_stock", in_stock)
+
+        # ── Raw HTML regex DISABLED — picks up prices from carousels/script tags ──
+        # no_price is better than wrong price
+
+        # Final MRP fallback: if SP found but MRP still missing, assume MRP = SP
+        if sp and not mrp:
+            mrp = sp
 
         out.update({
             "sam_product_name": name,

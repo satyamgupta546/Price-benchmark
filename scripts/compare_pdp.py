@@ -87,6 +87,10 @@ def main(pincode: str):
             error_count += 1
             matches.append({**p, "match_status": "scrape_error"})
             continue
+        if sam_status == "not_available":
+            no_price_count += 1
+            matches.append({**p, "match_status": "not_available_at_location"})
+            continue
         if sam_status == "no_price":
             no_price_count += 1
             matches.append({**p, "match_status": "no_price_on_pdp"})

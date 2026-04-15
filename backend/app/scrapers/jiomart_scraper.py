@@ -20,7 +20,7 @@ class JioMartScraper(BaseScraper):
     platform_name = "jiomart"
     base_url = "https://www.jiomart.com"
 
-    # Updated URLs discovered from live site
+    # Hardcoded fallback — URLs may go stale; _discover_categories() refreshes them.
     CATEGORY_MAP = {
         "Fruits & Vegetables": ["/c/groceries/fruits-vegetables/219"],
         "Dairy & Bakery": ["/c/groceries/dairy-bakery/61"],
@@ -30,6 +30,19 @@ class JioMartScraper(BaseScraper):
         "Beauty": ["/c/groceries/beauty/6607"],
         "Home": ["/c/groceries/home/36"],
         "Mom & Baby Care": ["/c/groceries/mom-baby-care/2551"],
+    }
+
+    # Keywords used to fuzzy-match discovered URLs back to CATEGORY_MAP display names.
+    # Each entry: display_name -> list of substrings to look for in the URL slug.
+    _CATEGORY_KEYWORDS = {
+        "Fruits & Vegetables": ["fruit", "vegetable"],
+        "Dairy & Bakery": ["dairy", "bakery"],
+        "Cooking Essentials": ["cooking", "essentials", "staple", "masala", "spice", "oil", "rice", "atta", "dal"],
+        "Biscuits, Drinks & Packaged Foods": ["biscuit", "drink", "packaged", "snack", "beverage"],
+        "Personal Care": ["personal-care", "personal_care"],
+        "Beauty": ["beauty", "cosmetic"],
+        "Home": ["/home/", "cleaning", "household"],
+        "Mom & Baby Care": ["mom", "baby", "infant"],
     }
 
     CATEGORY_SEARCH_MAP = {
@@ -42,6 +55,71 @@ class JioMartScraper(BaseScraper):
         "Home": ["cleaning", "kitchen_home"],
         "Mom & Baby Care": ["baby_health"],
     }
+
+    async def _discover_categories(self, page) -> dict[str, list[str]]:
+        """Visit /c/groceries/2 and map discovered links back to CATEGORY_MAP names.
+
+        Returns a dict with the same keys as CATEGORY_MAP but with live URLs.
+        Falls back to the hardcoded CATEGORY_MAP on any failure.
+        """
+        try:
+            await page.goto(f"{self.base_url}/c/groceries/2",
+                            wait_until="domcontentloaded", timeout=30000)
+            await asyncio.sleep(2)
+
+            raw_links = await page.evaluate("""() => {
+                const anchors = document.querySelectorAll('a[href*="/c/groceries"]');
+                const seen = new Set();
+                const results = [];
+                for (const a of anchors) {
+                    const href = a.getAttribute('href');
+                    if (!href || href === '/c/groceries/2') continue;
+                    // Normalise: drop query string and trailing slash
+                    const clean = href.split('?')[0].replace(/\\/$/, '');
+                    if (seen.has(clean)) continue;
+                    seen.add(clean);
+                    // Grab the visible text for extra matching signal
+                    const text = (a.innerText || a.textContent || '').trim();
+                    results.push({href: clean, text: text});
+                }
+                return results;
+            }""")
+
+            if not raw_links or len(raw_links) < 3:
+                print("[jiomart] Category discovery: too few links found, using hardcoded fallback")
+                return dict(self.CATEGORY_MAP)
+
+            # Build the updated map: for each CATEGORY_MAP key, find matching links.
+            updated: dict[str, list[str]] = {}
+            used_hrefs: set[str] = set()
+
+            for display_name, keywords in self._CATEGORY_KEYWORDS.items():
+                matches: list[str] = []
+                for link in raw_links:
+                    href_lower = link["href"].lower()
+                    text_lower = link.get("text", "").lower()
+                    combined = href_lower + " " + text_lower
+                    if any(kw in combined for kw in keywords):
+                        if link["href"] not in used_hrefs:
+                            matches.append(link["href"])
+                            used_hrefs.add(link["href"])
+                if matches:
+                    updated[display_name] = matches
+
+            # For any CATEGORY_MAP key that got no match, keep the hardcoded URL as fallback.
+            for display_name, paths in self.CATEGORY_MAP.items():
+                if display_name not in updated:
+                    updated[display_name] = list(paths)
+
+            matched_count = sum(1 for k in updated if updated[k] != self.CATEGORY_MAP.get(k))
+            print(f"[jiomart] Category discovery: {len(raw_links)} links found, "
+                  f"{matched_count} categories refreshed, "
+                  f"{len(updated) - matched_count} kept hardcoded fallback")
+            return updated
+
+        except Exception as e:
+            print(f"[jiomart] Category discovery failed ({e}), using hardcoded fallback")
+            return dict(self.CATEGORY_MAP)
 
     async def init_browser(self):
         """Use Firefox to bypass JioMart's Akamai bot detection (Chromium gets 403)."""
@@ -301,29 +379,21 @@ class JioMartScraper(BaseScraper):
             except Exception:
                 pass
 
-            # Discover grocery categories from the main groceries page
-            filtered_paths = self._get_filtered_category_paths()
-            await self.page.goto(f"{self.base_url}/c/groceries/2", wait_until="domcontentloaded", timeout=30000)
-            await asyncio.sleep(2)
+            # Auto-discover category URLs from the live groceries page.
+            # This refreshes CATEGORY_MAP with current URLs so stale hardcoded
+            # paths don't silently fail the entire scrape.
+            live_category_map = await self._discover_categories(self.page)
 
-            try:
-                page_cats = await self.page.evaluate("""
-                    () => [...new Set(
-                        [...document.querySelectorAll('a[href*="/c/groceries"]')]
-                            .map(a => a.getAttribute('href'))
-                            .filter(h => h && h !== '/c/groceries/2')
-                    )]
-                """)
-                discovered = list(set(page_cats or []))
-                if self.selected_categories and "all" not in self.selected_categories:
-                    filtered_set = set(filtered_paths)
-                    categories = [c for c in discovered if c in filtered_set] or filtered_paths
-                elif len(discovered) >= 5:
-                    categories = discovered
-                else:
-                    categories = filtered_paths
-            except Exception:
-                categories = filtered_paths
+            # Apply selected_categories filter to the live map
+            if self.selected_categories and "all" not in self.selected_categories:
+                categories = []
+                for cat_name in self.selected_categories:
+                    categories.extend(live_category_map.get(cat_name, []))
+                if not categories:
+                    # No match — fall back to all discovered categories
+                    categories = [p for paths in live_category_map.values() for p in paths]
+            else:
+                categories = [p for paths in live_category_map.values() for p in paths]
 
             # Deep crawl categories + subcategories
             visited = set()
@@ -343,6 +413,18 @@ class JioMartScraper(BaseScraper):
                 if new > 0:
                     consecutive_empty = 0
                     print(f"[jiomart] [{len(visited)}] +{new} (total: {len(self.products)})")
+
+                    # Pagination: visit page 2, 3, ... until empty
+                    base_cat_url = url.split("?")[0]  # strip existing query params
+                    for pg in range(2, 20):
+                        if len(self.products) >= self.max_products:
+                            break
+                        pg_url = f"{base_cat_url}?page={pg}"
+                        pg_new = await self._visit_and_collect(pg_url, scroll_times=3)
+                        if pg_new > 0:
+                            print(f"[jiomart]   page {pg}: +{pg_new} (total: {len(self.products)})")
+                        else:
+                            break  # no more pages
                 else:
                     consecutive_empty += 1
 

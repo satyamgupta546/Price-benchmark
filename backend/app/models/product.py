@@ -6,6 +6,7 @@ class Product(BaseModel):
     brand: str
     product_id: str | None = None       # platform-native id (e.g. Blinkit prid 32390)
     product_url: str | None = None      # PDP URL on the platform
+    barcode: str | None = None          # EAN / UPC / GTIN barcode
     price: float
     mrp: float | None = None
     unit: str | None = None

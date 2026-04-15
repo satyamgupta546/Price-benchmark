@@ -1,3 +1,4 @@
+import os
 """
 Fetch Anakin's Blinkit data from BigQuery (apna-mart-data.googlesheet.cx_competitor_prices)
 for a given pincode + latest date, and save to data/anakin/blinkit_<pincode>_<date>.json + .csv.
@@ -10,6 +11,7 @@ Usage:
 import csv
 import json
 import sys
+import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -17,7 +19,7 @@ from pathlib import Path
 # Mirror Metabase endpoint (we use this because BQ python client isn't installed,
 # and it's fine for read-only data pulls of < 10k rows per call).
 API = "https://mirror.apnamart.in/api/dataset"
-KEY = "mb_vk+r3s1MVlQHdlRfpI1+1onHFQYvMQMQ5QPfdPROGvM="
+KEY = os.environ.get("METABASE_API_KEY", "")
 TABLE_ID = 4742  # cx_competitor_prices in Mirror
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -55,8 +57,15 @@ def query(mbql):
         headers={"x-api-key": KEY, "Content-Type": "application/json"},
         data=json.dumps(mbql).encode(),
     )
-    with urllib.request.urlopen(req) as r:
-        return json.loads(r.read())
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read())
+    except urllib.error.URLError as e:
+        print(f"ERROR: API request failed: {e}", file=sys.stderr)
+        sys.exit(1)
+    except urllib.error.HTTPError as e:
+        print(f"ERROR: HTTP {e.code}: {e.reason}", file=sys.stderr)
+        sys.exit(1)
 
 
 def fetch_for_pincode(pincode: str) -> tuple[str, list[dict]]:
@@ -70,7 +79,11 @@ def fetch_for_pincode(pincode: str) -> tuple[str, list[dict]]:
             "aggregation": [["max", ["field", DATE_FIELD_ID, None]]],
         }
     })
-    latest_date = r["data"]["rows"][0][0]
+    rows = r["data"]["rows"]
+    if not rows or not rows[0][0]:
+        print(f"ERROR: No data found for pincode {pincode}", file=sys.stderr)
+        sys.exit(1)
+    latest_date = rows[0][0]
     print(f"  Latest date: {latest_date}")
 
     # 2. Paginate through all rows for that pincode + date
@@ -149,5 +162,8 @@ def main(pincode: str):
 
 
 if __name__ == "__main__":
+    if not KEY:
+        print("ERROR: METABASE_API_KEY not set", file=sys.stderr)
+        sys.exit(1)
     pincode = sys.argv[1] if len(sys.argv) > 1 else "834002"
     main(pincode)

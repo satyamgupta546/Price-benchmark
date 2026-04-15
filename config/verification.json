@@ -1,0 +1,93 @@
+{
+  "reference_source": "anakin",
+  "stages": [
+    {
+      "id": "stage1",
+      "name": "PDP Direct",
+      "type": "id_match",
+      "description": "Visit product URL, extract live price, exact join by item_code",
+      "file_pattern": "{platform}_pdp_{pincode}_*_compare.json",
+      "match_key": "matches",
+      "match_filter": {"match_status": "ok"},
+      "confidence": "high",
+      "price_fields": {
+        "anakin_sp": "anakin_blinkit_sp | anakin_jiomart_sp",
+        "sam_sp": "sam_selling_price"
+      }
+    },
+    {
+      "id": "stage2",
+      "name": "Brand Cascade",
+      "type": "fuzzy_match",
+      "description": "Brand -> type -> weight -> name cascade matching",
+      "file_pattern": "{platform}_cascade_{pincode}_*.json",
+      "match_key": "new_mappings",
+      "confidence": "medium",
+      "min_score": 0.4,
+      "filters": ["brand", "product_type", "weight_20pct", "name_fuzzy"]
+    },
+    {
+      "id": "stage3",
+      "name": "Type/MRP Cascade",
+      "type": "fuzzy_match",
+      "description": "Type -> name_token -> weight -> MRP -> name cascade (looser on brand)",
+      "file_pattern": "{platform}_stage3_{pincode}_*.json",
+      "match_key": "new_mappings",
+      "confidence": "medium",
+      "min_score": 0.35,
+      "filters": ["product_type", "name_token", "weight_20pct", "mrp_15pct", "name_fuzzy"]
+    },
+    {
+      "id": "stage4",
+      "name": "Search API",
+      "type": "api_search",
+      "description": "Platform search API match (Jiomart only — PDP doesn't render)",
+      "file_pattern": "jiomart_search_match_{pincode}_*.json",
+      "match_key": "new_mappings",
+      "confidence": "medium",
+      "platforms": ["jiomart"]
+    },
+    {
+      "id": "stage5a",
+      "name": "Image Match",
+      "type": "perceptual_hash",
+      "description": "pHash image comparison (Hamming distance <= 12)",
+      "file_pattern": "{platform}_image_match_{pincode}_*.json",
+      "match_key": "new_mappings",
+      "confidence": "medium-high",
+      "max_hamming_distance": 12
+    },
+    {
+      "id": "stage5b",
+      "name": "Barcode Match",
+      "type": "exact_match",
+      "description": "Exact EAN/UPC barcode match (>=8 digits, skip internal codes)",
+      "file_pattern": "{platform}_barcode_match_{pincode}_*.json",
+      "match_key": "new_mappings",
+      "confidence": "very_high",
+      "min_barcode_length": 8
+    }
+  ],
+  "verification": {
+    "price_tolerance_buckets": [2, 5, 10, 20],
+    "mismatch_threshold_pct": 2,
+    "top_mismatches_count": 15,
+    "usable_filters": {
+      "exclude_loose": true,
+      "require_selling_price": true,
+      "invalid_values": ["", "NA", "nan", "None", "#VALUE!"]
+    }
+  },
+  "platforms": {
+    "blinkit": {
+      "sp_key": "Blinkit_Selling_Price",
+      "mrp_key": "Blinkit_Mrp_Price",
+      "product_id_key": "Blinkit_Product_Id"
+    },
+    "jiomart": {
+      "sp_key": "Jiomart_Selling_Price",
+      "mrp_key": "Jiomart_Mrp_Price",
+      "product_id_key": "Jiomart_Product_Id"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "Proxy pool for SAM scrapers. Add proxies here — manager loads at startup.",
+  "_usage": "Set PROXY_ENABLED=true in .env to activate. Without proxies, scrapers use direct connection.",
+
+  "enabled": false,
+  "strategy": "round_robin",
+  "health_check_interval_minutes": 30,
+  "max_consecutive_failures": 5,
+
+  "proxies": [
+    {
+      "_comment": "Example: BrightData residential proxy",
+      "server": "http://brd.superproxy.io:22225",
+      "username": "brd-customer-XXXX-zone-residential",
+      "password": "XXXX",
+      "label": "brightdata-residential",
+      "type": "http",
+      "enabled": false
+    },
+    {
+      "_comment": "Example: Free SOCKS5 proxy",
+      "server": "socks5://103.xxx.xxx.xxx:1080",
+      "username": "",
+      "password": "",
+      "label": "free-india-1",
+      "type": "socks5",
+      "enabled": false
+    },
+    {
+      "_comment": "Example: Local proxy (mitmproxy, squid, etc.)",
+      "server": "http://127.0.0.1:8888",
+      "username": "",
+      "password": "",
+      "label": "local-debug",
+      "type": "http",
+      "enabled": false
+    }
+  ]
+}

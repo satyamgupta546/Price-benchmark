@@ -145,6 +145,54 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
     return None
 
 
+def _find_name_in_payload(data, target_pid: str, depth: int = 0) -> str | None:
+    """Search entire JSON payload for a product name associated with target_pid.
+    Blinkit sometimes puts name at a parent/sibling level, not in the price dict."""
+    if depth > 12:
+        return None
+    if isinstance(data, dict):
+        # Check if this dict has the target product_id AND a name
+        pid = str(data.get("product_id") or data.get("productId") or data.get("prid") or data.get("id") or "")
+        if pid == str(target_pid):
+            for k in ("name", "product_name", "display_name", "productName", "title"):
+                v = data.get(k)
+                if v and isinstance(v, str) and len(v.strip()) > 2:
+                    return v.strip()
+        # Also check if this dict has a name AND contains the target_pid somewhere
+        # in its immediate children (handles parent-dict-with-name + child-with-pid pattern)
+        if not pid or pid != str(target_pid):
+            name_here = None
+            for k in ("name", "product_name", "display_name", "productName", "title"):
+                v = data.get(k)
+                if v and isinstance(v, str) and len(v.strip()) > 2:
+                    name_here = v.strip()
+                    break
+            if name_here:
+                # Check if target_pid appears anywhere in this dict's JSON representation
+                # (lightweight: only check immediate children that are dicts/lists with product_id)
+                for child_v in data.values():
+                    if isinstance(child_v, dict):
+                        child_pid = str(child_v.get("product_id") or child_v.get("productId") or child_v.get("prid") or "")
+                        if child_pid == str(target_pid):
+                            return name_here
+                    elif isinstance(child_v, list):
+                        for item in child_v:
+                            if isinstance(item, dict):
+                                child_pid = str(item.get("product_id") or item.get("productId") or item.get("prid") or "")
+                                if child_pid == str(target_pid):
+                                    return name_here
+        for v in data.values():
+            found = _find_name_in_payload(v, target_pid, depth + 1)
+            if found:
+                return found
+    elif isinstance(data, list):
+        for item in data:
+            found = _find_name_in_payload(item, target_pid, depth + 1)
+            if found:
+                return found
+    return None
+
+
 def _extract_price_from_product_dict(p: dict) -> tuple[float | None, float | None]:
     """Pull selling_price and mrp out of a Blinkit product dict, handling nested pricing objects."""
     sp = None
@@ -211,6 +259,9 @@ def _extract_price_from_product_dict(p: dict) -> tuple[float | None, float | Non
             except (ValueError, TypeError):
                 pass
 
+    # If MRP not found but SP exists, MRP = SP (no discount)
+    if sp and not mrp:
+        mrp = sp
     return sp, mrp
 
 
@@ -263,6 +314,7 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
                     "ERR_CONNECTION_RESET",
                     "ERR_TIMED_OUT",
                     "ERR_CONNECTION_REFUSED",
+                    "ERR_ABORTED",
                     "Timeout",
                 ))
                 if transient and attempt < max_retries - 1:
@@ -275,8 +327,22 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
             out["error"] = f"goto (after {attempt+1} attempts): {last_error[:150]}"
             return out
 
-        # Wait briefly for API responses to arrive
-        await asyncio.sleep(1.2)
+        # Wait for API responses to arrive (increased from 1.2s — was missing responses)
+        await asyncio.sleep(2.0)
+
+        # ── Early detect: homepage redirect = product not available at this location ──
+        final_url = page.url
+        if final_url and ("blinkit.com/" == final_url.rstrip("/").split("//")[-1]
+                          or final_url.rstrip("/").endswith("blinkit.com")):
+            out.update({
+                "sam_product_name": None,
+                "sam_selling_price": None,
+                "sam_mrp": None,
+                "sam_in_stock": False,
+                "sam_unit": None,
+                "status": "not_available",
+            })
+            return out
 
         # ── Try 1: Find the exact product in captured JSON via product_id ──
         product_dict = None
@@ -295,9 +361,15 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
             sp, mrp = _extract_price_from_product_dict(product_dict)
             for k in ("name", "product_name", "display_name", "productName", "title"):
                 v = product_dict.get(k)
-                if v and isinstance(v, str):
+                if v and isinstance(v, str) and len(v.strip()) > 2:
                     name = v.strip()
                     break
+            # If name not in product dict, search entire captured payload for name near this product_id
+            if not name:
+                for payload in captured:
+                    name = _find_name_in_payload(payload, blinkit_pid)
+                    if name:
+                        break
             for k in ("unit", "weight", "quantity", "pack_size", "packSize"):
                 v = product_dict.get(k)
                 if v and isinstance(v, (str, int, float)):
@@ -313,14 +385,21 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
 
         # ── Try 2: DOM fallback using meta tags + h1-anchored price ──
         if sp is None or not name:
+            # Brief extra wait for SPA rendering (h1 may not be in initial HTML)
+            await asyncio.sleep(0.8)
             dom_data = await page.evaluate("""() => {
-                // Product name from h1 or og:title
+                // Product name from h1, og:title, or document.title
                 let name = '';
                 const h1 = document.querySelector('h1');
                 if (h1) name = (h1.innerText || '').trim();
                 if (!name) {
                     const og = document.querySelector('meta[property="og:title"]');
                     if (og) name = (og.getAttribute('content') || '').trim();
+                }
+                if (!name) {
+                    // Blinkit sets document.title to "Product Name | Blinkit ..."
+                    const dt = (document.title || '').split('|')[0].split('-')[0].trim();
+                    if (dt && dt.length > 2 && dt.toLowerCase() !== 'blinkit') name = dt;
                 }
 
                 // Price from og meta tags (cleanest)
@@ -389,7 +468,86 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
                 mrp = dom_data.get("mrp_near_h1")
             if unit is None:
                 unit = dom_data.get("unit") or None
-            in_stock = dom_data.get("in_stock", in_stock)
+            # Only use DOM stock status when API didn't already find the product
+            # (API stock info is more reliable than DOM text search)
+            if not product_dict:
+                in_stock = dom_data.get("in_stock", in_stock)
+
+        # ── Try 3: Auto-heal fallback (JSON-LD, meta tags, raw regex) ──
+        if sp is None:
+            try:
+                # JSON-LD structured data
+                ld_result = await page.evaluate("""() => {
+                    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+                    for (const s of scripts) {
+                        try {
+                            const data = JSON.parse(s.textContent);
+                            const items = Array.isArray(data) ? data : [data];
+                            const stack = [...items];
+                            while (stack.length) {
+                                const cur = stack.pop();
+                                if (!cur || typeof cur !== 'object') continue;
+                                if (cur['@type'] === 'Product' || cur['@type'] === 'ProductGroup') {
+                                    const pname = cur.name || '';
+                                    const offers = cur.offers || {};
+                                    const offerList = Array.isArray(offers) ? offers : [offers];
+                                    for (const off of offerList) {
+                                        const sp = parseFloat(off.price || off.lowPrice);
+                                        const mrp = parseFloat(off.highPrice);
+                                        if (sp > 0) return {sp, mrp: mrp > 0 ? mrp : null, name: pname};
+                                    }
+                                }
+                                if (cur['@graph']) stack.push(...cur['@graph']);
+                                for (const v of Object.values(cur)) {
+                                    if (v && typeof v === 'object') stack.push(v);
+                                }
+                            }
+                        } catch(e) {}
+                    }
+                    return null;
+                }""")
+                if ld_result and ld_result.get("sp") and 1 <= ld_result["sp"] <= 50000:
+                    sp = ld_result["sp"]
+                    mrp = mrp or ld_result.get("mrp")
+                    name = name or ld_result.get("name")
+            except Exception:
+                pass
+
+        # ── Try 4: Raw HTML regex (last resort) ──
+        if sp is None:
+            try:
+                html = await page.content()
+                import re as _re
+                prices = []
+                for m_p in _re.finditer(r'"(?:price|selling_price|offer_price|sp|sellingPrice)"[:\s]*"?(\d+\.?\d*)"?', html, _re.IGNORECASE):
+                    try:
+                        p = float(m_p.group(1))
+                        if 1 < p < 50000:
+                            prices.append(p)
+                    except ValueError:
+                        pass
+                for m_p in _re.finditer(r'₹\s*([\d,]+\.?\d*)', html):
+                    try:
+                        p = float(m_p.group(1).replace(',', ''))
+                        if 1 < p < 50000:
+                            prices.append(p)
+                    except ValueError:
+                        pass
+                if prices:
+                    from collections import Counter as _Counter
+                    freq = _Counter(prices)
+                    most_common = freq.most_common(3)
+                    if len(most_common) >= 2:
+                        sp = min(most_common[0][0], most_common[1][0])
+                        mrp = mrp or max(most_common[0][0], most_common[1][0])
+                    elif most_common:
+                        sp = most_common[0][0]
+            except Exception:
+                pass
+
+        # Final MRP fallback: if SP exists but MRP is missing, set MRP = SP (no discount)
+        if sp and not mrp:
+            mrp = sp
 
         out.update({
             "sam_product_name": name,
@@ -463,16 +621,21 @@ async def main(pincode: str, num_tabs: int = 5):
         sys.exit(1)
 
     ana = json.load(open(ana_path))
-    # Extract mapped URLs
+    # Extract mapped URLs — skip products Anakin already marks as out_of_stock
     urls_to_scrape = []
+    skipped_oos = 0
     for rec in ana["records"]:
         pid = (rec.get("Blinkit_Product_Id") or "").strip()
         url = (rec.get("Blinkit_Product_Url") or "").strip()
         ic = (rec.get("Item_Code") or "").strip()
         if pid and pid != "NA" and url and url.startswith("http"):
+            stock = (rec.get("Blinkit_In_Stock_Remark") or "").lower()
+            if stock == "out_of_stock":
+                skipped_oos += 1
+                continue
             urls_to_scrape.append((ic, url, pid))
 
-    print(f"[pdp] Loaded {len(urls_to_scrape)} mapped URLs from {ana_path.name}", flush=True)
+    print(f"[pdp] Loaded {len(urls_to_scrape)} mapped URLs from {ana_path.name} (skipped {skipped_oos} OOS)", flush=True)
     print(f"[pdp] Scraping with {num_tabs} parallel tabs", flush=True)
 
     start = datetime.now()

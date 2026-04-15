@@ -12,122 +12,21 @@ Usage:
     python3 scripts/stage3_match.py 834002
 """
 import json
-import re
 import sys
 from difflib import SequenceMatcher
 from datetime import datetime
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+from utils import (
+    normalize, tokens, STOPWORDS, UNIT_ALIASES,
+    parse_unit, to_base_unit, units_compatible,
+    parse_num, clean_str, latest_file, PROJECT_ROOT,
+)
 
 # ── Tunables ─────────────────────────────────────────────────────
 MRP_TOLERANCE_PCT = 15.0        # Stage 3d: MRP filter tolerance
 WEIGHT_TOLERANCE_RATIO = (0.8, 1.25)  # Stage 3c: weight filter
-NAME_SCORE_MIN = 0.35           # Minimum name similarity to accept
-
-
-# ── Normalization ────────────────────────────────────────────────
-
-def normalize(s: str) -> str:
-    if not s:
-        return ""
-    s = s.lower()
-    s = re.sub(r"[^\w\s]", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
-
-
-STOPWORDS = {"the", "and", "of", "a", "an", "with", "for", "in", "on", "to",
-             "pack", "pc", "pcs", "n", "by", "free", "new"}
-
-
-def tokens(s: str) -> set[str]:
-    """Significant tokens (≥3 chars, not stopwords, not pure numbers)."""
-    return {
-        t for t in normalize(s).split()
-        if len(t) >= 3 and t not in STOPWORDS and not t.isdigit()
-    }
-
-
-# ── Unit parsing (same as stage 2) ───────────────────────────────
-
-UNIT_ALIASES = {
-    "g": "g", "gm": "g", "gms": "g", "gram": "g", "grams": "g",
-    "kg": "kg", "kgs": "kg", "kilo": "kg", "kilogram": "kg",
-    "ml": "ml", "mls": "ml",
-    "l": "l", "ltr": "l", "ltrs": "l", "liter": "l", "litre": "l", "liters": "l", "litres": "l",
-    "pc": "pc", "pcs": "pc", "piece": "pc", "pieces": "pc", "n": "pc",
-    "unit": "pc", "units": "pc", "pack": "pc",
-}
-
-
-def parse_unit(text: str) -> tuple[float | None, str | None]:
-    if not text:
-        return None, None
-    s = str(text).strip().lower()
-
-    # Handle half / fraction notation: "1/2 kg" → "0.5 kg"
-    m_frac = re.match(r"^\s*(\d+)\s*/\s*(\d+)\s+(.+)$", s)
-    if m_frac:
-        try:
-            num = float(m_frac.group(1))
-            den = float(m_frac.group(2))
-            if den != 0:
-                s = f"{num/den} {m_frac.group(3)}"
-        except ValueError:
-            pass
-
-    m = re.search(r"(\d+\.?\d*)\s*[x×]\s*(\d+\.?\d*)\s*(g|gm|kg|ml|l|ltr|pc|pcs|piece|n|unit|units|pack)", s)
-    if m:
-        try:
-            return float(m.group(1)) * float(m.group(2)), UNIT_ALIASES.get(m.group(3), m.group(3))
-        except ValueError:
-            pass
-
-    m = re.search(r"(\d+\.?\d*)\s*(g|gm|kg|ml|l|ltr|pc|pcs|piece|n|unit|units|pack)\b", s)
-    if m:
-        try:
-            return float(m.group(1)), UNIT_ALIASES.get(m.group(2), m.group(2))
-        except ValueError:
-            pass
-    return None, None
-
-
-def to_base_unit(value: float, unit: str) -> tuple[float, str]:
-    if unit == "kg":
-        return value * 1000, "g"
-    if unit == "l":
-        return value * 1000, "ml"
-    return value, unit
-
-
-def units_compatible(u1: str, u2: str) -> bool:
-    if not u1 or not u2:
-        return False
-    base1 = "g" if u1 in ("g", "kg") else ("ml" if u1 in ("ml", "l") else u1)
-    base2 = "g" if u2 in ("g", "kg") else ("ml" if u2 in ("ml", "l") else u2)
-    return base1 == base2
-
-
-def parse_num(v):
-    if v is None or str(v).strip().lower() in ("", "na", "nan", "null", "none"):
-        return None
-    try:
-        s = str(v).replace("₹", "").replace("Rs.", "").replace("Rs", "").replace(",", "").strip()
-        s = s.rstrip("/-").strip()
-        return float(s)
-    except (ValueError, TypeError):
-        return None
-
-
-def clean_str(v) -> str:
-    """Return empty string for sentinel missing values (NA, nan, null, empty)."""
-    if v is None:
-        return ""
-    s = str(v).strip()
-    if s.lower() in ("", "na", "nan", "null", "none"):
-        return ""
-    return s
+NAME_SCORE_MIN = 0.50           # Minimum name similarity to accept (raised from 0.35)
 
 
 # ── Core matcher (type-first, MRP filter) ───────────────────────
@@ -167,14 +66,24 @@ def find_match(ana_sku: dict, sam_products: list[dict], debug: bool = False) -> 
     if debug:
         print(f"    3a type → {len(candidates)} candidates")
 
-    # ─── STAGE 3b: Name token overlap (specific product identity) ─────
-    # STRICT: require at least 1 significant name/brand token overlap.
-    combined_tokens = ana_name_tokens | ana_brand_tokens
-    if combined_tokens:
+    # ─── STAGE 3b: Brand soft-check + Name token overlap ─────
+    # Require brand token overlap OR sufficient name token overlap.
+    # When Anakin brand is known but doesn't match, require 3+ common name
+    # tokens to prevent cross-brand matches (Bisk Farm→Britannia, MDH→Catch).
+    if ana_name_tokens or ana_brand_tokens:
         filtered = []
         for p in candidates:
-            p_tokens = tokens(p.get("product_name") or "") | tokens(p.get("brand") or "")
-            if combined_tokens & p_tokens:
+            p_brand_tokens = tokens(p.get("brand") or "")
+            p_name_tokens = tokens(p.get("product_name") or "")
+            p_all = p_name_tokens | p_brand_tokens
+            # Brand check: at least 1 brand token must match
+            brand_ok = bool(ana_brand_tokens and (ana_brand_tokens & p_all))
+            # Name-only overlap (exclude brand tokens to avoid inflating count)
+            common_name = ana_name_tokens & p_all
+            if brand_ok or len(common_name) >= 2:
+                # When brand is known and doesn't match, require stricter overlap
+                if not brand_ok and ana_brand_tokens and len(common_name) < 3:
+                    continue
                 filtered.append(p)
         if not filtered:
             return None, "no_name_token", 0.0
@@ -182,21 +91,25 @@ def find_match(ana_sku: dict, sam_products: list[dict], debug: bool = False) -> 
     if debug:
         print(f"    3b name-token → {len(candidates)} candidates")
 
-    # ─── STAGE 3c: Weight filter (±20% tolerance) ─────────────────────
-    if ana_uv and ana_unit:
-        ana_base_val, _ = to_base_unit(ana_uv, ana_unit)
-        filtered = []
-        for p in candidates:
-            p_uv, p_unit = parse_unit(p.get("unit") or "")
-            if p_uv and p_unit and units_compatible(ana_unit, p_unit):
-                p_base_val, _ = to_base_unit(p_uv, p_unit)
-                if p_base_val > 0 and ana_base_val > 0:
-                    ratio = p_base_val / ana_base_val
-                    if WEIGHT_TOLERANCE_RATIO[0] <= ratio <= WEIGHT_TOLERANCE_RATIO[1]:
-                        filtered.append((p, abs(1 - ratio)))
-        if filtered:
-            filtered.sort(key=lambda x: x[1])
-            candidates = [p for p, _ in filtered]
+    # ─── STAGE 3c: Weight filter (±20% tolerance) — MANDATORY ──────────
+    # Weight is required for Stage 3; skip SKUs with no parseable weight.
+    if not (ana_uv and ana_unit):
+        return None, "no_weight", 0.0
+    ana_base_val, _ = to_base_unit(ana_uv, ana_unit)
+    weight_filtered = []
+    for p in candidates:
+        p_uv, p_unit = parse_unit(p.get("unit") or "")
+        if p_uv and p_unit and units_compatible(ana_unit, p_unit):
+            p_base_val, _ = to_base_unit(p_uv, p_unit)
+            if p_base_val > 0 and ana_base_val > 0:
+                ratio = p_base_val / ana_base_val
+                if WEIGHT_TOLERANCE_RATIO[0] <= ratio <= WEIGHT_TOLERANCE_RATIO[1]:
+                    weight_filtered.append((p, abs(1 - ratio)))
+    if weight_filtered:
+        weight_filtered.sort(key=lambda x: x[1])
+        candidates = [p for p, _ in weight_filtered]
+    else:
+        return None, "no_weight", 0.0
     if debug:
         print(f"    3c weight → {len(candidates)} candidates")
 
@@ -240,17 +153,13 @@ def find_match(ana_sku: dict, sam_products: list[dict], debug: bool = False) -> 
 
 # ── Main ────────────────────────────────────────────────────────
 
-def latest_file(subdir: str, pattern: str) -> Path | None:
-    cands = sorted((PROJECT_ROOT / "data" / subdir).glob(pattern))
-    return cands[-1] if cands else None
-
-
 def main(pincode: str, platform: str = "blinkit"):
     PLATFORM_FIELDS = {
-        "blinkit": {"product_id": "Blinkit_Product_Id"},
-        "jiomart": {"product_id": "Jiomart_Product_Id"},
+        "blinkit": {"product_id": "Blinkit_Product_Id", "sp_key": "Blinkit_Selling_Price"},
+        "jiomart": {"product_id": "Jiomart_Product_Id", "sp_key": "Jiomart_Selling_Price"},
     }
     pf = PLATFORM_FIELDS.get(platform, PLATFORM_FIELDS["blinkit"])
+    sp_key = pf["sp_key"]
 
     ana_path = latest_file("anakin", f"{platform}_{pincode}_*.json")
     stage2_path = latest_file("comparisons", f"{platform}_cascade_{pincode}_*.json")
@@ -301,6 +210,8 @@ def main(pincode: str, platform: str = "blinkit"):
         best, reason, score = find_match(sku, sam["products"])
         reasons[reason] = reasons.get(reason, 0) + 1
 
+        anakin_sp = parse_num(sku.get(sp_key))
+
         record = {
             "item_code": sku.get("Item_Code"),
             "anakin_name": sku.get("Item_Name"),
@@ -308,19 +219,25 @@ def main(pincode: str, platform: str = "blinkit"):
             "anakin_product_type": sku.get("Product_Type"),
             "anakin_weight": f"{sku.get('Unit_Value')} {sku.get('Unit')}".strip(),
             "anakin_mrp": sku.get("Mrp"),
+            "anakin_sp": anakin_sp,
             "stage3_reason": reason,
             "stage3_score": round(score, 3),
         }
 
         if best:
+            sam_price = parse_num(best.get("price")) or parse_num(best.get("sp"))
+            price_diff_pct = None
+            if sam_price and anakin_sp and anakin_sp > 0:
+                price_diff_pct = round(abs(sam_price - anakin_sp) / anakin_sp * 100, 2)
             record.update({
                 "sam_product_id": best.get("product_id"),
                 "sam_product_url": best.get("product_url"),
                 "sam_product_name": best.get("product_name"),
                 "sam_brand": best.get("brand"),
                 "sam_unit": best.get("unit"),
-                "sam_price": best.get("price"),
+                "sam_price": sam_price,
                 "sam_mrp": best.get("mrp"),
+                "price_diff_pct": price_diff_pct,
             })
             matched.append(record)
         else:
@@ -340,9 +257,10 @@ def main(pincode: str, platform: str = "blinkit"):
     if matched:
         print("Sample Stage 3 matches (top 5 by score):")
         for m in sorted(matched, key=lambda x: -x["stage3_score"])[:5]:
+            diff_str = f"{m['price_diff_pct']:.1f}%" if m.get("price_diff_pct") is not None else "N/A"
             print(f"  [{m['stage3_score']:.2f}] {m['anakin_name']}")
             print(f"          → {m['sam_product_name']}")
-            print(f"          Anakin MRP ₹{m['anakin_mrp']} | SAM ₹{m['sam_price']}")
+            print(f"          Anakin SP ₹{m.get('anakin_sp', 'N/A')} | SAM ₹{m['sam_price']} | Diff {diff_str}")
 
     out_dir = PROJECT_ROOT / "data" / "comparisons"
     out_dir.mkdir(parents=True, exist_ok=True)

@@ -8,7 +8,6 @@ Usage:
 """
 import asyncio
 import json
-import re
 import sys
 from datetime import datetime
 from difflib import SequenceMatcher
@@ -19,32 +18,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 
 from app.scrapers.jiomart_scraper import JioMartScraper  # noqa
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+from utils import clean_str, normalize, latest_file, PROJECT_ROOT
 
 
-def normalize(s: str) -> str:
-    if not s:
-        return ""
-    s = s.lower()
-    s = re.sub(r"[^\w\s]", " ", s)
-    return re.sub(r"\s+", " ", s).strip()
-
-
-def clean_str(v) -> str:
-    if v is None:
-        return ""
-    s = str(v).strip()
-    if s.lower() in ("", "na", "nan", "null", "none"):
-        return ""
-    return s
-
-
-def latest_file(subdir: str, pattern: str) -> Path | None:
-    cands = sorted((PROJECT_ROOT / "data" / subdir).glob(pattern))
-    return cands[-1] if cands else None
-
-
-async def search_one_product(scraper, search_term: str, target_name: str) -> dict | None:
+async def search_one_product(scraper, search_term: str, target_name: str,
+                             brand: str = "") -> dict | None:
     """Search Jiomart for a product, return best match with price."""
     scraper.products.clear()
     scraper._captured_responses.clear()
@@ -66,17 +44,34 @@ async def search_one_product(scraper, search_term: str, target_name: str) -> dic
         if not scraper.products:
             return None
 
-        # Find best name match
+        # Find best name match — require brand overlap + higher threshold
         target_norm = normalize(target_name)
+        # Use Anakin brand field if available, otherwise fall back to target_name words
+        target_brand = normalize(brand) if brand else ""
+        target_brand_words = set(target_brand.split()) if target_brand else set()
+        # Fallback: use significant words from target_name (first 2 words) if no brand provided
+        if not target_brand_words and target_name:
+            target_brand_words = {normalize(w) for w in target_name.split()[:2] if len(w) >= 3}
         best_score = 0.0
         best_product = None
         for p in scraper.products:
-            score = SequenceMatcher(None, target_norm, normalize(p.product_name)).ratio()
+            p_norm = normalize(p.product_name)
+            # Skip if no brand word overlap at all
+            p_brand = normalize(p.brand or "")
+            p_brand_words = set(p_brand.split()) if p_brand else set()
+            if target_brand_words and p_brand_words:
+                # Check if ANY word from target brand appears in product's brand
+                has_brand_overlap = bool(target_brand_words & p_brand_words)
+                # Also check if any target brand word appears in product name
+                has_name_overlap = any(bw in p_norm for bw in target_brand_words if len(bw) >= 3)
+                if not has_brand_overlap and not has_name_overlap:
+                    continue
+            score = SequenceMatcher(None, target_norm, p_norm).ratio()
             if score > best_score:
                 best_score = score
                 best_product = p
 
-        if best_product and best_score >= 0.4:
+        if best_product and best_score >= 0.55:
             return {
                 "product_name": best_product.product_name,
                 "brand": best_product.brand,
@@ -98,7 +93,9 @@ async def main(pincode: str):
 
     ana = json.load(open(ana_path))
 
-    # Find unmatched: usable non-loose Jiomart products not yet matched by any stage
+    # Find items that need search:
+    # 1. Usable items not matched by any stage (no_price from PDP + cascade/stage3 misses)
+    # 2. PDP "ok" items with suspicious data (no real name = "projects/" prefix)
     usable = {r.get("Item_Code") for r in ana["records"]
               if r.get("Jiomart_Selling_Price") not in (None, "", "NA", "nan")
               and "loose" not in (r.get("Item_Name") or "").lower()}
@@ -113,7 +110,20 @@ async def main(pincode: str):
             for m in d.get("new_mappings", []):
                 matched.add(m.get("item_code"))
 
-    unmatched_codes = usable - matched
+    # Also include PDP "ok" items with broken names (Google Retail raw catalog IDs)
+    suspect_pdp = set()
+    pdp_path = latest_file("sam", f"jiomart_pdp_{pincode}_*.json")
+    if pdp_path and "partial" not in pdp_path.name:
+        pdp_data = json.load(open(pdp_path))
+        for p in pdp_data.get("products", []):
+            if p.get("status") == "ok" and p.get("item_code"):
+                name = p.get("sam_product_name") or ""
+                if name.startswith("projects/") or not name:
+                    suspect_pdp.add(p["item_code"])
+        if suspect_pdp:
+            print(f"[jm-search] PDP items with broken names (re-verify): {len(suspect_pdp)}")
+
+    unmatched_codes = (usable - matched) | (suspect_pdp & usable)
     unmatched_skus = [r for r in ana["records"] if r.get("Item_Code") in unmatched_codes]
 
     print(f"[jm-search] Anakin: {ana_path.name}")
@@ -141,12 +151,13 @@ async def main(pincode: str):
             # Search by Jiomart_Item_Name (closest to what Jiomart shows)
             jm_name = clean_str(sku.get("Jiomart_Item_Name"))
             ana_name = clean_str(sku.get("Item_Name"))
+            ana_brand = clean_str(sku.get("Brand"))
             search_term = jm_name or ana_name
             if not search_term:
                 no_result += 1
                 continue
 
-            result = await search_one_product(scraper, search_term, search_term)
+            result = await search_one_product(scraper, search_term, search_term, brand=ana_brand)
 
             if result:
                 ana_sp = None

@@ -6,6 +6,7 @@ import CategorySelector from './components/CategorySelector'
 import ProductTable from './components/ProductTable'
 import ComparisonView from './components/ComparisonView'
 import DeltaCompare from './components/DeltaCompare'
+import SAMDashboard from './components/SAMDashboard'
 import ExportButton from './components/ExportButton'
 import LoadingSpinner from './components/LoadingSpinner'
 import ErrorBanner from './components/ErrorBanner'
@@ -20,7 +21,7 @@ export default function App() {
   const [selectedPincodes, setSelectedPincodes] = useState([])
   const [selectedPlatforms, setSelectedPlatforms] = useState(['blinkit', 'zepto', 'instamart', 'jiomart', 'flipkart_minutes'])
   const [selectedCategories, setSelectedCategories] = useState({})
-  const [view, setView] = useState('table')  // 'table' | 'compare' | 'delta'
+  const [view, setView] = useState('sam')  // 'sam' | 'table' | 'compare' | 'delta'
   const { data, loading, error, scrape, platformProgress } = useScrapeData()
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function App() {
         {/* View Toggle — always visible */}
         <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 w-fit">
           {[
+            { id: 'sam', label: '🚀 SAM Dashboard' },
             { id: 'table', label: 'Product Table' },
             { id: 'compare', label: 'Price Comparison' },
             { id: 'delta', label: 'Delta Compare' },
@@ -93,6 +95,11 @@ export default function App() {
           ))}
         </div>
 
+        {/* SAM Dashboard Tab */}
+        {view === 'sam' && (
+          <SAMDashboard />
+        )}
+
         {/* Delta Compare Tab */}
         {view === 'delta' && (
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm dark:shadow-none">
@@ -101,7 +108,7 @@ export default function App() {
         )}
 
         {/* Scrape views */}
-        {view !== 'delta' && (
+        {view !== 'delta' && view !== 'sam' && (
           <>
             {error && <ErrorBanner message={error} type="error" />}
             {data?.results?.filter(r => r.status === 'failed').map((r, i) => (

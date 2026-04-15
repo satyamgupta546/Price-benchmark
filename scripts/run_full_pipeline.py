@@ -156,6 +156,9 @@ def run_platform_pipeline(pincode: str, platform: str):
     # Stage 6 — Manual Review Queue
     run_script("export_review_queue.py", [pincode])
 
+    # Verification against Anakin
+    run_script("verify_against_anakin.py", [pincode, platform])
+
     # Final report
     result = count_matched(pincode, platform)
     print(f"\n{'═'*60}", flush=True)
