@@ -11,18 +11,18 @@ Apna Mart ke har product ke liye, Blinkit/Jiomart pe wahi product dhundh ke live
    - PDP scrape → compare → cascade → stage3 → image → barcode
    - Jiomart also runs search (Stage 4)
 5. Compute match status (COMPLETE/SEMI COMPLETE/PARTIAL/NA)
-6. Generate Excel in 27-column format
+6. Generate Excel in 28-column format
 7. Save to `/Users/satyam/Desktop/price csv/SAM_{City}_{Pincode}_{Date}.xlsx`
 
-## Excel Output Format — 27 Columns, SINGLE Sheet, Both Platforms
+## Excel Output Format — 28 Columns, SINGLE Sheet, Both Platforms
 ```
-DATE | CITY | PINCODE | AM ITEM CODE | AM ITEM NAME | AM master cat | AM BRAND | AM MARKETED BY | AM PRODUCT TYPE | AM UNIT | AM UNIT VALUE | AM MRP | IMAGE LINK | BLINKIT URL | BLINKIT ITEM NAME | BLINKIT UNIT | BLINKIT MRP | BLINKIT SP | BLINKIT IN STOCK REMARK | BLINKIT STATUS | JIO URL | JIO ITEM NAME | JIO UNIT | JIO MRP | JIO SP | JIO IN STOCK REMARK | JIO STATUS
+DATE | TIME | CITY | PINCODE | AM ITEM CODE | AM ITEM NAME | AM master cat | AM BRAND | AM MARKETED BY | AM PRODUCT TYPE | AM UNIT | AM UNIT VALUE | AM MRP | IMAGE LINK | BLINKIT URL | BLINKIT ITEM NAME | BLINKIT UNIT | BLINKIT MRP | BLINKIT SP | BLINKIT IN STOCK REMARK | BLINKIT STATUS | JIO URL | JIO ITEM NAME | JIO UNIT | JIO MRP | JIO SP | JIO IN STOCK REMARK | JIO STATUS
 ```
 
 ### Data Sources per Column
-- **AM columns (1-13)**: smpcm_product (table 578, db 5)
+- **AM columns (1-14)**: smpcm_product (table 578, db 5)
 - **AM MRP**: From model 1808 (latest inward cost price), warehouse-specific. Fallback to smpcm_product.mrp
-- **BLINKIT/JIO columns (14-27)**: SAM scraped data (PDP + cascade + stage3 + search)
+- **BLINKIT/JIO columns (15-28)**: SAM scraped data (PDP + cascade + stage3 + search)
 - **BLINKIT/JIO STATUS**: Computed match status (see logic below)
 
 ### Match Status Logic
@@ -135,9 +135,9 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 | `cx_competitor_prices` | googlesheet | Anakin's current competitor prices |
 | `cx_competitor_prices_external` | googlesheet | Anakin's external table (GCS parquet → BQ) |
 
-### sam_price_history Schema (27 data cols + created_at)
+### sam_price_history Schema (28 data cols + created_at)
 ```
-date, city, pincode, item_code, item_name, master_cat, brand, marketed_by, product_type, unit, unit_value, am_mrp, image_link, blinkit_url, blinkit_name, blinkit_unit, blinkit_mrp, blinkit_sp, blinkit_stock, blinkit_status, jio_url, jio_name, jio_unit, jio_mrp, jio_sp, jio_stock, jio_status, created_at
+date, time, city, pincode, item_code, item_name, master_cat, brand, marketed_by, product_type, unit, unit_value, am_mrp, image_link, blinkit_url, blinkit_name, blinkit_unit, blinkit_mrp, blinkit_sp, blinkit_stock, blinkit_status, jio_url, jio_name, jio_unit, jio_mrp, jio_sp, jio_stock, jio_status, created_at
 ```
 - Partition: `date` (DAY)
 - Cluster: `pincode`, `item_code`

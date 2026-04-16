@@ -5,3 +5,5 @@ pydantic
 python-dotenv
 httpx
 openpyxl
+Pillow
+imagehash

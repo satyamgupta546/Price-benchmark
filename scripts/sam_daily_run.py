@@ -33,11 +33,16 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 VENV_PYTHON = str(PROJECT_ROOT / "backend" / "venv" / "bin" / "python")
 SCRIPTS = PROJECT_ROOT / "scripts"
 DATA = PROJECT_ROOT / "data"
+OUTPUT_DIR = Path(os.environ.get("SAM_OUTPUT_DIR", str(PROJECT_ROOT / "output")))
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+VALID_MASTER_CATEGORIES = {"STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"}
 CITIES = {"834002": "Ranchi", "712232": "Kolkata", "492001": "Raipur", "825301": "Hazaribagh"}
 WAREHOUSE_MAP = {"834002": "WRHS_1", "825301": "WRHS_1", "492001": "WRHS_2", "712232": "WRHS_10"}
 DATE = datetime.now().strftime("%Y-%m-%d")
 NOW = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+URL_DATABASE_PATH = DATA / "mappings" / "url_database.json"
 
 METABASE_API = "https://mirror.apnamart.in/api"
 METABASE_KEY = os.environ.get("METABASE_API_KEY", "")
@@ -66,6 +71,178 @@ def metabase_query(payload):
     )
     resp = urllib.request.urlopen(req, timeout=60)
     return json.loads(resp.read())
+
+
+# ── URL Database (fallback when Anakin is removed) ──
+
+_url_db_cache = None
+_url_db_lock = threading.Lock()
+
+
+def load_url_database() -> dict:
+    """Load url_database.json. Returns dict keyed by '{platform}_{pincode}_{item_code}'."""
+    global _url_db_cache
+    if _url_db_cache is not None:
+        return _url_db_cache
+    with _url_db_lock:
+        if _url_db_cache is not None:
+            return _url_db_cache
+        if URL_DATABASE_PATH.exists():
+            try:
+                _url_db_cache = json.load(open(URL_DATABASE_PATH))
+                print(f"  📂 URL database: {len(_url_db_cache)} entries", flush=True)
+            except Exception as e:
+                print(f"  ⚠️ URL database load error: {e}", flush=True)
+                _url_db_cache = {}
+        else:
+            _url_db_cache = {}
+    return _url_db_cache
+
+
+def save_urls_to_database(pincode):
+    """Save new URLs from PDP results to url_database.json. Only adds, never removes."""
+    url_db = {}
+    if URL_DATABASE_PATH.exists():
+        try:
+            url_db = json.load(open(URL_DATABASE_PATH))
+        except Exception:
+            url_db = {}
+
+    added = 0
+    for platform in ["blinkit", "jiomart"]:
+        # Find latest PDP file for this pincode (any date)
+        files = sorted([f for f in DATA.glob(f"sam/{platform}_pdp_{pincode}_*.json")
+                        if "partial" not in f.name])
+        if not files:
+            continue
+        try:
+            data = json.load(open(files[-1]))
+        except Exception:
+            continue
+
+        for p in data.get("products", []):
+            ic = p.get("item_code")
+            if not ic:
+                continue
+            url_key = f"{platform}_{pincode}_{ic}"
+            product_url = p.get(f"{platform}_product_url")
+            product_id = p.get(f"{platform}_product_id")
+            if not product_url:
+                continue
+
+            # Only add if key is new or URL has changed
+            existing = url_db.get(url_key)
+            if existing and existing.get("product_url") == product_url:
+                continue
+
+            url_db[url_key] = {
+                "item_code": ic,
+                "platform": platform,
+                "pincode": pincode,
+                "product_id": product_id,
+                "product_url": product_url,
+                "platform_item_name": p.get("sam_product_name") or "",
+                "apna_name": "",
+                "brand": "",
+                "updated_at": NOW,
+            }
+            added += 1
+
+    if added > 0:
+        URL_DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(URL_DATABASE_PATH, "w") as f:
+            json.dump(url_db, f, indent=2)
+        # Invalidate cache so next load picks up new data
+        global _url_db_cache
+        _url_db_cache = None
+        print(f"  💾 URL database: +{added} URLs for {pincode} (total {len(url_db)})", flush=True)
+
+
+# ── Data Validation ──
+
+def validate_data(rows, pincodes):
+    """Validate data before BQ push. Returns (ok: bool, messages: list[str])."""
+    errors = []
+
+    # Total rows > 0
+    if len(rows) == 0:
+        errors.append("FAIL: 0 total rows")
+        return False, errors
+
+    # Each pincode has at least 100 rows (pincode is index 3 in row)
+    pincode_counts = {}
+    for row in rows:
+        pin = str(row[3])
+        pincode_counts[pin] = pincode_counts.get(pin, 0) + 1
+    for pin in pincodes:
+        count = pincode_counts.get(pin, 0)
+        if count < 100:
+            errors.append(f"FAIL: pincode {pin} has only {count} rows (need >= 100)")
+
+    # No row has item_code = None (item_code is index 4)
+    none_ic = sum(1 for row in rows if row[4] is None)
+    if none_ic > 0:
+        errors.append(f"FAIL: {none_ic} rows have item_code = None")
+
+    # blinkit_sp (index 18) and jio_sp (index 25) in range 0-50000 when not None
+    for idx, label in [(18, "blinkit_sp"), (25, "jio_sp")]:
+        bad = 0
+        for row in rows:
+            val = row[idx]
+            if val is not None:
+                try:
+                    v = float(val)
+                    if v < 0 or v > 50000:
+                        bad += 1
+                except (ValueError, TypeError):
+                    bad += 1
+        if bad > 0:
+            errors.append(f"FAIL: {bad} rows have {label} outside 0-50000 range")
+
+    # At least 10% of rows have blinkit_sp (not all blank)
+    blinkit_filled = sum(1 for row in rows if row[18] is not None)
+    pct = blinkit_filled / len(rows) * 100 if rows else 0
+    if pct < 10:
+        errors.append(f"FAIL: only {pct:.1f}% of rows have blinkit_sp ({blinkit_filled}/{len(rows)})")
+
+    ok = len(errors) == 0
+    return ok, errors
+
+
+# ── Old File Cleanup ──
+
+def cleanup_old_files():
+    """Delete files older than 7 days from data/sam/, data/comparisons/, data/anakin/.
+    Keeps data/mappings/ and data/ean_map.json. Only deletes if >20 files in directory."""
+    from datetime import timedelta
+
+    cutoff = datetime.now() - timedelta(days=7)
+    dirs_to_clean = [DATA / "sam", DATA / "comparisons", DATA / "anakin"]
+    total_deleted = 0
+
+    for dir_path in dirs_to_clean:
+        if not dir_path.exists():
+            continue
+        files = [f for f in dir_path.iterdir() if f.is_file()]
+        if len(files) <= 20:
+            continue
+        deleted = 0
+        for f in files:
+            try:
+                mtime = datetime.fromtimestamp(f.stat().st_mtime)
+                if mtime < cutoff:
+                    f.unlink()
+                    deleted += 1
+            except Exception:
+                pass
+        if deleted > 0:
+            print(f"  🧹 {dir_path.name}/: deleted {deleted} old files", flush=True)
+        total_deleted += deleted
+
+    if total_deleted > 0:
+        print(f"  🧹 Total cleanup: {total_deleted} files removed", flush=True)
+    else:
+        print(f"  🧹 Cleanup: nothing to remove", flush=True)
 
 
 # ── Step 1: Fetch AM product master + MRP ──
@@ -198,6 +375,9 @@ def scrape_city(pincode, city):
     t1.join()
     t2.join()
 
+    # Save new URLs to database after scrape
+    save_urls_to_database(pincode)
+
 
 # ── Step 3: Compute status + generate output ──
 
@@ -303,6 +483,9 @@ def generate_city_data(pincode, city, am_map, mrp_map):
     for f in sorted(DATA.glob(f"anakin/jiomart_{pincode}_*.json")):
         jiomart_anakin = {r["Item_Code"]: r for r in json.load(open(f))["records"] if r.get("Item_Code")}
 
+    # Load URL database as fallback for missing Anakin URLs
+    url_db = load_url_database()
+
     b_pdp = load_pdp("blinkit", pincode)
     j_pdp = load_pdp("jiomart", pincode)
     b_cascade = load_cascade("blinkit", pincode)
@@ -311,16 +494,24 @@ def generate_city_data(pincode, city, am_map, mrp_map):
     rows = []
     for ic in sorted(am_map.keys(), key=lambda x: int(x) if x.isdigit() else 0):
         am = am_map.get(ic, {})
+        if am.get("master_category") not in VALID_MASTER_CATEGORIES:
+            continue
         mrp_rec = mrp_map.get(ic, {})
         am_mrp = mrp_rec.get("mrp") if mrp_rec else am.get("mrp")
         b_ana = blinkit_anakin.get(ic, {})
         j_ana = jiomart_anakin.get(ic, {})
 
-        def get_sam(pdp_m, cas_m, ana_r, url_k):
+        def get_sam(pdp_m, cas_m, ana_r, url_k, platform):
             sp = mrp = name = stock = unit = None
             url = ana_r.get(url_k)
             if url and str(url).strip().lower() in ("na", "nan", "null", "none", ""):
                 url = None
+            # Fallback to URL database if Anakin URL is missing
+            if not url:
+                db_key = f"{platform}_{pincode}_{ic}"
+                db_entry = url_db.get(db_key)
+                if db_entry:
+                    url = db_entry.get("product_url")
             if ic in pdp_m:
                 p = pdp_m[ic]
                 name = p.get("sam_product_name")
@@ -335,12 +526,14 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 mrp = m.get("sam_mrp")
                 stock = "available"
                 unit = m.get("sam_unit")
+            if mrp is None and sp is not None:
+                mrp = sp
             return url, name, unit, mrp, sp, stock
 
-        b_url, b_name, b_unit, b_mrp, b_sp, b_stock = get_sam(b_pdp, b_cascade, b_ana, "Blinkit_Product_Url")
+        b_url, b_name, b_unit, b_mrp, b_sp, b_stock = get_sam(b_pdp, b_cascade, b_ana, "Blinkit_Product_Url", "blinkit")
         b_status = compute_status(am, am_mrp, b_sp, b_mrp, b_name, b_ana, "blinkit")
 
-        j_url, j_name, j_unit, j_mrp, j_sp, j_stock = get_sam(j_pdp, j_cascade, j_ana, "Jiomart_Product_Url")
+        j_url, j_name, j_unit, j_mrp, j_sp, j_stock = get_sam(j_pdp, j_cascade, j_ana, "Jiomart_Product_Url", "jiomart")
         j_status = compute_status(am, am_mrp, j_sp, j_mrp, j_name, j_ana, "jiomart")
 
         rows.append([
@@ -396,28 +589,50 @@ def generate_excel(rows, city, pincode):
         ws.column_dimensions[get_column_letter(i)].width = w
     ws.freeze_panes = "E2"
 
-    out_dir = Path("/Users/satyam/Desktop/price csv")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"SAM_{city}_{pincode}_{DATE}.xlsx"
+    out_path = OUTPUT_DIR / f"SAM_{city}_{pincode}_{DATE}.xlsx"
     wb.save(out_path)
     print(f"  📊 {out_path.name}", flush=True)
 
 
-def push_to_bigquery(csv_path):
-    """Push CSV to both BQ tables."""
+def push_to_bigquery(csv_path, pincodes):
+    """Push CSV to both BQ tables using DELETE+INSERT to avoid wiping other cities."""
     print("\n📤 Pushing to BigQuery...", flush=True)
+    bq_live_sql = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
+    bq_hist_sql = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_history"
 
-    # Live table (replace)
+    # Live table: delete rows for pincodes being pushed, then append
+    for pin in pincodes:
+        del_r = subprocess.run(
+            ["bq", "query", "--use_legacy_sql=false",
+             f"DELETE FROM `{bq_live_sql}` WHERE pincode = '{pin}'"],
+            capture_output=True, text=True,
+        )
+        if del_r.returncode == 0:
+            print(f"  🗑️  sam_price_live: deleted pincode {pin}", flush=True)
+        else:
+            print(f"  ⚠️  sam_price_live delete {pin}: {del_r.stderr[:200]}", flush=True)
+
     r1 = subprocess.run(
-        ["bq", "load", "--source_format=CSV", "--replace", BQ_LIVE_TABLE, str(csv_path)],
+        ["bq", "load", "--source_format=CSV", BQ_LIVE_TABLE, str(csv_path)],
         capture_output=True, text=True,
     )
     if r1.returncode == 0:
-        print(f"  ✅ sam_price_live (replaced)", flush=True)
+        print(f"  ✅ sam_price_live (loaded)", flush=True)
     else:
         print(f"  ❌ sam_price_live: {r1.stderr[:200]}", flush=True)
 
-    # History table (append)
+    # History table: delete existing rows for same date+pincodes to prevent duplicates on re-run
+    pin_list = ", ".join(f"'{p}'" for p in pincodes)
+    del_hist = subprocess.run(
+        ["bq", "query", "--use_legacy_sql=false",
+         f"DELETE FROM `{bq_hist_sql}` WHERE date = '{DATE}' AND pincode IN ({pin_list})"],
+        capture_output=True, text=True,
+    )
+    if del_hist.returncode == 0:
+        print(f"  🗑️  sam_price_history: deduped {DATE} for {pin_list}", flush=True)
+    else:
+        print(f"  ⚠️  sam_price_history dedup: {del_hist.stderr[:200]}", flush=True)
+
     r2 = subprocess.run(
         ["bq", "load", "--source_format=CSV", BQ_HISTORY_TABLE, str(csv_path)],
         capture_output=True, text=True,
@@ -509,11 +724,24 @@ def main():
             w.writerow(row)
     print(f"\n📄 CSV: {len(all_rows)} total rows", flush=True)
 
-    push_to_bigquery(csv_path)
+    # Step 7: Validate data before BQ push
+    valid, messages = validate_data(all_rows, list(pincodes.keys()))
+    if not valid:
+        print("\n⚠️  Data validation warnings:", flush=True)
+        for msg in messages:
+            print(f"    {msg}", flush=True)
+        print("  (pushing anyway — these are warnings, not blockers)", flush=True)
+    else:
+        print("\n✅ Data validation passed", flush=True)
+
+    push_to_bigquery(csv_path, list(pincodes.keys()))
+
+    # Step 8: Cleanup old files
+    cleanup_old_files()
 
     print(f"\n{'═' * 60}")
     print(f"  DONE! {len(pincodes)} cities, {len(all_rows)} rows")
-    print(f"  Excel: /Users/satyam/Desktop/price csv/")
+    print(f"  Excel: {OUTPUT_DIR}")
     print(f"  BigQuery: sam_price_live + sam_price_history")
     print(f"{'═' * 60}")
 
