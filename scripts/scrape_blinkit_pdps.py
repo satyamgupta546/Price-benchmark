@@ -265,7 +265,8 @@ def _extract_price_from_product_dict(p: dict) -> tuple[float | None, float | Non
     return sp, mrp
 
 
-async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_retries: int = 3) -> dict:
+async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
+                         anakin_name: str = "", max_retries: int = 3) -> dict:
     """Visit a single Blinkit PDP, intercept product JSON API responses, extract price/stock/name.
     Retries on transient network errors with exponential backoff."""
     out = {
@@ -273,6 +274,7 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
         "blinkit_product_id": blinkit_pid,
         "blinkit_product_url": url,
         "scraped_at": datetime.now(tz=None).isoformat(),
+        "_anakin_name": anakin_name,
     }
     captured: list = []
 
@@ -327,8 +329,18 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
             out["error"] = f"goto (after {attempt+1} attempts): {last_error[:150]}"
             return out
 
-        # Wait for API responses to arrive (increased from 1.2s — was missing responses)
-        await asyncio.sleep(2.0)
+        # Smart wait: poll for product in captured responses, max 4s
+        # Fast products resolve in 0.5s, slow ones get up to 4s
+        product_dict = None
+        for _wait in range(8):  # 8 × 0.5s = 4s max
+            await asyncio.sleep(0.5)
+            for payload in captured:
+                found = _find_product_in_json(payload, blinkit_pid)
+                if found:
+                    product_dict = found
+                    break
+            if product_dict:
+                break
 
         # ── Early detect: homepage redirect = product not available at this location ──
         final_url = page.url
@@ -344,12 +356,13 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
             })
             return out
 
-        # ── Try 1: Find the exact product in captured JSON via product_id ──
-        product_dict = None
-        for payload in captured:
-            found = _find_product_in_json(payload, blinkit_pid)
-            if found:
-                product_dict = found
+        # ── Try 1: product_dict already found in smart-wait loop above ──
+        # If not found yet, one final check on all captured responses
+        if not product_dict:
+            for payload in captured:
+                found = _find_product_in_json(payload, blinkit_pid)
+                if found:
+                    product_dict = found
                 break
 
         sp = mrp = None
@@ -549,6 +562,70 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str, max_r
         if sp and not mrp:
             mrp = sp
 
+        # Detect SPA redirect: Blinkit SPA doesn't change URL on redirect,
+        # but sets page title/name to "blinkit.com" instead of product name.
+        # When this happens, try SEARCH as fallback before giving up.
+        if not sp and name and name.lower().strip() in ("blinkit.com", "blinkit"):
+            # Search fallback: use Anakin item name to search on Blinkit
+            search_name = out.get("_anakin_name", "")
+            if search_name:
+                try:
+                    from urllib.parse import quote
+                    search_url = f"https://blinkit.com/s/?q={quote(search_name)}"
+                    search_captured = []
+
+                    async def on_search_response(response):
+                        try:
+                            ct = response.headers.get("content-type", "")
+                            if "json" in ct and response.status == 200:
+                                body = await response.text()
+                                if len(body) > 50 and any(kw in body.lower() for kw in ("product", "price", "mrp")):
+                                    search_captured.append(json.loads(body))
+                        except Exception:
+                            pass
+
+                    page.on("response", on_search_response)
+                    await page.goto(search_url, wait_until="domcontentloaded", timeout=15000)
+                    await asyncio.sleep(2.0)
+                    page.remove_listener("response", on_search_response)
+
+                    # Find best match by product_id in search results
+                    for payload in search_captured:
+                        found = _find_product_in_json(payload, blinkit_pid)
+                        if found:
+                            sp, mrp = _extract_price_from_product_dict(found)
+                            if sp:
+                                for k in ("name", "product_name", "display_name", "productName", "title"):
+                                    v = found.get(k)
+                                    if v and isinstance(v, str) and len(v.strip()) > 2:
+                                        name = v.strip()
+                                        break
+                                if not name:
+                                    name = _find_name_in_payload(payload, blinkit_pid)
+                                if not mrp:
+                                    mrp = sp
+                                out.update({
+                                    "sam_product_name": name,
+                                    "sam_selling_price": sp,
+                                    "sam_mrp": mrp,
+                                    "sam_in_stock": True,
+                                    "sam_unit": None,
+                                    "status": "ok",
+                                })
+                                return out
+                except Exception:
+                    pass
+
+            out.update({
+                "sam_product_name": None,
+                "sam_selling_price": None,
+                "sam_mrp": None,
+                "sam_in_stock": False,
+                "sam_unit": None,
+                "status": "not_available",
+            })
+            return out
+
         out.update({
             "sam_product_name": name,
             "sam_selling_price": sp,
@@ -598,10 +675,10 @@ async def worker(worker_id: int, page, queue: asyncio.Queue, results: list,
                  progress_counter: list, total: int, pincode: str, anakin_file: str, start_time):
     while True:
         try:
-            item_code, url, blinkit_pid = queue.get_nowait()
+            item_code, url, blinkit_pid, anakin_name = queue.get_nowait()
         except asyncio.QueueEmpty:
             break
-        result = await scrape_one_pdp(page, item_code, url, blinkit_pid)
+        result = await scrape_one_pdp(page, item_code, url, blinkit_pid, anakin_name=anakin_name)
         results.append(result)
         progress_counter[0] += 1
         if progress_counter[0] % 20 == 0:
@@ -633,7 +710,8 @@ async def main(pincode: str, num_tabs: int = 5):
             if stock == "out_of_stock":
                 skipped_oos += 1
                 continue
-            urls_to_scrape.append((ic, url, pid))
+            aname = (rec.get("Blinkit_Item_Name") or rec.get("Item_Name") or "").strip()
+            urls_to_scrape.append((ic, url, pid, aname))
 
     print(f"[pdp] Loaded {len(urls_to_scrape)} mapped URLs from {ana_path.name} (skipped {skipped_oos} OOS)", flush=True)
     print(f"[pdp] Scraping with {num_tabs} parallel tabs", flush=True)
@@ -670,7 +748,43 @@ async def main(pincode: str, num_tabs: int = 5):
     ok = sum(1 for r in results if r.get("status") == "ok")
     err = sum(1 for r in results if r.get("status") == "error")
     no_price = sum(1 for r in results if r.get("status") == "no_price")
-    print(f"\n[pdp] DONE in {duration:.0f}s — {ok} OK, {no_price} no-price, {err} errors (of {len(results)})", flush=True)
+    not_avail = sum(1 for r in results if r.get("status") == "not_available")
+    print(f"\n[pdp] Pass 1 done in {duration:.0f}s — {ok} OK, {no_price} no-price, {not_avail} not-available, {err} errors", flush=True)
+
+    # ── RETRY PASS: re-scrape failed items with longer wait (single tab, 4s wait) ──
+    retry_items = [(r["item_code"], r["blinkit_product_url"], r["blinkit_product_id"],
+                     r.get("_anakin_name", ""))
+                    for r in results
+                    if r.get("status") in ("no_price", "not_available")
+                    and r.get("blinkit_product_url", "").startswith("http")]
+    if retry_items:
+        print(f"\n[pdp] RETRY PASS: {len(retry_items)} failed items with 4s wait...", flush=True)
+        try:
+            pw2, browser2, context2, pages2 = await init_blinkit_browser(pincode, 1)
+            retry_page = pages2[0]
+            recovered = 0
+            # Build lookup for quick replacement
+            result_idx = {r["item_code"]: i for i, r in enumerate(results)}
+
+            for i, (ic, url, pid, aname) in enumerate(retry_items):
+                # Override wait time: 4s instead of 2s
+                retry_result = await scrape_one_pdp(retry_page, ic, url, pid,
+                                                     anakin_name=aname, max_retries=2)
+                if retry_result.get("status") == "ok":
+                    idx = result_idx.get(ic)
+                    if idx is not None:
+                        results[idx] = retry_result
+                    recovered += 1
+                if (i + 1) % 20 == 0:
+                    print(f"[pdp] retry {i+1}/{len(retry_items)} — recovered {recovered}", flush=True)
+
+            await browser2.close()
+            await pw2.stop()
+
+            ok = sum(1 for r in results if r.get("status") == "ok")
+            print(f"[pdp] Retry recovered {recovered} items. Total OK now: {ok}", flush=True)
+        except Exception as e:
+            print(f"[pdp] Retry pass failed: {e}", flush=True)
 
     # Save
     out_dir = PROJECT_ROOT / "data" / "sam"

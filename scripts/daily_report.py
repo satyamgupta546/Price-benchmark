@@ -64,7 +64,7 @@ def step2_run_pipeline(pincode, platform):
 
     if platform == "blinkit":
         # Stage 1: PDP
-        run("scrape_blinkit_pdps.py", [pincode, "2"], use_venv=True)
+        run("scrape_blinkit_pdps.py", [pincode, "4"], use_venv=True)
         # Clean partial
         partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
         if partial.exists():

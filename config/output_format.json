@@ -1,0 +1,71 @@
+{
+  "excel_columns": [
+    {"key": "date", "header": "DATE", "source": "generated"},
+    {"key": "city", "header": "CITY", "source": "generated"},
+    {"key": "pincode", "header": "PINCODE", "source": "generated"},
+    {"key": "item_code", "header": "AM ITEM CODE", "source": "smpcm_product.item_code"},
+    {"key": "item_name", "header": "AM ITEM NAME", "source": "smpcm_product.display_name"},
+    {"key": "master_cat", "header": "AM master cat", "source": "smpcm_product.master_category"},
+    {"key": "brand", "header": "AM BRAND", "source": "smpcm_product.brand"},
+    {"key": "marketed_by", "header": "AM MARKETED BY", "source": "smpcm_product.marketed_by"},
+    {"key": "product_type", "header": "AM PRODUCT TYPE", "source": "smpcm_product.product_type"},
+    {"key": "unit", "header": "AM UNIT", "source": "smpcm_product.unit"},
+    {"key": "unit_value", "header": "AM UNIT VALUE", "source": "smpcm_product.unit_value"},
+    {"key": "mrp", "header": "AM MRP", "source": "model_1808.mrp (latest inward, warehouse-specific)"},
+    {"key": "image_link", "header": "IMAGE LINK", "source": "smpcm_product.main_image"},
+    {"key": "blinkit_url", "header": "BLINKIT URL", "source": "url_database / anakin"},
+    {"key": "blinkit_item_name", "header": "BLINKIT ITEM NAME", "source": "SAM scraped"},
+    {"key": "blinkit_unit", "header": "BLINKIT UNIT", "source": "SAM scraped"},
+    {"key": "blinkit_mrp", "header": "BLINKIT MRP", "source": "SAM scraped"},
+    {"key": "blinkit_sp", "header": "BLINKIT SP", "source": "SAM scraped"},
+    {"key": "blinkit_in_stock", "header": "BLINKIT IN STOCK REMARK", "source": "SAM scraped"},
+    {"key": "blinkit_status", "header": "BLINKIT STATUS", "source": "match quality"},
+    {"key": "jio_url", "header": "JIO URL", "source": "url_database / anakin"},
+    {"key": "jio_item_name", "header": "JIO ITEM NAME", "source": "SAM scraped"},
+    {"key": "jio_unit", "header": "JIO UNIT", "source": "SAM scraped"},
+    {"key": "jio_mrp", "header": "JIO MRP", "source": "SAM scraped"},
+    {"key": "jio_sp", "header": "JIO SP", "source": "SAM scraped"},
+    {"key": "jio_in_stock", "header": "JIO IN STOCK REMARK", "source": "SAM scraped"},
+    {"key": "jio_status", "header": "JIO STATUS", "source": "match quality"}
+  ],
+  "am_data_source": {
+    "table": "smpcm_product",
+    "table_id": 578,
+    "database_id": 5,
+    "fields": {
+      "item_code": 7191,
+      "display_name": 7118,
+      "master_category": 8935,
+      "brand": 7113,
+      "marketed_by": 7133,
+      "product_type": 7131,
+      "unit": 7176,
+      "unit_value": 7193,
+      "mrp": 7158,
+      "main_image": 7149,
+      "bar_code": 7127
+    },
+    "master_category_filter": ["STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"]
+  },
+  "latest_mrp_source": {
+    "model_id": 1808,
+    "model_name": "Latest inward Cost Price",
+    "database_id": 3,
+    "columns": ["warehouse_id", "grn_date", "pricing_approv_date", "product_id", "item_code", "cost", "mrp", "display_name", "master_category"]
+  },
+  "warehouse_mapping": {
+    "834002": "WRHS_1",
+    "825301": "WRHS_1",
+    "492001": "WRHS_2",
+    "712232": "WRHS_10",
+    "DURGAPOOR": "WRHS_DURGAPOOR",
+    "RANIGANJ": "WRHS_RANIGANJ",
+    "ASANSOL": "WRHS_ASANSOL"
+  },
+  "cities": {
+    "834002": "Ranchi",
+    "712232": "Kolkata",
+    "492001": "Raipur",
+    "825301": "Hazaribagh"
+  }
+}
