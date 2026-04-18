@@ -14,16 +14,18 @@ Apna Mart ke har product ke liye, Blinkit/Jiomart pe wahi product dhundh ke live
 6. Generate Excel in 28-column format
 7. Save to `/Users/satyam/Desktop/price csv/SAM_{City}_{Pincode}_{Date}.xlsx`
 
-## Excel Output Format — 28 Columns, SINGLE Sheet, Both Platforms
+## Excel Output Format — 35 Columns, SINGLE Sheet, All Platforms
 ```
-DATE | TIME | CITY | PINCODE | AM ITEM CODE | AM ITEM NAME | AM master cat | AM BRAND | AM MARKETED BY | AM PRODUCT TYPE | AM UNIT | AM UNIT VALUE | AM MRP | IMAGE LINK | BLINKIT URL | BLINKIT ITEM NAME | BLINKIT UNIT | BLINKIT MRP | BLINKIT SP | BLINKIT IN STOCK REMARK | BLINKIT STATUS | JIO URL | JIO ITEM NAME | JIO UNIT | JIO MRP | JIO SP | JIO IN STOCK REMARK | JIO STATUS
+DATE | TIME | CITY | PINCODE | AM ITEM CODE | AM ITEM NAME | AM master cat | AM BRAND | AM MARKETED BY | AM PRODUCT TYPE | AM UNIT | AM UNIT VALUE | AM MRP | IMAGE LINK | BLINKIT URL | BLINKIT ITEM NAME | BLINKIT UNIT | BLINKIT MRP | BLINKIT SP | BLINKIT IN STOCK REMARK | BLINKIT STATUS | JIO URL | JIO ITEM NAME | JIO UNIT | JIO MRP | JIO SP | JIO IN STOCK REMARK | JIO STATUS | DMART URL | DMART ITEM NAME | DMART UNIT | DMART MRP | DMART SP | DMART IN STOCK REMARK | DMART STATUS
 ```
 
 ### Data Sources per Column
 - **AM columns (1-14)**: smpcm_product (table 578, db 5)
 - **AM MRP**: From model 1808 (latest inward cost price), warehouse-specific. Fallback to smpcm_product.mrp
-- **BLINKIT/JIO columns (15-28)**: SAM scraped data (PDP + cascade + stage3 + search)
-- **BLINKIT/JIO STATUS**: Computed match status (see logic below)
+- **BLINKIT columns (15-21)**: SAM scraped (PDP + cascade + stage3)
+- **JIO columns (22-28)**: SAM scraped (PDP + cascade + stage3 + search)
+- **DMART columns (29-35)**: SAM API scrape (pure JSON API, no browser)
+- **STATUS columns**: Computed match status (see logic below)
 
 ### Match Status Logic
 ```
@@ -112,10 +114,22 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 - **load_cascade_matches**: Higher score wins (stage3 doesn't overwrite better cascade match)
 
 ## Cities
-- 834002: Ranchi
-- 712232: Kolkata
-- 492001: Raipur
-- 825301: Hazaribagh (**no Jiomart** — skip Jiomart pipeline)
+- 834002: Ranchi (WRHS_1 — Jharkhand)
+- 712232: Kolkata (WRHS_10)
+- 492001: Raipur (WRHS_2 — Chhattisgarh)
+- 825301: Hazaribagh (WRHS_1 — **no Jiomart**)
+- 495001: Bilaspur (WRHS_2 — Chhattisgarh) **NEW**
+- 831001: Jamshedpur (WRHS_1 — Jharkhand) **NEW**
+
+## Platforms per City
+| City | Blinkit | Jiomart | DMart |
+|------|---------|---------|-------|
+| Ranchi | ✅ | ✅ | ❌ |
+| Kolkata | ✅ | ✅ | ❌ |
+| Raipur | ✅ | ✅ | ✅ |
+| Hazaribagh | ✅ | ❌ | ❌ |
+| Bilaspur | ✅ | ✅ | ❌ |
+| Jamshedpur | ✅ | ✅ | ❌ |
 
 ## File Locations
 - AM product master: `data/am_product_master.json`
@@ -135,9 +149,9 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 | `cx_competitor_prices` | googlesheet | Anakin's current competitor prices |
 | `cx_competitor_prices_external` | googlesheet | Anakin's external table (GCS parquet → BQ) |
 
-### sam_price_history Schema (28 data cols + created_at)
+### sam_price_history/live Schema (35 data cols)
 ```
-date, time, city, pincode, item_code, item_name, master_cat, brand, marketed_by, product_type, unit, unit_value, am_mrp, image_link, blinkit_url, blinkit_name, blinkit_unit, blinkit_mrp, blinkit_sp, blinkit_stock, blinkit_status, jio_url, jio_name, jio_unit, jio_mrp, jio_sp, jio_stock, jio_status, created_at
+date, time, city, pincode, item_code, item_name, master_cat, brand, marketed_by, product_type, unit, unit_value, am_mrp, image_link, blinkit_url, blinkit_name, blinkit_unit, blinkit_mrp, blinkit_sp, blinkit_stock, blinkit_status, jio_url, jio_name, jio_unit, jio_mrp, jio_sp, jio_stock, jio_status, dmart_url, dmart_name, dmart_unit, dmart_mrp, dmart_sp, dmart_stock, dmart_status
 ```
 - Partition: `date` (DAY)
 - Cluster: `pincode`, `item_code`

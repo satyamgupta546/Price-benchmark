@@ -37,8 +37,15 @@ OUTPUT_DIR = Path(os.environ.get("SAM_OUTPUT_DIR", str(PROJECT_ROOT / "output"))
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 VALID_MASTER_CATEGORIES = {"STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"}
-CITIES = {"834002": "Ranchi", "712232": "Kolkata", "492001": "Raipur", "825301": "Hazaribagh"}
-WAREHOUSE_MAP = {"834002": "WRHS_1", "825301": "WRHS_1", "492001": "WRHS_2", "712232": "WRHS_10"}
+CITIES = {
+    "834002": "Ranchi", "712232": "Kolkata", "492001": "Raipur",
+    "825301": "Hazaribagh", "495001": "Bilaspur", "831001": "Jamshedpur",
+}
+WAREHOUSE_MAP = {
+    "834002": "WRHS_1", "825301": "WRHS_1", "831001": "WRHS_1",  # Jharkhand
+    "492001": "WRHS_2", "495001": "WRHS_2",                       # Chhattisgarh
+    "712232": "WRHS_10",                                           # Kolkata
+}
 DATE = datetime.now().strftime("%Y-%m-%d")
 NOW = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -340,9 +347,26 @@ def scrape_city(pincode, city):
     run("fetch_anakin_blinkit.py", [pincode])
     run("fetch_anakin_jiomart.py", [pincode])
 
+    # Platform availability per city
+    SKIP_PLATFORM = {
+        "825301": {"jiomart"},     # Hazaribagh — no Jiomart
+    }
+
     def run_platform(platform):
-        if pincode == "825301" and platform == "jiomart":
+        if platform in SKIP_PLATFORM.get(pincode, set()):
+            print(f"  ⏭️  {platform} not available in {city}", flush=True)
             return
+        if platform == "dmart":
+            # DMart: Pure API scraper — no Playwright, no PDP stages
+            from backend.app.scrapers.dmart_scraper import DMART_STORE_IDS
+            if pincode not in DMART_STORE_IDS:
+                print(f"  ⏭️  DMart not available for {city} ({pincode})", flush=True)
+                return
+            print(f"\n⚙️  {city} — dmart pipeline (API)", flush=True)
+            run("scrape_dmart.py", [pincode])
+            print(f"  ✅ {city} dmart complete", flush=True)
+            return
+
         print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
         if platform == "blinkit":
             run("scrape_blinkit_pdps.py", [pincode, "4"], use_venv=True)
@@ -367,13 +391,16 @@ def scrape_city(pincode, city):
         run("stage5_barcode_match.py", [pincode, platform])
         print(f"  ✅ {city} {platform} complete", flush=True)
 
-    # Run both platforms in PARALLEL
-    t1 = threading.Thread(target=run_platform, args=("blinkit",))
-    t2 = threading.Thread(target=run_platform, args=("jiomart",))
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
+    # Run ALL platforms in PARALLEL (Blinkit + Jiomart + DMart)
+    threads = [
+        threading.Thread(target=run_platform, args=("blinkit",)),
+        threading.Thread(target=run_platform, args=("jiomart",)),
+        threading.Thread(target=run_platform, args=("dmart",)),
+    ]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
 
     # Save new URLs to database after scrape
     save_urls_to_database(pincode)
@@ -491,6 +518,15 @@ def generate_city_data(pincode, city, am_map, mrp_map):
     b_cascade = load_cascade("blinkit", pincode)
     j_cascade = load_cascade("jiomart", pincode)
 
+    # Load DMart data (API-based, no PDP/cascade stages)
+    dmart_map = {}
+    dmart_files = sorted([f for f in DATA.glob(f"sam/dmart_{pincode}_{DATE}*.json")])
+    if dmart_files:
+        d = json.load(open(dmart_files[-1]))
+        for p in d.get("products", []):
+            # Match by brand + name fuzzy (DMart doesn't use Anakin item_codes)
+            dmart_map[p.get("product_name", "")] = p
+
     rows = []
     for ic in sorted(am_map.keys(), key=lambda x: int(x) if x.isdigit() else 0):
         am = am_map.get(ic, {})
@@ -536,12 +572,36 @@ def generate_city_data(pincode, city, am_map, mrp_map):
         j_url, j_name, j_unit, j_mrp, j_sp, j_stock = get_sam(j_pdp, j_cascade, j_ana, "Jiomart_Product_Url", "jiomart")
         j_status = compute_status(am, am_mrp, j_sp, j_mrp, j_name, j_ana, "jiomart")
 
+        # DMart: match by product name similarity (no Anakin mapping exists)
+        d_url = d_name = d_unit = d_mrp = d_sp = d_stock = d_status = None
+        am_display = (am.get("display_name") or "").lower()
+        if dmart_map and am_display:
+            best_match = None
+            best_score = 0
+            from difflib import SequenceMatcher
+            for dname, dp in dmart_map.items():
+                score = SequenceMatcher(None, am_display, dname.lower()).ratio()
+                if score > best_score:
+                    best_score = score
+                    best_match = dp
+            if best_match and best_score >= 0.55:
+                d_url = best_match.get("product_url")
+                d_name = best_match.get("product_name")
+                d_unit = best_match.get("unit")
+                d_mrp = best_match.get("mrp")
+                d_sp = best_match.get("price")
+                d_stock = "available" if best_match.get("in_stock") else "out_of_stock"
+                if d_mrp is None and d_sp is not None:
+                    d_mrp = d_sp
+                d_status = compute_status(am, am_mrp, d_sp, d_mrp, d_name, {}, "dmart")
+
         rows.append([
             DATE, NOW, city, pincode, int(ic) if ic.isdigit() else ic,
             am.get("display_name"), am.get("master_category"), am.get("brand"), am.get("marketed_by"),
             am.get("product_type"), am.get("unit"), am.get("unit_value"), am_mrp, am.get("main_image"),
             b_url, b_name, b_unit, b_mrp, b_sp, b_stock, b_status,
             j_url, j_name, j_unit, j_mrp, j_sp, j_stock, j_status,
+            d_url, d_name, d_unit, d_mrp, d_sp, d_stock, d_status,
         ])
     return rows
 
@@ -572,19 +632,23 @@ def generate_excel(rows, city, pincode):
         "BLINKIT IN STOCK REMARK", "BLINKIT STATUS",
         "JIO URL", "JIO ITEM NAME", "JIO UNIT", "JIO MRP", "JIO SP",
         "JIO IN STOCK REMARK", "JIO STATUS",
+        "DMART URL", "DMART ITEM NAME", "DMART UNIT", "DMART MRP", "DMART SP",
+        "DMART IN STOCK REMARK", "DMART STATUS",
     ]
+    dmart_fill = PatternFill(start_color="FFE6CCFF", end_color="FFE6CCFF", fill_type="solid")
     for i, h in enumerate(headers, 1):
         c = ws.cell(row=1, column=i, value=h)
         c.font = Font(bold=True, size=10)
         if 1 <= i <= 14: c.fill = am_fill
         elif 15 <= i <= 21: c.fill = blinkit_fill
         elif 22 <= i <= 28: c.fill = jio_fill
+        elif 29 <= i <= 35: c.fill = dmart_fill
 
     for r_idx, row_data in enumerate(rows, 2):
         for c_idx, val in enumerate(row_data, 1):
             ws.cell(row=r_idx, column=c_idx, value=val)
 
-    widths = [10, 18, 10, 8, 10, 40, 8, 15, 20, 20, 5, 8, 8, 30, 35, 40, 10, 8, 8, 12, 20, 35, 40, 10, 8, 8, 12, 20]
+    widths = [10, 18, 10, 8, 10, 40, 8, 15, 20, 20, 5, 8, 8, 30, 35, 40, 10, 8, 8, 12, 20, 35, 40, 10, 8, 8, 12, 20, 35, 40, 10, 8, 8, 12, 20]
     for i, w in enumerate(widths, 1):
         ws.column_dimensions[get_column_letter(i)].width = w
     ws.freeze_panes = "E2"
@@ -665,14 +729,17 @@ def main():
     print("\n📥 Fetching EAN map...", flush=True)
     run("fetch_ean_map.py")
 
-    # Step 2: Scrape all cities
+    # Step 2: Scrape all cities (2 at a time to avoid RAM saturation)
     if not skip_scrape:
-        if len(pincodes) > 1:
-            # Parallel cities
-            from concurrent.futures import ThreadPoolExecutor, as_completed
-            print(f"\n🚀 Running {len(pincodes)} cities in PARALLEL...", flush=True)
-            with ThreadPoolExecutor(max_workers=len(pincodes)) as executor:
-                futures = {executor.submit(scrape_city, pin, city): (pin, city) for pin, city in pincodes.items()}
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        MAX_PARALLEL_CITIES = 2  # Each city runs 2 browsers × multiple tabs ≈ 8GB RAM
+        pin_list = list(pincodes.items())
+        for batch_start in range(0, len(pin_list), MAX_PARALLEL_CITIES):
+            batch = pin_list[batch_start:batch_start + MAX_PARALLEL_CITIES]
+            batch_names = ", ".join(city for _, city in batch)
+            print(f"\n🚀 Batch {batch_start // MAX_PARALLEL_CITIES + 1}: {batch_names} ...", flush=True)
+            with ThreadPoolExecutor(max_workers=len(batch)) as executor:
+                futures = {executor.submit(scrape_city, pin, city): (pin, city) for pin, city in batch}
                 for future in as_completed(futures):
                     pin, city = futures[future]
                     try:
@@ -680,9 +747,6 @@ def main():
                         print(f"  ✅ {city} complete", flush=True)
                     except Exception as e:
                         print(f"  ❌ {city} failed: {e}", flush=True)
-        else:
-            for pin, city in pincodes.items():
-                scrape_city(pin, city)
 
     # Step 3: Collect all item_codes from Anakin files
     all_item_codes = set()

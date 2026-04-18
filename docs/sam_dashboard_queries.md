@@ -1,4 +1,4 @@
-# SAM Dashboard — Mirror Queries
+# SAM Dashboard — Mirror Queries (Updated with DMart + 6 Cities)
 
 Create these as "New Question" → "Native query" on https://mirror.apnamart.in
 Database: **Apna Data Warehouse**
