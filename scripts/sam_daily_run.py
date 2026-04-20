@@ -358,8 +358,9 @@ def scrape_city(pincode, city):
             return
         if platform == "dmart":
             # DMart: Pure API scraper — no Playwright, no PDP stages
-            from backend.app.scrapers.dmart_scraper import DMART_STORE_IDS
-            if pincode not in DMART_STORE_IDS:
+            # Pincodes where DMart Ready is available (update when new cities added)
+            DMART_PINCODES = {"492001"}  # Raipur only
+            if pincode not in DMART_PINCODES:
                 print(f"  ⏭️  DMart not available for {city} ({pincode})", flush=True)
                 return
             print(f"\n⚙️  {city} — dmart pipeline (API)", flush=True)
@@ -424,18 +425,45 @@ def parse_wt(name):
     return None, None
 
 
+def unit_type_group(u):
+    """Return unit category: 'weight', 'volume', 'count', or None."""
+    if not u: return None
+    u = str(u).lower().strip()
+    if u in ("g", "gm", "gms", "kg", "kgs"): return "weight"
+    if u in ("ml", "mls", "l", "ltr", "ltrs"): return "volume"
+    if u in ("pc", "pcs", "piece", "pieces", "unit", "units", "n", "nos"): return "count"
+    return None
+
+
 def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
     if sam_sp is None:
         return "NA"
-    am_name_lower = (am.get("display_name") or "").lower()
-    if "loose" in am_name_lower and am.get("master_category") == "STPLS":
-        return "SEMI COMPLETE MATCH"
 
-    sam_wt, sam_wu = parse_wt(sam_name)
+    am_name_lower = (am.get("display_name") or "").lower()
     am_unit = (am.get("unit") or "").lower().strip()
     am_uv = am.get("unit_value")
+    am_pt = (am.get("product_type") or "").upper()
 
-    unit_match = True
+    sam_wt, sam_wu = parse_wt(sam_name)
+
+    # ── SEMI COMPLETE: Loose / ASM items in STPLS ──
+    # Criteria: product is loose/ASM + unit TYPE matches (kg↔g = weight, ml↔l = volume)
+    is_loose_asm = (
+        ("loose" in am_name_lower or "asm" in am_name_lower or am_pt in ("LOOSE", "ASM"))
+        and am.get("master_category") == "STPLS"
+    )
+    if is_loose_asm:
+        am_ug = unit_type_group(am_unit)
+        sam_ug = unit_type_group(sam_wu)
+        # Unit type must match — if either side unknown, give benefit of doubt
+        if am_ug and sam_ug and am_ug != sam_ug:
+            return "PARTIAL MATCH"  # e.g. AM=weight, SAM=volume → wrong product
+        return "SEMI COMPLETE MATCH"
+
+    # ── Unit value match (±10%) ──
+    # None = unknown (one or both sides can't be parsed → don't assume match or mismatch)
+    # True = confirmed match, False = confirmed mismatch
+    unit_match = None
     if am_uv and sam_wt and am_unit and sam_wu:
         try:
             av = float(am_uv)
@@ -449,6 +477,11 @@ def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
         except Exception:
             pass
 
+    # Confirmed unit mismatch → can never be COMPLETE (don't let sp_match override this)
+    if unit_match is False:
+        return "PARTIAL MATCH"
+
+    # ── MRP match ──
     mrp5 = mrp10 = False
     if am_mrp and sam_mrp:
         try:
@@ -458,8 +491,9 @@ def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
         except Exception:
             pass
     elif not am_mrp:
-        mrp5 = mrp10 = True
+        mrp5 = mrp10 = True  # No AM MRP to compare against — don't penalize
 
+    # ── SP match vs Anakin (only for Blinkit/Jiomart, not DMart) ──
     sp_key = "Blinkit_Selling_Price" if platform == "blinkit" else "Jiomart_Selling_Price"
     ana_sp = anakin_rec.get(sp_key)
     sp_match = False
@@ -471,7 +505,11 @@ def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
         except Exception:
             pass
 
-    if (unit_match and mrp5) or sp_match or (unit_match and mrp10):
+    # ── COMPLETE MATCH (unit_match is True or None at this point) ──
+    # (1) Unit confirmed match + MRP ±5%
+    # (2) Unit confirmed match + MRP ±10%
+    # (3) SP matches Anakin ±5% (only when unit is not a confirmed mismatch — already guarded above)
+    if (unit_match and mrp5) or (unit_match and mrp10) or sp_match:
         return "COMPLETE MATCH"
     return "PARTIAL MATCH"
 

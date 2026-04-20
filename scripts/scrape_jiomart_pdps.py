@@ -76,6 +76,11 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
             data.get("code") or data.get("id") or data.get("product_id") or
             data.get("productId") or data.get("sku") or ""
         )
+        # Also handle Google Retail catalog 'name' field: "projects/.../products/490993684"
+        if not this_id:
+            name_field = str(data.get("name", ""))
+            if "/" in name_field:
+                this_id = name_field.rsplit("/", 1)[-1]
         if this_id == str(target_pid):
             # Check for price keys at this level
             if any(k in data for k in price_keys):
@@ -96,6 +101,37 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
             if found:
                 return found
     return None
+
+
+def _scan_for_buybox_mrp(captured: list, target_pid: str) -> tuple[float | None, float | None]:
+    """Fallback: scan ALL captured responses for buybox_mrp without requiring product ID match.
+    Safe on PDP pages since only one product's data is loaded."""
+    for payload in captured:
+        s = json.dumps(payload, default=str)
+        if "buybox_mrp" not in s:
+            continue
+        # Walk tree looking for any dict with buybox_mrp
+        stack = [payload]
+        while stack:
+            node = stack.pop()
+            if isinstance(node, dict):
+                bb = node.get("buybox_mrp")
+                if isinstance(bb, dict):
+                    texts = bb.get("text", [])
+                    if texts:
+                        parts = str(texts[0]).split("|")
+                        if len(parts) >= 6:
+                            try:
+                                mrp = float(parts[4]) if parts[4] else None
+                                sp = float(parts[5]) if parts[5] else None
+                                if sp and sp > 0:
+                                    return sp, mrp
+                            except ValueError:
+                                pass
+                stack.extend(node.values())
+            elif isinstance(node, list):
+                stack.extend(node)
+    return None, None
 
 
 def _extract_price_from_jiomart_dict(p: dict) -> tuple[float | None, float | None]:
@@ -150,9 +186,10 @@ def _extract_price_from_jiomart_dict(p: dict) -> tuple[float | None, float | Non
                 except (ValueError, TypeError):
                     pass
 
-    # If MRP not found but SP exists, MRP = SP (no discount)
-    if sp and not mrp:
-        mrp = sp
+    # Sanity check: MRP must be >= SP and <= SP*5 (anything beyond is a bundle/multi-pack price)
+    if mrp and sp:
+        if mrp < sp or mrp > sp * 5:
+            mrp = None
     return sp, mrp
 
 
@@ -245,9 +282,18 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                         name = candidate
                         break
 
+        # If MRP still missing after product_dict extraction, scan all captured responses
+        # for buybox_mrp (covers cases where _find_product_in_json missed the match)
+        if mrp is None and captured:
+            _bb_sp, _bb_mrp = _scan_for_buybox_mrp(captured, jm_pid_clean)
+            if _bb_mrp is not None:
+                mrp = _bb_mrp
+            if sp is None and _bb_sp is not None:
+                sp = _bb_sp
+
         # DOM fallback — also triggered when name is a Google Retail catalog path
         _name_bad = not name or (isinstance(name, str) and name.startswith("projects/"))
-        if sp is None or _name_bad:
+        if sp is None or mrp is None or _name_bad:
             dom_data = await page.evaluate("""() => {
                 let name = '';
                 let sp_val = null, mrp_val = null;
@@ -312,8 +358,45 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                     }
                 }
 
-                // ─── TRY 4: DISABLED — body text ₹ regex picks up carousel/bundle prices ───
-                // no_price is better than wrong price
+                // ─── TRY 4: window.__NEXT_DATA__ (Next.js SSR — most reliable, has full product data) ───
+                try {
+                    const nextEl = document.getElementById('__NEXT_DATA__');
+                    if (nextEl) {
+                        const nd = JSON.parse(nextEl.textContent || '{}');
+                        // JioMart stores product in props.pageProps.product or similar path
+                        const walk = (obj, depth) => {
+                            if (!obj || typeof obj !== 'object' || depth > 8) return;
+                            if (Array.isArray(obj)) { obj.forEach(x => walk(x, depth+1)); return; }
+                            // Look for price object with mrp/selling_price fields
+                            if ((obj.mrp !== undefined || obj.selling_price !== undefined) &&
+                                (typeof obj.mrp === 'number' || typeof obj.mrp === 'string') &&
+                                !mrp_val) {
+                                const m = parseFloat(String(obj.mrp).replace(',',''));
+                                const s = parseFloat(String(obj.selling_price || obj.sp || obj.price || 0).replace(',',''));
+                                if (m > 0 && (!sp_val || s > 0)) {
+                                    if (!sp_val && s > 0) sp_val = s;
+                                    if (m >= (sp_val || s) && m <= (sp_val || s) * 5) mrp_val = m;
+                                }
+                            }
+                            Object.values(obj).forEach(v => walk(v, depth+1));
+                        };
+                        walk(nd, 0);
+                    }
+                } catch(e) {}
+
+                // ─── TRY 5: Strikethrough MRP (del/s/strike = crossed-out original price) ───
+                if (!mrp_val && sp_val) {
+                    const dels = document.querySelectorAll('del, s, strike, [class*="mrp"], [class*="strike"], [class*="original-price"]');
+                    for (const el of dels) {
+                        const t = (el.innerText || '').replace(/[₹, ]/g, '').trim();
+                        const v = parseFloat(t);
+                        // MRP should be >= SP and <= 5× SP (not a bundle/related price)
+                        if (v > 0 && v >= sp_val && v <= sp_val * 5) {
+                            mrp_val = v;
+                            break;
+                        }
+                    }
+                }
 
                 // Stock
                 const bodyLower = (document.body.innerText || '').toLowerCase();
@@ -336,12 +419,9 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                 mrp = dom_data.get("mrp_val")
             in_stock = dom_data.get("in_stock", in_stock)
 
-        # ── Raw HTML regex DISABLED — picks up prices from carousels/script tags ──
-        # no_price is better than wrong price
-
-        # Final MRP fallback: if SP found but MRP still missing, assume MRP = SP
-        if sp and not mrp:
-            mrp = sp
+        # Final sanity check: MRP must be >= SP and <= SP*5
+        if mrp and sp and (mrp < sp or mrp > sp * 5):
+            mrp = None
 
         out.update({
             "sam_product_name": name,
