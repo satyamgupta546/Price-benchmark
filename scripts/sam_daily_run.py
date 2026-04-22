@@ -37,15 +37,13 @@ OUTPUT_DIR = Path(os.environ.get("SAM_OUTPUT_DIR", str(PROJECT_ROOT / "output"))
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 VALID_MASTER_CATEGORIES = {"STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"}
-CITIES = {
-    "834002": "Ranchi", "712232": "Kolkata", "492001": "Raipur",
-    "825301": "Hazaribagh", "495001": "Bilaspur", "831001": "Jamshedpur",
-}
-WAREHOUSE_MAP = {
-    "834002": "WRHS_1", "825301": "WRHS_1", "831001": "WRHS_1",  # Jharkhand
-    "492001": "WRHS_2", "495001": "WRHS_2",                       # Chhattisgarh
-    "712232": "WRHS_10",                                           # Kolkata
-}
+
+# Load city + platform config from config/cities.json
+_cities_config = json.load(open(PROJECT_ROOT / "config" / "cities.json"))
+CITIES = {pin: cfg["name"] for pin, cfg in _cities_config["cities"].items()}
+WAREHOUSE_MAP = {pin: cfg["warehouse"] for pin, cfg in _cities_config["cities"].items()}
+CITY_PLATFORMS = {pin: set(cfg["platforms"]) for pin, cfg in _cities_config["cities"].items()}
+DMART_STORE_IDS = _cities_config.get("dmart_store_ids", {})
 DATE = datetime.now().strftime("%Y-%m-%d")
 NOW = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -347,20 +345,15 @@ def scrape_city(pincode, city):
     run("fetch_anakin_blinkit.py", [pincode])
     run("fetch_anakin_jiomart.py", [pincode])
 
-    # Platform availability per city
-    SKIP_PLATFORM = {
-        "825301": {"jiomart"},     # Hazaribagh — no Jiomart
-    }
+    # Platform availability from config/cities.json
+    city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit", "jiomart"})
 
     def run_platform(platform):
-        if platform in SKIP_PLATFORM.get(pincode, set()):
+        if platform not in city_platforms:
             print(f"  ⏭️  {platform} not available in {city}", flush=True)
             return
         if platform == "dmart":
-            # DMart: Pure API scraper — no Playwright, no PDP stages
-            # Pincodes where DMart Ready is available (update when new cities added)
-            DMART_PINCODES = {"492001"}  # Raipur only
-            if pincode not in DMART_PINCODES:
+            if pincode not in DMART_STORE_IDS:
                 print(f"  ⏭️  DMart not available for {city} ({pincode})", flush=True)
                 return
             print(f"\n⚙️  {city} — dmart pipeline (API)", flush=True)

@@ -1,0 +1,46 @@
+{
+  "_doc": "City + platform config for SAM. Edit this to add/remove cities or platforms.",
+
+  "cities": {
+    "834002": {
+      "name": "Ranchi",
+      "state": "JH",
+      "warehouse": "WRHS_1",
+      "platforms": ["blinkit", "jiomart"]
+    },
+    "712232": {
+      "name": "Kolkata",
+      "state": "WB",
+      "warehouse": "WRHS_10",
+      "platforms": ["blinkit", "jiomart"]
+    },
+    "492001": {
+      "name": "Raipur",
+      "state": "CG",
+      "warehouse": "WRHS_2",
+      "platforms": ["blinkit", "jiomart", "dmart"]
+    },
+    "825301": {
+      "name": "Hazaribagh",
+      "state": "JH",
+      "warehouse": "WRHS_1",
+      "platforms": ["blinkit"]
+    },
+    "495001": {
+      "name": "Bilaspur",
+      "state": "CG",
+      "warehouse": "WRHS_2",
+      "platforms": ["blinkit", "jiomart"]
+    },
+    "831001": {
+      "name": "Jamshedpur",
+      "state": "JH",
+      "warehouse": "WRHS_1",
+      "platforms": ["blinkit", "jiomart"]
+    }
+  },
+
+  "dmart_store_ids": {
+    "492001": "10677"
+  }
+}
