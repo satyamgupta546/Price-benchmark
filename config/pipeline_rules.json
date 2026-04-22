@@ -1,0 +1,122 @@
+{
+  "_doc": "SAM Pipeline Rules — ALL matching logic. Scripts MUST read from here, not hardcode.",
+
+  "matching": {
+    "weight_comparison": {
+      "mandatory": true,
+      "source_am": "unit_value + unit from smpcm_product",
+      "source_sam": "parse from platform product name (regex)",
+      "normalize": {"kg": "g", "l": "ml", "kgs": "g", "ltr": "ml"},
+      "tolerance_pct": 10,
+      "note": "Do NOT use sam_unit from Blinkit (always '1' — useless)"
+    },
+    "variant_rejection": {
+      "enabled": true,
+      "min_ratio": 0.7,
+      "max_ratio": 1.5,
+      "note": "If SAM_weight / AM_weight outside this range, reject as wrong variant"
+    },
+    "price_sanity": {
+      "max_sp_to_mrp_ratio": 3,
+      "note": "If SAM SP > AM MRP * 3, reject as bulk/combo price"
+    }
+  },
+
+  "match_status": {
+    "COMPLETE_MATCH": {
+      "rules": [
+        "unit_match (±10%) AND mrp_match (±5%)",
+        "unit_match (±10%) AND mrp_match (±10%)",
+        "sp_match_anakin (±5%) — only when unit is NOT confirmed mismatch"
+      ],
+      "note": "unit_match=None (unknown) does NOT default to True. If unit_match=False, ALWAYS PARTIAL."
+    },
+    "SEMI_COMPLETE_MATCH": {
+      "rules": [
+        "Item is LOOSE or ASM (check display_name + product_type)",
+        "master_category = STPLS",
+        "unit TYPE must match (weight/volume/count) — values can differ",
+        "MRP can differ"
+      ]
+    },
+    "PARTIAL_MATCH": {
+      "rules": ["Product found but fails COMPLETE and SEMI COMPLETE criteria"]
+    },
+    "NA": {
+      "rules": ["No price found on platform"]
+    }
+  },
+
+  "stages": {
+    "stage1_pdp": {
+      "description": "Direct PDP visit using saved product_id/URL",
+      "input": "product_mapping.json (our mapping) OR Anakin URLs as fallback",
+      "must_check": ["weight_match before accepting price", "product_id save after successful scrape"],
+      "fallback": "stage2_cascade"
+    },
+    "stage2_cascade": {
+      "description": "Brand-first cascade from BFS crawl pool",
+      "rules": {
+        "brand": "strict match (exact brand name)",
+        "product_type": "must match",
+        "weight": "±10% MANDATORY",
+        "name_score": ">=0.55 (or >=0.70 if weight NA)",
+        "mrp_cross_check": "±15%",
+        "sp_cross_check": "±25%",
+        "ean": "if both sides have barcode, must match"
+      },
+      "fallback": "stage3"
+    },
+    "stage3": {
+      "description": "Broader matching with relaxed brand check",
+      "rules": {
+        "brand": "3-token overlap check",
+        "weight": "MANDATORY",
+        "mrp": "±15%",
+        "name_score": ">=0.50"
+      },
+      "fallback": "stage4_search"
+    },
+    "stage4_search": {
+      "description": "Search API based matching — MUST exist for ALL platforms",
+      "platforms": {
+        "blinkit": "search URL: /s/?q={query} — intercept API response",
+        "jiomart": "search URL: /search/{query} — /trex/search API (Google Retail)",
+        "dmart": "API: digital.dmart.in/api/v3/plp/{slug}"
+      },
+      "rules": {
+        "brand_overlap": "target brand words must appear in result",
+        "name_score": ">=0.55",
+        "weight_check": "MANDATORY — reject if wrong variant"
+      },
+      "must_do": "SAVE product_id after successful match to product_mapping.json",
+      "fallback": "stage5_image"
+    },
+    "stage5_image": {
+      "description": "Image similarity matching",
+      "fallback": "stage6_barcode"
+    },
+    "stage6_barcode": {
+      "description": "EAN barcode matching",
+      "note": "If both sides have barcode, must match exactly"
+    }
+  },
+
+  "product_mapping": {
+    "file": "data/mappings/product_mapping.json",
+    "key_format": "{platform}_{pincode}_{item_code}",
+    "must_save": ["product_id", "product_url", "platform_name", "weight_value", "weight_unit"],
+    "sources": ["anakin (initial seed)", "pdp_scrape (new discoveries)", "search_match (new matches)", "manual_correction"],
+    "note": "This is our PERMANENT mapping. When Anakin is removed, this is all we have."
+  },
+
+  "dont_do": [
+    "NEVER default unit_match to True — use None for unknown",
+    "NEVER set MRP = SP as fallback — leave MRP as None if not found",
+    "NEVER accept price without weight check — variant mismatch is worse than no_price",
+    "NEVER depend only on Anakin URLs — build own product_mapping",
+    "NEVER skip search stage for any platform",
+    "NEVER use sam_unit from Blinkit (always '1')",
+    "NEVER trust DOM body text regex for Jiomart (carousel prices)"
+  ]
+}

@@ -600,6 +600,32 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 mrp = m.get("sam_mrp")
                 stock = "available"
                 unit = m.get("sam_unit")
+            # Price sanity: reject bulk/combo prices (SP > 3× AM MRP = clearly wrong product)
+            if sp is not None and am_mrp:
+                try:
+                    if float(sp) > float(am_mrp) * 3:
+                        sp = mrp = name = stock = unit = None
+                except (ValueError, TypeError):
+                    pass
+            # Variant check: if weight ratio outside 0.7-1.5, mark as NA (not same product)
+            if sp is not None and name:
+                sam_wt, sam_wu = parse_wt(name)
+                am_u = (am.get("unit") or "").lower().strip()
+                am_uv_val = am.get("unit_value")
+                if sam_wt and am_uv_val and am_u and sam_wu:
+                    try:
+                        av = float(am_uv_val)
+                        sv = sam_wt
+                        if am_u in ("kg", "kgs") and sam_wu == "g": av *= 1000
+                        elif am_u in ("g", "gm") and sam_wu == "kg": sv *= 1000
+                        elif am_u in ("l", "ltr") and sam_wu == "ml": av *= 1000
+                        elif am_u == "ml" and sam_wu in ("l", "ltr"): sv *= 1000
+                        if av > 0 and sv > 0:
+                            ratio = sv / av
+                            if ratio < 0.7 or ratio > 1.5:
+                                sp = mrp = name = stock = unit = None
+                    except (ValueError, TypeError):
+                        pass
             if mrp is None and sp is not None:
                 mrp = sp
             return url, name, unit, mrp, sp, stock
@@ -786,7 +812,7 @@ def main():
                     except Exception as e:
                         print(f"  ❌ {city} failed: {e}", flush=True)
 
-    # Step 3: Collect all item_codes from Anakin files
+    # Step 3: Collect all item_codes from Anakin files + KVI list
     all_item_codes = set()
     for pin in pincodes:
         for platform in ["blinkit", "jiomart"]:
@@ -797,6 +823,16 @@ def main():
                     ic = str(r.get("Item_Code", "")).strip()
                     if ic:
                         all_item_codes.add(ic)
+
+    # Also add KVI item_codes (so they're fetched even if Anakin doesn't track them)
+    kvi_path = DATA / "kvi_master.json"
+    if kvi_path.exists():
+        kvi_data = json.load(open(kvi_path))
+        for item in kvi_data.get("kvi", []):
+            ic = str(item.get("item_code", "")).strip()
+            if ic:
+                all_item_codes.add(ic)
+        print(f"  📋 KVI: added {len(set(item['item_code'] for item in kvi_data.get('kvi', [])))} unique items to fetch list", flush=True)
 
     # Step 4: Fetch AM master + MRP
     am_map = fetch_am_master(list(all_item_codes))
@@ -817,6 +853,46 @@ def main():
         all_rows.extend(city_rows)
         generate_excel(city_rows, city, pin)
         print(f"  ✅ {city}: {len(city_rows)} rows", flush=True)
+
+    # Step 5b: KVI coverage report
+    kvi_path = DATA / "kvi_master.json"
+    if kvi_path.exists():
+        kvi_data = json.load(open(kvi_path))
+        # Build pincode → KVI item_codes map
+        state_to_pins = kvi_data.get("state_map", {})
+        pin_to_state = {}
+        for st, pins in state_to_pins.items():
+            for p in pins:
+                pin_to_state[p] = st
+        kvi_by_state = {}
+        for item in kvi_data.get("kvi", []):
+            st = {"1": "JH", "2": "WB", "3": "CG"}.get(item.get("state_key"), item.get("state_key"))
+            if st not in kvi_by_state:
+                kvi_by_state[st] = {}
+            kvi_by_state[st][item["item_code"]] = item.get("kvi_tag", "KVI")
+
+        print(f"\n📊 KVI Coverage Report", flush=True)
+        # row indices: 4=item_code, 18=blinkit_sp, 25=jio_sp, 32=dmart_sp, 3=pincode
+        for pin, city in pincodes.items():
+            state = pin_to_state.get(pin)
+            if not state or state not in kvi_by_state:
+                continue
+            kvi_items = kvi_by_state[state]
+            super_kvi = {ic for ic, tag in kvi_items.items() if "Super" in tag}
+            city_rows = [r for r in all_rows if str(r[3]) == pin]
+            city_ics = {str(r[4]): r for r in city_rows}
+
+            b_hit = sum(1 for ic in kvi_items if ic in city_ics and city_ics[ic][18])
+            j_hit = sum(1 for ic in kvi_items if ic in city_ics and city_ics[ic][25])
+            either = sum(1 for ic in kvi_items if ic in city_ics and (city_ics[ic][18] or city_ics[ic][25]))
+            skvi_b = sum(1 for ic in super_kvi if ic in city_ics and city_ics[ic][18])
+            skvi_j = sum(1 for ic in super_kvi if ic in city_ics and city_ics[ic][25])
+
+            n = len(kvi_items)
+            sn = len(super_kvi)
+            print(f"  {city} ({state}): KVI {either}/{n} = {either/n*100:.0f}%  "
+                  f"[B:{b_hit}/{n}={b_hit/n*100:.0f}% J:{j_hit}/{n}={j_hit/n*100:.0f}%]  "
+                  f"Super KVI: B:{skvi_b}/{sn} J:{skvi_j}/{sn}", flush=True)
 
     # Step 6: Write CSV + push to BQ
     csv_path = DATA / "bq_upload_temp.csv"
