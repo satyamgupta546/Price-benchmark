@@ -914,14 +914,13 @@ def main():
         if wh not in mrp_maps:
             mrp_maps[wh] = fetch_latest_mrp(wh)
 
-    # Step 5: Generate data + Excel + CSV for BQ
+    # Step 5: Generate data + CSV for BQ (Excel removed — use export_excel_from_bq.py)
     all_rows = []
     for pin, city in pincodes.items():
         wh = WAREHOUSE_MAP.get(pin, "WRHS_1")
         mrp_map = mrp_maps.get(wh, {})
         city_rows = generate_city_data(pin, city, am_map, mrp_map)
         all_rows.extend(city_rows)
-        generate_excel(city_rows, city, pin)
         print(f"  ✅ {city}: {len(city_rows)} rows", flush=True)
 
     # Step 5b: KVI coverage report
@@ -1009,8 +1008,8 @@ def main():
         print(f"  ⚠️ {len(RUN_ERRORS)} errors during run:")
         for e in RUN_ERRORS:
             print(f"    - {e}")
-    print(f"  Excel: {OUTPUT_DIR}")
     print(f"  BigQuery: sam_price_live + sam_price_history")
+    print(f"  Excel: run 'python scripts/export_excel_from_bq.py <pincode>' to generate")
     print(f"{'═' * 60}")
 
 
