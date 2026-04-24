@@ -187,11 +187,11 @@ def main(pincode: str, platform: str = "blinkit"):
             break
 
     if not ana_path:
-        print(f"[cascade] ERROR: no Anakin {platform} file for {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[cascade] No Anakin {platform} file for {pincode} — skipping", flush=True)
+        sys.exit(0)
     if not sam_path:
-        print(f"[cascade] ERROR: no SAM {platform} BFS scrape for {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[cascade] No SAM {platform} BFS data for {pincode} — skipping", flush=True)
+        sys.exit(0)
 
     print(f"[cascade] Platform: {platform}")
     print(f"[cascade] Anakin: {ana_path.name}")

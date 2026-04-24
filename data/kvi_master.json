@@ -1,0 +1,5789 @@
+{
+  "kvi": [
+    {
+      "key": "JH2405",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2405",
+      "display_name": "Aashirvaad Shudh Chakki Atta 5 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG2405",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2405",
+      "display_name": "Aashirvaad Shudh Chakki Atta 5 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB2405",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2405",
+      "display_name": "Aashirvaad Shudh Chakki Atta 5 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG83332",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "83332",
+      "display_name": "Abba Huzur Jsr Lachkari Kolam Rice | 1Kg | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH104239",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "104239",
+      "display_name": "Almond Badaam Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB104239",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "104239",
+      "display_name": "Almond Badaam Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG104239",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "104239",
+      "display_name": "Almond Badaam Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG85877",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "85877",
+      "display_name": "Amul Cow Ghee 500ml Jar",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG927",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "927",
+      "display_name": "Amul Pure Ghee 1 Ltr Tetra",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB927",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "927",
+      "display_name": "Amul Pure Ghee 1 Ltr Tetra",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH930",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "930",
+      "display_name": "Amul Pure Ghee Pouch 500ml",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH82190",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "82190",
+      "display_name": "Baba Premium Usna Rice | 26 Kgs",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB96144",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96144",
+      "display_name": "Baskati Standard Rice | 1Kg | Loose | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG95464",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95464",
+      "display_name": "Basmati Rice Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH9661",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "9661",
+      "display_name": "Basmati Sella Loose Rice 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95357",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95357",
+      "display_name": "Brown Chana Small 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG99894",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "99894",
+      "display_name": "Brown Jaggery Loose 1kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH99894",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "99894",
+      "display_name": "Brown Jaggery Loose 1kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB99894",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "99894",
+      "display_name": "Brown Jaggery Loose 1kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH93937",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "93937",
+      "display_name": "Chana Dal Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB93937",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "93937",
+      "display_name": "Chana Dal Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG93937",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "93937",
+      "display_name": "Chana Dal Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG95368",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95368",
+      "display_name": "Chura Poha Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH95368",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95368",
+      "display_name": "Chura Poha Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95368",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95368",
+      "display_name": "Chura Poha Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH103734",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "103734",
+      "display_name": "Crunchi Waves Makhana Regular| 250g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB103734",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "103734",
+      "display_name": "Crunchi Waves Makhana Regular| 250g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB103531",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "103531",
+      "display_name": "Dainik Minikit Rice | 26kg | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH682",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "682",
+      "display_name": "Dhaniya Gota Sabut - 250g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB682",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "682",
+      "display_name": "Dhaniya Gota Sabut - 250g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10696",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10696",
+      "display_name": "Dhara Kachi Ghani Mustard Oil 1 Ltr Pouch",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG10696",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10696",
+      "display_name": "Dhara Kachi Ghani Mustard Oil 1 Ltr Pouch",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB12916",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "12916",
+      "display_name": "Emami Healthy And Tasty Refined Rice Bran Oil - 730g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2537",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2537",
+      "display_name": "Everest Turmeric Powder 200g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2621",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2621",
+      "display_name": "Fortune Besan 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2704",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2704",
+      "display_name": "Fortune Premium Kachi ghani Pure Mustard Oil 1 Ltr Pouch",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH2705",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2705",
+      "display_name": "Fortune Pure Mustard Oil | 870g Pouch | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2694",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2694",
+      "display_name": "Fortune Refined Sunflower Oil | 800g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB2694",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2694",
+      "display_name": "Fortune Refined Sunflower Oil | 800g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2694",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2694",
+      "display_name": "Fortune Refined Sunflower Oil | 800g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2714",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2714",
+      "display_name": "Fortune Rice Bran Oil - 750g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2714",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2714",
+      "display_name": "Fortune Rice Bran Oil - 750g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2681",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2681",
+      "display_name": "Fortune Soya Health Refined Soyabean Oil | 750g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG76848",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "76848",
+      "display_name": "Fortune Soya Plus Oil | 840g Pouch | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB42934",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "42934",
+      "display_name": "Ganesh Chana Besan 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB13302",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "13302",
+      "display_name": "Ganesh Sooji 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG690",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "690",
+      "display_name": "Golki Kaali Mirch 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH690",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "690",
+      "display_name": "Golki Kaali Mirch 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8691",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8691",
+      "display_name": "Gota Garam Masala 50g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB93959",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "93959",
+      "display_name": "Govind Bhog Raw Rice Loose 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG686",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "686",
+      "display_name": "Green Elaichi 25g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH686",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "686",
+      "display_name": "Green Elaichi 25g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB686",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "686",
+      "display_name": "Green Elaichi 25g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG28473",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "28473",
+      "display_name": "Hareli Refined Rice Bran Oil 1 Ltr",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH2698",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2698",
+      "display_name": "Hathi Kacchi Ghani Mustard Oil 1 Ltr",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG95453",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95453",
+      "display_name": "HMT Kolam Rice Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2634",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2634",
+      "display_name": "Jalan Chana Besan 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH700",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "700",
+      "display_name": "Jeera Sabut 250g",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG700",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "700",
+      "display_name": "Jeera Sabut 250g",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB700",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "700",
+      "display_name": "Jeera Sabut 250g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG95373",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95373",
+      "display_name": "Kabuli Chana Loose - 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95373",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95373",
+      "display_name": "Kabuli Chana Loose - 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95373",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95373",
+      "display_name": "Kabuli Chana Loose - 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH104240",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "104240",
+      "display_name": "Kaju Cashew Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB104240",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "104240",
+      "display_name": "Kaju Cashew Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG104240",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "104240",
+      "display_name": "Kaju Cashew Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG95466",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95466",
+      "display_name": "Kala Chana Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB95466",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95466",
+      "display_name": "Kala Chana Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG67850",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "67850",
+      "display_name": "Kalimooch Rice Loose 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG85006",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "85006",
+      "display_name": "Khatri Chilli Powder 200g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG85003",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "85003",
+      "display_name": "Khatri Dhaniya Powder 200g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG85633",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "85633",
+      "display_name": "Khatri Haldi Powder 200g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG10015",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10015",
+      "display_name": "Kings Soyabean Oil Pouch | 750g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB10015",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10015",
+      "display_name": "Kings Soyabean Oil Pouch | 750g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG68173",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "68173",
+      "display_name": "Kirti Gold Refined Soyabean Oil 1Ltr",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH104241",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "104241",
+      "display_name": "Kismis Raisin Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB104241",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "104241",
+      "display_name": "Kismis Raisin Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG104241",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "104241",
+      "display_name": "Kismis Raisin Popular 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG68178",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "68178",
+      "display_name": "Lal Gulab Mustard Oil 1 Ltr",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH765",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "765",
+      "display_name": "Lal Mirch Khada With Stick 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB713",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "713",
+      "display_name": "Lal Mirch Khada Without Stick 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB81590",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "81590",
+      "display_name": "Lalbaba Superior Miniket Rice 26 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10017",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10017",
+      "display_name": "Mahakosh Soyabean Oil | 750g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG10017",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10017",
+      "display_name": "Mahakosh Soyabean Oil | 750g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8689",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8689",
+      "display_name": "Maida 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95370",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95370",
+      "display_name": "Maida Loose | 1kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95370",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95370",
+      "display_name": "Maida Loose | 1kg | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG93935",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "93935",
+      "display_name": "Masoor Dal Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95358",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95358",
+      "display_name": "Masoor Malka Red Whole 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB95358",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95358",
+      "display_name": "Masoor Malka Red Whole 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH90233",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "90233",
+      "display_name": "Miniket Boiled Rice 1Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB96160",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96160",
+      "display_name": "Miniket Regular Rice Loose | 1kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB93936",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "93936",
+      "display_name": "Moong Dal Yellow 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG93936",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "93936",
+      "display_name": "Moong Dal Yellow 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH93936",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "93936",
+      "display_name": "Moong Dal Yellow 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG10552",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10552",
+      "display_name": "Mota Sounf 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10552",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10552",
+      "display_name": "Mota Sounf 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG751",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "751",
+      "display_name": "Mungfali Peanut White 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8552",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8552",
+      "display_name": "Panchkanya Sooji 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8445",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8445",
+      "display_name": "Parrot Haldi Powder 100g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG77735",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "77735",
+      "display_name": "Pawan Brand Makhana | 250g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB96335",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96335",
+      "display_name": "Posta Loose 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH68222",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "68222",
+      "display_name": "Premium Usna Loose Rice 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG81726",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "81726",
+      "display_name": "Raja Rani Lachkari Kolam Dubar Rice 30 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB96145",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96145",
+      "display_name": "Ratna Boiled Rice Loose 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH10706",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10706",
+      "display_name": "Sachamoti Sabudana 500g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8285",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8285",
+      "display_name": "Saloni Kachchi Ghani Mustard Oil 1 Ltr",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH9878",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "9878",
+      "display_name": "Shree Bhajan Whole Wheat Atta 5 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB96133",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96133",
+      "display_name": "Sona Moong Dal Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH93951",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "93951",
+      "display_name": "Sonam Steamed Loose Rice",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10103",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10103",
+      "display_name": "Steam Katarni Loose Rice",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG23319",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "23319",
+      "display_name": "Sunder Sakhi Suji | 500g | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB28122",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "28122",
+      "display_name": "Sunrise Pure Haldi Powder 200g",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH93934",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "93934",
+      "display_name": "Toor Dal Loose | 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG93934",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "93934",
+      "display_name": "Toor Dal Loose | 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB93934",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "93934",
+      "display_name": "Toor Dal Loose | 1Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB96272",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96272",
+      "display_name": "Tulsi Bhog Rice Loose 1 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95356",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95356",
+      "display_name": "Wheat Atta 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH95356",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95356",
+      "display_name": "Wheat Atta 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG95356",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95356",
+      "display_name": "Wheat Atta 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "JH90513",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "90513",
+      "display_name": "White Crystal Sugar | 1 Kg | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "WB90513",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "90513",
+      "display_name": "White Crystal Sugar | 1 Kg | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG90513",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "90513",
+      "display_name": "White Crystal Sugar | 1 Kg | Pack of 1",
+      "master_category": "STPLS",
+      "kvi_tag": "Super KVI"
+    },
+    {
+      "key": "CG79085",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "79085",
+      "display_name": "White Platinum Super Rice 26 Kg",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95367",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95367",
+      "display_name": "Whole Grain Basmati Rice 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95367",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95367",
+      "display_name": "Whole Grain Basmati Rice 1 Kg Loose",
+      "master_category": "STPLS",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4286",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4286",
+      "display_name": "Surf Excel Easy Wash Detergent Powder | 1 Kg | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH838",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "838",
+      "display_name": "Active Wheel 2 in 1 Clean & Fresh Detergent Powder 1kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8080",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8080",
+      "display_name": "Surf Excel Easy Wash 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4286",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4286",
+      "display_name": "Surf Excel Easy Wash Detergent Powder | 1 Kg | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4286",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4286",
+      "display_name": "Surf Excel Easy Wash Detergent Powder | 1 Kg | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB14334",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "14334",
+      "display_name": "Sunlight Detergent Powder 1 kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8080",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8080",
+      "display_name": "Surf Excel Easy Wash 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5056",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5056",
+      "display_name": "Surf Excel Easy Wash Detergent Powder 1.5 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG10588",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10588",
+      "display_name": "Ghadi Detergent Powder 1 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG22682",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "22682",
+      "display_name": "Ghadi Detergent Powder 3 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB76434",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "76434",
+      "display_name": "Good Knight Gold Flash Mosquito Repellent Refill 45ml 2N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH840",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "840",
+      "display_name": "Active Wheel 2in1 Detergent Powder 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8328",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8328",
+      "display_name": "Harpic Power Plus Original Toilet Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH22682",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "22682",
+      "display_name": "Ghadi Detergent Powder 3 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH86569",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "86569",
+      "display_name": "Lux Ultimate Glow Jasmine Vitamin C+E Soap 100g*4N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB96128",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96128",
+      "display_name": "Safed Detergent Powder Pouch 1 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG838",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "838",
+      "display_name": "Active Wheel 2 in 1 Clean & Fresh Detergent Powder 1kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8080",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8080",
+      "display_name": "Surf Excel Easy Wash 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB17443",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "17443",
+      "display_name": "Sunlight Detergent Powder Pouch 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10588",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10588",
+      "display_name": "Ghadi Detergent Powder 1 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH15846",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "15846",
+      "display_name": "Surf Excel Detergent Bar | 200g x 4 | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH23525",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "23525",
+      "display_name": "Sensodyne Sensitive Soft Toothbrush | Buy 2 Get 1 Free | Pack of 3",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB5026",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "5026",
+      "display_name": "Sensodyne Toothpaste Fresh Gel 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8328",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8328",
+      "display_name": "Harpic Power Plus Original Toilet Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1513",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1513",
+      "display_name": "Dettol Original Soap Bar 5 X 100g Set 4+1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8063",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8063",
+      "display_name": "Harpic Power Plus 10X Max Toilet Cleaner 900ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH82422",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "82422",
+      "display_name": "Stayfree Secure Cottony Extra Large 18N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8063",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8063",
+      "display_name": "Harpic Power Plus 10X Max Toilet Cleaner 900ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1363",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1363",
+      "display_name": "Colgate Dental Cream Strong Teeth Toothpaste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH23642",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "23642",
+      "display_name": "Parachute Coconut Oil Bottle | 600ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB5056",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "5056",
+      "display_name": "Surf Excel Easy Wash Detergent Powder 1.5 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5026",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5026",
+      "display_name": "Sensodyne Toothpaste Fresh Gel 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB87465",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "87465",
+      "display_name": "Good Knight Gold Flash Liquid Vapouriser Refill 1N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4315",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4315",
+      "display_name": "Vim Dish Wash Bar Best Ever Tub | 500g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5024",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5024",
+      "display_name": "Sensodyne Repair & Protect 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8328",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8328",
+      "display_name": "Harpic Power Plus Original Toilet Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4315",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4315",
+      "display_name": "Vim Dish Wash Bar Best Ever Tub | 500g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5185",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5185",
+      "display_name": "Surf Excel Easy Wash 3 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11272",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11272",
+      "display_name": "Colgate Strong Teeth Toothpaste (Free 15% Extra) 100 g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4334",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4334",
+      "display_name": "Good Knight Flash Combo Pack Machine + Refill 1 N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5003",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5003",
+      "display_name": "Parachute Coconut Oil Bottle | 100ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB5024",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "5024",
+      "display_name": "Sensodyne Repair & Protect 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB86569",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "86569",
+      "display_name": "Lux Ultimate Glow Jasmine Vitamin C+E Soap 100g*4N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH12463",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "12463",
+      "display_name": "Parachute Coconut Oil Bottle 200ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4329",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4329",
+      "display_name": "Good Knight Power Activ+ Refills | 45ml | Pack of 2",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5028",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5028",
+      "display_name": "Sensodyne Toothpaste Fresh Gel 75g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH9963",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "9963",
+      "display_name": "Stay Free Cotton Extra Large 40 Pads",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH76434",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "76434",
+      "display_name": "Good Knight Gold Flash Mosquito Repellent Refill 45ml 2N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH67638",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "67638",
+      "display_name": "Ponds Super Light Gel Hydrated Glow 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2628",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2628",
+      "display_name": "Jac Olivol Body Oil 300ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1362",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1362",
+      "display_name": "Colgate Cibaca Toothpaste 175g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB5029",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "5029",
+      "display_name": "Sensodyne Toothpaste Fresh Mint 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB23525",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "23525",
+      "display_name": "Sensodyne Sensitive Soft Toothbrush | Buy 2 Get 1 Free | Pack of 3",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4329",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4329",
+      "display_name": "Good Knight Power Activ+ Refills | 45ml | Pack of 2",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10666",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10666",
+      "display_name": "Dettol Skincare Liquid Hand Wash 675ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4115",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4115",
+      "display_name": "Godrej No 1 Sandal Turmeric Soap 100g 5 Pcs",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH82804",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "82804",
+      "display_name": "Pampers Happy Skin Pants M 7 To 12 kg Pack of 30",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8063",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8063",
+      "display_name": "Harpic Power Plus 10X Max Toilet Cleaner 900ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH33011",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "33011",
+      "display_name": "Close Up Everfresh Plus Zinc Fresh Technology Toothpaste 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB5023",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "5023",
+      "display_name": "Sensodyne Rapid Relief Toothpaste 80g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11272",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11272",
+      "display_name": "Colgate Strong Teeth Toothpaste (Free 15% Extra) 100 g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10665",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10665",
+      "display_name": "Dettol Original Liquid Hand Wash 650ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4736",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4736",
+      "display_name": "Himalaya Purifying Neem Face Wash 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG15846",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "15846",
+      "display_name": "Surf Excel Detergent Bar | 200g x 4 | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB23642",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "23642",
+      "display_name": "Parachute Coconut Oil Bottle | 600ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH13697",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "13697",
+      "display_name": "MamyPoko All Night Absorb Baby Diaper Pants (M, 7 - 12 kg - 15 Diapers)",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG76434",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "76434",
+      "display_name": "Good Knight Gold Flash Mosquito Repellent Refill 45ml 2N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1363",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1363",
+      "display_name": "Colgate Dental Cream Strong Teeth Toothpaste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11989",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11989",
+      "display_name": "Sensodyne Repair And Protect Toothpaste 70g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB67638",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "67638",
+      "display_name": "Ponds Super Light Gel Hydrated Glow 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4981",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4981",
+      "display_name": "Nihar Naturals Hair Oil Methi Extract Jasmine | 200ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG3684",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "3684",
+      "display_name": "Nivea Soft Light Moisture | 100ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5023",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5023",
+      "display_name": "Sensodyne Rapid Relief Toothpaste 80g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4246",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4246",
+      "display_name": "Harpic Floral Bathroom Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB22682",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "22682",
+      "display_name": "Ghadi Detergent Powder 3 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4251",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4251",
+      "display_name": "Lizol Citrus Surface Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1327",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1327",
+      "display_name": "Clean & Clear Foaming Face Wash 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG23642",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "23642",
+      "display_name": "Parachute Coconut Oil Bottle | 600ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH12622",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "12622",
+      "display_name": "MamyPoko All Night Absorb Baby Diaper Pants (L, 9 - 14 kg - 13 Diapers)",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1353",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1353",
+      "display_name": "Colgate Maxfresh Red 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1562",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1562",
+      "display_name": "Dove Cream Beauty Bathing Bar 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8395",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8395",
+      "display_name": "Colgate Max Fresh Cooling Crystals Spicy Fresh Toothpaste 2x150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG27354",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "27354",
+      "display_name": "Parachute Coconut Oil Bottle 300ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4251",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4251",
+      "display_name": "Lizol Citrus Surface Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH963",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "963",
+      "display_name": "Bajaj Almond Drops Hair Oil 95ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB79399",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "79399",
+      "display_name": "Lakme Peach Milk 24 Hour Moisture Lock Non Sticky Soft Creme 50g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1332",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1332",
+      "display_name": "Clinic Plus Strong & Long Health Shampoo 175ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4288",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4288",
+      "display_name": "Surf Excel Quick Wash Detergent 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8580",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8580",
+      "display_name": "Vim Liquid Dish Washing Gel 250ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5029",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5029",
+      "display_name": "Sensodyne Toothpaste Fresh Mint 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4251",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4251",
+      "display_name": "Lizol Citrus Surface Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4330",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4330",
+      "display_name": "Good knight Power Activ+ Liquid Vapourizer Refill 45ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB77772",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "77772",
+      "display_name": "Colin Sparkling Shine Glass & Multisurface Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB46920",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "46920",
+      "display_name": "Mortein Insta Mosquito Repellent Refill | 45ml | Pack of 3 (B2G1 Free)",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1353",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1353",
+      "display_name": "Colgate Maxfresh Red 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11578",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11578",
+      "display_name": "Whisper Choice Ultra XL 6 Pads",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG77772",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "77772",
+      "display_name": "Colin Sparkling Shine Glass & Multisurface Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4288",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4288",
+      "display_name": "Surf Excel Quick Wash Detergent 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH5030",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "5030",
+      "display_name": "Sensodyne Toothpaste Fresh Mint 75g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB67616",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "67616",
+      "display_name": "Colgate Max Fresh Toothpaste 81g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH15737",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "15737",
+      "display_name": "Whisper Choice XL 280mm 18N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH964",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "964",
+      "display_name": "Bajaj Almond Drops Hair Oil | 180ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4144",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4144",
+      "display_name": "Margo Original Neem Vitamin E Moisturizing Soap| 500g | Buy 4 Get 1 Free",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4172",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4172",
+      "display_name": "Pears Pure And Gentle Body Wash 250ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4704",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4704",
+      "display_name": "Everyuth Naturals Walnut Scrub | 50g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB27354",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "27354",
+      "display_name": "Parachute Coconut Oil Bottle 300ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4330",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4330",
+      "display_name": "Good knight Power Activ+ Liquid Vapourizer Refill 45ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8305",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8305",
+      "display_name": "Dabur Red Paste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1326",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1326",
+      "display_name": "Clean & Clear Foaming Face Wash 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG12463",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "12463",
+      "display_name": "Parachute Coconut Oil Bottle 200ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH77772",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "77772",
+      "display_name": "Colin Sparkling Shine Glass & Multisurface Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10804",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10804",
+      "display_name": "Colgate Active Salt Toothpaste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1468",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1468",
+      "display_name": "Dabur Red Toothpaste 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH87576",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "87576",
+      "display_name": "Pond's Bright Beauty Serum Cream | 24 g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8555",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8555",
+      "display_name": "Sunsilk Black Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG5003",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "5003",
+      "display_name": "Parachute Coconut Oil Bottle | 100ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4166",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4166",
+      "display_name": "Pears Pure & Gentle Bathing Bar 75g*4N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB12463",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "12463",
+      "display_name": "Parachute Coconut Oil Bottle 200ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3911",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3911",
+      "display_name": "Tresemme Keratin Smooth Argan Oil Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB29164",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "29164",
+      "display_name": "Odonil Assorted Air Freshener | 192g | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4170",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4170",
+      "display_name": "Pears Pure & Gentle Soap | 100g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH9964",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "9964",
+      "display_name": "Stay Free Cotton Extra Large 12 Pads",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8396",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8396",
+      "display_name": "Colgate Strong Teeth Toothpaste | 250g x 2 | Pack of 2",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH69635",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "69635",
+      "display_name": "Glow & Lovely Advanced Multivitamin Face Cream 110g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8305",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8305",
+      "display_name": "Dabur Red Paste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4732",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4732",
+      "display_name": "Himalaya Purifying Neem Face Wash | 200ml | Buy 1 Get 1 Free",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10665",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10665",
+      "display_name": "Dettol Original Liquid Hand Wash 650ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH85252",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "85252",
+      "display_name": "Garnier Bright Complete Vitamin C Foam Face Wash 50g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11600",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11600",
+      "display_name": "Loreal Paris Total Repair 5 Damaged Hair shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG11272",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "11272",
+      "display_name": "Colgate Strong Teeth Toothpaste (Free 15% Extra) 100 g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4114",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4114",
+      "display_name": "Godrej No 1 Lime And Aloevera Soap 100g 5 Pcs",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4093",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4093",
+      "display_name": "Fiama Gel Bar Soap Blackcurrant And Bearberry | 625g| Pack of 5",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH16574",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "16574",
+      "display_name": "Gillette Venus Razor Pink | 1N | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG5056",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "5056",
+      "display_name": "Surf Excel Easy Wash Detergent Powder 1.5 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4732",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4732",
+      "display_name": "Himalaya Purifying Neem Face Wash | 200ml | Buy 1 Get 1 Free",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4261",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4261",
+      "display_name": "Pitambari Copper Brass Cleaner 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG5024",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "5024",
+      "display_name": "Sensodyne Repair & Protect 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG23525",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "23525",
+      "display_name": "Sensodyne Sensitive Soft Toothbrush | Buy 2 Get 1 Free | Pack of 3",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8280",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8280",
+      "display_name": "Hit Cockroaches Killer Spray 625ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1363",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1363",
+      "display_name": "Colgate Dental Cream Strong Teeth Toothpaste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH23407",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "23407",
+      "display_name": "Sensodyne Sensitive Toothbrush 1N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB12422",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "12422",
+      "display_name": "Lifebuoy Germ Expert Soap | 125g | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG97055",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "97055",
+      "display_name": "Santoor Sandal & Turmeric Soap 125gm x 4 N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10031",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10031",
+      "display_name": "Sunsilk Stunning Black Shine Shampoo 350ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH32983",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "32983",
+      "display_name": "Parachute Advanced Gold Coconut Hair Oil 190 Ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH12963",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "12963",
+      "display_name": "Dove Nutritive Solution Hair Fall Rescue Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4172",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4172",
+      "display_name": "Pears Pure And Gentle Body Wash 250ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG5028",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "5028",
+      "display_name": "Sensodyne Toothpaste Fresh Gel 75g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG11207",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "11207",
+      "display_name": "Harpic Lemon Bathroom Cleaner 500ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG5026",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "5026",
+      "display_name": "Sensodyne Toothpaste Fresh Gel 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1492",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1492",
+      "display_name": "Denver Hamilton Deodorant | 150 ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB33011",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "33011",
+      "display_name": "Close Up Everfresh Plus Zinc Fresh Technology Toothpaste 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4114",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4114",
+      "display_name": "Godrej No 1 Lime And Aloevera Soap 100g 5 Pcs",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10812",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10812",
+      "display_name": "Colgate Visible White Toothpaste 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4734",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4734",
+      "display_name": "Himalaya Purifying Neem Face Wash Tube 150ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4335",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4335",
+      "display_name": "Hit Cockroach Repellent | 400ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH87465",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "87465",
+      "display_name": "Good Knight Gold Flash Liquid Vapouriser Refill 1N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB15846",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "15846",
+      "display_name": "Surf Excel Detergent Bar | 200g x 4 | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4765",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4765",
+      "display_name": "Himalaya Herbals Complete Care Toothpaste 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11600",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11600",
+      "display_name": "Loreal Paris Total Repair 5 Damaged Hair shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG33011",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "33011",
+      "display_name": "Close Up Everfresh Plus Zinc Fresh Technology Toothpaste 150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4201",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4201",
+      "display_name": "Santoor Sandal & Turmeric Soap | 4x100g | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3892",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3892",
+      "display_name": "Streax Hair Serum Vitamin C with Walnut Oil 45ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3739",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3739",
+      "display_name": "Garnier Color Naturals Natural Black Shade 1 Hair Color 70ml + 60g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB9244",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "9244",
+      "display_name": "Colgate Anticavity Dental Care Toothpaste 200g+100g & Brush Free",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4736",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4736",
+      "display_name": "Himalaya Purifying Neem Face Wash 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1332",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1332",
+      "display_name": "Clinic Plus Strong & Long Health Shampoo 175ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG69709",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "69709",
+      "display_name": "Lux Fresh Glow 100g 4N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG77213",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "77213",
+      "display_name": "Active Wheel 2 In 1 Detergent Powder 2 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH72174",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "72174",
+      "display_name": "Dove Pink Beauty Bathing Bar 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1613",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1613",
+      "display_name": "Godrej Cinthol Lime Soap 75g Set Of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH97517",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "97517",
+      "display_name": "Dettol Original Soap 150g Pack Of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4201",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4201",
+      "display_name": "Santoor Sandal & Turmeric Soap | 4x100g | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4985",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4985",
+      "display_name": "Parachute Advanced Aloe Vera Enriched Coconut Hair Oil 250ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4724",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4724",
+      "display_name": "Himalaya Face Wash Purifying Neem Tube 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1562",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1562",
+      "display_name": "Dove Cream Beauty Bathing Bar 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10809",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10809",
+      "display_name": "Colgate Max Fresh Cooling Crystals Peppermint Ice Toothpaste | 70g + 11g Free | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4337",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4337",
+      "display_name": "Hit Hidden Cockroaches Repellant 200ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG13725",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "13725",
+      "display_name": "Dove Cream Beauty Bathing Bar 125*3 Set",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH97027",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "97027",
+      "display_name": "Dettol Icy Cool Soap 100g x 5N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4985",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4985",
+      "display_name": "Parachute Advanced Aloe Vera Enriched Coconut Hair Oil 250ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1327",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1327",
+      "display_name": "Clean & Clear Foaming Face Wash 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11989",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11989",
+      "display_name": "Sensodyne Repair And Protect Toothpaste 70g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8555",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8555",
+      "display_name": "Sunsilk Black Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG36818",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "36818",
+      "display_name": "Medimix Ayurvedic 18 Herbs Soap 450g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB15865",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "15865",
+      "display_name": "Tresemme Keratin Smooth With Keratin & Argan Shampoo 340ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH77843",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "77843",
+      "display_name": "L'Oréal Paris Hyaluron Moisture Hyaluronic Acid Shampoo | 180ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG97517",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "97517",
+      "display_name": "Dettol Original Soap 150g Pack Of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG965",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "965",
+      "display_name": "Bajaj Almond Drops Hair Oil 285ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4173",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4173",
+      "display_name": "Pears Soft & Fresh Soap Bar 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3810",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3810",
+      "display_name": "Livon Silky Hair Serum 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG10666",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10666",
+      "display_name": "Dettol Skincare Liquid Hand Wash 675ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4987",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4987",
+      "display_name": "Parachute Advanced Gold Coconut Hair Oil 500ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4288",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4288",
+      "display_name": "Surf Excel Quick Wash Detergent 500g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB12963",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "12963",
+      "display_name": "Dove Nutritive Solution Hair Fall Rescue Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4109",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4109",
+      "display_name": "Godrej No 1 Jasmine Milk Cream 5x100g + B4 G1F + Rotomac",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8408",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8408",
+      "display_name": "Dove Beauty Bathing Bar 3x75g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1326",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1326",
+      "display_name": "Clean & Clear Foaming Face Wash 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4724",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4724",
+      "display_name": "Himalaya Face Wash Purifying Neem Tube 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4335",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4335",
+      "display_name": "Hit Cockroach Repellent | 400ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4115",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4115",
+      "display_name": "Godrej No 1 Sandal Turmeric Soap 100g 5 Pcs",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG78656",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "78656",
+      "display_name": "Sensodyne Sensitive Soft Toothbrush 4N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3822",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3822",
+      "display_name": "Loreal Paris Fall Repairs 3x Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB77843",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "77843",
+      "display_name": "L'Oréal Paris Hyaluron Moisture Hyaluronic Acid Shampoo | 180ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1578",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1578",
+      "display_name": "Dove Daily Shine Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB85722",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "85722",
+      "display_name": "Pepsodent Advanced Anti Germ Formula Toothpaste 200g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4170",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4170",
+      "display_name": "Pears Pure & Gentle Soap | 100g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3910",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3910",
+      "display_name": "Tresemme Hair Fall Defence Shampoo 185ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1613",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1613",
+      "display_name": "Godrej Cinthol Lime Soap 75g Set Of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG11600",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "11600",
+      "display_name": "Loreal Paris Total Repair 5 Damaged Hair shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB33009",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "33009",
+      "display_name": "Close Up Everfresh Plus Zinc Fresh Technology Toothpaste 2x150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10807",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10807",
+      "display_name": "Colgate Max Fresh Cooling Crystals Peppermint Ice Toothpaste 300g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH78652",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "78652",
+      "display_name": "Bajaj 100% Pure Coconut Oil | 547.2g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH14452",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "14452",
+      "display_name": "Santoor Classic Gentle Hand Wash 650ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11595",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11595",
+      "display_name": "Sunsilk Thick And Long Shampoo 350ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3798",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3798",
+      "display_name": "Loreal Hair Total Repair Hair Conditioner 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4724",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4724",
+      "display_name": "Himalaya Face Wash Purifying Neem Tube 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8555",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8555",
+      "display_name": "Sunsilk Black Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4736",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4736",
+      "display_name": "Himalaya Purifying Neem Face Wash 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3819",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3819",
+      "display_name": "Loreal Paris 6 Oil Nourishing Conditioner 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11708",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11708",
+      "display_name": "Dove Daily Shine Conditioner 175ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG15996",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "15996",
+      "display_name": "Godrej No. 1 Rosewater Almond Soap Bar 100gx5N B4G1 Free",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10031",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10031",
+      "display_name": "Sunsilk Stunning Black Shine Shampoo 350ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4337",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4337",
+      "display_name": "Hit Hidden Cockroaches Repellant 200ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB81190",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "81190",
+      "display_name": "Lakme Blush & Glow Strawberry Blast Face wash 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1611",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1611",
+      "display_name": "Godrej Cinthol Cool Soap 75g*4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1327",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1327",
+      "display_name": "Clean & Clear Foaming Face Wash 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB13737",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "13737",
+      "display_name": "Dove Hair Fall Rescue Shampoo 340ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG12968",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "12968",
+      "display_name": "Garnier Bright Complete Foam Face Wash 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG33009",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "33009",
+      "display_name": "Close Up Everfresh Plus Zinc Fresh Technology Toothpaste 2x150g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG32983",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "32983",
+      "display_name": "Parachute Advanced Gold Coconut Hair Oil 190 Ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG72174",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "72174",
+      "display_name": "Dove Pink Beauty Bathing Bar 100g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1507",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1507",
+      "display_name": "Dettol Hand Wash Original 175ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG97042",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "97042",
+      "display_name": "Dettol Skincare Soap 100gX 4N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB97517",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "97517",
+      "display_name": "Dettol Original Soap 150g Pack Of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG78652",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "78652",
+      "display_name": "Bajaj 100% Pure Coconut Oil | 547.2g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG76388",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "76388",
+      "display_name": "Close Up Everfresh Plus Zinc Fresh Technology Toothpaste 80g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1326",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1326",
+      "display_name": "Clean & Clear Foaming Face Wash 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG87576",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "87576",
+      "display_name": "Pond's Bright Beauty Serum Cream | 24 g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1568",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1568",
+      "display_name": "Dove Daily Shine Shampoo 340ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1611",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1611",
+      "display_name": "Godrej Cinthol Cool Soap 75g*4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG5045",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "5045",
+      "display_name": "Liril Lime All Day Freshness Soap | 125g | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB8391",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "8391",
+      "display_name": "Clinic Plus Strong & Long Health Shampoo 355ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8391",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8391",
+      "display_name": "Clinic Plus Strong & Long Health Shampoo 355ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG96223",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "96223",
+      "display_name": "Godrej No. 1 Lime Aloe Vera Soap 150 g x 4 N",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1578",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1578",
+      "display_name": "Dove Daily Shine Shampoo 180ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH12422",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "12422",
+      "display_name": "Lifebuoy Germ Expert Soap | 125g | Pack of 4",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB14796",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "14796",
+      "display_name": "Tresemme Smooth & Shine Shampoo 580ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4113",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4113",
+      "display_name": "Godrej Kesar Milk Cream Soap 100g 5 Pcs",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG83737",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "83737",
+      "display_name": "Parachute Advansed Gold Coconut Hair Oil 280ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG82004",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "82004",
+      "display_name": "Ponds Super Light Gel Hydrated Glow 100ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG23648",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "23648",
+      "display_name": "Lux Creamy Perfection Soap 4Nx125g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG33004",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "33004",
+      "display_name": "Ponds Dream Flower Fragant Talcum Powder 80g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4982",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4982",
+      "display_name": "Nihar Naturals Hair Oil Methi Extract Jasmine | 400ml | Pack of 1",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH46920",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "46920",
+      "display_name": "Mortein Insta Mosquito Repellent Refill | 45ml | Pack of 3 (B2G1 Free)",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB5185",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "5185",
+      "display_name": "Surf Excel Easy Wash 3 Kg",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG3810",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "3810",
+      "display_name": "Livon Silky Hair Serum 50ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB9271",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "9271",
+      "display_name": "Loreal Paris Excellence Creme Black Hair Color 100g+72ml",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3555",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3555",
+      "display_name": "Glow & Lovely Advance Multi Vitamin Face Cream 80g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3527",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3527",
+      "display_name": "Glow & Lovely Advanced Multi Vitamin Cream 25g",
+      "master_category": "FMCGNF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11732",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11732",
+      "display_name": "7up 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11732",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11732",
+      "display_name": "7up 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG11732",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "11732",
+      "display_name": "7up 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG69697",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "69697",
+      "display_name": "Agrawals 420 Instant Idli Mix 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG69698",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "69698",
+      "display_name": "Agrawals 420 Khaman Dhokla Instant Mix 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG73549",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "73549",
+      "display_name": "Agrawals 420 Special Papad 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG872",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "872",
+      "display_name": "Amul Chocominis 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB872",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "872",
+      "display_name": "Amul Chocominis 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH872",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "872",
+      "display_name": "Amul Chocominis 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB886",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "886",
+      "display_name": "Amul Homogenised Standardised Milk - 1Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH918",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "918",
+      "display_name": "Amul Pasteurised Butter | 500g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB917",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "917",
+      "display_name": "Amul Pasteurised Butter 100g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH917",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "917",
+      "display_name": "Amul Pasteurised Butter 100g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG917",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "917",
+      "display_name": "Amul Pasteurised Butter 100g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB919",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "919",
+      "display_name": "Amul Pasteurised Butter 200g Tub",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG937",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "937",
+      "display_name": "Amul Taaza Toned Milk Tetra Pack - 1Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB937",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "937",
+      "display_name": "Amul Taaza Toned Milk Tetra Pack - 1Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB944",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "944",
+      "display_name": "Amulya Dairy Whitener 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH944",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "944",
+      "display_name": "Amulya Dairy Whitener 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH97240",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "97240",
+      "display_name": "Ayush Moong Mix 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH67088",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "67088",
+      "display_name": "Bagrrys Choco Fills+ 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH43502",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "43502",
+      "display_name": "Bagrrys Corn Flakes Plus Original & Healthier 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB43502",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "43502",
+      "display_name": "Bagrrys Corn Flakes Plus Original & Healthier 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG43502",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "43502",
+      "display_name": "Bagrrys Corn Flakes Plus Original & Healthier 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB43513",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "43513",
+      "display_name": "Bagrrys White Oats 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG67199",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "67199",
+      "display_name": "Bagrrys White Oats 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB976",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "976",
+      "display_name": "Bikaji Namkeen All In One Kuch Kuch 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB977",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "977",
+      "display_name": "Bikaji Namkeen Bikaneri Bhujia 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH75585",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "75585",
+      "display_name": "Britannia 50 50 Maska Chaska Biscuits 300g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG97165",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "97165",
+      "display_name": "Britannia Good Day Butter Jeera Cookies 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG16921",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "16921",
+      "display_name": "Britannia Good Day Cashew Cookies | 565g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG43506",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "43506",
+      "display_name": "Britannia Good Day Cashew Cookies Family Pack | 827g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH43506",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "43506",
+      "display_name": "Britannia Good Day Cashew Cookies Family Pack | 827g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB43506",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "43506",
+      "display_name": "Britannia Good Day Cashew Cookies Family Pack | 827g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH16952",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "16952",
+      "display_name": "Britannia Marie Gold Biscuits 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG16952",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "16952",
+      "display_name": "Britannia Marie Gold Biscuits 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB16952",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "16952",
+      "display_name": "Britannia Marie Gold Biscuits 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB1061",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "1061",
+      "display_name": "Britannia Nutri Choice Digestive High Fiber Biscuits 960g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1061",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1061",
+      "display_name": "Britannia Nutri Choice Digestive High Fiber Biscuits 960g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG1061",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "1061",
+      "display_name": "Britannia Nutri Choice Digestive High Fiber Biscuits 960g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG103047",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "103047",
+      "display_name": "Britannia Toastea Premium Bake Rusk With Real Elaichi | 1 kg | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG32999",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "32999",
+      "display_name": "Brooke Bond Red Label Carton Pack 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2477",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2477",
+      "display_name": "Brooke Bond Red Label Tea 250g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2477",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2477",
+      "display_name": "Brooke Bond Red Label Tea 250g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG12635",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "12635",
+      "display_name": "Brooke Bond Red Label Tea 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1132",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1132",
+      "display_name": "Brooke Bond Taaza Tea 250g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2831",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2831",
+      "display_name": "Cadbury Bourn Vita 500g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2831",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2831",
+      "display_name": "Cadbury Bourn Vita 500g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2831",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2831",
+      "display_name": "Cadbury Bourn Vita 500g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG17044",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "17044",
+      "display_name": "Chefs Basket Durum Wheat Penne Pasta 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH92",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "92",
+      "display_name": "Chings Schezwan Chutney | 250g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG92",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "92",
+      "display_name": "Chings Schezwan Chutney | 250g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB92",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "92",
+      "display_name": "Chings Schezwan Chutney | 250g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH96",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "96",
+      "display_name": "Chings Secret Green Chilli Sauce 190g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH1371",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "1371",
+      "display_name": "Complan Health Drink Chocolate Flavour 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH97022",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "97022",
+      "display_name": "Complan New Royal Chocolate Pouch 700GM",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB97022",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "97022",
+      "display_name": "Complan New Royal Chocolate Pouch 700GM",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3053",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3053",
+      "display_name": "Funfoods Mayonnaise Veg Pouch 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG84933",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "84933",
+      "display_name": "Ganga Jamuna Gold Salty Namkeen 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2730",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2730",
+      "display_name": "Glucon D Drink Mix Orange 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2730",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2730",
+      "display_name": "Glucon D Drink Mix Orange 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2734",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2734",
+      "display_name": "Glucon D Regular 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8444",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8444",
+      "display_name": "Glucon D Tangy Orange Jar 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2732",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2732",
+      "display_name": "Glucon-D Tangy Orange Instant Energy Health Drink 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2732",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2732",
+      "display_name": "Glucon-D Tangy Orange Instant Energy Health Drink 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG3160",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "3160",
+      "display_name": "Haldirams All In One 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4631",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4631",
+      "display_name": "Haldirams Aloo Bhujia 350g+50g Free",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4631",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4631",
+      "display_name": "Haldirams Aloo Bhujia 350g+50g Free",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3163",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3163",
+      "display_name": "Haldirams Bhujia Sev 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG3163",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "3163",
+      "display_name": "Haldirams Bhujia Sev 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH90157",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "90157",
+      "display_name": "Haldirams Indian Snacks Mixture 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3153",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3153",
+      "display_name": "Haldirams Mixchiv Prabhuji Jhal Chanachur 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3172",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3172",
+      "display_name": "Haldirams Moong Dal Namkeen 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8327",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8327",
+      "display_name": "Haldirams Namkeen Khatta Meetha 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3154",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3154",
+      "display_name": "Haldirams Prabhuji Bhujia 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB68115",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "68115",
+      "display_name": "Hell Classic Energy Drink 250ml Can",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3230",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3230",
+      "display_name": "Horlicks Classic Malt Pouch | 450g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3230",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3230",
+      "display_name": "Horlicks Classic Malt Pouch | 450g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH30253",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "30253",
+      "display_name": "Horlicks Health & Nutrition Drink Classic Malt 750g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB30253",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "30253",
+      "display_name": "Horlicks Health & Nutrition Drink Classic Malt 750g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG73572",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "73572",
+      "display_name": "Jabalpur Lijjat Moong papad 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG72143",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "72143",
+      "display_name": "Jalaram Mahasamund Ganga Jamuna Gold Namkeen 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH68872",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "68872",
+      "display_name": "Kellogg's Chocos Variety Pack | 7N | 140g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB68872",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "68872",
+      "display_name": "Kellogg's Chocos Variety Pack | 7N | 140g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG68872",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "68872",
+      "display_name": "Kellogg's Chocos Variety Pack | 7N | 140g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB100665",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "100665",
+      "display_name": "Kellogg's Millet Muesli 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG100665",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "100665",
+      "display_name": "Kellogg's Millet Muesli 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB102267",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "102267",
+      "display_name": "Kellogg's Muesli 0% Added Sugar | 400g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG102267",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "102267",
+      "display_name": "Kellogg's Muesli 0% Added Sugar | 400g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2777",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2777",
+      "display_name": "Kellogg's Muesli Fruit & Nut | 500g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2777",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2777",
+      "display_name": "Kellogg's Muesli Fruit & Nut | 500g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG99564",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "99564",
+      "display_name": "Kellogg's Muesli Fruit Nut & Seeds | 72g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG9901",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "9901",
+      "display_name": "Kelloggs Chocos 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH9902",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "9902",
+      "display_name": "Kelloggs Chocos 385g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB9942",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "9942",
+      "display_name": "Kelloggs Chocos Fills 153g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2584",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2584",
+      "display_name": "Kelloggs Corn Flakes Original 251 g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2584",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2584",
+      "display_name": "Kelloggs Corn Flakes Original 251 g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2584",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2584",
+      "display_name": "Kelloggs Corn Flakes Original 251 g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10178",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10178",
+      "display_name": "Kelloggs Corn Flakes Original 900g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10178",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10178",
+      "display_name": "Kelloggs Corn Flakes Original 900g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG10178",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10178",
+      "display_name": "Kelloggs Corn Flakes Original 900g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH86683",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "86683",
+      "display_name": "Kissan Fresh Tomato Ketchup 1.1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB86683",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "86683",
+      "display_name": "Kissan Fresh Tomato Ketchup 1.1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG86683",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "86683",
+      "display_name": "Kissan Fresh Tomato Ketchup 1.1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH8277",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "8277",
+      "display_name": "Kissan Mixed Fruit Jam 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG8277",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "8277",
+      "display_name": "Kissan Mixed Fruit Jam 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2909",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2909",
+      "display_name": "Lijjat Punjabi Masala Papad 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2794",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2794",
+      "display_name": "Lotte Choco Pie 168g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10331",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10331",
+      "display_name": "Maggi 2 Minute Noodles Masala 420g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG10331",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "10331",
+      "display_name": "Maggi 2 Minute Noodles Masala 420g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10331",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10331",
+      "display_name": "Maggi 2 Minute Noodles Masala 420g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB74102",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "74102",
+      "display_name": "Maggi Masala Veg Atta Noodles 290g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG74102",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "74102",
+      "display_name": "Maggi Masala Veg Atta Noodles 290g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH74102",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "74102",
+      "display_name": "Maggi Masala Veg Atta Noodles 290g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB102071",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "102071",
+      "display_name": "Marino Premium Elaichi Rusk | 1kg | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH102071",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "102071",
+      "display_name": "Marino Premium Elaichi Rusk | 1kg | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB96516",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96516",
+      "display_name": "Meri Elaichi Tea | 500g | Pouch | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4686",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4686",
+      "display_name": "Mirinda Pet 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4686",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4686",
+      "display_name": "Mirinda Pet 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4686",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4686",
+      "display_name": "Mirinda Pet 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH77960",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "77960",
+      "display_name": "Mothers Recipe Mixed Pickle 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH10368",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "10368",
+      "display_name": "Mountain Dew 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB10368",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "10368",
+      "display_name": "Mountain Dew 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95799",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95799",
+      "display_name": "Mukharochak Sweet & Sour Chanachur | 400g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH100441",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "100441",
+      "display_name": "Nakoda All In One Mixture 900g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB100441",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "100441",
+      "display_name": "Nakoda All In One Mixture 900g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG100446",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "100446",
+      "display_name": "Nakoda Chatpata Mixture 750g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG103866",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "103866",
+      "display_name": "Nakoda Garlic Mixture | 750g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3081",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3081",
+      "display_name": "Nescafe Classic Coffee 24g Jar",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG3081",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "3081",
+      "display_name": "Nescafe Classic Coffee 24g Jar",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95652",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95652",
+      "display_name": "Panda Treats Hakka Masala Noodles 400 g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95653",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95653",
+      "display_name": "Panda Treats Hakka Plain Noodles 1.2 kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95653",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95653",
+      "display_name": "Panda Treats Hakka Plain Noodles 1.2 kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG95653",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95653",
+      "display_name": "Panda Treats Hakka Plain Noodles 1.2 kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB97011",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "97011",
+      "display_name": "Panda Treats Rava/Sooji Hakka Chow Noodles 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG32987",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "32987",
+      "display_name": "Parle 20 20 Gold Cashew Almond Cookies 600g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH77827",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "77827",
+      "display_name": "Parle 20 20 Nice Sugar Sprinkled Coconut Biscuits 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG77827",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "77827",
+      "display_name": "Parle 20 20 Nice Sugar Sprinkled Coconut Biscuits 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH77179",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "77179",
+      "display_name": "Parle 20-20 Gold Cashew Cookies | 936 g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB77179",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "77179",
+      "display_name": "Parle 20-20 Gold Cashew Cookies | 936 g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG77179",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "77179",
+      "display_name": "Parle 20-20 Gold Cashew Cookies | 936 g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH94188",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "94188",
+      "display_name": "Parle 20-20 Gold Choco Chips Cookies 400 g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH76411",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "76411",
+      "display_name": "Parle Fab Bourbon Chocolate flavoured Biscuits 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB76411",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "76411",
+      "display_name": "Parle Fab Bourbon Chocolate flavoured Biscuits 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG76411",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "76411",
+      "display_name": "Parle Fab Bourbon Chocolate flavoured Biscuits 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG66348",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "66348",
+      "display_name": "Parle G Original Glucose Biscuit 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH66348",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "66348",
+      "display_name": "Parle G Original Glucose Biscuit 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB66348",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "66348",
+      "display_name": "Parle G Original Glucose Biscuit 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH32985",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "32985",
+      "display_name": "Parle Happy Happy Choco Chip Cookies 396g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB32985",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "32985",
+      "display_name": "Parle Happy Happy Choco Chip Cookies 396g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH78546",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "78546",
+      "display_name": "Parle Hide & Seek B3 G1 Free 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG78546",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "78546",
+      "display_name": "Parle Hide & Seek B3 G1 Free 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB78546",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "78546",
+      "display_name": "Parle Hide & Seek B3 G1 Free 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH75582",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "75582",
+      "display_name": "Parle Hide & Seek Biscuits Chocolate Chip Cookies 412.5g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB75582",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "75582",
+      "display_name": "Parle Hide & Seek Biscuits Chocolate Chip Cookies 412.5g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB71614",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "71614",
+      "display_name": "Parle Hide & Seek Choco Chip Creme Sandwiches Cookies 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG16607",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "16607",
+      "display_name": "Parle Krackjack Sweet & Salty Biscuits 352.8g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH16607",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "16607",
+      "display_name": "Parle Krackjack Sweet & Salty Biscuits 352.8g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB16607",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "16607",
+      "display_name": "Parle Krackjack Sweet & Salty Biscuits 352.8g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH43504",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "43504",
+      "display_name": "Parle Marie 4 Stay Fresh Packs Inside 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB43504",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "43504",
+      "display_name": "Parle Marie 4 Stay Fresh Packs Inside 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG43504",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "43504",
+      "display_name": "Parle Marie 4 Stay Fresh Packs Inside 800g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG68867",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "68867",
+      "display_name": "Parle Monaco Biscuits Classic Regular 371.2g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH68867",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "68867",
+      "display_name": "Parle Monaco Biscuits Classic Regular 371.2g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB68867",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "68867",
+      "display_name": "Parle Monaco Biscuits Classic Regular 371.2g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB43505",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "43505",
+      "display_name": "Parle Nutricrunch Digestives 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH43505",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "43505",
+      "display_name": "Parle Nutricrunch Digestives 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG43505",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "43505",
+      "display_name": "Parle Nutricrunch Digestives 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH77297",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "77297",
+      "display_name": "Parle Rusk Real Elaichi Premium Rusk 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB77297",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "77297",
+      "display_name": "Parle Rusk Real Elaichi Premium Rusk 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG77297",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "77297",
+      "display_name": "Parle Rusk Real Elaichi Premium Rusk 1 Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4690",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4690",
+      "display_name": "Pepsi Pet Bottle 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4690",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4690",
+      "display_name": "Pepsi Pet Bottle 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG4690",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "4690",
+      "display_name": "Pepsi Pet Bottle 2.25 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB15993",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "15993",
+      "display_name": "Prabhuji Aloo Bhujiya Total Masti 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4670",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4670",
+      "display_name": "Prabhuji Elaichi Soan Papdi 400 g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3169",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3169",
+      "display_name": "Prabhuji Haldirams Khatta Meetha 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB15806",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "15806",
+      "display_name": "Prabhuji Haldirams Tok Jhal Misti 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH46951",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "46951",
+      "display_name": "Pramod Brand Bihari Zaika 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH13146",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "13146",
+      "display_name": "Pramod Jhal Mix Spicy & Tasty 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2598",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2598",
+      "display_name": "Quaker Wholegrain Oats 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2598",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2598",
+      "display_name": "Quaker Wholegrain Oats 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2598",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2598",
+      "display_name": "Quaker Wholegrain Oats 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4934",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4934",
+      "display_name": "Real Fruit Juice Pomegranate 1 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH68913",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "68913",
+      "display_name": "Real Masala Pomegranate Juice | 1 Ltr | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB68913",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "68913",
+      "display_name": "Real Masala Pomegranate Juice | 1 Ltr | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH4939",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "4939",
+      "display_name": "Real Mixed Fruit Power 1 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4939",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4939",
+      "display_name": "Real Mixed Fruit Power 1 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH11519",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "11519",
+      "display_name": "Red Bull Energy Drink 250ml",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG11326",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "11326",
+      "display_name": "Red Label Natural Care | 250g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH68010",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "68010",
+      "display_name": "Royal Chow Noodles | 500g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2599",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2599",
+      "display_name": "Saffola Masala Oats Classic 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2599",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2599",
+      "display_name": "Saffola Masala Oats Classic 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2599",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2599",
+      "display_name": "Saffola Masala Oats Classic 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2604",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2604",
+      "display_name": "Saffola Oats Delicious Creamy Oats 100% Natural High Protein & Fibre Healthy Cereal 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2601",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2601",
+      "display_name": "Saffola Oats Natural 1 Kg + Saffola Oats 300g Free",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2601",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2601",
+      "display_name": "Saffola Oats Natural 1 Kg + Saffola Oats 300g Free",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2601",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2601",
+      "display_name": "Saffola Oats Natural 1 Kg + Saffola Oats 300g Free",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB96418",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "96418",
+      "display_name": "Shree Ram Bikaneri Bhujia | 1 Kg | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG96418",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "96418",
+      "display_name": "Shree Ram Bikaneri Bhujia | 1 Kg | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2921",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2921",
+      "display_name": "Shree Ram Bikaneri Moong Dal Namkeen 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB4663",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "4663",
+      "display_name": "Shree Ram Bikaneri Sev Bhujia 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3198",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3198",
+      "display_name": "Shree Ram Mixture 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3200",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3200",
+      "display_name": "Shree Ram Navrattan 400g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH27238",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "27238",
+      "display_name": "Shree Ram Papad 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB27238",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "27238",
+      "display_name": "Shree Ram Papad 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG27238",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "27238",
+      "display_name": "Shree Ram Papad 200g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH3202",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "3202",
+      "display_name": "Shree Ram Papad 360g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3202",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3202",
+      "display_name": "Shree Ram Papad 360g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB69206",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "69206",
+      "display_name": "Slice Thickest Mango Drink 1.75 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG69206",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "69206",
+      "display_name": "Slice Thickest Mango Drink 1.75 Ltr",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH79079",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "79079",
+      "display_name": "Storia 100% Tender Coconut Water | 1 Ltr | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB79079",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "79079",
+      "display_name": "Storia 100% Tender Coconut Water | 1 Ltr | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG97160",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "97160",
+      "display_name": "Sunder Garlic Mixture | 700g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG100491",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "100491",
+      "display_name": "Sunder Suji Rusk 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG94353",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "94353",
+      "display_name": "Sunder Surati Mixture 700 g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB3069",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "3069",
+      "display_name": "Sundrop Peanut Butter Regular Creamy Jar 924g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95907",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95907",
+      "display_name": "Sundrop Peanut Butter With Honey Crunchy 300g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH28755",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "28755",
+      "display_name": "Sunfeast Dark Fantasy Yumfills Pie 242g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB28755",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "28755",
+      "display_name": "Sunfeast Dark Fantasy Yumfills Pie 242g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG28755",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "28755",
+      "display_name": "Sunfeast Dark Fantasy Yumfills Pie 242g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH34756",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "34756",
+      "display_name": "Sunfeast Yippee Magic Masala | 544g-560g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB34756",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "34756",
+      "display_name": "Sunfeast Yippee Magic Masala | 544g-560g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG34756",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "34756",
+      "display_name": "Sunfeast Yippee Magic Masala | 544g-560g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB12833",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "12833",
+      "display_name": "Tata Tea Agni 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH12833",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "12833",
+      "display_name": "Tata Tea Agni 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG12833",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "12833",
+      "display_name": "Tata Tea Agni 1Kg",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2491",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2491",
+      "display_name": "Tata Tea Agni 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2492",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2492",
+      "display_name": "Tata Tea Agni 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2492",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2492",
+      "display_name": "Tata Tea Agni 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2492",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2492",
+      "display_name": "Tata Tea Agni 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2499",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2499",
+      "display_name": "Tata Tea Agni Leaf 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2494",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2494",
+      "display_name": "Tata Tea Elaichi Chai 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2494",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2494",
+      "display_name": "Tata Tea Elaichi Chai 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2494",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2494",
+      "display_name": "Tata Tea Elaichi Chai 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2495",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2495",
+      "display_name": "Tata Tea Gold 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2495",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2495",
+      "display_name": "Tata Tea Gold 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2496",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2496",
+      "display_name": "Tata Tea Gold 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB2496",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "2496",
+      "display_name": "Tata Tea Gold 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG2496",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "2496",
+      "display_name": "Tata Tea Gold 500g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH2501",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "2501",
+      "display_name": "Tata Tea Premium Tea 500g Pouch",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH76403",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "76403",
+      "display_name": "Unibic Cashew Badam Cookies 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG76403",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "76403",
+      "display_name": "Unibic Cashew Badam Cookies 450g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11986",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11986",
+      "display_name": "Unibic Choco Chip Cookies | 135g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH71616",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "71616",
+      "display_name": "Unibic Delight Choco Chip Cookies | 450g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG71616",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "71616",
+      "display_name": "Unibic Delight Choco Chip Cookies | 450g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH71617",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "71617",
+      "display_name": "Unibic Delight Fruit & Nut Cookies | 450g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG71617",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "71617",
+      "display_name": "Unibic Delight Fruit & Nut Cookies | 450g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB11987",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "11987",
+      "display_name": "Unibic Fruit and Nut Cookies | 135g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG67654",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "67654",
+      "display_name": "Wagh Bakri Premium Leaf Tea 250g",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95487",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95487",
+      "display_name": "Wai Wai Ready To Eat Chicken Noodles Pack 6In1 | 390 g | Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "JH95486",
+      "state": "JH",
+      "state_key": "1",
+      "item_code": "95486",
+      "display_name": "Wai Wai Ready To Eat Veg Noodles Pack 6IN1 | 390 g| Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB95486",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "95486",
+      "display_name": "Wai Wai Ready To Eat Veg Noodles Pack 6IN1 | 390 g| Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "CG95486",
+      "state": "CG",
+      "state_key": "3",
+      "item_code": "95486",
+      "display_name": "Wai Wai Ready To Eat Veg Noodles Pack 6IN1 | 390 g| Pack of 1",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    },
+    {
+      "key": "WB97074",
+      "state": "WB",
+      "state_key": "2",
+      "item_code": "97074",
+      "display_name": "सनफीस्ट ग्लूकोज़ प्लस बिस्किट | 1 किग्रा | 1 पैक",
+      "master_category": "FMCGF",
+      "kvi_tag": "KVI"
+    }
+  ],
+  "state_map": {
+    "JH": [
+      "834002",
+      "825301",
+      "831001"
+    ],
+    "CG": [
+      "492001",
+      "495001"
+    ],
+    "WB": [
+      "712232"
+    ]
+  },
+  "source": "https://docs.google.com/spreadsheets/d/1xjmKnSeUOnklrWW4BoWJQ062M-tvI12BQRjm_J8aSFk",
+  "fetched_at": "2026-04-22T14:00:28.982413"
+}

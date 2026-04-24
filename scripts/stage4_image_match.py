@@ -136,9 +136,12 @@ def main(pincode: str, platform: str = "blinkit"):
             sam_path = p
             break
 
-    if not ana_path or not sam_path:
-        print(f"[img] ERROR: missing files for {platform} {pincode}", file=sys.stderr)
-        sys.exit(1)
+    if not ana_path:
+        print(f"[img] No Anakin {platform} file for {pincode} — skipping", flush=True)
+        sys.exit(0)
+    if not sam_path:
+        print(f"[img] No SAM {platform} BFS data for {pincode} — skipping", flush=True)
+        sys.exit(0)
 
     print(f"[img] Platform: {platform}")
     print(f"[img] Anakin: {ana_path.name}")

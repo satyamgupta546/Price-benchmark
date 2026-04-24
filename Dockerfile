@@ -14,8 +14,10 @@ RUN playwright install chromium firefox
 COPY scripts/ ./scripts/
 COPY config/ ./config/
 COPY backend/app/ ./backend/app/
-COPY backend/utils.py ./backend/utils.py
 COPY CLAUDE.md ./
+
+# Copy mapping data (product IDs, URLs — needed for cities without Anakin)
+COPY data/mappings/ ./data/mappings/
 
 # Create data directories
 RUN mkdir -p data/anakin data/sam data/comparisons data/mappings output

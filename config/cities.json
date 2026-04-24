@@ -1,46 +1,118 @@
 {
-  "_doc": "City + platform config for SAM. Edit this to add/remove cities or platforms.",
+  "_doc": "City + platform config for SAM. Edit this to add/remove cities or change tabs.",
+
+  "scrape_settings": {
+    "_doc": "Per-platform browser settings",
+    "blinkit": {
+      "browser": "chromium",
+      "default_tabs": 4,
+      "fast_tabs": 8,
+      "timeout_per_url": 15,
+      "retry_enabled": true
+    },
+    "jiomart": {
+      "browser": "firefox",
+      "default_tabs": 2,
+      "fast_tabs": 4,
+      "timeout_per_url": 25,
+      "retry_enabled": true
+    },
+    "dmart": {
+      "browser": "none",
+      "default_tabs": 1,
+      "fast_tabs": 1,
+      "timeout_per_url": 10,
+      "retry_enabled": false,
+      "_note": "Pure API, no browser needed"
+    }
+  },
+
+  "speed_profiles": {
+    "_doc": "Choose profile based on machine. Cloud Run uses 'cloud'.",
+    "laptop": {
+      "_doc": "MacBook Air M4 16GB — safe, no lag",
+      "max_parallel_cities": 1,
+      "blinkit_tabs": 4,
+      "jiomart_tabs": 2,
+      "est_time_per_city": "40 min"
+    },
+    "laptop_fast": {
+      "_doc": "MacBook Air M4 16GB — full speed, fan will spin",
+      "max_parallel_cities": 2,
+      "blinkit_tabs": 8,
+      "jiomart_tabs": 3,
+      "est_time_per_city": "15 min"
+    },
+    "cloud": {
+      "_doc": "Cloud Run 4CPU 8GB — production",
+      "max_parallel_cities": 3,
+      "blinkit_tabs": 8,
+      "jiomart_tabs": 4,
+      "est_time_per_city": "10 min"
+    }
+  },
 
   "cities": {
     "834002": {
       "name": "Ranchi",
       "state": "JH",
       "warehouse": "WRHS_1",
-      "platforms": ["blinkit", "jiomart"]
+      "platforms": ["blinkit", "jiomart"],
+      "anakin_available": true,
+      "est_products": 2400
     },
     "712232": {
       "name": "Kolkata",
       "state": "WB",
       "warehouse": "WRHS_10",
-      "platforms": ["blinkit", "jiomart"]
+      "platforms": ["blinkit", "jiomart"],
+      "anakin_available": true,
+      "est_products": 2600
     },
     "492001": {
       "name": "Raipur",
       "state": "CG",
       "warehouse": "WRHS_2",
-      "platforms": ["blinkit", "jiomart", "dmart"]
+      "platforms": ["blinkit", "jiomart", "dmart"],
+      "anakin_available": true,
+      "est_products": 2500
     },
     "825301": {
       "name": "Hazaribagh",
       "state": "JH",
       "warehouse": "WRHS_1",
-      "platforms": ["blinkit"]
+      "platforms": ["blinkit"],
+      "anakin_available": true,
+      "est_products": 1200
     },
     "495001": {
       "name": "Bilaspur",
       "state": "CG",
       "warehouse": "WRHS_2",
-      "platforms": ["blinkit", "jiomart"]
+      "platforms": ["blinkit", "jiomart"],
+      "anakin_available": false,
+      "est_products": 0,
+      "_note": "New city — no Anakin data, needs search-based discovery"
     },
     "831001": {
       "name": "Jamshedpur",
       "state": "JH",
       "warehouse": "WRHS_1",
-      "platforms": ["blinkit", "jiomart"]
+      "platforms": ["blinkit", "jiomart"],
+      "anakin_available": false,
+      "est_products": 0,
+      "_note": "New city — no Anakin data, needs search-based discovery"
     }
   },
 
   "dmart_store_ids": {
     "492001": "10677"
+  },
+
+  "time_estimate": {
+    "_doc": "Total time = cities / max_parallel × est_time_per_city",
+    "laptop":      "6 cities / 1 parallel × 40 min = ~4 hours",
+    "laptop_fast": "6 cities / 2 parallel × 15 min = ~45 min",
+    "cloud":       "6 cities / 3 parallel × 10 min = ~20 min"
   }
 }

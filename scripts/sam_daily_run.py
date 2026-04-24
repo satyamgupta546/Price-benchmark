@@ -10,6 +10,8 @@ What it does:
   6. Generate Excel per city → /Users/satyam/Desktop/price csv/
   7. Push to BigQuery (sam_price_live = replace, sam_price_history = append)
 
+Schedule: Daily 8:30 AM IST via Cloud Run Job
+
 Usage:
     export METABASE_API_KEY=...
     python3 scripts/sam_daily_run.py              # all cities
@@ -30,7 +32,8 @@ from pathlib import Path
 sys.stdout.reconfigure(line_buffering=True)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-VENV_PYTHON = str(PROJECT_ROOT / "backend" / "venv" / "bin" / "python")
+_venv_path = PROJECT_ROOT / "backend" / "venv" / "bin" / "python"
+VENV_PYTHON = str(_venv_path) if _venv_path.exists() else sys.executable
 SCRIPTS = PROJECT_ROOT / "scripts"
 DATA = PROJECT_ROOT / "data"
 OUTPUT_DIR = Path(os.environ.get("SAM_OUTPUT_DIR", str(PROJECT_ROOT / "output")))
@@ -58,13 +61,49 @@ BQ_LIVE_TABLE = f"{BQ_PROJECT}:{BQ_DATASET}.sam_price_live"
 BQ_HISTORY_TABLE = f"{BQ_PROJECT}:{BQ_DATASET}.sam_price_history"
 
 
-def run(script, args=[], use_venv=False):
+RUN_ERRORS = []  # Collect errors across the entire run
+
+
+def run(script, args=[], use_venv=False, retries=2, critical=False):
+    """Run a script with retry logic. Collects errors for end-of-run alert."""
     python = VENV_PYTHON if use_venv else sys.executable
     cmd = [python, str(SCRIPTS / script)] + args
     print(f"  ▶ {script} {' '.join(args)}", flush=True)
-    r = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True)
-    if r.returncode != 0:
-        print(f"    ⚠️ {script} failed (exit {r.returncode}): {(r.stderr or '')[:200]}", flush=True)
+
+    for attempt in range(retries + 1):
+        try:
+            r = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
+                               timeout=5400)  # 90 min max per script
+        except subprocess.TimeoutExpired:
+            err_msg = f"Timed out after 30 min"
+            print(f"    ⚠️ {script} timed out (attempt {attempt+1}/{retries+1})", flush=True)
+            if attempt < retries:
+                wait = 10 * (attempt + 1)
+                time.sleep(wait)
+                continue
+            else:
+                error = f"{script} {' '.join(args)} failed after {retries+1} attempts: {err_msg}"
+                print(f"    ❌ {error}", flush=True)
+                RUN_ERRORS.append(error)
+                if critical:
+                    from alert import send_alert, AlertLevel
+                    send_alert(AlertLevel.ERROR, f"{script} timed out", details=err_msg)
+                return False
+        if r.returncode == 0:
+            return True
+        err_msg = (r.stderr or r.stdout or "")[:200]
+        if attempt < retries:
+            wait = 10 * (attempt + 1)
+            print(f"    ⚠️ {script} failed (attempt {attempt+1}/{retries+1}), retry in {wait}s: {err_msg}", flush=True)
+            time.sleep(wait)
+        else:
+            error = f"{script} {' '.join(args)} failed after {retries+1} attempts: {err_msg}"
+            print(f"    ❌ {error}", flush=True)
+            RUN_ERRORS.append(error)
+            if critical:
+                from alert import send_alert, AlertLevel
+                send_alert(AlertLevel.ERROR, f"{script} failed", details=err_msg)
+    return False
 
 
 def metabase_query(payload):
@@ -352,38 +391,43 @@ def scrape_city(pincode, city):
         if platform not in city_platforms:
             print(f"  ⏭️  {platform} not available in {city}", flush=True)
             return
-        if platform == "dmart":
-            if pincode not in DMART_STORE_IDS:
-                print(f"  ⏭️  DMart not available for {city} ({pincode})", flush=True)
+        try:
+            if platform == "dmart":
+                if pincode not in DMART_STORE_IDS:
+                    print(f"  ⏭️  DMart not available for {city} ({pincode})", flush=True)
+                    return
+                print(f"\n⚙️  {city} — dmart pipeline (API)", flush=True)
+                run("scrape_dmart.py", [pincode], retries=2)
+                print(f"  ✅ {city} dmart complete", flush=True)
                 return
-            print(f"\n⚙️  {city} — dmart pipeline (API)", flush=True)
-            run("scrape_dmart.py", [pincode])
-            print(f"  ✅ {city} dmart complete", flush=True)
-            return
 
-        print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
-        if platform == "blinkit":
-            run("scrape_blinkit_pdps.py", [pincode, "4"], use_venv=True)
-            partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
-            if partial.exists():
-                partial.unlink()
-            run("compare_pdp.py", [pincode])
-        elif platform == "jiomart":
-            run("scrape_jiomart_pdps.py", [pincode, "2"], use_venv=True)
-            partial = DATA / "sam" / f"jiomart_pdp_{pincode}_latest_partial.json"
-            if partial.exists():
-                partial.unlink()
-            run("compare_pdp_jiomart.py", [pincode])
+            print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
+            if platform == "blinkit":
+                run("scrape_blinkit_pdps.py", [pincode, "4"], use_venv=True, retries=1, critical=True)
+                partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
+                if partial.exists():
+                    partial.unlink()
+                run("compare_pdp.py", [pincode])
+            elif platform == "jiomart":
+                run("scrape_jiomart_pdps.py", [pincode, "2"], use_venv=True, retries=1, critical=True)
+                partial = DATA / "sam" / f"jiomart_pdp_{pincode}_latest_partial.json"
+                if partial.exists():
+                    partial.unlink()
+                run("compare_pdp_jiomart.py", [pincode])
 
-        run("cascade_match.py", [pincode, platform])
-        run("stage3_match.py", [pincode, platform])
+            run("cascade_match.py", [pincode, platform])
+            run("stage3_match.py", [pincode, platform])
 
-        if platform == "jiomart":
-            run("jiomart_search_match.py", [pincode], use_venv=True)
+            if platform == "jiomart":
+                run("jiomart_search_match.py", [pincode], use_venv=True)
 
-        run("stage4_image_match.py", [pincode, platform])
-        run("stage5_barcode_match.py", [pincode, platform])
-        print(f"  ✅ {city} {platform} complete", flush=True)
+            run("stage4_image_match.py", [pincode, platform])
+            run("stage5_barcode_match.py", [pincode, platform])
+            print(f"  ✅ {city} {platform} complete", flush=True)
+        except Exception as e:
+            error = f"{city} {platform} crashed: {str(e)[:200]}"
+            print(f"  ❌ {error}", flush=True)
+            RUN_ERRORS.append(error)
 
     # Run ALL platforms in PARALLEL (Blinkit + Jiomart + DMart)
     threads = [
@@ -715,6 +759,15 @@ def generate_excel(rows, city, pincode):
     print(f"  📊 {out_path.name}", flush=True)
 
 
+def _run_bq(args):
+    """Run bq CLI command, return (success, stderr). Skip if bq not found."""
+    try:
+        r = subprocess.run(args, capture_output=True, text=True, timeout=120)
+        return r.returncode == 0, r.stderr[:200] if r.stderr else ""
+    except FileNotFoundError:
+        return False, "bq CLI not found (running in Docker — use BQ Python API)"
+
+
 def push_to_bigquery(csv_path, pincodes):
     """Push CSV to both BQ tables using DELETE+INSERT to avoid wiping other cities."""
     print("\n📤 Pushing to BigQuery...", flush=True)
@@ -723,45 +776,33 @@ def push_to_bigquery(csv_path, pincodes):
 
     # Live table: delete rows for pincodes being pushed, then append
     for pin in pincodes:
-        del_r = subprocess.run(
-            ["bq", "query", "--use_legacy_sql=false",
-             f"DELETE FROM `{bq_live_sql}` WHERE pincode = '{pin}'"],
-            capture_output=True, text=True,
-        )
-        if del_r.returncode == 0:
+        ok, err = _run_bq(["bq", "query", "--use_legacy_sql=false",
+                           f"DELETE FROM `{bq_live_sql}` WHERE pincode = '{pin}'"])
+        if ok:
             print(f"  🗑️  sam_price_live: deleted pincode {pin}", flush=True)
         else:
-            print(f"  ⚠️  sam_price_live delete {pin}: {del_r.stderr[:200]}", flush=True)
+            print(f"  ⚠️  sam_price_live delete {pin}: {err}", flush=True)
 
-    r1 = subprocess.run(
-        ["bq", "load", "--source_format=CSV", BQ_LIVE_TABLE, str(csv_path)],
-        capture_output=True, text=True,
-    )
-    if r1.returncode == 0:
+    ok, err = _run_bq(["bq", "load", "--source_format=CSV", BQ_LIVE_TABLE, str(csv_path)])
+    if ok:
         print(f"  ✅ sam_price_live (loaded)", flush=True)
     else:
-        print(f"  ❌ sam_price_live: {r1.stderr[:200]}", flush=True)
+        print(f"  ❌ sam_price_live: {err}", flush=True)
 
     # History table: delete existing rows for same date+pincodes to prevent duplicates on re-run
     pin_list = ", ".join(f"'{p}'" for p in pincodes)
-    del_hist = subprocess.run(
-        ["bq", "query", "--use_legacy_sql=false",
-         f"DELETE FROM `{bq_hist_sql}` WHERE date = '{DATE}' AND pincode IN ({pin_list})"],
-        capture_output=True, text=True,
-    )
-    if del_hist.returncode == 0:
+    ok, err = _run_bq(["bq", "query", "--use_legacy_sql=false",
+                        f"DELETE FROM `{bq_hist_sql}` WHERE date = '{DATE}' AND pincode IN ({pin_list})"])
+    if ok:
         print(f"  🗑️  sam_price_history: deduped {DATE} for {pin_list}", flush=True)
     else:
-        print(f"  ⚠️  sam_price_history dedup: {del_hist.stderr[:200]}", flush=True)
+        print(f"  ⚠️  sam_price_history dedup: {err}", flush=True)
 
-    r2 = subprocess.run(
-        ["bq", "load", "--source_format=CSV", BQ_HISTORY_TABLE, str(csv_path)],
-        capture_output=True, text=True,
-    )
-    if r2.returncode == 0:
+    ok, err = _run_bq(["bq", "load", "--source_format=CSV", BQ_HISTORY_TABLE, str(csv_path)])
+    if ok:
         print(f"  ✅ sam_price_history (appended)", flush=True)
     else:
-        print(f"  ❌ sam_price_history: {r2.stderr[:200]}", flush=True)
+        print(f"  ❌ sam_price_history: {err}", flush=True)
 
 
 # ── Main ──
@@ -778,23 +819,32 @@ def main():
     print(f"  Scrape: {'skip' if skip_scrape else 'yes'}")
     print(f"{'═' * 60}")
 
-    # Step 0: Switch gcloud account
-    subprocess.run(["gcloud", "config", "set", "account", "satyam.gupta@apnamart.in"],
-                    capture_output=True)
+    # Step 0: Switch gcloud account (skip in Docker where gcloud may not exist)
+    try:
+        subprocess.run(["gcloud", "config", "set", "account", "satyam.gupta@apnamart.in"],
+                        capture_output=True, timeout=5)
+    except FileNotFoundError:
+        print("  (gcloud not found — running in Docker, using service account)", flush=True)
 
     # Step 1: Fetch EAN map
     print("\n📥 Fetching EAN map...", flush=True)
     run("fetch_ean_map.py")
 
-    # Step 2: Scrape all cities (2 at a time to avoid RAM saturation)
+    # Step 2: Scrape all cities — crashed cities go to retry queue
     if not skip_scrape:
         from concurrent.futures import ThreadPoolExecutor, as_completed
-        MAX_PARALLEL_CITIES = 2  # Each city runs 2 browsers × multiple tabs ≈ 8GB RAM
+        MAX_PARALLEL_CITIES = 2
         pin_list = list(pincodes.items())
+        failed_cities = []  # (pin, city) pairs that need retry
+
+        # ── Pass 1: Run all cities ──
+        print(f"\n{'─' * 60}", flush=True)
+        print(f"  PASS 1: Scraping {len(pin_list)} cities", flush=True)
+        print(f"{'─' * 60}", flush=True)
         for batch_start in range(0, len(pin_list), MAX_PARALLEL_CITIES):
             batch = pin_list[batch_start:batch_start + MAX_PARALLEL_CITIES]
             batch_names = ", ".join(city for _, city in batch)
-            print(f"\n🚀 Batch {batch_start // MAX_PARALLEL_CITIES + 1}: {batch_names} ...", flush=True)
+            print(f"\n🚀 Batch {batch_start // MAX_PARALLEL_CITIES + 1}: {batch_names}", flush=True)
             with ThreadPoolExecutor(max_workers=len(batch)) as executor:
                 futures = {executor.submit(scrape_city, pin, city): (pin, city) for pin, city in batch}
                 for future in as_completed(futures):
@@ -803,7 +853,34 @@ def main():
                         future.result()
                         print(f"  ✅ {city} complete", flush=True)
                     except Exception as e:
-                        print(f"  ❌ {city} failed: {e}", flush=True)
+                        print(f"  ❌ {city} crashed: {e} — will retry after other cities", flush=True)
+                        failed_cities.append((pin, city))
+                        RUN_ERRORS.append(f"{city} ({pin}) crashed in pass 1: {str(e)[:150]}")
+
+        # ── Pass 2: Retry crashed cities (one at a time, fresh browser) ──
+        if failed_cities:
+            print(f"\n{'─' * 60}", flush=True)
+            print(f"  PASS 2: Retrying {len(failed_cities)} crashed cities", flush=True)
+            print(f"{'─' * 60}", flush=True)
+            still_failed = []
+            for pin, city in failed_cities:
+                print(f"\n🔄 Retrying {city} ({pin})...", flush=True)
+                try:
+                    scrape_city(pin, city)
+                    print(f"  ✅ {city} recovered on retry!", flush=True)
+                except Exception as e:
+                    print(f"  ❌ {city} failed again: {e}", flush=True)
+                    still_failed.append((pin, city))
+                    RUN_ERRORS.append(f"{city} ({pin}) failed on retry too: {str(e)[:150]}")
+
+            if still_failed:
+                try:
+                    from alert import send_alert, AlertLevel
+                    names = ", ".join(city for _, city in still_failed)
+                    send_alert(AlertLevel.CRITICAL, f"{len(still_failed)} cities failed",
+                               details=f"Cities: {names}\nFailed after 2 passes. Check logs.")
+                except Exception:
+                    pass
 
     # Step 3: Collect all item_codes from Anakin files + KVI list
     all_item_codes = set()
@@ -910,12 +987,33 @@ def main():
     # Step 8: Cleanup old files
     cleanup_old_files()
 
+    # Step 9: Send summary alert
+    end_time = time.time()
+    duration = end_time - _run_start_time if '_run_start_time' in globals() else 0
+    try:
+        from alert import send_daily_summary, send_alert, AlertLevel
+        cities_summary = {}
+        for pin, city in pincodes.items():
+            city_rows = [r for r in all_rows if str(r[3]) == pin]
+            b_ok = sum(1 for r in city_rows if r[18])  # blinkit_sp
+            j_ok = sum(1 for r in city_rows if r[25])  # jio_sp
+            d_ok = sum(1 for r in city_rows if len(r) > 32 and r[32])  # dmart_sp
+            cities_summary[pin] = {"city": city, "rows": len(city_rows), "blinkit_ok": b_ok, "jiomart_ok": j_ok, "dmart_ok": d_ok}
+        send_daily_summary(cities_summary, len(all_rows), duration, errors=RUN_ERRORS or None)
+    except Exception as e:
+        print(f"  ⚠️ Alert send failed: {e}", flush=True)
+
     print(f"\n{'═' * 60}")
     print(f"  DONE! {len(pincodes)} cities, {len(all_rows)} rows")
+    if RUN_ERRORS:
+        print(f"  ⚠️ {len(RUN_ERRORS)} errors during run:")
+        for e in RUN_ERRORS:
+            print(f"    - {e}")
     print(f"  Excel: {OUTPUT_DIR}")
     print(f"  BigQuery: sam_price_live + sam_price_history")
     print(f"{'═' * 60}")
 
 
 if __name__ == "__main__":
+    _run_start_time = time.time()
     main()

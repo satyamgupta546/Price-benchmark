@@ -2,7 +2,6 @@ data/anakin/
 data/sam/
 data/comparisons/
 data/sam_output/
-data/mappings/product_mapping.json
 data/bq_upload_*.csv
 data/am_product_master.json
 data/latest_mrp_*.json

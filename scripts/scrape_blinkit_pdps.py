@@ -692,28 +692,53 @@ async def worker(worker_id: int, page, queue: asyncio.Queue, results: list,
 
 
 async def main(pincode: str, num_tabs: int = 5):
-    ana_path = latest_anakin_file(pincode)
-    if not ana_path:
-        print(f"[pdp] ERROR: no Anakin file for pincode {pincode}", file=sys.stderr)
-        sys.exit(1)
-
-    ana = json.load(open(ana_path))
-    # Extract mapped URLs — skip products Anakin already marks as out_of_stock
     urls_to_scrape = []
     skipped_oos = 0
-    for rec in ana["records"]:
-        pid = (rec.get("Blinkit_Product_Id") or "").strip()
-        url = (rec.get("Blinkit_Product_Url") or "").strip()
-        ic = (rec.get("Item_Code") or "").strip()
-        if pid and pid != "NA" and url and url.startswith("http"):
-            stock = (rec.get("Blinkit_In_Stock_Remark") or "").lower()
-            if stock == "out_of_stock":
-                skipped_oos += 1
-                continue
-            aname = (rec.get("Blinkit_Item_Name") or rec.get("Item_Name") or "").strip()
-            urls_to_scrape.append((ic, url, pid, aname))
+    source_name = ""
 
-    print(f"[pdp] Loaded {len(urls_to_scrape)} mapped URLs from {ana_path.name} (skipped {skipped_oos} OOS)", flush=True)
+    # Source 1: Anakin file for this pincode
+    ana_path = latest_anakin_file(pincode)
+    if ana_path:
+        ana = json.load(open(ana_path))
+        for rec in ana["records"]:
+            pid = (rec.get("Blinkit_Product_Id") or "").strip()
+            url = (rec.get("Blinkit_Product_Url") or "").strip()
+            ic = (rec.get("Item_Code") or "").strip()
+            if pid and pid != "NA" and url and url.startswith("http"):
+                stock = (rec.get("Blinkit_In_Stock_Remark") or "").lower()
+                if stock == "out_of_stock":
+                    skipped_oos += 1
+                    continue
+                aname = (rec.get("Blinkit_Item_Name") or rec.get("Item_Name") or "").strip()
+                urls_to_scrape.append((ic, url, pid, aname))
+        source_name = ana_path.name
+
+    # Source 2: product_mapping.json — fallback for cities without Anakin data
+    # Product IDs are same across cities, only location/availability changes
+    if not urls_to_scrape:
+        mapping_path = PROJECT_ROOT / "data" / "mappings" / "product_mapping.json"
+        if mapping_path.exists():
+            mapping = json.load(open(mapping_path))
+            seen_ics = set()
+            for key, entry in mapping.items():
+                if entry.get("platform") != "blinkit":
+                    continue
+                pid = entry.get("product_id")
+                url = entry.get("product_url")
+                ic = entry.get("item_code")
+                if not pid or not ic or ic in seen_ics:
+                    continue
+                seen_ics.add(ic)
+                if not url or not url.startswith("http"):
+                    url = f"https://blinkit.com/prn/x/prid/{pid}"
+                aname = entry.get("platform_name") or entry.get("am_name") or ""
+                urls_to_scrape.append((ic, url, pid, aname))
+            source_name = f"product_mapping.json ({len(seen_ics)} unique items)"
+        else:
+            print(f"[pdp] ERROR: no Anakin file and no product_mapping.json for {pincode}", file=sys.stderr)
+            sys.exit(1)
+
+    print(f"[pdp] Loaded {len(urls_to_scrape)} URLs from {source_name} (skipped {skipped_oos} OOS)", flush=True)
     print(f"[pdp] Scraping with {num_tabs} parallel tabs", flush=True)
 
     start = datetime.now()
@@ -731,7 +756,7 @@ async def main(pincode: str, num_tabs: int = 5):
 
         workers = [
             worker(i, pages[i], queue, results, progress, len(urls_to_scrape),
-                   pincode, ana_path.name, start)
+                   pincode, source_name, start)
             for i in range(num_tabs)
         ]
         await asyncio.gather(*workers)
@@ -795,7 +820,7 @@ async def main(pincode: str, num_tabs: int = 5):
         json.dump({
             "pincode": pincode,
             "source": "anakin_url_seed",
-            "anakin_file": ana_path.name,
+            "anakin_file": source_name,
             "scraped_at": datetime.now().isoformat(),
             "duration_seconds": round(duration, 1),
             "total_urls": len(urls_to_scrape),
