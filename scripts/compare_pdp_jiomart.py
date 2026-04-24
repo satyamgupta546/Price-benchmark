@@ -47,11 +47,11 @@ def main(pincode: str):
     pdp_path = latest_pdp_sam(pincode)
 
     if not ana_path:
-        print(f"[compare_jm] ERROR: no Anakin Jiomart file for {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[compare_jm] No Anakin Jiomart file for {pincode} — skipping", flush=True)
+        sys.exit(0)
     if not pdp_path:
-        print(f"[compare_jm] ERROR: no SAM Jiomart PDP file for {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[compare_jm] No SAM Jiomart PDP file for {pincode} — skipping", flush=True)
+        sys.exit(0)
 
     print(f"[compare_jm] Anakin:   {ana_path.name}")
     print(f"[compare_jm] SAM PDP: {pdp_path.name}")

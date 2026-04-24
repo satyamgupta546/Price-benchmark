@@ -73,8 +73,8 @@ def fetch_for_pincode(pincode: str):
     })
     rows = r["data"]["rows"]
     if not rows or not rows[0][0]:
-        print(f"ERROR: No data found for pincode {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"  No Anakin Jiomart data for pincode {pincode} — skipping", flush=True)
+        sys.exit(0)
     latest_date = rows[0][0]
     print(f"Latest date for {pincode}: {latest_date}")
 

@@ -16,11 +16,11 @@ COPY config/ ./config/
 COPY backend/app/ ./backend/app/
 COPY CLAUDE.md ./
 
-# Copy mapping data (product IDs, URLs — needed for cities without Anakin)
-COPY data/mappings/ ./data/mappings/
-
 # Create data directories
 RUN mkdir -p data/anakin data/sam data/comparisons data/mappings output
+
+# Copy mapping data (product IDs, URLs — needed for cities without Anakin)
+COPY data/mappings/ ./data/mappings/
 
 # Environment
 ENV PYTHONUNBUFFERED=1

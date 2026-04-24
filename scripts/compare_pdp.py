@@ -41,12 +41,11 @@ def main(pincode: str):
     pdp_path = latest_pdp_file(pincode)
 
     if not ana_path:
-        print(f"[compare_pdp] ERROR: no Anakin file for pincode {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[compare_pdp] No Anakin file for pincode {pincode} — skipping", flush=True)
+        sys.exit(0)
     if not pdp_path:
-        print(f"[compare_pdp] ERROR: no SAM PDP file for pincode {pincode} (run scrape_blinkit_pdps.py first)",
-              file=sys.stderr)
-        sys.exit(1)
+        print(f"[compare_pdp] No SAM PDP file for pincode {pincode} — skipping", flush=True)
+        sys.exit(0)
 
     print(f"[compare_pdp] Anakin file: {ana_path.name}")
     print(f"[compare_pdp] SAM PDP:    {pdp_path.name}")

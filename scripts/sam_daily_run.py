@@ -75,7 +75,7 @@ def run(script, args=[], use_venv=False, retries=2, critical=False):
             r = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
                                timeout=5400)  # 90 min max per script
         except subprocess.TimeoutExpired:
-            err_msg = f"Timed out after 30 min"
+            err_msg = f"Timed out after 90 min"
             print(f"    ⚠️ {script} timed out (attempt {attempt+1}/{retries+1})", flush=True)
             if attempt < retries:
                 wait = 10 * (attempt + 1)
