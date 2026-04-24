@@ -489,41 +489,47 @@ async def worker(worker_id: int, page, queue: asyncio.Queue, results: list,
 async def main(pincode: str, num_tabs: int = 2):
     urls_to_scrape = []
     source_name = ""
+    seen_ics = set()
 
-    # Source 1: Anakin file for this pincode
+    # Source 1: product_mapping.json — PRIMARY (humara saved data)
+    mapping_path = PROJECT_ROOT / "data" / "mappings" / "product_mapping.json"
+    if mapping_path.exists():
+        mapping = json.load(open(mapping_path))
+        for key, entry in mapping.items():
+            if entry.get("platform") != "jiomart":
+                continue
+            pid = entry.get("product_id")
+            url = entry.get("product_url")
+            ic = entry.get("item_code")
+            if not pid or not ic or ic in seen_ics:
+                continue
+            seen_ics.add(ic)
+            if not url or not url.startswith("http"):
+                continue
+            urls_to_scrape.append((ic, url, pid))
+        source_name = f"product_mapping.json ({len(seen_ics)} items)"
+
+    # Source 2: Anakin file — SUPPLEMENT (add new URLs not in mapping)
     ana_path = latest_anakin_file(pincode)
     if ana_path:
         ana = json.load(open(ana_path))
+        added_from_anakin = 0
         for rec in ana["records"]:
+            ic = (rec.get("Item_Code") or "").strip()
+            if ic in seen_ics:
+                continue
             pid = (rec.get("Jiomart_Product_Id") or "").strip()
             url = (rec.get("Jiomart_Product_Url") or "").strip()
-            ic = (rec.get("Item_Code") or "").strip()
             if pid and pid != "NA" and url and url.startswith("http"):
                 urls_to_scrape.append((ic, url, pid))
-        source_name = ana_path.name
-
-    # Source 2: product_mapping.json — fallback for cities without Anakin data
-    if not urls_to_scrape:
-        mapping_path = PROJECT_ROOT / "data" / "mappings" / "product_mapping.json"
-        if mapping_path.exists():
-            mapping = json.load(open(mapping_path))
-            seen_ics = set()
-            for key, entry in mapping.items():
-                if entry.get("platform") != "jiomart":
-                    continue
-                pid = entry.get("product_id")
-                url = entry.get("product_url")
-                ic = entry.get("item_code")
-                if not pid or not ic or ic in seen_ics:
-                    continue
                 seen_ics.add(ic)
-                if not url or not url.startswith("http"):
-                    continue
-                urls_to_scrape.append((ic, url, pid))
-            source_name = f"product_mapping.json ({len(seen_ics)} unique items)"
-        else:
-            print(f"[jm-pdp] ERROR: no Anakin file and no product_mapping.json for {pincode}", file=sys.stderr)
-            sys.exit(1)
+                added_from_anakin += 1
+        if added_from_anakin:
+            source_name += f" + Anakin {ana_path.name} (+{added_from_anakin} new)"
+
+    if not urls_to_scrape:
+        print(f"[jm-pdp] ERROR: no product_mapping.json and no Anakin file for {pincode}", file=sys.stderr)
+        sys.exit(1)
 
     print(f"[jm-pdp] Loaded {len(urls_to_scrape)} mapped URLs from {source_name}", flush=True)
     print(f"[jm-pdp] Scraping with {num_tabs} parallel tabs (Firefox)", flush=True)
