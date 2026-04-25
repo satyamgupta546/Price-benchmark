@@ -73,9 +73,9 @@ def run(script, args=[], use_venv=False, retries=2, critical=False):
     for attempt in range(retries + 1):
         try:
             r = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
-                               timeout=5400)  # 90 min max per script
+                               timeout=7200)  # 120 min max per script
         except subprocess.TimeoutExpired:
-            err_msg = f"Timed out after 90 min"
+            err_msg = f"Timed out after 120 min"
             print(f"    ⚠️ {script} timed out (attempt {attempt+1}/{retries+1})", flush=True)
             if attempt < retries:
                 wait = 10 * (attempt + 1)
@@ -374,15 +374,25 @@ def fetch_latest_mrp(warehouse_id: str) -> dict:
 
 # ── Step 2: Scrape one city ──
 
-def scrape_city(pincode, city):
+def fetch_all_anakin(pincodes):
+    """Fetch Anakin data for all cities (lightweight API calls, no browser)."""
+    print(f"\n📥 Fetching Anakin data for {len(pincodes)} cities...", flush=True)
+    for pin, city in pincodes.items():
+        run("fetch_anakin_blinkit.py", [pin])
+        run("fetch_anakin_jiomart.py", [pin])
+        print(f"  ✅ Anakin: {city} ({pin})", flush=True)
+
+
+def scrape_city(pincode, city, skip_anakin=False):
     """Run full pipeline for one city — both platforms."""
     print(f"\n{'─' * 60}", flush=True)
     print(f"  {city} ({pincode})", flush=True)
     print(f"{'─' * 60}", flush=True)
 
-    # Fetch Anakin
-    run("fetch_anakin_blinkit.py", [pincode])
-    run("fetch_anakin_jiomart.py", [pincode])
+    # Fetch Anakin (skip if already fetched in bulk)
+    if not skip_anakin:
+        run("fetch_anakin_blinkit.py", [pincode])
+        run("fetch_anakin_jiomart.py", [pincode])
 
     # Platform availability from config/cities.json
     city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit", "jiomart"})
@@ -403,7 +413,7 @@ def scrape_city(pincode, city):
 
             print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
             if platform == "blinkit":
-                run("scrape_blinkit_pdps.py", [pincode, "4"], use_venv=True, retries=1, critical=True)
+                run("scrape_blinkit_pdps.py", [pincode, "2"], use_venv=True, retries=1, critical=True)
                 partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
                 if partial.exists():
                     partial.unlink()
@@ -759,6 +769,55 @@ def generate_excel(rows, city, pincode):
     print(f"  📊 {out_path.name}", flush=True)
 
 
+def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
+    """Scrape one city → generate data → validate → push to BQ. Returns city_rows."""
+    print(f"\n{'═' * 60}", flush=True)
+    print(f"  CITY {city_index}/{total_cities}: {city} ({pin})", flush=True)
+    print(f"{'═' * 60}", flush=True)
+
+    # 1. Scrape (Anakin already fetched)
+    try:
+        scrape_city(pin, city, skip_anakin=True)
+    except Exception as e:
+        print(f"  ❌ {city} scrape crashed: {e}", flush=True)
+        RUN_ERRORS.append(f"{city} ({pin}) scrape crashed: {str(e)[:150]}")
+        try:
+            print(f"  🔄 Retrying {city}...", flush=True)
+            scrape_city(pin, city, skip_anakin=True)
+            print(f"  ✅ {city} recovered on retry!", flush=True)
+        except Exception as e2:
+            print(f"  ❌ {city} failed again: {e2}", flush=True)
+            RUN_ERRORS.append(f"{city} ({pin}) failed on retry: {str(e2)[:150]}")
+            return []
+
+    # 2. Generate data
+    wh = WAREHOUSE_MAP.get(pin, "WRHS_1")
+    mrp_map = mrp_maps.get(wh, {})
+    city_rows = generate_city_data(pin, city, am_map, mrp_map)
+    print(f"  ✅ {city}: {len(city_rows)} rows generated", flush=True)
+
+    # 3. Validate
+    valid, messages = validate_data(city_rows, [pin])
+    if not valid:
+        print(f"  ⚠️  {city} validation warnings:", flush=True)
+        for msg in messages:
+            print(f"    {msg}", flush=True)
+    else:
+        print(f"  ✅ {city} validation passed", flush=True)
+
+    # 4. Write city CSV + push to BQ
+    city_csv_path = DATA / f"bq_upload_{pin}.csv"
+    with open(city_csv_path, "w", newline="") as f:
+        w = csv.writer(f)
+        for row in city_rows:
+            w.writerow(row)
+
+    push_to_bigquery(city_csv_path, [pin])
+    print(f"  ✅ {city} pushed to BQ ({len(city_rows)} rows)", flush=True)
+
+    return city_rows
+
+
 def _run_bq(args):
     """Run bq CLI command, return (success, stderr). Skip if bq not found."""
     try:
@@ -830,57 +889,9 @@ def main():
     print("\n📥 Fetching EAN map...", flush=True)
     run("fetch_ean_map.py")
 
-    # Step 2: Scrape all cities — crashed cities go to retry queue
+    # Step 2: Fetch Anakin for ALL cities (lightweight API calls, no browser)
     if not skip_scrape:
-        from concurrent.futures import ThreadPoolExecutor, as_completed
-        MAX_PARALLEL_CITIES = 2
-        pin_list = list(pincodes.items())
-        failed_cities = []  # (pin, city) pairs that need retry
-
-        # ── Pass 1: Run all cities ──
-        print(f"\n{'─' * 60}", flush=True)
-        print(f"  PASS 1: Scraping {len(pin_list)} cities", flush=True)
-        print(f"{'─' * 60}", flush=True)
-        for batch_start in range(0, len(pin_list), MAX_PARALLEL_CITIES):
-            batch = pin_list[batch_start:batch_start + MAX_PARALLEL_CITIES]
-            batch_names = ", ".join(city for _, city in batch)
-            print(f"\n🚀 Batch {batch_start // MAX_PARALLEL_CITIES + 1}: {batch_names}", flush=True)
-            with ThreadPoolExecutor(max_workers=len(batch)) as executor:
-                futures = {executor.submit(scrape_city, pin, city): (pin, city) for pin, city in batch}
-                for future in as_completed(futures):
-                    pin, city = futures[future]
-                    try:
-                        future.result()
-                        print(f"  ✅ {city} complete", flush=True)
-                    except Exception as e:
-                        print(f"  ❌ {city} crashed: {e} — will retry after other cities", flush=True)
-                        failed_cities.append((pin, city))
-                        RUN_ERRORS.append(f"{city} ({pin}) crashed in pass 1: {str(e)[:150]}")
-
-        # ── Pass 2: Retry crashed cities (one at a time, fresh browser) ──
-        if failed_cities:
-            print(f"\n{'─' * 60}", flush=True)
-            print(f"  PASS 2: Retrying {len(failed_cities)} crashed cities", flush=True)
-            print(f"{'─' * 60}", flush=True)
-            still_failed = []
-            for pin, city in failed_cities:
-                print(f"\n🔄 Retrying {city} ({pin})...", flush=True)
-                try:
-                    scrape_city(pin, city)
-                    print(f"  ✅ {city} recovered on retry!", flush=True)
-                except Exception as e:
-                    print(f"  ❌ {city} failed again: {e}", flush=True)
-                    still_failed.append((pin, city))
-                    RUN_ERRORS.append(f"{city} ({pin}) failed on retry too: {str(e)[:150]}")
-
-            if still_failed:
-                try:
-                    from alert import send_alert, AlertLevel
-                    names = ", ".join(city for _, city in still_failed)
-                    send_alert(AlertLevel.CRITICAL, f"{len(still_failed)} cities failed",
-                               details=f"Cities: {names}\nFailed after 2 passes. Check logs.")
-                except Exception:
-                    pass
+        fetch_all_anakin(pincodes)
 
     # Step 3: Collect all item_codes from Anakin files + KVI list
     all_item_codes = set()
@@ -914,20 +925,47 @@ def main():
         if wh not in mrp_maps:
             mrp_maps[wh] = fetch_latest_mrp(wh)
 
-    # Step 5: Generate data + CSV for BQ (Excel removed — use export_excel_from_bq.py)
+    # Step 5: Per-city sequential processing (scrape → generate → validate → push)
     all_rows = []
-    for pin, city in pincodes.items():
-        wh = WAREHOUSE_MAP.get(pin, "WRHS_1")
-        mrp_map = mrp_maps.get(wh, {})
-        city_rows = generate_city_data(pin, city, am_map, mrp_map)
-        all_rows.extend(city_rows)
-        print(f"  ✅ {city}: {len(city_rows)} rows", flush=True)
+    cities_summary = {}
 
-    # Step 5b: KVI coverage report
+    if skip_scrape:
+        # --no-scrape mode: just generate + push, no scraping
+        for pin, city in pincodes.items():
+            wh = WAREHOUSE_MAP.get(pin, "WRHS_1")
+            mrp_map = mrp_maps.get(wh, {})
+            city_rows = generate_city_data(pin, city, am_map, mrp_map)
+            all_rows.extend(city_rows)
+            print(f"  ✅ {city}: {len(city_rows)} rows", flush=True)
+        # Single push for all cities
+        csv_path = DATA / "bq_upload_temp.csv"
+        with open(csv_path, "w", newline="") as f:
+            w = csv.writer(f)
+            for row in all_rows:
+                w.writerow(row)
+        valid, messages = validate_data(all_rows, list(pincodes.keys()))
+        if not valid:
+            for msg in messages:
+                print(f"  ⚠️ {msg}", flush=True)
+        push_to_bigquery(csv_path, list(pincodes.keys()))
+    else:
+        # Normal mode: per-city scrape → generate → push to BQ
+        for i, (pin, city) in enumerate(pincodes.items(), 1):
+            city_rows = process_city(pin, city, am_map, mrp_maps, i, len(pincodes))
+            all_rows.extend(city_rows)
+            # Build summary incrementally
+            b_ok = sum(1 for r in city_rows if r[18])
+            j_ok = sum(1 for r in city_rows if r[25])
+            d_ok = sum(1 for r in city_rows if len(r) > 32 and r[32])
+            cities_summary[pin] = {
+                "city": city, "rows": len(city_rows),
+                "blinkit_ok": b_ok, "jiomart_ok": j_ok, "dmart_ok": d_ok
+            }
+
+    # Step 6: KVI coverage report
     kvi_path = DATA / "kvi_master.json"
     if kvi_path.exists():
         kvi_data = json.load(open(kvi_path))
-        # Build pincode → KVI item_codes map
         state_to_pins = kvi_data.get("state_map", {})
         pin_to_state = {}
         for st, pins in state_to_pins.items():
@@ -941,7 +979,6 @@ def main():
             kvi_by_state[st][item["item_code"]] = item.get("kvi_tag", "KVI")
 
         print(f"\n📊 KVI Coverage Report", flush=True)
-        # row indices: 4=item_code, 18=blinkit_sp, 25=jio_sp, 32=dmart_sp, 3=pincode
         for pin, city in pincodes.items():
             state = pin_to_state.get(pin)
             if not state or state not in kvi_by_state:
@@ -963,41 +1000,21 @@ def main():
                   f"[B:{b_hit}/{n}={b_hit/n*100:.0f}% J:{j_hit}/{n}={j_hit/n*100:.0f}%]  "
                   f"Super KVI: B:{skvi_b}/{sn} J:{skvi_j}/{sn}", flush=True)
 
-    # Step 6: Write CSV + push to BQ
-    csv_path = DATA / "bq_upload_temp.csv"
-    with open(csv_path, "w", newline="") as f:
-        w = csv.writer(f)
-        for row in all_rows:
-            w.writerow(row)
-    print(f"\n📄 CSV: {len(all_rows)} total rows", flush=True)
-
-    # Step 7: Validate data before BQ push
-    valid, messages = validate_data(all_rows, list(pincodes.keys()))
-    if not valid:
-        print("\n⚠️  Data validation warnings:", flush=True)
-        for msg in messages:
-            print(f"    {msg}", flush=True)
-        print("  (pushing anyway — these are warnings, not blockers)", flush=True)
-    else:
-        print("\n✅ Data validation passed", flush=True)
-
-    push_to_bigquery(csv_path, list(pincodes.keys()))
-
-    # Step 8: Cleanup old files
+    # Step 7: Cleanup old files
     cleanup_old_files()
 
-    # Step 9: Send summary alert
+    # Step 8: Send summary alert
     end_time = time.time()
     duration = end_time - _run_start_time if '_run_start_time' in globals() else 0
     try:
         from alert import send_daily_summary, send_alert, AlertLevel
-        cities_summary = {}
-        for pin, city in pincodes.items():
-            city_rows = [r for r in all_rows if str(r[3]) == pin]
-            b_ok = sum(1 for r in city_rows if r[18])  # blinkit_sp
-            j_ok = sum(1 for r in city_rows if r[25])  # jio_sp
-            d_ok = sum(1 for r in city_rows if len(r) > 32 and r[32])  # dmart_sp
-            cities_summary[pin] = {"city": city, "rows": len(city_rows), "blinkit_ok": b_ok, "jiomart_ok": j_ok, "dmart_ok": d_ok}
+        if not cities_summary:
+            for pin, city in pincodes.items():
+                cr = [r for r in all_rows if str(r[3]) == pin]
+                b_ok = sum(1 for r in cr if r[18])
+                j_ok = sum(1 for r in cr if r[25])
+                d_ok = sum(1 for r in cr if len(r) > 32 and r[32])
+                cities_summary[pin] = {"city": city, "rows": len(cr), "blinkit_ok": b_ok, "jiomart_ok": j_ok, "dmart_ok": d_ok}
         send_daily_summary(cities_summary, len(all_rows), duration, errors=RUN_ERRORS or None)
     except Exception as e:
         print(f"  ⚠️ Alert send failed: {e}", flush=True)
@@ -1009,7 +1026,6 @@ def main():
         for e in RUN_ERRORS:
             print(f"    - {e}")
     print(f"  BigQuery: sam_price_live + sam_price_history")
-    print(f"  Excel: run 'python scripts/export_excel_from_bq.py <pincode>' to generate")
     print(f"{'═' * 60}")
 
 
