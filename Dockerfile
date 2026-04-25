@@ -10,6 +10,11 @@ RUN pip install --no-cache-dir -r backend/requirements.txt \
 # Install Playwright browsers
 RUN playwright install chromium firefox
 
+# Install gcloud/bq CLI
+RUN curl -sSL https://sdk.cloud.google.com | bash -s -- --disable-prompts --install-dir=/opt \
+    && ln -s /opt/google-cloud-sdk/bin/bq /usr/local/bin/bq \
+    && ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud
+
 # Copy code
 COPY scripts/ ./scripts/
 COPY config/ ./config/
