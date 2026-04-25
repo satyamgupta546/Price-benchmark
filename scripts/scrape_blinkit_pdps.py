@@ -49,7 +49,14 @@ async def init_blinkit_browser(pincode: str, num_tabs: int):
     pw = await async_playwright().start()
     browser = await pw.chromium.launch(
         headless=True,
-        args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
+        args=[
+            "--disable-blink-features=AutomationControlled",
+            "--no-sandbox",
+            "--disable-gpu",
+            "--disable-dev-shm-usage",
+            "--disable-extensions",
+            "--disable-background-networking",
+        ],
     )
     context = await browser.new_context(
         user_agent=random.choice(USER_AGENTS),
@@ -57,6 +64,12 @@ async def init_blinkit_browser(pincode: str, num_tabs: int):
         locale="en-IN",
         timezone_id="Asia/Kolkata",
     )
+
+    # Block images/CSS/fonts — we only need JSON API responses
+    await context.route("**/*.{png,jpg,jpeg,gif,webp,svg,ico,css,woff,woff2,ttf,eot}", lambda route: route.abort())
+    await context.route("**/analytics/**", lambda route: route.abort())
+    await context.route("**/tracking/**", lambda route: route.abort())
+    await context.route("**/google-analytics**", lambda route: route.abort())
 
     # Set cookies at the context level — applies to ALL pages in this context
     await context.add_cookies([
@@ -329,11 +342,11 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
             out["error"] = f"goto (after {attempt+1} attempts): {last_error[:150]}"
             return out
 
-        # Smart wait: poll for product in captured responses, max 4s
-        # Fast products resolve in 0.5s, slow ones get up to 4s
+        # Smart wait: poll for product in captured responses, max 2s
+        # Fast products resolve in 0.3s, slow ones get up to 2s
         product_dict = None
-        for _wait in range(8):  # 8 × 0.5s = 4s max
-            await asyncio.sleep(0.5)
+        for _wait in range(6):  # 6 × 0.3s = ~2s max
+            await asyncio.sleep(0.3)
             for payload in captured:
                 found = _find_product_in_json(payload, blinkit_pid)
                 if found:
@@ -398,8 +411,8 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
 
         # ── Try 2: DOM fallback using meta tags + h1-anchored price ──
         if sp is None or not name:
-            # Brief extra wait for SPA rendering (h1 may not be in initial HTML)
-            await asyncio.sleep(0.8)
+            # Brief extra wait for SPA rendering (only if API didn't return data)
+            await asyncio.sleep(0.4)
             dom_data = await page.evaluate("""() => {
                 // Product name from h1, og:title, or document.title
                 let name = '';

@@ -413,7 +413,7 @@ def scrape_city(pincode, city, skip_anakin=False):
 
             print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
             if platform == "blinkit":
-                run("scrape_blinkit_pdps.py", [pincode, "2"], use_venv=True, retries=1, critical=True)
+                run("scrape_blinkit_pdps.py", [pincode, "4"], use_venv=True, retries=1, critical=True)
                 partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
                 if partial.exists():
                     partial.unlink()

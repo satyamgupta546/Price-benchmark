@@ -47,6 +47,12 @@ async def init_jiomart_browser(pincode: str, num_tabs: int):
         locale="en-IN",
         timezone_id="Asia/Kolkata",
     )
+
+    # Block images/CSS/fonts — we only need JSON API responses
+    await context.route("**/*.{png,jpg,jpeg,gif,webp,svg,ico,css,woff,woff2,ttf,eot}", lambda route: route.abort())
+    await context.route("**/analytics/**", lambda route: route.abort())
+    await context.route("**/tracking/**", lambda route: route.abort())
+
     await context.add_cookies([
         {"name": "pincode", "value": pincode, "domain": ".jiomart.com", "path": "/"},
         {"name": "address_pincode", "value": pincode, "domain": ".jiomart.com", "path": "/"},
@@ -56,7 +62,7 @@ async def init_jiomart_browser(pincode: str, num_tabs: int):
     warm = await context.new_page()
     try:
         await warm.goto("https://www.jiomart.com", wait_until="domcontentloaded", timeout=30000)
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
     except Exception:
         pass
     await warm.close()
@@ -245,15 +251,17 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
             out["error"] = f"goto: {last_error[:150]}"
             return out
 
-        await asyncio.sleep(2.5)  # Firefox + Akamai needs longer settle
-
-        # Try: Find product in captured JSON by matching product_id
+        # Smart wait: poll for product in captured responses, max 2.5s
         product_dict = None
         jm_pid_clean = jm_pid.strip()
-        for payload in captured:
-            found = _find_product_in_json(payload, jm_pid_clean)
-            if found:
-                product_dict = found
+        for _wait in range(5):  # 5 × 0.5s = 2.5s max
+            await asyncio.sleep(0.5)
+            for payload in captured:
+                found = _find_product_in_json(payload, jm_pid_clean)
+                if found:
+                    product_dict = found
+                    break
+            if product_dict:
                 break
 
         sp = mrp = None
