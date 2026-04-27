@@ -59,6 +59,7 @@ BQ_PROJECT = "apna-mart-data"
 BQ_DATASET = "googlesheet"
 BQ_LIVE_TABLE = f"{BQ_PROJECT}:{BQ_DATASET}.sam_price_live"
 BQ_HISTORY_TABLE = f"{BQ_PROJECT}:{BQ_DATASET}.sam_price_history"
+GCS_BUCKET = "sam-price-data"
 
 
 RUN_ERRORS = []  # Collect errors across the entire run
@@ -813,55 +814,72 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
             w.writerow(row)
 
     push_to_bigquery(city_csv_path, [pin])
-    print(f"  ✅ {city} pushed to BQ ({len(city_rows)} rows)", flush=True)
+    backup_to_gcs(city_csv_path, pin)
+    print(f"  ✅ {city} pushed to BQ + GCS ({len(city_rows)} rows)", flush=True)
 
     return city_rows
 
 
-def _run_bq(args):
-    """Run bq CLI command, return (success, stderr). Skip if bq not found."""
-    try:
-        r = subprocess.run(args, capture_output=True, text=True, timeout=120)
-        return r.returncode == 0, r.stderr[:200] if r.stderr else ""
-    except FileNotFoundError:
-        return False, "bq CLI not found (running in Docker — use BQ Python API)"
-
-
 def push_to_bigquery(csv_path, pincodes):
-    """Push CSV to both BQ tables using DELETE+INSERT to avoid wiping other cities."""
+    """Push CSV to both BQ tables using Python BigQuery API."""
     print("\n📤 Pushing to BigQuery...", flush=True)
-    bq_live_sql = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
-    bq_hist_sql = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_history"
+    from google.cloud import bigquery
+    client = bigquery.Client(project=BQ_PROJECT)
 
-    # Live table: delete rows for pincodes being pushed, then append
+    live_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
+    hist_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_history"
+
+    # Live table: delete rows for pincodes being pushed, then load
     for pin in pincodes:
-        ok, err = _run_bq(["bq", "query", "--use_legacy_sql=false",
-                           f"DELETE FROM `{bq_live_sql}` WHERE pincode = '{pin}'"])
-        if ok:
+        try:
+            client.query(f"DELETE FROM `{live_table}` WHERE pincode = '{pin}'").result()
             print(f"  🗑️  sam_price_live: deleted pincode {pin}", flush=True)
-        else:
-            print(f"  ⚠️  sam_price_live delete {pin}: {err}", flush=True)
+        except Exception as e:
+            print(f"  ⚠️  sam_price_live delete {pin}: {str(e)[:200]}", flush=True)
 
-    ok, err = _run_bq(["bq", "load", "--source_format=CSV", BQ_LIVE_TABLE, str(csv_path)])
-    if ok:
+    try:
+        job_config = bigquery.LoadJobConfig(
+            source_format=bigquery.SourceFormat.CSV,
+            write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+        )
+        with open(csv_path, "rb") as f:
+            client.load_table_from_file(f, live_table, job_config=job_config).result()
         print(f"  ✅ sam_price_live (loaded)", flush=True)
-    else:
-        print(f"  ❌ sam_price_live: {err}", flush=True)
+    except Exception as e:
+        print(f"  ❌ sam_price_live: {str(e)[:200]}", flush=True)
 
-    # History table: delete existing rows for same date+pincodes to prevent duplicates on re-run
+    # History table: delete existing rows for same date+pincodes, then load
     pin_list = ", ".join(f"'{p}'" for p in pincodes)
-    ok, err = _run_bq(["bq", "query", "--use_legacy_sql=false",
-                        f"DELETE FROM `{bq_hist_sql}` WHERE date = '{DATE}' AND pincode IN ({pin_list})"])
-    if ok:
+    try:
+        client.query(f"DELETE FROM `{hist_table}` WHERE date = '{DATE}' AND pincode IN ({pin_list})").result()
         print(f"  🗑️  sam_price_history: deduped {DATE} for {pin_list}", flush=True)
-    else:
-        print(f"  ⚠️  sam_price_history dedup: {err}", flush=True)
+    except Exception as e:
+        print(f"  ⚠️  sam_price_history dedup: {str(e)[:200]}", flush=True)
 
-    ok, err = _run_bq(["bq", "load", "--source_format=CSV", BQ_HISTORY_TABLE, str(csv_path)])
-    if ok:
+    try:
+        job_config = bigquery.LoadJobConfig(
+            source_format=bigquery.SourceFormat.CSV,
+            write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+        )
+        with open(csv_path, "rb") as f:
+            client.load_table_from_file(f, hist_table, job_config=job_config).result()
         print(f"  ✅ sam_price_history (appended)", flush=True)
-    else:
-        print(f"  ❌ sam_price_history: {err}", flush=True)
+    except Exception as e:
+        print(f"  ❌ sam_price_history: {str(e)[:200]}", flush=True)
+
+
+def backup_to_gcs(csv_path, pincode):
+    """Backup daily CSV to GCS bucket: gs://sam-price-data/{date}/{pincode}.csv"""
+    try:
+        from google.cloud import storage
+        client = storage.Client(project=BQ_PROJECT)
+        bucket = client.bucket(GCS_BUCKET)
+        blob_name = f"{DATE}/{pincode}.csv"
+        blob = bucket.blob(blob_name)
+        blob.upload_from_filename(str(csv_path))
+        print(f"  ☁️  GCS backup: gs://{GCS_BUCKET}/{blob_name}", flush=True)
+    except Exception as e:
+        print(f"  ⚠️  GCS backup failed: {str(e)[:200]}", flush=True)
 
 
 # ── Main ──

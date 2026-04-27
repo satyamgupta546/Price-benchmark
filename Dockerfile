@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy requirements first (better caching)
 COPY backend/requirements.txt ./backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt \
-    && pip install --no-cache-dir gspread google-auth google-cloud-bigquery openpyxl
+    && pip install --no-cache-dir gspread google-auth google-cloud-bigquery google-cloud-storage openpyxl
 
 # Install Playwright browsers
 RUN playwright install chromium firefox
