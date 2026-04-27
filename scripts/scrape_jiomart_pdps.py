@@ -48,11 +48,6 @@ async def init_jiomart_browser(pincode: str, num_tabs: int):
         timezone_id="Asia/Kolkata",
     )
 
-    # Block images/CSS/fonts — we only need JSON API responses
-    await context.route("**/*.{png,jpg,jpeg,gif,webp,svg,ico,css,woff,woff2,ttf,eot}", lambda route: route.abort())
-    await context.route("**/analytics/**", lambda route: route.abort())
-    await context.route("**/tracking/**", lambda route: route.abort())
-
     await context.add_cookies([
         {"name": "pincode", "value": pincode, "domain": ".jiomart.com", "path": "/"},
         {"name": "address_pincode", "value": pincode, "domain": ".jiomart.com", "path": "/"},
