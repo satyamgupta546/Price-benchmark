@@ -132,12 +132,21 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
                 this_id = str(raw_id)
 
         if this_id == str(target_pid):
-            has_price = any(k in data for k in ("mrp", "price", "offer_price", "selling_price", "sellingPrice"))
+            # Check for actual non-zero price (skip placeholder dicts with price=0)
+            has_real_price = False
+            for pk in ("mrp", "price", "offer_price", "selling_price", "sellingPrice"):
+                pv = data.get(pk)
+                if pv and not isinstance(pv, (dict, list)):
+                    try:
+                        if float(str(pv).replace(",", "")) > 0:
+                            has_real_price = True
+                            break
+                    except (ValueError, TypeError):
+                        pass
             has_name = any(k in data for k in ("name", "product_name", "display_name", "title"))
-            if has_price and has_name:
+            if has_real_price and has_name:
                 return data
-            # Even without name, if it has price + product_id (not just 'id'), accept it
-            if has_price and "product_id" in data:
+            if has_real_price and "product_id" in data:
                 return data
 
         for v in data.values():
@@ -208,63 +217,47 @@ def _extract_price_from_product_dict(p: dict) -> tuple[float | None, float | Non
     # MRP first — Blinkit usually has a clean top-level 'mrp'
     for k in ("mrp", "marked_price", "max_price", "original_price"):
         v = p.get(k)
-        if v:
-            try:
-                mrp = float(str(v).replace(",", "").replace("₹", "").strip())
-                if mrp > 50000:
-                    mrp /= 100  # paise → rupees
-                if mrp > 0:
-                    break
-            except (ValueError, TypeError):
-                pass
+        if v and isinstance(v, (int, float)):
+            mrp = float(v)
+            if mrp > 50000:
+                mrp /= 100
+            if mrp > 0:
+                break
 
     # SP: try top-level first, then nested
     for k in ("offer_price", "selling_price", "sellingPrice", "finalPrice", "sp"):
         v = p.get(k)
-        if v and not isinstance(v, (dict, list)):
-            try:
-                sp = float(str(v).replace(",", "").replace("₹", "").strip())
-                if sp > 50000:
-                    sp /= 100
-                if sp > 0:
-                    break
-            except (ValueError, TypeError):
-                pass
+        if v and isinstance(v, (int, float)):
+            sp = float(v)
+            if sp > 50000:
+                sp /= 100
+            if sp > 0:
+                break
 
     # Sometimes 'price' itself is a dict like {mrp: .., offer_price: ..}
     if sp is None and isinstance(p.get("price"), dict):
         inner = p["price"]
         for k in ("offer_price", "selling_price", "sp"):
             v = inner.get(k)
-            if v:
-                try:
-                    sp = float(str(v).replace(",", "").replace("₹", "").strip())
-                    if sp > 50000:
-                        sp /= 100
-                    if sp > 0:
-                        break
-                except (ValueError, TypeError):
-                    pass
+            if v and isinstance(v, (int, float)) and float(v) > 0:
+                sp = float(v)
+                if sp > 50000:
+                    sp /= 100
+                break
         if mrp is None:
             mv = inner.get("mrp")
-            if mv:
-                try:
-                    mrp = float(str(mv).replace(",", "").replace("₹", "").strip())
-                    if mrp > 50000:
-                        mrp /= 100
-                except (ValueError, TypeError):
-                    pass
+            if mv and isinstance(mv, (int, float)) and float(mv) > 0:
+                mrp = float(mv)
+                if mrp > 50000:
+                    mrp /= 100
 
     # Top-level 'price' as scalar number
     if sp is None:
         v = p.get("price")
-        if v and not isinstance(v, (dict, list)):
-            try:
-                sp = float(str(v).replace(",", "").replace("₹", "").strip())
-                if sp > 50000:
-                    sp /= 100
-            except (ValueError, TypeError):
-                pass
+        if v and isinstance(v, (int, float)):
+            sp = float(v)
+            if sp > 50000:
+                sp /= 100
 
     # If MRP not found but SP exists, MRP = SP (no discount)
     if sp and not mrp:
