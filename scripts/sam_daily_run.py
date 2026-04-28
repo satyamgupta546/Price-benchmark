@@ -308,13 +308,15 @@ def fetch_am_master(item_codes: list[str]) -> dict:
                     "source-table": 578,
                     "fields": [["field", 7191], ["field", 7118], ["field", 8935], ["field", 7113],
                                ["field", 7133], ["field", 7131], ["field", 7176], ["field", 7193],
-                               ["field", 7158], ["field", 7149]],
+                               ["field", 7158], ["field", 7149], ["field", 7126], ["field", 7137],
+                               ["field", 15241]],
                     "filter": ["=", ["field", 7191]] + batch,
                     "limit": 200,
                 }
             })
             cols = ["item_code", "display_name", "master_category", "brand", "marketed_by",
-                    "product_type", "unit", "unit_value", "mrp", "main_image"]
+                    "product_type", "unit", "unit_value", "mrp", "main_image",
+                    "sub_variant", "variant", "pack_size"]
             for row in r.get("data", {}).get("rows", []):
                 rec = dict(zip(cols, row))
                 ic = str(rec.get("item_code", "")).strip()
@@ -529,35 +531,16 @@ def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
     if unit_match is False:
         return "PARTIAL MATCH"
 
-    # ── MRP match ──
-    mrp5 = mrp10 = False
+    # ── MRP match (exact) ──
+    mrp_match = False
     if am_mrp and sam_mrp:
         try:
-            pct = abs(float(am_mrp) - float(sam_mrp)) / max(float(am_mrp), 0.01) * 100
-            mrp5 = pct <= 5
-            mrp10 = pct <= 10
-        except Exception:
-            pass
-    elif not am_mrp:
-        mrp5 = mrp10 = True  # No AM MRP to compare against — don't penalize
-
-    # ── SP match vs Anakin (only for Blinkit/Jiomart, not DMart) ──
-    sp_key = "Blinkit_Selling_Price" if platform == "blinkit" else "Jiomart_Selling_Price"
-    ana_sp = anakin_rec.get(sp_key)
-    sp_match = False
-    if ana_sp and str(ana_sp).strip().lower() not in ("na", "nan", "null", "none", "") and sam_sp:
-        try:
-            asp = float(str(ana_sp).replace(",", ""))
-            if asp > 0:
-                sp_match = abs(sam_sp - asp) / asp * 100 <= 5
+            mrp_match = float(am_mrp) == float(sam_mrp)
         except Exception:
             pass
 
-    # ── COMPLETE MATCH (unit_match is True or None at this point) ──
-    # (1) Unit confirmed match + MRP ±5%
-    # (2) Unit confirmed match + MRP ±10%
-    # (3) SP matches Anakin ±5% (only when unit is not a confirmed mismatch — already guarded above)
-    if (unit_match and mrp5) or (unit_match and mrp10) or sp_match:
+    # ── COMPLETE MATCH: unit match + MRP exact ──
+    if unit_match and mrp_match:
         return "COMPLETE MATCH"
     return "PARTIAL MATCH"
 
