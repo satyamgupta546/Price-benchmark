@@ -531,11 +531,11 @@ def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
     if unit_match is False:
         return "PARTIAL MATCH"
 
-    # ── MRP match (exact) ──
+    # ── MRP match (exact — allow 0.01 for float rounding) ──
     mrp_match = False
     if am_mrp and sam_mrp:
         try:
-            mrp_match = float(am_mrp) == float(sam_mrp)
+            mrp_match = abs(float(am_mrp) - float(sam_mrp)) < 0.01
         except Exception:
             pass
 
@@ -548,11 +548,15 @@ def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
 def load_pdp(platform, pincode):
     files = sorted([f for f in DATA.glob(f"sam/{platform}_pdp_{pincode}_{DATE}*.json") if "partial" not in f.name])
     if not files:
-        return {}
+        return {}, set()
     d = json.load(open(files[-1]))
-    return {p["item_code"]: p for p in d["products"]
-            if p.get("item_code") and p.get("status") == "ok"
-            and not (p.get("sam_product_name") or "").startswith("projects/")}
+    ok = {p["item_code"]: p for p in d["products"]
+          if p.get("item_code") and p.get("status") == "ok"
+          and not (p.get("sam_product_name") or "").startswith("projects/")}
+    # Track products confirmed not_available on platform (OOS / redirected)
+    not_available = {p["item_code"] for p in d["products"]
+                     if p.get("item_code") and p.get("status") == "not_available"}
+    return ok, not_available
 
 
 def load_cascade(platform, pincode):
@@ -582,8 +586,8 @@ def generate_city_data(pincode, city, am_map, mrp_map):
     # Load URL database as fallback for missing Anakin URLs
     url_db = load_url_database()
 
-    b_pdp = load_pdp("blinkit", pincode)
-    j_pdp = load_pdp("jiomart", pincode)
+    b_pdp, b_not_avail = load_pdp("blinkit", pincode)
+    j_pdp, j_not_avail = load_pdp("jiomart", pincode)
     b_cascade = load_cascade("blinkit", pincode)
     j_cascade = load_cascade("jiomart", pincode)
 
@@ -601,12 +605,12 @@ def generate_city_data(pincode, city, am_map, mrp_map):
         am = am_map.get(ic, {})
         if am.get("master_category") not in VALID_MASTER_CATEGORIES:
             continue
-        mrp_rec = mrp_map.get(ic, {})
+        mrp_rec = mrp_map.get(ic)
         am_mrp = mrp_rec.get("mrp") if mrp_rec else am.get("mrp")
         b_ana = blinkit_anakin.get(ic, {})
         j_ana = jiomart_anakin.get(ic, {})
 
-        def get_sam(pdp_m, cas_m, ana_r, url_k, platform):
+        def get_sam(pdp_m, cas_m, ana_r, url_k, platform, not_avail_set=set()):
             sp = mrp = name = stock = unit = None
             url = ana_r.get(url_k)
             if url and str(url).strip().lower() in ("na", "nan", "null", "none", ""):
@@ -617,6 +621,9 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 db_entry = url_db.get(db_key)
                 if db_entry:
                     url = db_entry.get("product_url")
+            # If PDP confirmed not_available, don't use cascade data
+            if ic in not_avail_set:
+                return url, None, None, None, None, "out_of_stock"
             if ic in pdp_m:
                 p = pdp_m[ic]
                 name = p.get("sam_product_name")
@@ -629,7 +636,7 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 name = m.get("sam_product_name")
                 sp = m.get("sam_price")
                 mrp = m.get("sam_mrp")
-                stock = "available"
+                stock = "available" if m.get("sam_in_stock", True) else "out_of_stock"
                 unit = m.get("sam_unit")
             # Price sanity: reject bulk/combo prices (SP > 3× AM MRP = clearly wrong product)
             if sp is not None and am_mrp:
@@ -657,14 +664,12 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                                 sp = mrp = name = stock = unit = None
                     except (ValueError, TypeError):
                         pass
-            if mrp is None and sp is not None:
-                mrp = sp
             return url, name, unit, mrp, sp, stock
 
-        b_url, b_name, b_unit, b_mrp, b_sp, b_stock = get_sam(b_pdp, b_cascade, b_ana, "Blinkit_Product_Url", "blinkit")
+        b_url, b_name, b_unit, b_mrp, b_sp, b_stock = get_sam(b_pdp, b_cascade, b_ana, "Blinkit_Product_Url", "blinkit", b_not_avail)
         b_status = compute_status(am, am_mrp, b_sp, b_mrp, b_name, b_ana, "blinkit")
 
-        j_url, j_name, j_unit, j_mrp, j_sp, j_stock = get_sam(j_pdp, j_cascade, j_ana, "Jiomart_Product_Url", "jiomart")
+        j_url, j_name, j_unit, j_mrp, j_sp, j_stock = get_sam(j_pdp, j_cascade, j_ana, "Jiomart_Product_Url", "jiomart", j_not_avail)
         j_status = compute_status(am, am_mrp, j_sp, j_mrp, j_name, j_ana, "jiomart")
 
         # DMart: match by product name similarity (no Anakin mapping exists)
@@ -686,8 +691,6 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 d_mrp = best_match.get("mrp")
                 d_sp = best_match.get("price")
                 d_stock = "available" if best_match.get("in_stock") else "out_of_stock"
-                if d_mrp is None and d_sp is not None:
-                    d_mrp = d_sp
                 d_status = compute_status(am, am_mrp, d_sp, d_mrp, d_name, {}, "dmart")
 
         rows.append([

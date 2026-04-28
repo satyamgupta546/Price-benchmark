@@ -83,14 +83,20 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
             if "/" in name_field:
                 this_id = name_field.rsplit("/", 1)[-1]
         if this_id == str(target_pid):
-            # Check for price keys at this level
-            if any(k in data for k in price_keys):
+            # Check for real non-zero price (skip placeholder dicts)
+            has_real_price = False
+            for pk in price_keys:
+                pv = data.get(pk)
+                if pv and isinstance(pv, (int, float)) and pv > 0:
+                    has_real_price = True
+                    break
+            if has_real_price:
                 return data
-            # Also check nested subtree (e.g. variants[0].attributes.buybox_mrp)
+            # Also check nested subtree for buybox_mrp (pipe-delimited format)
             for v in data.values():
                 if isinstance(v, (dict, list)):
                     subtree_str = json.dumps(v)
-                    if any(pk in subtree_str for pk in ("buybox_mrp", "price", "mrp", "selling_price")):
+                    if "buybox_mrp" in subtree_str:
                         return data
         for v in data.values():
             found = _find_product_in_json(v, target_pid, depth + 1)
@@ -105,19 +111,21 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
 
 
 def _scan_for_buybox_mrp(captured: list, target_pid: str) -> tuple[float | None, float | None]:
-    """Fallback: scan ALL captured responses for buybox_mrp without requiring product ID match.
-    Safe on PDP pages since only one product's data is loaded."""
+    """Scan captured responses for buybox_mrp associated with target_pid."""
     for payload in captured:
         s = json.dumps(payload, default=str)
         if "buybox_mrp" not in s:
             continue
-        # Walk tree looking for any dict with buybox_mrp
+        # Walk tree looking for dict with buybox_mrp near target_pid
         stack = [payload]
         while stack:
             node = stack.pop()
             if isinstance(node, dict):
+                # Check if this dict or its parent references target_pid
+                node_str = str(node.get("code", "")) or str(node.get("id", "")) or str(node.get("product_id", ""))
+                has_pid = node_str == str(target_pid)
                 bb = node.get("buybox_mrp")
-                if isinstance(bb, dict):
+                if isinstance(bb, dict) and (has_pid or str(target_pid) in json.dumps(node, default=str)):
                     texts = bb.get("text", [])
                     if texts:
                         parts = str(texts[0]).split("|")

@@ -132,21 +132,12 @@ def _find_product_in_json(data, target_pid: str, depth: int = 0):
                 this_id = str(raw_id)
 
         if this_id == str(target_pid):
-            # Check for actual non-zero price (skip placeholder dicts with price=0)
-            has_real_price = False
-            for pk in ("mrp", "price", "offer_price", "selling_price", "sellingPrice"):
-                pv = data.get(pk)
-                if pv and not isinstance(pv, (dict, list)):
-                    try:
-                        if float(str(pv).replace(",", "")) > 0:
-                            has_real_price = True
-                            break
-                    except (ValueError, TypeError):
-                        pass
-            has_name = any(k in data for k in ("name", "product_name", "display_name", "title"))
-            if has_real_price and has_name:
-                return data
-            if has_real_price and "product_id" in data:
+            # Only accept dicts where BOTH price and mrp are int/float > 0
+            price_val = data.get("price")
+            mrp_val = data.get("mrp")
+            has_real_price = isinstance(price_val, (int, float)) and price_val > 0
+            has_real_mrp = isinstance(mrp_val, (int, float)) and mrp_val > 0
+            if has_real_price and has_real_mrp:
                 return data
 
         for v in data.values():
@@ -259,9 +250,6 @@ def _extract_price_from_product_dict(p: dict) -> tuple[float | None, float | Non
             if sp > 50000:
                 sp /= 100
 
-    # If MRP not found but SP exists, MRP = SP (no discount)
-    if sp and not mrp:
-        mrp = sp
     return sp, mrp
 
 
@@ -363,7 +351,7 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
                 found = _find_product_in_json(payload, blinkit_pid)
                 if found:
                     product_dict = found
-                break
+                    break
 
         sp = mrp = None
         name = None
