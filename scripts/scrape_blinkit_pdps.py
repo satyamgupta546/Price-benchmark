@@ -330,8 +330,9 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
             if product_dict:
                 break
 
-        # ── Early detect: homepage redirect = product not available at this location ──
+        # ── Early detect: redirect = product not available at this location ──
         final_url = page.url
+        # Case 1: homepage redirect
         if final_url and ("blinkit.com/" == final_url.rstrip("/").split("//")[-1]
                           or final_url.rstrip("/").endswith("blinkit.com")):
             out.update({
@@ -343,6 +344,35 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
                 "status": "not_available",
             })
             return out
+        # Case 2: redirected to a DIFFERENT product page
+        # Compare /prn/ slug or /prid/ from original URL vs final URL
+        if final_url and url:
+            import re as _re_url
+            orig_prid = _re_url.search(r'/prid/(\d+)', url)
+            final_prid = _re_url.search(r'/prid/(\d+)', final_url)
+            if orig_prid and final_prid and orig_prid.group(1) != final_prid.group(1):
+                out.update({
+                    "sam_product_name": None,
+                    "sam_selling_price": None,
+                    "sam_mrp": None,
+                    "sam_in_stock": False,
+                    "sam_unit": None,
+                    "status": "not_available",
+                    "error": f"redirected: {final_url[:100]}",
+                })
+                return out
+            # Also check if URL slug completely changed (no /prn/ in final)
+            if "/prn/" in url and "/prn/" not in final_url:
+                out.update({
+                    "sam_product_name": None,
+                    "sam_selling_price": None,
+                    "sam_mrp": None,
+                    "sam_in_stock": False,
+                    "sam_unit": None,
+                    "status": "not_available",
+                    "error": f"redirected: {final_url[:100]}",
+                })
+                return out
 
         # ── Try 1: product_dict already found in smart-wait loop above ──
         # If not found yet, one final check on all captured responses
@@ -614,6 +644,20 @@ async def scrape_one_pdp(page, item_code: str, url: str, blinkit_pid: str,
             })
             return out
 
+        # ── Final safety: reject if product_id not found in API AND name doesn't match URL slug ──
+        if sp and not product_dict and name and url:
+            import re as _re_slug
+            # Extract slug from URL: /prn/amul-pure-ghee-refill-pack/prid/...
+            slug_match = _re_slug.search(r'/prn/([^/]+)/', url)
+            if slug_match:
+                slug_words = set(slug_match.group(1).lower().replace("-", " ").split())
+                name_words = set(name.lower().split())
+                # If less than 2 words overlap between URL slug and scraped name, it's wrong product
+                overlap = slug_words & name_words
+                if len(overlap) < 2 and len(slug_words) >= 2:
+                    sp = mrp = name = unit = None
+                    in_stock = False
+
         out.update({
             "sam_product_name": name,
             "sam_selling_price": sp,
@@ -679,16 +723,167 @@ async def worker(worker_id: int, page, queue: asyncio.Queue, results: list,
             print(f"[pdp] snapshot saved to {snap_path.name} ({len(results)} so far)", flush=True)
 
 
+async def discover_from_categories(pincode: str, context, num_tabs: int = 2) -> list:
+    """Scrape Blinkit category pages to discover product URLs + prices.
+    Dynamically fetches category tree from homepage API, then visits each sub-category
+    to intercept /v1/layout/listing_widgets responses."""
+
+    # FMCG-relevant parent category names (case-insensitive match)
+    RELEVANT_PARENTS = {
+        "paan corner", "dairy, bread & eggs", "fruits & vegetables", "cold drinks & juices",
+        "snacks & munchies", "breakfast & instant food", "sweet tooth", "bakery & biscuits",
+        "tea, coffee & milk drinks", "atta, rice & dal", "masala, oil & more", "sauces & spreads",
+        "chicken, meat & fish", "organic & healthy living", "baby care", "pharma & wellness",
+        "cleaning essentials", "home & office", "personal care", "pet care",
+        # Also match single-word variants
+        "munchies", "dairy", "snacks", "beverages", "grocery", "staples",
+    }
+
+    discovered = []
+    seen_pids = set()
+    page = await context.new_page()
+
+    # Step 1: Fetch category tree from homepage
+    cat_tree_responses = []
+    async def on_cat_resp(r):
+        try:
+            ct = r.headers.get("content-type", "")
+            if "json" in ct and r.status == 200:
+                body = await r.text()
+                if len(body) > 500 and "subcategories" in body.lower():
+                    cat_tree_responses.append(json.loads(body))
+        except:
+            pass
+
+    page.on("response", on_cat_resp)
+    try:
+        await page.goto("https://blinkit.com", wait_until="domcontentloaded", timeout=15000)
+        await asyncio.sleep(3)
+    except Exception:
+        pass
+    page.remove_listener("response", on_cat_resp)
+
+    # Step 2: Parse category tree → extract (l0_id, l1_id, name) tuples
+    categories = []
+    for payload in cat_tree_responses:
+        stack = [payload]
+        while stack:
+            node = stack.pop()
+            if isinstance(node, dict):
+                name = node.get("name") or node.get("title") or ""
+                nid = str(node.get("id") or node.get("category_id") or "")
+                subs = node.get("subcategories") or node.get("children") or node.get("sub_categories") or []
+                if isinstance(name, str) and name.lower().strip() in RELEVANT_PARENTS and subs:
+                    for sub in subs:
+                        sname = sub.get("name") or sub.get("title") or ""
+                        sid = str(sub.get("id") or sub.get("category_id") or "")
+                        if sid and sname:
+                            categories.append((nid, sid, f"{name} > {sname}"))
+                elif isinstance(name, str) and subs:
+                    stack.extend(subs)
+                else:
+                    for v in node.values():
+                        if isinstance(v, (dict, list)):
+                            stack.append(v)
+            elif isinstance(node, list):
+                stack.extend(node)
+
+    if not categories:
+        print(f"[pdp] WARNING: Could not fetch category tree from homepage — using no categories", flush=True)
+        await page.close()
+        return discovered
+
+    print(f"[pdp] Category discovery: {len(categories)} sub-categories from homepage API", flush=True)
+
+    for l0, l1, cat_name in categories:
+        captured = []
+
+        async def on_resp(r, cap=captured):
+            try:
+                ct = r.headers.get("content-type", "")
+                if "json" in ct and r.status == 200 and "listing_widgets" in r.url:
+                    body = await r.text()
+                    if len(body) > 200:
+                        cap.append(json.loads(body))
+            except:
+                pass
+
+        page.on("response", on_resp)
+        try:
+            await page.goto(f"https://blinkit.com/cn/x/cid/{l0}/{l1}",
+                            wait_until="domcontentloaded", timeout=12000)
+            await asyncio.sleep(2)
+        except Exception:
+            pass
+        page.remove_listener("response", on_resp)
+
+        # Extract products from listing_widgets responses
+        cat_count = 0
+        for payload in captured:
+            stack = [payload]
+            while stack:
+                node = stack.pop()
+                if isinstance(node, dict):
+                    pid = str(node.get("product_id") or node.get("id") or "")
+                    name = node.get("name")
+                    if pid and name and isinstance(name, str) and (node.get("mrp") or node.get("price")):
+                        if pid not in seen_pids:
+                            seen_pids.add(pid)
+                            discovered.append({
+                                "product_id": pid,
+                                "product_url": f"https://blinkit.com/prn/x/prid/{pid}",
+                                "name": name,
+                                "mrp": node.get("mrp"),
+                                "price": node.get("price") or node.get("selling_price"),
+                                "inventory": node.get("inventory", 0),
+                                "category": cat_name,
+                            })
+                            cat_count += 1
+                    else:
+                        stack.extend(node.values())
+                elif isinstance(node, list):
+                    stack.extend(node)
+
+        if cat_count:
+            print(f"[pdp]   {cat_name}: +{cat_count} products", flush=True)
+
+    await page.close()
+    print(f"[pdp] Category discovery done: {len(discovered)} unique products", flush=True)
+    return discovered
+
+
 async def main(pincode: str, num_tabs: int = 5):
     urls_to_scrape = []
     skipped_oos = 0
     source_name = ""
     seen_ics = set()
+    seen_pids = set()
 
-    # Source 1: product_mapping.json — PRIMARY (humara saved data)
+    # Source 1: url_database.json — PRIMARY (our saved URLs from Anakin + previous scrapes)
+    url_db_path = PROJECT_ROOT / "data" / "mappings" / "url_database.json"
+    if url_db_path.exists():
+        url_db = json.load(open(url_db_path))
+        for key, entry in url_db.items():
+            if entry.get("platform") != "blinkit" or entry.get("pincode") != pincode:
+                continue
+            pid = str(entry.get("product_id") or "").strip()
+            url = entry.get("product_url") or ""
+            ic = str(entry.get("item_code") or "").strip()
+            if not pid or not ic or ic in seen_ics:
+                continue
+            seen_ics.add(ic)
+            seen_pids.add(pid)
+            if not url.startswith("http"):
+                url = f"https://blinkit.com/prn/x/prid/{pid}"
+            aname = entry.get("platform_name") or ""
+            urls_to_scrape.append((ic, url, pid, aname))
+        source_name = f"url_database ({len(seen_ics)} items)"
+
+    # Source 2: product_mapping.json — SUPPLEMENT
     mapping_path = PROJECT_ROOT / "data" / "mappings" / "product_mapping.json"
     if mapping_path.exists():
         mapping = json.load(open(mapping_path))
+        added = 0
         for key, entry in mapping.items():
             if entry.get("platform") != "blinkit":
                 continue
@@ -698,13 +893,16 @@ async def main(pincode: str, num_tabs: int = 5):
             if not pid or not ic or ic in seen_ics:
                 continue
             seen_ics.add(ic)
+            seen_pids.add(str(pid))
             if not url or not url.startswith("http"):
                 url = f"https://blinkit.com/prn/x/prid/{pid}"
             aname = entry.get("platform_name") or entry.get("am_name") or ""
             urls_to_scrape.append((ic, url, pid, aname))
-        source_name = f"product_mapping.json ({len(seen_ics)} items)"
+            added += 1
+        if added:
+            source_name += f" + mapping (+{added})"
 
-    # Source 2: Anakin file — SUPPLEMENT (add new URLs not in mapping)
+    # Source 3: Anakin file — OPTIONAL supplement (will be removed when Anakin shuts down)
     ana_path = latest_anakin_file(pincode)
     if ana_path:
         ana = json.load(open(ana_path))
@@ -723,13 +921,14 @@ async def main(pincode: str, num_tabs: int = 5):
                 aname = (rec.get("Blinkit_Item_Name") or rec.get("Item_Name") or "").strip()
                 urls_to_scrape.append((ic, url, pid, aname))
                 seen_ics.add(ic)
+                seen_pids.add(pid)
                 added_from_anakin += 1
         if added_from_anakin:
-            source_name += f" + Anakin {ana_path.name} (+{added_from_anakin} new)"
+            source_name += f" + Anakin (+{added_from_anakin})"
 
     if not urls_to_scrape:
-        print(f"[pdp] ERROR: no product_mapping.json and no Anakin file for {pincode}", file=sys.stderr)
-        sys.exit(1)
+        print(f"[pdp] WARNING: no URLs from database/mapping/anakin for {pincode} — running category discovery only", flush=True)
+        source_name = "category_discovery_only"
 
     print(f"[pdp] Loaded {len(urls_to_scrape)} URLs from {source_name} (skipped {skipped_oos} OOS)", flush=True)
     print(f"[pdp] Scraping with {num_tabs} parallel tabs", flush=True)
@@ -804,6 +1003,60 @@ async def main(pincode: str, num_tabs: int = 5):
         except Exception as e:
             print(f"[pdp] Retry pass failed: {e}", flush=True)
 
+    # ── CATEGORY DISCOVERY: find new products from category pages ──
+    category_products = []
+    try:
+        pw3, browser3, context3, _ = await init_blinkit_browser(pincode, 1)
+        category_products = await discover_from_categories(pincode, context3)
+        await browser3.close()
+        await pw3.stop()
+    except Exception as e:
+        print(f"[pdp] Category discovery failed: {e}", flush=True)
+
+    # ── UPDATE URL DATABASE with discovered products ──
+    if url_db_path.exists():
+        url_db = json.load(open(url_db_path))
+    else:
+        url_db = {}
+    db_added = 0
+
+    # Add/verify from PDP scrape results
+    for r in results:
+        if r.get("status") != "ok":
+            continue
+        ic = str(r.get("item_code", ""))
+        pid = str(r.get("blinkit_product_id", ""))
+        url = r.get("blinkit_product_url", "")
+        if not ic or not pid:
+            continue
+        db_key = f"blinkit_{pincode}_{ic}"
+        if db_key not in url_db:
+            url_db[db_key] = {
+                "item_code": ic, "platform": "blinkit", "pincode": pincode,
+                "product_id": pid, "product_url": url,
+                "platform_name": r.get("sam_product_name", ""),
+            }
+            db_added += 1
+
+    # Save category products for cascade matching (new products not yet in AM master)
+    if category_products:
+        cat_dir = PROJECT_ROOT / "data" / "sam"
+        cat_dir.mkdir(parents=True, exist_ok=True)
+        cat_path = cat_dir / f"blinkit_category_{pincode}_latest.json"
+        with open(cat_path, "w") as f:
+            json.dump({
+                "pincode": pincode, "platform": "blinkit",
+                "scraped_at": datetime.now().isoformat(),
+                "total": len(category_products),
+                "products": category_products,
+            }, f, indent=2, default=str)
+        print(f"[pdp] Category products saved: {cat_path.name} ({len(category_products)} items)", flush=True)
+
+    if db_added:
+        with open(url_db_path, "w") as f:
+            json.dump(url_db, f, indent=2, default=str)
+        print(f"[pdp] URL database updated: +{db_added} new entries (total {len(url_db)})", flush=True)
+
     # Save
     out_dir = PROJECT_ROOT / "data" / "sam"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -812,11 +1065,11 @@ async def main(pincode: str, num_tabs: int = 5):
     with open(out_path, "w") as f:
         json.dump({
             "pincode": pincode,
-            "source": "anakin_url_seed",
-            "anakin_file": source_name,
+            "source": source_name,
             "scraped_at": datetime.now().isoformat(),
             "duration_seconds": round(duration, 1),
             "total_urls": len(urls_to_scrape),
+            "category_discovered": len(category_products),
             "ok": ok,
             "no_price": no_price,
             "errors": err,

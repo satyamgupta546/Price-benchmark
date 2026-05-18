@@ -58,14 +58,13 @@ METABASE_KEY = os.environ.get("METABASE_API_KEY", "")
 BQ_PROJECT = "apna-mart-data"
 BQ_DATASET = "googlesheet"
 BQ_LIVE_TABLE = f"{BQ_PROJECT}:{BQ_DATASET}.sam_price_live"
-BQ_HISTORY_TABLE = f"{BQ_PROJECT}:{BQ_DATASET}.sam_price_history"
 GCS_BUCKET = "sam-price-data"
 
 
 RUN_ERRORS = []  # Collect errors across the entire run
 
 
-def run(script, args=[], use_venv=False, retries=2, critical=False):
+def run(script, args=[], use_venv=False, retries=2, critical=False, timeout=7200):
     """Run a script with retry logic. Collects errors for end-of-run alert."""
     python = VENV_PYTHON if use_venv else sys.executable
     cmd = [python, str(SCRIPTS / script)] + args
@@ -74,7 +73,7 @@ def run(script, args=[], use_venv=False, retries=2, critical=False):
     for attempt in range(retries + 1):
         try:
             r = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
-                               timeout=7200)  # 120 min max per script
+                               timeout=timeout)
         except subprocess.TimeoutExpired:
             err_msg = f"Timed out after 120 min"
             print(f"    ⚠️ {script} timed out (attempt {attempt+1}/{retries+1})", flush=True)
@@ -386,16 +385,11 @@ def fetch_all_anakin(pincodes):
         print(f"  ✅ Anakin: {city} ({pin})", flush=True)
 
 
-def scrape_city(pincode, city, skip_anakin=False):
+def scrape_city(pincode, city, ):
     """Run full pipeline for one city — both platforms."""
     print(f"\n{'─' * 60}", flush=True)
     print(f"  {city} ({pincode})", flush=True)
     print(f"{'─' * 60}", flush=True)
-
-    # Fetch Anakin (skip if already fetched in bulk)
-    if not skip_anakin:
-        run("fetch_anakin_blinkit.py", [pincode])
-        run("fetch_anakin_jiomart.py", [pincode])
 
     # Platform availability from config/cities.json
     city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit", "jiomart"})
@@ -414,6 +408,16 @@ def scrape_city(pincode, city, skip_anakin=False):
                 print(f"  ✅ {city} dmart complete", flush=True)
                 return
 
+            if platform == "jiomart":
+                # New Jiomart: category scrape → master file → unified match (no PDP)
+                print(f"\n⚙️  {city} — jiomart pipeline (category scrape)", flush=True)
+                run("test_jiomart_pdp.py", ["--all", "--pincode", pincode], use_venv=True, retries=0, timeout=1800)
+                run("unified_matcher.py", [pincode, "jiomart"], timeout=600)
+                run("stage4_image_match.py", [pincode, "jiomart"], timeout=600)
+                run("stage5_barcode_match.py", [pincode, "jiomart"], timeout=600)
+                print(f"  ✅ {city} jiomart complete", flush=True)
+                return
+
             print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
             if platform == "blinkit":
                 run("scrape_blinkit_pdps.py", [pincode, "8"], use_venv=True, retries=1, critical=True)
@@ -421,28 +425,17 @@ def scrape_city(pincode, city, skip_anakin=False):
                 if partial.exists():
                     partial.unlink()
                 run("compare_pdp.py", [pincode])
-            elif platform == "jiomart":
-                run("scrape_jiomart_pdps.py", [pincode, "4"], use_venv=True, retries=1, critical=True)
-                partial = DATA / "sam" / f"jiomart_pdp_{pincode}_latest_partial.json"
-                if partial.exists():
-                    partial.unlink()
-                run("compare_pdp_jiomart.py", [pincode])
 
-            run("cascade_match.py", [pincode, platform])
-            run("stage3_match.py", [pincode, platform])
-
-            if platform == "jiomart":
-                run("jiomart_search_match.py", [pincode], use_venv=True)
-
+            run("unified_matcher.py", [pincode, platform], timeout=600)
             run("stage4_image_match.py", [pincode, platform])
-            run("stage5_barcode_match.py", [pincode, platform])
+            run("stage5_barcode_match.py", [pincode, platform], timeout=600)
             print(f"  ✅ {city} {platform} complete", flush=True)
         except Exception as e:
             error = f"{city} {platform} crashed: {str(e)[:200]}"
             print(f"  ❌ {error}", flush=True)
             RUN_ERRORS.append(error)
 
-    # Run ALL platforms in PARALLEL (Blinkit + Jiomart + DMart)
+    # Run ALL platforms in PARALLEL
     threads = [
         threading.Thread(target=run_platform, args=("blinkit",)),
         threading.Thread(target=run_platform, args=("jiomart",)),
@@ -458,95 +451,23 @@ def scrape_city(pincode, city, skip_anakin=False):
 
 
 # ── Step 3: Compute status + generate output ──
+# Status computation now uses UnifiedMatchingEngine (unified_matcher.py)
 
-def parse_wt(name):
-    if not name:
-        return None, None
-    m = re.search(r"(\d+\.?\d*)\s*(g|gm|gms|kg|kgs|ml|mls|l|ltr|ltrs|pc|pcs|piece|pieces|unit|units|n|nos)\b", name.lower())
-    if m:
-        v = float(m.group(1))
-        u = m.group(2)
-        if u in ("gm", "gms"): u = "g"
-        elif u in ("kgs",): u = "kg"
-        elif u in ("mls",): u = "ml"
-        elif u in ("ltrs",): u = "ltr"
-        elif u in ("pcs", "piece", "pieces", "units", "n", "nos"): u = "pc"
-        return v, u
-    return None, None
+from unified_matcher import UnifiedMatchingEngine
+
+_engine = UnifiedMatchingEngine()  # No pool needed — used only for compute_status + heuristics
 
 
-def unit_type_group(u):
-    """Return unit category: 'weight', 'volume', 'count', or None."""
-    if not u: return None
-    u = str(u).lower().strip()
-    if u in ("g", "gm", "gms", "kg", "kgs"): return "weight"
-    if u in ("ml", "mls", "l", "ltr", "ltrs"): return "volume"
-    if u in ("pc", "pcs", "piece", "pieces", "unit", "units", "n", "nos"): return "count"
-    return None
-
-
-def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec, platform):
-    if sam_sp is None:
-        return "NA"
-
-    am_name_lower = (am.get("display_name") or "").lower()
-    am_unit = (am.get("unit") or "").lower().strip()
-    am_uv = am.get("unit_value")
-    am_pt = (am.get("product_type") or "").upper()
-
-    sam_wt, sam_wu = parse_wt(sam_name)
-
-    # ── SEMI COMPLETE: Loose / ASM items in STPLS ──
-    # Criteria: product is loose/ASM + unit TYPE matches (kg↔g = weight, ml↔l = volume)
-    is_loose_asm = (
-        ("loose" in am_name_lower or "asm" in am_name_lower or am_pt in ("LOOSE", "ASM"))
-        and am.get("master_category") == "STPLS"
-    )
-    if is_loose_asm:
-        am_ug = unit_type_group(am_unit)
-        sam_ug = unit_type_group(sam_wu)
-        # Unit type must match — if either side unknown, give benefit of doubt
-        if am_ug and sam_ug and am_ug != sam_ug:
-            return "PARTIAL MATCH"  # e.g. AM=weight, SAM=volume → wrong product
-        return "SEMI COMPLETE MATCH"
-
-    # ── Unit value match (±10%) ──
-    # None = unknown (one or both sides can't be parsed → don't assume match or mismatch)
-    # True = confirmed match, False = confirmed mismatch
-    unit_match = None
-    if am_uv and sam_wt and am_unit and sam_wu:
-        try:
-            av = float(am_uv)
-            sv = sam_wt
-            if am_unit in ("kg", "kgs") and sam_wu == "g": av *= 1000
-            elif am_unit in ("g", "gm") and sam_wu == "kg": sv *= 1000
-            elif am_unit in ("l", "ltr") and sam_wu == "ml": av *= 1000
-            elif am_unit == "ml" and sam_wu in ("l", "ltr"): sv *= 1000
-            if av > 0 and sv > 0:
-                unit_match = 0.9 <= sv / av <= 1.1
-        except Exception:
-            pass
-
-    # Confirmed unit mismatch → can never be COMPLETE (don't let sp_match override this)
-    if unit_match is False:
-        return "PARTIAL MATCH"
-
-    # ── MRP match (exact — allow 0.01 for float rounding) ──
-    mrp_match = False
-    if am_mrp and sam_mrp:
-        try:
-            mrp_match = abs(float(am_mrp) - float(sam_mrp)) < 0.01
-        except Exception:
-            pass
-
-    # ── COMPLETE MATCH: unit match + MRP exact ──
-    if unit_match and mrp_match:
-        return "COMPLETE MATCH"
-    return "PARTIAL MATCH"
+def compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name, anakin_rec=None, platform=None):
+    """Wrapper around UnifiedMatchingEngine.compute_status for backward compat."""
+    return _engine.compute_status(am, am_mrp, sam_sp, sam_mrp, sam_name)
 
 
 def load_pdp(platform, pincode):
+    # Try today's file first, fallback to latest available
     files = sorted([f for f in DATA.glob(f"sam/{platform}_pdp_{pincode}_{DATE}*.json") if "partial" not in f.name])
+    if not files:
+        files = sorted([f for f in DATA.glob(f"sam/{platform}_pdp_{pincode}_*.json") if "partial" not in f.name and "category" not in f.name])
     if not files:
         return {}, set()
     d = json.load(open(files[-1]))
@@ -561,11 +482,20 @@ def load_pdp(platform, pincode):
 
 def load_cascade(platform, pincode):
     cm = {}
-    patterns = [f"{platform}_cascade_{pincode}_{DATE}*.json", f"{platform}_stage3_{pincode}_{DATE}*.json"]
+    # Unified matcher output first (highest priority), then legacy fallbacks
+    patterns = [
+        f"{platform}_unified_{pincode}_{DATE}*.json",
+        f"{platform}_cascade_{pincode}_{DATE}*.json",
+        f"{platform}_stage3_{pincode}_{DATE}*.json",
+    ]
     if platform == "jiomart":
         patterns.append(f"jiomart_search_match_{pincode}_{DATE}*.json")
     for pat in patterns:
         files = sorted(DATA.glob(f"comparisons/{pat}"))
+        # Fallback to latest if today's not found
+        if not files:
+            fallback_pat = pat.replace(f"_{DATE}", "_")
+            files = sorted(DATA.glob(f"comparisons/{fallback_pat}"))
         if files:
             for m in json.load(open(files[-1])).get("new_mappings", []):
                 ic = m.get("item_code")
@@ -647,19 +577,16 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                     pass
             # Variant check: if weight ratio outside 0.7-1.5, mark as NA (not same product)
             if sp is not None and name:
-                sam_wt, sam_wu = parse_wt(name)
+                from utils import UNIT_ALIASES, to_base_unit
+                sam_wt, sam_wu = _engine._parse_weight(name)
                 am_u = (am.get("unit") or "").lower().strip()
                 am_uv_val = am.get("unit_value")
                 if sam_wt and am_uv_val and am_u and sam_wu:
                     try:
-                        av = float(am_uv_val)
-                        sv = sam_wt
-                        if am_u in ("kg", "kgs") and sam_wu == "g": av *= 1000
-                        elif am_u in ("g", "gm") and sam_wu == "kg": sv *= 1000
-                        elif am_u in ("l", "ltr") and sam_wu == "ml": av *= 1000
-                        elif am_u == "ml" and sam_wu in ("l", "ltr"): sv *= 1000
-                        if av > 0 and sv > 0:
-                            ratio = sv / av
+                        u_norm = UNIT_ALIASES.get(am_u, am_u)
+                        am_bv, am_bu = to_base_unit(float(am_uv_val), u_norm)
+                        if am_bu == sam_wu and am_bv > 0 and sam_wt > 0:
+                            ratio = sam_wt / am_bv
                             if ratio < 0.7 or ratio > 1.5:
                                 sp = mrp = name = stock = unit = None
                     except (ValueError, TypeError):
@@ -675,16 +602,39 @@ def generate_city_data(pincode, city, am_map, mrp_map):
         # DMart: match by product name similarity (no Anakin mapping exists)
         d_url = d_name = d_unit = d_mrp = d_sp = d_stock = d_status = None
         am_display = (am.get("display_name") or "").lower()
+        am_brand = (am.get("brand") or "").lower().strip()
         if dmart_map and am_display:
             best_match = None
             best_score = 0
-            from difflib import SequenceMatcher
+            try:
+                from rapidfuzz import fuzz
+            except ImportError:
+                # Fallback for local dev without rapidfuzz
+                from difflib import SequenceMatcher
+                class fuzz:
+                    @staticmethod
+                    def token_sort_ratio(a, b):
+                        return SequenceMatcher(None, " ".join(sorted(a.split())), " ".join(sorted(b.split()))).ratio() * 100
+            # Strip common prefixes that hurt matching
+            am_clean = re.sub(r'\s*[-|]\s*\d+\s*(g|gm|gms|kg|ml|l|ltr|pcs?|n)\b', '', am_display).strip()
             for dname, dp in dmart_map.items():
-                score = SequenceMatcher(None, am_display, dname.lower()).ratio()
+                dname_low = dname.lower()
+                # Strip DMart's SKU suffix (": 500 gms", ": 1 kg")
+                dname_clean = re.sub(r'\s*:\s*\d+\s*(g|gm|gms|kg|ml|l|ltr|pcs?)\b.*', '', dname_low).strip()
+                # Strip "dmart premia/swaad" brand prefix for better matching
+                dname_clean = re.sub(r'^dmart\s+(premia|swaad|kitchen)\s+', '', dname_clean).strip()
+                # Brand check: if AM brand exists, DMart product should contain it (or vice versa)
+                d_brand = (dp.get("brand") or "").lower().strip()
+                if am_brand and d_brand and am_brand not in d_brand and d_brand not in am_brand:
+                    # Different brands — skip unless names are very similar
+                    score = fuzz.token_sort_ratio(am_clean, dname_clean)
+                    if score < 80:
+                        continue
+                score = fuzz.token_sort_ratio(am_clean, dname_clean)
                 if score > best_score:
                     best_score = score
                     best_match = dp
-            if best_match and best_score >= 0.55:
+            if best_match and best_score >= 50:
                 d_url = best_match.get("product_url")
                 d_name = best_match.get("product_name")
                 d_unit = best_match.get("unit")
@@ -700,6 +650,7 @@ def generate_city_data(pincode, city, am_map, mrp_map):
             b_url, b_name, b_unit, b_mrp, b_sp, b_stock, b_status,
             j_url, j_name, j_unit, j_mrp, j_sp, j_stock, j_status,
             d_url, d_name, d_unit, d_mrp, d_sp, d_stock, d_status,
+            am.get("sub_variant"), am.get("variant"), am.get("pack_size"),
         ])
     return rows
 
@@ -764,13 +715,13 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
 
     # 1. Scrape (Anakin already fetched)
     try:
-        scrape_city(pin, city, skip_anakin=True)
+        scrape_city(pin, city, )
     except Exception as e:
         print(f"  ❌ {city} scrape crashed: {e}", flush=True)
         RUN_ERRORS.append(f"{city} ({pin}) scrape crashed: {str(e)[:150]}")
         try:
             print(f"  🔄 Retrying {city}...", flush=True)
-            scrape_city(pin, city, skip_anakin=True)
+            scrape_city(pin, city, )
             print(f"  ✅ {city} recovered on retry!", flush=True)
         except Exception as e2:
             print(f"  ❌ {city} failed again: {e2}", flush=True)
@@ -807,22 +758,24 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
 
 
 def push_to_bigquery(csv_path, pincodes):
-    """Push CSV to both BQ tables using Python BigQuery API."""
+    """Push CSV to sam_price_live (dedup: delete today's rows first) + sam_price_history (append)."""
     print("\n📤 Pushing to BigQuery...", flush=True)
     from google.cloud import bigquery
     client = bigquery.Client(project=BQ_PROJECT)
 
     live_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
-    hist_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_history"
+    history_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_history"
 
-    # Live table: delete rows for pincodes being pushed, then load
-    for pin in pincodes:
-        try:
-            client.query(f"DELETE FROM `{live_table}` WHERE pincode = '{pin}'").result()
-            print(f"  🗑️  sam_price_live: deleted pincode {pin}", flush=True)
-        except Exception as e:
-            print(f"  ⚠️  sam_price_live delete {pin}: {str(e)[:200]}", flush=True)
+    # Dedup: delete existing rows for today's pincodes before appending
+    try:
+        pin_list = ", ".join(f"'{p}'" for p in pincodes)
+        delete_sql = f"DELETE FROM `{live_table}` WHERE date = '{DATE}' AND pincode IN ({pin_list})"
+        client.query(delete_sql).result()
+        print(f"  🗑️  Deleted existing rows for {DATE} [{pin_list}]", flush=True)
+    except Exception as e:
+        print(f"  ⚠️  Dedup delete failed (continuing): {str(e)[:200]}", flush=True)
 
+    # Push to sam_price_live
     try:
         job_config = bigquery.LoadJobConfig(
             source_format=bigquery.SourceFormat.CSV,
@@ -830,25 +783,18 @@ def push_to_bigquery(csv_path, pincodes):
         )
         with open(csv_path, "rb") as f:
             client.load_table_from_file(f, live_table, job_config=job_config).result()
-        print(f"  ✅ sam_price_live (loaded)", flush=True)
+        print(f"  ✅ sam_price_live (appended)", flush=True)
     except Exception as e:
         print(f"  ❌ sam_price_live: {str(e)[:200]}", flush=True)
 
-    # History table: delete existing rows for same date+pincodes, then load
-    pin_list = ", ".join(f"'{p}'" for p in pincodes)
-    try:
-        client.query(f"DELETE FROM `{hist_table}` WHERE date = '{DATE}' AND pincode IN ({pin_list})").result()
-        print(f"  🗑️  sam_price_history: deduped {DATE} for {pin_list}", flush=True)
-    except Exception as e:
-        print(f"  ⚠️  sam_price_history dedup: {str(e)[:200]}", flush=True)
-
+    # Push to sam_price_history (append only — permanent record)
     try:
         job_config = bigquery.LoadJobConfig(
             source_format=bigquery.SourceFormat.CSV,
             write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
         )
         with open(csv_path, "rb") as f:
-            client.load_table_from_file(f, hist_table, job_config=job_config).result()
+            client.load_table_from_file(f, history_table, job_config=job_config).result()
         print(f"  ✅ sam_price_history (appended)", flush=True)
     except Exception as e:
         print(f"  ❌ sam_price_history: {str(e)[:200]}", flush=True)
@@ -893,33 +839,48 @@ def main():
     print("\n📥 Fetching EAN map...", flush=True)
     run("fetch_ean_map.py")
 
-    # Step 2: Fetch Anakin for ALL cities (lightweight API calls, no browser)
-    if not skip_scrape:
-        fetch_all_anakin(pincodes)
-
-    # Step 3: Collect all item_codes from Anakin files + KVI list
+    # Step 2: Collect item_codes from url_database + KVI (Anakin removed — url_database is primary)
     all_item_codes = set()
+
+    # Source 1: URL database (primary — 17,446+ saved URLs)
+    url_db = load_url_database()
+    for key, entry in url_db.items():
+        ic = str(entry.get("item_code", "")).strip()
+        if ic:
+            all_item_codes.add(ic)
+    print(f"  📦 URL database: {len(all_item_codes)} unique item_codes", flush=True)
+
+    # Source 2: KVI master (high-priority items)
+    kvi_path = DATA / "kvi_master.json"
+    if kvi_path.exists():
+        kvi_data = json.load(open(kvi_path))
+        kvi_count = 0
+        for item in kvi_data.get("kvi", []):
+            ic = str(item.get("item_code", "")).strip()
+            if ic and ic not in all_item_codes:
+                all_item_codes.add(ic)
+                kvi_count += 1
+        if kvi_count:
+            print(f"  📋 KVI: +{kvi_count} items added", flush=True)
+
+    # Source 3: Anakin files if they exist (optional supplement — will be removed)
     for pin in pincodes:
         for platform in ["blinkit", "jiomart"]:
             files = sorted(DATA.glob(f"anakin/{platform}_{pin}_*.json"))
             if files:
                 d = json.load(open(files[-1]))
+                anakin_added = 0
                 for r in d.get("records", []):
                     ic = str(r.get("Item_Code", "")).strip()
-                    if ic:
+                    if ic and ic not in all_item_codes:
                         all_item_codes.add(ic)
+                        anakin_added += 1
+                if anakin_added:
+                    print(f"  📎 Anakin {platform} {pin}: +{anakin_added} items", flush=True)
 
-    # Also add KVI item_codes (so they're fetched even if Anakin doesn't track them)
-    kvi_path = DATA / "kvi_master.json"
-    if kvi_path.exists():
-        kvi_data = json.load(open(kvi_path))
-        for item in kvi_data.get("kvi", []):
-            ic = str(item.get("item_code", "")).strip()
-            if ic:
-                all_item_codes.add(ic)
-        print(f"  📋 KVI: added {len(set(item['item_code'] for item in kvi_data.get('kvi', [])))} unique items to fetch list", flush=True)
+    print(f"  Total item_codes: {len(all_item_codes)}", flush=True)
 
-    # Step 4: Fetch AM master + MRP
+    # Step 3: Fetch AM master + MRP
     am_map = fetch_am_master(list(all_item_codes))
 
     # Fetch MRP per warehouse (deduplicate warehouses)

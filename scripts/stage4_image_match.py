@@ -132,28 +132,92 @@ def main(pincode: str, platform: str = "blinkit"):
     ana_path = latest_file("anakin", f"{platform}_{pincode}_*.json")
     sam_path = None
     for p in sorted((PROJECT_ROOT / "data" / "sam").glob(f"{platform}_{pincode}_*.json"), reverse=True):
-        if "pdp" not in p.name:
+        if "pdp" not in p.name and "category" not in p.name:
             sam_path = p
             break
 
-    if not ana_path:
-        print(f"[img] No Anakin {platform} file for {pincode} — skipping", flush=True)
-        sys.exit(0)
-    if not sam_path:
-        print(f"[img] No SAM {platform} BFS data for {pincode} — skipping", flush=True)
+    cat_path = None
+    for p in sorted((PROJECT_ROOT / "data" / "sam").glob(f"{platform}_category_{pincode}_*.json"), reverse=True):
+        cat_path = p
+        break
+
+    am_path = PROJECT_ROOT / "data" / "am_product_master.json"
+    has_anakin = ana_path is not None
+    has_sam = sam_path is not None
+    has_category = cat_path is not None
+    jm_master_path = PROJECT_ROOT / "data" / "jiomart_product_master.json"
+    has_jm_master = platform == "jiomart" and jm_master_path.exists()
+
+    if not has_sam and not has_category and not has_jm_master:
+        print(f"[img] No SAM/category/master data for {platform} {pincode} — skipping", flush=True)
         sys.exit(0)
 
     print(f"[img] Platform: {platform}")
-    print(f"[img] Anakin: {ana_path.name}")
-    print(f"[img] SAM pool: {sam_path.name}")
+    print(f"[img] Anakin: {ana_path.name if has_anakin else 'none'}")
+    print(f"[img] SAM pool: {sam_path.name if has_sam else 'none'}")
+    print(f"[img] Category: {cat_path.name if has_category else 'none'}")
 
-    ana = json.load(open(ana_path))
-    sam = json.load(open(sam_path))
+    ana_records = []
+    if has_anakin:
+        ana = json.load(open(ana_path))
+        ana_records = ana.get("records", [])
+
+    # Build search pool
+    sam_products = []
+    seen_pids = set()
+    if has_sam:
+        sam = json.load(open(sam_path))
+        for p in sam.get("products", []):
+            pid = str(p.get("product_id", ""))
+            if pid and pid not in seen_pids:
+                seen_pids.add(pid)
+                sam_products.append(p)
+    if has_category:
+        cat = json.load(open(cat_path))
+        for p in cat.get("products", []):
+            pid = str(p.get("product_id") or p.get("pid", ""))
+            if pid and pid not in seen_pids:
+                seen_pids.add(pid)
+                sam_products.append({
+                    "product_id": pid,
+                    "product_url": p.get("product_url", f"https://blinkit.com/prn/x/prid/{pid}"),
+                    "product_name": p.get("name", ""),
+                    "brand": (p.get("name") or "").split()[0] if p.get("name") else "",
+                    "price": p.get("price") or p.get("sp"),
+                    "mrp": p.get("mrp"),
+                    "image_url": p.get("image_url", ""),
+                })
+
+    # Jiomart product master
+    if has_jm_master:
+        jm_master = json.load(open(jm_master_path))
+        jm_added = 0
+        for pid, p in jm_master.items():
+            if pid not in seen_pids and p.get("last_sp"):
+                seen_pids.add(pid)
+                sam_products.append({
+                    "product_id": pid,
+                    "product_url": p.get("url", ""),
+                    "product_name": p.get("name", ""),
+                    "brand": p.get("brand", ""),
+                    "price": p.get("last_sp"),
+                    "mrp": p.get("last_mrp"),
+                    "image_url": "",
+                })
+                jm_added += 1
+        print(f"[img] Jiomart master added to pool: {jm_added}")
 
     # Find unmatched non-loose usable SKUs
-    usable_codes = {r.get("Item_Code") for r in ana["records"]
+    usable_codes = {r.get("Item_Code") for r in ana_records
                     if r.get(pf["selling_price"]) not in (None, "", "NA", "nan")
                     and "loose" not in (r.get("Item_Name") or "").lower()}
+    # Also add AM products as usable
+    if am_path.exists():
+        am_map = json.load(open(am_path))
+        for ic, am in am_map.items():
+            if am.get("master_category") in ("STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"):
+                if "loose" not in (am.get("display_name") or "").lower():
+                    usable_codes.add(ic)
 
     # Collect already-matched codes from Stage 1-3
     matched_codes: set[str] = set()
@@ -168,34 +232,41 @@ def main(pincode: str, platform: str = "blinkit"):
             for m in d.get("new_mappings", []):
                 matched_codes.add(m.get("item_code"))
 
-    unmatched = [r for r in ana["records"]
+    # Build unmatched input from Anakin + AM master
+    unmatched = [r for r in ana_records
                  if r.get("Item_Code") in (usable_codes - matched_codes)]
+    if am_path.exists():
+        existing_ics = {r.get("Item_Code") for r in unmatched}
+        for ic in (usable_codes - matched_codes - existing_ics):
+            am_item = am_map.get(ic, {})
+            if am_item.get("main_image"):
+                unmatched.append({
+                    "Item_Code": ic, "Item_Name": am_item.get("display_name", ""),
+                    "Image_Link": am_item.get("main_image", ""),
+                })
 
     print(f"[img] Usable non-loose: {len(usable_codes)}")
     print(f"[img] Already matched: {len(matched_codes & usable_codes)}")
     print(f"[img] Unmatched (Stage 4 input): {len(unmatched)}")
 
-    # Diagnose Anakin image availability
-    ana_img_stats = {"has_url": 0, "empty": 0, "missing_field": 0}
+    # Diagnose image availability
+    img_stats = {"has_url": 0, "empty": 0}
     for sku in unmatched:
         raw = sku.get("Image_Link")
-        url = clean_str(raw)
+        url = clean_str(raw) if callable(clean_str) else (raw or "").strip()
         if url and url.startswith("http"):
-            ana_img_stats["has_url"] += 1
-        elif "Image_Link" in sku:
-            ana_img_stats["empty"] += 1
+            img_stats["has_url"] += 1
         else:
-            ana_img_stats["missing_field"] += 1
+            img_stats["empty"] += 1
 
-    print(f"[img] Anakin images: {ana_img_stats['has_url']} have URL, "
-          f"{ana_img_stats['empty']} empty, {ana_img_stats['missing_field']} field missing")
+    print(f"[img] Images: {img_stats['has_url']} have URL, {img_stats['empty']} missing")
     print()
 
-    # Step 1: Pre-compute pHash for SAM BFS pool images
+    # Step 1: Pre-compute pHash for SAM pool images
     print("[img] Computing pHash for SAM pool images...", flush=True)
     sam_hashes: list[tuple[dict, imagehash.ImageHash]] = []
     sam_download_errors: dict[str, int] = {}
-    pool = sam["products"]
+    pool = sam_products
     for i, p in enumerate(pool):
         img_url = p.get("image_url")
         if not img_url:

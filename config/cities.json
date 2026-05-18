@@ -8,7 +8,10 @@
       "default_tabs": 4,
       "fast_tabs": 8,
       "timeout_per_url": 15,
-      "retry_enabled": true
+      "retry_enabled": true,
+      "category_discovery": true,
+      "url_source": "url_database",
+      "_note": "Category IDs fetched dynamically from homepage API per city"
     },
     "jiomart": {
       "browser": "firefox",
@@ -73,7 +76,7 @@
       "name": "Raipur",
       "state": "CG",
       "warehouse": "WRHS_2",
-      "platforms": ["blinkit", "jiomart", "dmart"],
+      "platforms": ["blinkit", "jiomart"],
       "anakin_available": true,
       "est_products": 2500
     },
@@ -105,9 +108,7 @@
     }
   },
 
-  "dmart_store_ids": {
-    "492001": "10677"
-  },
+  "dmart_store_ids": {},
 
   "time_estimate": {
     "_doc": "Total time = cities / max_parallel × est_time_per_city",

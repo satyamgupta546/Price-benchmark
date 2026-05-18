@@ -10,7 +10,13 @@ PROJECT="apna-mart-data"
 REGION="asia-south1"
 IMAGE="gcr.io/${PROJECT}/sam-scraper"
 JOB_NAME="sam-daily"
-SCHEDULE="30 8 * * *"  # 8:30 AM IST daily
+SCHEDULE="0 8 * * *"  # 8:00 AM IST daily
+
+# ── FIXED INFRA CONFIG — DO NOT CHANGE ──
+CPU=8
+MEMORY="32Gi"
+TIMEOUT=14400
+# ─────────────────────────────────────────
 
 echo "═══════════════════════════════════════"
 echo "  SAM Scraper — Cloud Run Deployment"
@@ -33,18 +39,18 @@ echo ""
 echo "Step 4: Creating Cloud Run Job..."
 gcloud run jobs create ${JOB_NAME} \
   --image ${IMAGE} \
-  --memory 4Gi \
-  --cpu 2 \
-  --timeout 14400 \
+  --memory ${MEMORY} \
+  --cpu ${CPU} \
+  --task-timeout ${TIMEOUT} \
   --max-retries 1 \
   --region ${REGION} \
   --set-env-vars "METABASE_API_KEY=${METABASE_API_KEY},SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}" \
   2>/dev/null || \
 gcloud run jobs update ${JOB_NAME} \
   --image ${IMAGE} \
-  --memory 4Gi \
-  --cpu 2 \
-  --timeout 14400 \
+  --memory ${MEMORY} \
+  --cpu ${CPU} \
+  --task-timeout ${TIMEOUT} \
   --max-retries 1 \
   --region ${REGION} \
   --set-env-vars "METABASE_API_KEY=${METABASE_API_KEY},SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}"
@@ -84,7 +90,7 @@ echo "════════════════════════�
 echo ""
 echo "  Image:    ${IMAGE}"
 echo "  Job:      ${JOB_NAME}"
-echo "  Schedule: Daily 8:30 AM IST"
+echo "  Schedule: Daily 8:00 AM IST"
 echo "  Region:   ${REGION}"
 echo ""
 echo "  Manual test run:"

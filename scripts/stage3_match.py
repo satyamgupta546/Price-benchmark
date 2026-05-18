@@ -166,24 +166,85 @@ def main(pincode: str, platform: str = "blinkit"):
 
     sam_path = None
     for p in sorted((PROJECT_ROOT / "data" / "sam").glob(f"{platform}_{pincode}_*.json"), reverse=True):
-        if "pdp" not in p.name:
+        if "pdp" not in p.name and "category" not in p.name:
             sam_path = p
             break
 
-    if not ana_path:
-        print(f"[stage3] No Anakin {platform} file for {pincode} — skipping", flush=True)
-        sys.exit(0)
-    if not sam_path:
-        print(f"[stage3] No SAM {platform} BFS data for {pincode} — skipping", flush=True)
+    # Category products
+    cat_path = None
+    for p in sorted((PROJECT_ROOT / "data" / "sam").glob(f"{platform}_category_{pincode}_*.json"), reverse=True):
+        cat_path = p
+        break
+
+    am_path = PROJECT_ROOT / "data" / "am_product_master.json"
+    has_anakin = ana_path is not None
+    has_sam = sam_path is not None
+    has_category = cat_path is not None
+    jm_master_path = PROJECT_ROOT / "data" / "jiomart_product_master.json"
+    has_jm_master = platform == "jiomart" and jm_master_path.exists()
+
+    if not has_sam and not has_category and not has_jm_master:
+        print(f"[stage3] No SAM/category/master data for {platform} {pincode} — skipping", flush=True)
         sys.exit(0)
 
     print(f"[stage3] Platform: {platform}")
-    print(f"[stage3] Anakin:   {ana_path.name}")
-    print(f"[stage3] SAM:     {sam_path.name}")
+    print(f"[stage3] Anakin:   {ana_path.name if has_anakin else 'none'}")
+    print(f"[stage3] SAM:     {sam_path.name if has_sam else 'none'}")
+    print(f"[stage3] Category: {cat_path.name if has_category else 'none'}")
     print(f"[stage3] Stage 2:  {stage2_path.name if stage2_path else 'NONE'}")
 
-    ana = json.load(open(ana_path))
-    sam = json.load(open(sam_path))
+    # Build search pool: BFS + category
+    sam_products = []
+    seen_pids = set()
+    if has_sam:
+        sam = json.load(open(sam_path))
+        for p in sam.get("products", []):
+            pid = str(p.get("product_id", ""))
+            if pid and pid not in seen_pids:
+                seen_pids.add(pid)
+                sam_products.append(p)
+    if has_category:
+        cat = json.load(open(cat_path))
+        for p in cat.get("products", []):
+            pid = str(p.get("product_id") or p.get("pid", ""))
+            if pid and pid not in seen_pids:
+                seen_pids.add(pid)
+                sam_products.append({
+                    "product_id": pid,
+                    "product_url": p.get("product_url", f"https://blinkit.com/prn/x/prid/{pid}"),
+                    "product_name": p.get("name", ""),
+                    "brand": (p.get("name") or "").split()[0] if p.get("name") else "",
+                    "price": p.get("price") or p.get("sp"),
+                    "mrp": p.get("mrp"),
+                    "unit": p.get("unit", ""),
+                    "category": p.get("category", ""),
+                    "in_stock": bool(p.get("inventory") or p.get("stock")),
+                })
+
+    # Jiomart product master
+    if has_jm_master:
+        jm_master = json.load(open(jm_master_path))
+        jm_added = 0
+        for pid, p in jm_master.items():
+            if pid not in seen_pids and p.get("last_sp"):
+                seen_pids.add(pid)
+                sam_products.append({
+                    "product_id": pid,
+                    "product_url": p.get("url", ""),
+                    "product_name": p.get("name", ""),
+                    "brand": p.get("brand", ""),
+                    "price": p.get("last_sp"),
+                    "mrp": p.get("last_mrp"),
+                    "unit": p.get("unit", ""),
+                    "in_stock": p.get("in_stock", True),
+                })
+                jm_added += 1
+        print(f"[stage3] Jiomart master added to pool: {jm_added}")
+
+    ana_records = []
+    if has_anakin:
+        ana = json.load(open(ana_path))
+        ana_records = ana.get("records", [])
 
     if stage2_path:
         stage2 = json.load(open(stage2_path))
@@ -191,15 +252,26 @@ def main(pincode: str, platform: str = "blinkit"):
         stage2_weak_codes = {r["item_code"] for r in stage2.get("new_mappings", [])
                              if r.get("cascade_score", 0) < 0.6}
         retry_codes = stage2_unmatched_codes | stage2_weak_codes
-        input_skus = [r for r in ana["records"]
+        input_skus = [r for r in ana_records
                       if (r.get(pf["product_id"]) in (None, "", "NA"))
                       and (r.get("Item_Code") in retry_codes)]
+        # Also add AM unmatched products
+        if am_path.exists():
+            am_map = json.load(open(am_path))
+            for ic, am in am_map.items():
+                if ic in retry_codes and ic not in {r.get("Item_Code") for r in input_skus}:
+                    if am.get("master_category") in ("STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"):
+                        input_skus.append({
+                            "Item_Code": ic, "Item_Name": am.get("display_name", ""),
+                            "Brand": am.get("brand", ""), "Product_Type": am.get("product_type", ""),
+                            "Unit_Value": am.get("unit_value"), "Unit": am.get("unit", ""), "Mrp": am.get("mrp"),
+                        })
     else:
-        input_skus = [r for r in ana["records"]
+        input_skus = [r for r in ana_records
                       if r.get(pf["product_id"]) in (None, "", "NA")]
 
     print(f"[stage3] Input SKUs (leftover from Stage 2): {len(input_skus)}")
-    print(f"[stage3] SAM pool: {len(sam['products'])}")
+    print(f"[stage3] SAM pool: {len(sam_products)}")
     print()
 
     matched = []
@@ -207,7 +279,7 @@ def main(pincode: str, platform: str = "blinkit"):
     reasons = {}
 
     for sku in input_skus:
-        best, reason, score = find_match(sku, sam["products"])
+        best, reason, score = find_match(sku, sam_products)
         reasons[reason] = reasons.get(reason, 0) + 1
 
         anakin_sp = parse_num(sku.get(sp_key))
@@ -270,8 +342,9 @@ def main(pincode: str, platform: str = "blinkit"):
         json.dump({
             "pincode": pincode,
             "compared_at": datetime.now().isoformat(),
-            "anakin_file": ana_path.name,
-            "sam_file": sam_path.name,
+            "anakin_file": ana_path.name if has_anakin else "none",
+            "sam_file": sam_path.name if has_sam else "none",
+            "category_file": cat_path.name if has_category else "none",
             "stage2_file": stage2_path.name if stage2_path else None,
             "metrics": {
                 "input_skus": len(input_skus),

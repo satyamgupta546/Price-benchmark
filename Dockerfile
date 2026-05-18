@@ -24,8 +24,9 @@ COPY CLAUDE.md ./
 # Create data directories
 RUN mkdir -p data/anakin data/sam data/comparisons data/mappings output
 
-# Copy mapping data (product IDs, URLs — needed for cities without Anakin)
+# Copy mapping data + product masters (permanent stores)
 COPY data/mappings/ ./data/mappings/
+COPY data/jiomart_product_master.json ./data/jiomart_product_master.json
 
 # Environment
 ENV PYTHONUNBUFFERED=1

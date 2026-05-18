@@ -171,29 +171,21 @@ def _extract_price_from_jiomart_dict(p: dict) -> tuple[float | None, float | Non
                 except ValueError:
                     pass
 
-    # Standard keys
+    # Standard keys — only pick int/float values
     if sp is None:
         for k in ("final_price", "selling_price", "sellingPrice", "offer_price", "sp",
                   "current_price", "final_selling_price", "price"):
             v = p.get(k)
-            if v and not isinstance(v, (dict, list)):
-                try:
-                    sp = float(str(v).replace(",", "").replace("₹", "").strip())
-                    if sp > 0:
-                        break
-                except (ValueError, TypeError):
-                    pass
+            if v and isinstance(v, (int, float)) and float(v) > 0:
+                sp = float(v)
+                break
 
     if mrp is None:
         for k in ("mrp", "marked_price", "max_price", "original_price", "strike_price"):
             v = p.get(k)
-            if v and not isinstance(v, (dict, list)):
-                try:
-                    mrp = float(str(v).replace(",", "").replace("₹", "").strip())
-                    if mrp > 0:
-                        break
-                except (ValueError, TypeError):
-                    pass
+            if v and isinstance(v, (int, float)) and float(v) > 0:
+                mrp = float(v)
+                break
 
     # Sanity check: MRP must be >= SP and <= SP*5 (anything beyond is a bundle/multi-pack price)
     if mrp and sp:
@@ -274,6 +266,12 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
 
         if product_dict:
             sp, mrp = _extract_price_from_jiomart_dict(product_dict)
+            # Extract unit from product dict
+            for uk in ("unit", "weight", "quantity", "pack_size", "packSize", "size"):
+                uv = product_dict.get(uk)
+                if uv and isinstance(uv, (str, int, float)) and str(uv).strip():
+                    unit = str(uv).strip()
+                    break
             # Google Retail format: "name" = catalog path (projects/...),
             # actual title in variants[0].title or product.title
             # Check variant-level title first (most specific), then product-level
@@ -292,6 +290,13 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                             continue
                         name = candidate
                         break
+
+        # Parse unit from name if still missing (e.g. "Amul Butter 500 g" → "500 g")
+        if not unit and name:
+            import re
+            m = re.search(r"(\d+\.?\d*)\s*(g|gm|gms|kg|kgs|ml|mls|l|ltr|ltrs|pc|pcs|piece|pieces)\b", name.lower())
+            if m:
+                unit = f"{m.group(1)} {m.group(2)}"
 
         # If MRP still missing after product_dict extraction, scan all captured responses
         # for buybox_mrp (covers cases where _find_product_in_json missed the match)
@@ -415,7 +420,10 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
                 if (bodyLower.includes('out of stock') ||
                     bodyLower.includes('notify me') ||
                     bodyLower.includes('sold out') ||
-                    bodyLower.includes('currently unavailable')) {
+                    bodyLower.includes('currently unavailable') ||
+                    bodyLower.includes('not available at the selected') ||
+                    bodyLower.includes('unavailable at your location') ||
+                    bodyLower.includes('product not available')) {
                     in_stock = false;
                 }
 
@@ -424,15 +432,42 @@ async def scrape_one_jiomart_pdp(page, item_code: str, url: str, jm_pid: str, ma
 
             if not name or (isinstance(name, str) and name.startswith("projects/")):
                 name = dom_data.get("name") or None
-            if sp is None:
-                sp = dom_data.get("sp_val")
-            if mrp is None:
-                mrp = dom_data.get("mrp_val")
-            in_stock = dom_data.get("in_stock", in_stock)
+            # If DOM says OOS, clear all prices — don't pick variant/similar product prices
+            if not dom_data.get("in_stock", True):
+                in_stock = False
+                sp = mrp = None
+            else:
+                if sp is None:
+                    sp = dom_data.get("sp_val")
+                if mrp is None:
+                    mrp = dom_data.get("mrp_val")
 
         # Final sanity check: MRP must be >= SP and <= SP*5
         if mrp and sp and (mrp < sp or mrp > sp * 5):
             mrp = None
+
+        # Variant check: URL slug has weight (e.g. "36-g"), scraped name may have different weight
+        # If mismatch, reject — wrong variant picked
+        if sp and name and url:
+            import re
+            url_wt_match = re.search(r"(\d+)-?(g|gm|kg|ml|l|ltr)\b", url.lower().split("/")[-2] if "/" in url else url.lower())
+            name_wt_match = re.search(r"(\d+\.?\d*)\s*(g|gm|gms|kg|kgs|ml|mls|l|ltr|ltrs)\b", (name or "").lower())
+            if url_wt_match and name_wt_match:
+                url_wt = float(url_wt_match.group(1))
+                url_unit = url_wt_match.group(2)
+                name_wt = float(name_wt_match.group(1))
+                name_unit = name_wt_match.group(2)
+                # Normalize units
+                if url_unit in ("gm",): url_unit = "g"
+                if name_unit in ("gm", "gms"): name_unit = "g"
+                if url_unit in ("ltr",): url_unit = "l"
+                if name_unit in ("ltr", "ltrs"): name_unit = "l"
+                if url_unit == name_unit:
+                    ratio = name_wt / url_wt if url_wt > 0 else 0
+                    if ratio < 0.7 or ratio > 1.5:
+                        # Wrong variant — reject
+                        sp = mrp = name = unit = None
+                        in_stock = False
 
         out.update({
             "sam_product_name": name,

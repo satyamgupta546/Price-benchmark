@@ -7,12 +7,35 @@ Apna Mart ke har product ke liye, Blinkit/Jiomart pe wahi product dhundh ke live
 1. `fetch_ean_map.py` — EAN barcodes from smpcm_product (table 578, db 5)
 2. Fetch AM product master from smpcm_product (item_code, display_name, master_category, brand, marketed_by, product_type, unit, unit_value, mrp, main_image)
 3. Fetch latest MRP from model 1808 (Latest inward Cost Price) — warehouse-specific
-4. **Blinkit + Jiomart in PARALLEL** (NEVER sequential):
-   - PDP scrape → compare → cascade → stage3 → image → barcode
-   - Jiomart also runs search (Stage 4)
-5. Compute match status (COMPLETE/SEMI COMPLETE/PARTIAL/NA)
-6. Generate Excel in 28-column format
-7. Save to `/Users/satyam/Desktop/price csv/SAM_{City}_{Pincode}_{Date}.xlsx`
+4. **Blinkit + Jiomart + DMart in PARALLEL** (NEVER sequential):
+   - **Blinkit**: PDP scrape (url_database → PDP visit) → category discovery (homepage API → all sub-cats) → compare → unified_matcher → image → barcode
+   - **Jiomart**: PAUSED (UI rewrite in progress from Jiomart side — PDP+Search broken)
+   - **DMart**: Pure API scrape → name fuzzy match (rapidfuzz)
+5. All stages use **category products as search pool** (not just BFS)
+6. All stages use **AM master as input** (not just Anakin — Anakin is optional)
+7. Compute match status (COMPLETE/SEMI COMPLETE/PARTIAL/NA)
+8. Generate Excel in 35-column format
+9. Push to BigQuery (dedup DELETE then APPEND to live + APPEND to history)
+10. Save Excel to output dir
+
+## Hosting
+- **Cloud Run Job** (`sam-daily`) — Docker container, 2 CPU / 4GB, 4hr timeout
+- **Cloud Scheduler** (`sam-daily-cron`) — Daily 8 AM IST
+- **Cloud NAT** — 25 rotating IPs on `sam-network` (isolated from default/kinetic)
+- **No laptop dependency** — fully cloud-hosted
+
+## URL Sources (priority order)
+1. `url_database.json` — PRIMARY (17,446+ saved URLs from Anakin + scrapes)
+2. `product_mapping.json` — supplement
+3. Category discovery — new products from Blinkit category APIs (dynamic per city)
+4. Anakin — OPTIONAL (shutting down end of May 2026)
+
+## Category Discovery (Blinkit)
+- Homepage API returns full category tree (city-specific IDs)
+- Each sub-category visited → `listing_widgets` API intercepted → products extracted
+- Products saved to `blinkit_category_{pincode}_latest.json`
+- Fed into unified_matcher + stage4 + stage5 as search pool
+- URL database auto-updated with new product_ids
 
 ## Excel Output Format — 35 Columns, SINGLE Sheet, All Platforms
 ```
@@ -22,8 +45,8 @@ DATE | TIME | CITY | PINCODE | AM ITEM CODE | AM ITEM NAME | AM master cat | AM 
 ### Data Sources per Column
 - **AM columns (1-14)**: smpcm_product (table 578, db 5)
 - **AM MRP**: From model 1808 (latest inward cost price), warehouse-specific. Fallback to smpcm_product.mrp
-- **BLINKIT columns (15-21)**: SAM scraped (PDP + cascade + stage3)
-- **JIO columns (22-28)**: SAM scraped (PDP + cascade + stage3 + search)
+- **BLINKIT columns (15-21)**: SAM scraped (PDP + unified_matcher)
+- **JIO columns (22-28)**: SAM scraped (PDP + unified_matcher)
 - **DMART columns (29-35)**: SAM API scrape (pure JSON API, no browser)
 - **STATUS columns**: Computed match status (see logic below)
 
@@ -87,31 +110,44 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 
 ## Platform-Specific Rules
 ### Blinkit
-- Browser: Chromium (4 parallel tabs)
+- Browser: Chromium (8 parallel tabs on cloud)
 - Location: localStorage `location` JSON + cookies `__pincode`, `gr_1_lat`, `gr_1_lon` (NOT `gr_1_lng`)
 - Smart wait: poll every 0.5s for API response, max 4s (not fixed sleep)
-- PDP redirect detection: name = "blinkit.com" → search fallback → then mark not_available
+- PDP redirect detection: (1) homepage redirect, (2) /prid/ mismatch, (3) URL slug vs name mismatch
+- Category discovery: homepage → category tree → visit each sub-cat → `listing_widgets` API
+- URL source: url_database.json (primary) → product_mapping.json → Anakin (optional)
 - Retry pass: failed items get 2nd attempt with fresh browser
-- OOS skip: don't visit products Anakin marks as out_of_stock
 - MRP fallback: if MRP None, set MRP = SP
 
-### Jiomart
+### Jiomart — NEW UI (May 2026)
 - Browser: **Firefox** (Chromium gets 403 from Akamai CDN)
-- Location: cookies `pincode`, `address_pincode`
-- Price format: `buybox_mrp` pipe-delimited in `variants[0].attributes.buybox_mrp.text[0]`
-  - `parts[4]` = MRP, `parts[5]` = SP
-- PDP broken in headless Firefox → Search API (`/trex/search`) is reliable fallback
+- Location: localStorage `pin` JSON + `jio_lat_long` + cookie `app_location_details`
+- Old URLs `/p/groceries/...` — DEAD. New URLs: `/product/{slug-with-id}`
+- Old `buybox_mrp`, `__NEXT_DATA__`, `/trex/search` — ALL GONE
+- **New PDP APIs**:
+  - `/api/service/application/catalog/v1.0/products/{slug}` → name, images, brand
+  - `/api/service/application/catalog/v1.0/products/sizes/price` → SP (`price.effective`), MRP (`price.marked`), article_id, stock (`quantity`)
+- **Category discovery**: `/categories` page → 94 grocery sub-categories → `/products?department=groceries&l1_category=...&l2_category=...`
+- **Product data from category pages**: `dataLayer` (product_id, name, brand, SP, slug) + DOM (`PriceContainer__currentPrice`, `PriceContainer__originalPrice`, `productCard__productTitle`)
+- **Product master**: `data/jiomart_product_master.json` — permanent store. Save product_id, slug, name, brand, unit, article_id, fssai, URL once. Only fetch prices daily.
+- **Scraper script**: `scripts/test_jiomart_pdp.py` — single PDP, category, or `--all` grocery
+- **No EAN available** from Jiomart — use name+brand+weight+MRP matching (unified_matcher)
 - DOM TRY 4 (body text regex) **DISABLED** — picks up carousel/bundle prices
 - `projects/` names from Google Retail = garbage → skip, use search/DOM name instead
 - Pagination: `?page=N` for category pages (up to page 19)
 - Grocery-only filter in `_parse_trex_results`
 
-## Cascade/Stage Matching Rules
-- **Cascade (Stage 2)**: Brand strict → Product type → Weight ±10% (MANDATORY) → Name score ≥0.55 (or ≥0.70 if weight NA) → MRP ±15% / SP ±25% cross-check → EAN verification
-- **Stage 3**: Brand 3-token check → Weight MANDATORY → MRP ±15% → Name score ≥0.50
+## Unified Matching Engine (unified_matcher.py — replaces cascade_match.py + stage3_match.py)
+- **EAN Fast-Track**: If barcode matches → instant COMPLETE MATCH (bypass all text/price logic)
+- **Brand**: Normalized with alias dictionary (e.g., "chings" → "ching's secret", "maggie" → "maggi")
+- **Weight**: Advanced multipack-aware parser ("Pack of 2 x 500g" → 1000g), ±10% tolerance, MANDATORY
+- **Packaging Check**: Detects rigid (jar/tin/bottle) vs soft (pouch/refill) — mismatch → PARTIAL
+- **Variant Check**: Critical tokens (moong/toor/masoor, dark/milk/white, salted/unsalted) — conflict → PARTIAL
+- **Name Score**: token_set_ratio ≥65 for COMPLETE, ≥40 for PARTIAL (uses rapidfuzz, order-independent)
+- **MRP**: Exact match (±0.01) required for COMPLETE. Loose/ASM allows 0.3-3.0x ratio for SEMI COMPLETE
 - **Jiomart Search**: Brand from Anakin field (not first-word) → Score ≥0.55 → Also covers PDP failures + projects/ items
 - **EAN**: fetch_ean_map.py loads from smpcm_product. If both sides have barcode, must match.
-- **load_cascade_matches**: Higher score wins (stage3 doesn't overwrite better cascade match)
+- **load_cascade_matches**: Unified output loaded first; higher score wins (no overwrite)
 
 ## Cities
 - 834002: Ranchi (WRHS_1 — Jharkhand)
@@ -126,7 +162,7 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 |------|---------|---------|-------|
 | Ranchi | ✅ | ✅ | ❌ |
 | Kolkata | ✅ | ✅ | ❌ |
-| Raipur | ✅ | ✅ | ✅ |
+| Raipur | ✅ | ✅ | ❌ (closed) |
 | Hazaribagh | ✅ | ❌ | ❌ |
 | Bilaspur | ✅ | ✅ | ❌ |
 | Jamshedpur | ✅ | ✅ | ❌ |
@@ -135,12 +171,15 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 - AM product master: `data/am_product_master.json`
 - Latest MRP: `data/latest_mrp_{warehouse}.json`
 - EAN map: `data/ean_map.json`
-- URL database: `data/mappings/url_database.json`
-- Anakin data: `data/anakin/`
+- URL database: `data/mappings/url_database.json` — PRIMARY source for Blinkit URLs (17,446+)
+- Jiomart product master: `data/jiomart_product_master.json` — permanent store (name, brand, unit, article_id, slug, URL). Only prices change daily.
+- Blinkit category products: `data/sam/blinkit_category_{pincode}_latest.json`
+- Anakin data: `data/anakin/` — OPTIONAL, shutting down
 - SAM PDP data: `data/sam/`
-- Cascade/stage3 output: `data/comparisons/`
-- Excel output: `/Users/satyam/Desktop/price csv/`
-- Config: `config/output_format.json`, `config/match_status_logic.md`
+- Unified matcher output: `data/comparisons/` (files: `{platform}_unified_{pincode}_{ts}.json`)
+- Excel output: Cloud Run → `/app/output/`, Laptop → `/Users/satyam/Desktop/price csv/`
+- Config: `config/cities.json`, `config/output_format.json`, `config/match_status_logic.md`
+- Deploy: `deploy.sh` — 8 CPU / 32Gi RAM hardcoded, DO NOT CHANGE
 
 ## BigQuery Tables
 | Table | Dataset | Purpose |

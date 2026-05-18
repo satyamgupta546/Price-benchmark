@@ -49,7 +49,7 @@ gcloud auth login satyam.gupta@apnamart.in
 gcloud config set project apna-mart-data
 
 # Environment
-export METABASE_API_KEY="mb_rJuZYiQLgCMDOhoJkEVDq2+0AhAlLxgAk8TVfY7mlms="
+export METABASE_API_KEY="<your-key-here>"  # Get from .env file, never commit actual key
 
 # Cron
 chmod +x scripts/sam_cron.sh

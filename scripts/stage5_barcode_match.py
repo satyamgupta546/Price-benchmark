@@ -417,28 +417,89 @@ def main(pincode: str, platform: str = "blinkit"):
     ana_path = latest_file("anakin", f"{platform}_{pincode}_*.json")
     sam_path = None
     for p in sorted((PROJECT_ROOT / "data" / "sam").glob(f"{platform}_{pincode}_*.json"), reverse=True):
-        if "pdp" not in p.name:
+        if "pdp" not in p.name and "category" not in p.name:
             sam_path = p
             break
 
-    if not ana_path:
-        print(f"[barcode] No Anakin {platform} file for {pincode} — skipping", flush=True)
-        sys.exit(0)
-    if not sam_path:
-        print(f"[barcode] No SAM {platform} BFS data for {pincode} — skipping", flush=True)
+    cat_path = None
+    for p in sorted((PROJECT_ROOT / "data" / "sam").glob(f"{platform}_category_{pincode}_*.json"), reverse=True):
+        cat_path = p
+        break
+
+    am_path = PROJECT_ROOT / "data" / "am_product_master.json"
+    has_anakin = ana_path is not None
+    has_sam = sam_path is not None
+    has_category = cat_path is not None
+    jm_master_path = PROJECT_ROOT / "data" / "jiomart_product_master.json"
+    has_jm_master = platform == "jiomart" and jm_master_path.exists()
+
+    if not has_sam and not has_category and not has_jm_master:
+        print(f"[barcode] No SAM/category/master data for {platform} {pincode} — skipping", flush=True)
         sys.exit(0)
 
     print(f"[barcode] Platform: {platform}")
-    print(f"[barcode] Anakin: {ana_path.name}")
-    print(f"[barcode] SAM pool: {sam_path.name}")
+    print(f"[barcode] Anakin: {ana_path.name if has_anakin else 'none'}")
+    print(f"[barcode] SAM pool: {sam_path.name if has_sam else 'none'}")
+    print(f"[barcode] Category: {cat_path.name if has_category else 'none'}")
 
-    ana = json.load(open(ana_path))
-    sam = json.load(open(sam_path))
+    ana_records = []
+    if has_anakin:
+        ana = json.load(open(ana_path))
+        ana_records = ana.get("records", [])
 
-    # Find unmatched non-loose usable SKUs (same logic as Stage 4)
-    usable_codes = {r.get("Item_Code") for r in ana["records"]
+    # Build search pool
+    sam_products = []
+    seen_pids = set()
+    if has_sam:
+        sam_data = json.load(open(sam_path))
+        for p in sam_data.get("products", []):
+            pid = str(p.get("product_id", ""))
+            if pid and pid not in seen_pids:
+                seen_pids.add(pid)
+                sam_products.append(p)
+    if has_category:
+        cat = json.load(open(cat_path))
+        for p in cat.get("products", []):
+            pid = str(p.get("product_id") or p.get("pid", ""))
+            if pid and pid not in seen_pids:
+                seen_pids.add(pid)
+                sam_products.append({
+                    "product_id": pid,
+                    "product_url": p.get("product_url", ""),
+                    "product_name": p.get("name", ""),
+                    "price": p.get("price") or p.get("sp"),
+                    "mrp": p.get("mrp"),
+                    "barcode": p.get("barcode", ""),
+                })
+
+    # Jiomart product master
+    if has_jm_master:
+        jm_master = json.load(open(jm_master_path))
+        jm_added = 0
+        for pid, p in jm_master.items():
+            if pid not in seen_pids and p.get("last_sp"):
+                seen_pids.add(pid)
+                sam_products.append({
+                    "product_id": pid,
+                    "product_url": p.get("url", ""),
+                    "product_name": p.get("name", ""),
+                    "price": p.get("last_sp"),
+                    "mrp": p.get("last_mrp"),
+                    "barcode": "",
+                })
+                jm_added += 1
+        print(f"[barcode] Jiomart master added to pool: {jm_added}")
+
+    # Find unmatched non-loose usable SKUs
+    usable_codes = {r.get("Item_Code") for r in ana_records
                     if r.get(pf["selling_price"]) not in (None, "", "NA", "nan")
                     and "loose" not in (r.get("Item_Name") or "").lower()}
+    if am_path.exists():
+        am_map = json.load(open(am_path))
+        for ic, am in am_map.items():
+            if am.get("master_category") in ("STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"):
+                if "loose" not in (am.get("display_name") or "").lower():
+                    usable_codes.add(ic)
 
     matched_codes: set[str] = set()
     for pattern_str in [f"{platform}_pdp_{pincode}_*_compare.json",
@@ -530,9 +591,9 @@ def main(pincode: str, platform: str = "blinkit"):
     print(f"[barcode] Unmatched with real EAN: {unique_items_with_ean}")
     print(f"[barcode] Total unique EANs: {len(apna_barcode_map)}")
 
-    # Step 2: Check SAM BFS pool for barcode data
+    # Step 2: Check SAM pool for barcode data
     sam_barcodes: dict[str, dict] = {}  # ean -> product
-    for p in sam["products"]:
+    for p in sam_products:
         for key in ("barcode", "bar_code", "ean", "upc", "gtin"):
             v = p.get(key)
             if v and is_real_ean(str(v)):
