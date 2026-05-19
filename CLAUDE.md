@@ -46,7 +46,7 @@ DATE | TIME | CITY | PINCODE | AM ITEM CODE | AM ITEM NAME | AM master cat | AM 
 - **AM columns (1-14)**: smpcm_product (table 578, db 5)
 - **AM MRP**: From model 1808 (latest inward cost price), warehouse-specific. Fallback to smpcm_product.mrp
 - **BLINKIT columns (15-21)**: SAM scraped (PDP + unified_matcher)
-- **JIO columns (22-28)**: SAM scraped (PDP + unified_matcher)
+- **JIO columns (22-28)**: SAM scraped (jiomart_fetch_prices.py — mapping-based URL fetch + search fallback)
 - **DMART columns (29-35)**: SAM API scrape (pure JSON API, no browser)
 - **STATUS columns**: Computed match status (see logic below)
 
@@ -132,6 +132,11 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 - **Product master**: `data/jiomart_product_master.json` — permanent store. Save product_id, slug, name, brand, unit, article_id, fssai, URL once. Only fetch prices daily.
 - **Scraper script**: `scripts/test_jiomart_pdp.py` — single PDP, category, or `--all` grocery
 - **No EAN available** from Jiomart — use name+brand+weight+MRP matching (unified_matcher)
+- **Jiomart MRP source**: `smpricing_latestproductpricingtracker` (BQ: smpublic) — NOT model 1808
+- **Jiomart mapping**: `data/am_jiomart_mapping.json` — permanent AM↔Jiomart URL mapping
+- **Jiomart pricing**: `data/am_pricing_wrhs_1.json` — latest AM MRP from pricing tracker
+- **Daily Jiomart flow**: mapped items = URL fetch (fast), unmapped = search + match + save mapping
+- **Scripts**: `jiomart_fetch_prices.py` (main daily), `unified_matcher.py` (matching engine)
 - DOM TRY 4 (body text regex) **DISABLED** — picks up carousel/bundle prices
 - `projects/` names from Google Retail = garbage → skip, use search/DOM name instead
 - Pagination: `?page=N` for category pages (up to page 19)
@@ -177,6 +182,8 @@ Columns: warehouse_id, grn_date, pricing_approv_date, product_id, item_code, cos
 - Anakin data: `data/anakin/` — OPTIONAL, shutting down
 - SAM PDP data: `data/sam/`
 - Unified matcher output: `data/comparisons/` (files: `{platform}_unified_{pincode}_{ts}.json`)
+- Jiomart mapping: `data/am_jiomart_mapping.json` — permanent AM item_code ↔ Jiomart product_id/URL
+- Jiomart pricing: `data/am_pricing_wrhs_1.json` — latest MRP from latestproductpricingtracker
 - Excel output: Cloud Run → `/app/output/`, Laptop → `/Users/satyam/Desktop/price csv/`
 - Config: `config/cities.json`, `config/output_format.json`, `config/match_status_logic.md`
 - Deploy: `deploy.sh` — 8 CPU / 32Gi RAM hardcoded, DO NOT CHANGE

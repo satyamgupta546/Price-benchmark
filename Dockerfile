@@ -27,6 +27,7 @@ RUN mkdir -p data/anakin data/sam data/comparisons data/mappings output
 # Copy mapping data + product masters (permanent stores)
 COPY data/mappings/ ./data/mappings/
 COPY data/jiomart_product_master.json ./data/jiomart_product_master.json
+COPY data/am_jiomart_mapping.json ./data/am_jiomart_mapping.json
 
 # Environment
 ENV PYTHONUNBUFFERED=1

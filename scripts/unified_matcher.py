@@ -148,7 +148,8 @@ class UnifiedMatchingEngine:
     # ── Thresholds ──
     NAME_SCORE_COMPLETE = 65.0      # token_set_ratio needed for COMPLETE eligibility
     NAME_SCORE_PARTIAL = 40.0       # below this → NA
-    WEIGHT_TOLERANCE = (0.9, 1.1)   # ±10% weight match
+    WEIGHT_EXACT_TOL = 0.001        # COMPLETE: weight must be exact (0.1% tolerance for float rounding)
+    WEIGHT_SEMI_TOL = (0.9, 1.1)    # SEMI COMPLETE: ±10% weight tolerance
     MRP_EXACT_TOL = 0.01            # MRP exact match tolerance (₹)
     MRP_LOOSE_RATIO = (0.3, 3.0)    # MRP ratio bounds for SEMI COMPLETE
     PRICE_SANITY_MULT = 3.0         # SP > 3× AM MRP → reject
@@ -385,6 +386,7 @@ class UnifiedMatchingEngine:
             return MatchResult(status="NA", reason="no_candidates")
 
         # ── STEP 3: Weight filter (uses precomputed _base_wt/_base_unit) ──
+        # Allow ±10% through as candidates (SEMI range), exact check later for COMPLETE
         if am_base_wt and am_base_unit and am_base_wt > 0:
             weighted = []
             for p in candidates:
@@ -392,13 +394,12 @@ class UnifiedMatchingEngine:
                 p_unit = p.get("_base_unit")
                 if p_wt and p_unit == am_base_unit and p_wt > 0:
                     ratio = p_wt / am_base_wt
-                    if self.WEIGHT_TOLERANCE[0] <= ratio <= self.WEIGHT_TOLERANCE[1]:
+                    if self.WEIGHT_SEMI_TOL[0] <= ratio <= self.WEIGHT_SEMI_TOL[1]:
                         weighted.append((p, abs(1 - ratio)))
             if weighted:
                 weighted.sort(key=lambda x: x[1])
                 candidates = [p for p, _ in weighted]
             elif not is_loose:
-                # Non-loose items MUST have a weight match
                 return MatchResult(status="NA", reason="no_weight_match")
 
         # Loose items: check unit TYPE compatibility (kg↔g ok, kg↔ml not ok)
@@ -541,7 +542,18 @@ class UnifiedMatchingEngine:
                 "low_name_score", score_01, best_flags,
             )
 
-        # MRP exact check → COMPLETE or PARTIAL
+        # ── Weight: exact vs approximate ──
+        weight_exact = False
+        weight_semi = False
+        p_wt = best_product.get("_base_wt")
+        p_wu = best_product.get("_base_unit")
+        if am_base_wt and p_wt and am_base_unit and p_wu and am_base_unit == p_wu:
+            if am_base_wt > 0 and p_wt > 0:
+                ratio = p_wt / am_base_wt
+                weight_exact = abs(1 - ratio) <= self.WEIGHT_EXACT_TOL  # exact same
+                weight_semi = self.WEIGHT_SEMI_TOL[0] <= ratio <= self.WEIGHT_SEMI_TOL[1]  # ±10%
+
+        # ── MRP exact check ──
         mrp_exact = False
         if am_mrp_val and sam_mrp:
             try:
@@ -549,15 +561,23 @@ class UnifiedMatchingEngine:
             except (ValueError, TypeError):
                 pass
 
-        if mrp_exact:
+        # ── COMPLETE: exact weight + name ≥65 + exact MRP ──
+        if weight_exact and mrp_exact:
             return MatchResult(
                 best_product, "COMPLETE MATCH",
-                "brand_weight_name_mrp", score_01, best_flags,
+                "exact_weight_name_mrp", score_01, best_flags,
+            )
+
+        # ── SEMI COMPLETE: weight ±10% + name ≥65 (MRP can differ) ──
+        if weight_semi and best_score >= self.NAME_SCORE_COMPLETE:
+            return MatchResult(
+                best_product, "SEMI COMPLETE MATCH",
+                "semi_weight_name", score_01, best_flags,
             )
 
         return MatchResult(
             best_product, "PARTIAL MATCH",
-            "mrp_mismatch", score_01, best_flags,
+            "no_weight_or_mrp", score_01, best_flags,
         )
 
     # ══════════════════════════════════════════════════════════════
@@ -626,26 +646,22 @@ class UnifiedMatchingEngine:
                     return "PARTIAL MATCH"
             return "SEMI COMPLETE MATCH"
 
-        # ── Unit value match (±10%) ──
+        # ── Weight check ──
         sam_wt, sam_wu = self._parse_weight(sam_name)
-        unit_match = None  # None=unknown, True=match, False=mismatch
+        weight_exact = False
+        weight_semi = False
         if am_uv and sam_wt and am_unit and sam_wu:
             try:
                 u_norm = UNIT_ALIASES.get(am_unit, am_unit)
                 am_bv, am_bu = to_base_unit(float(am_uv), u_norm)
-                # sam_wt already in base units from _parse_weight
                 if am_bu == sam_wu and am_bv > 0 and sam_wt > 0:
-                    unit_match = (self.WEIGHT_TOLERANCE[0]
-                                  <= sam_wt / am_bv
-                                  <= self.WEIGHT_TOLERANCE[1])
+                    ratio = sam_wt / am_bv
+                    weight_exact = abs(1 - ratio) <= self.WEIGHT_EXACT_TOL
+                    weight_semi = (self.WEIGHT_SEMI_TOL[0] <= ratio <= self.WEIGHT_SEMI_TOL[1])
                 elif am_bu != sam_wu:
-                    unit_match = False  # Incompatible units (g vs ml)
+                    return "PARTIAL MATCH"  # Incompatible units
             except Exception:
                 pass
-
-        # Confirmed unit mismatch → can never be COMPLETE
-        if unit_match is False:
-            return "PARTIAL MATCH"
 
         # ── MRP exact match ──
         mrp_match = False
@@ -655,8 +671,12 @@ class UnifiedMatchingEngine:
             except Exception:
                 pass
 
-        if mrp_match and unit_match is not False:
+        # COMPLETE: exact weight + exact MRP
+        if weight_exact and mrp_match:
             return "COMPLETE MATCH"
+        # SEMI COMPLETE: weight ±10% + name matched (MRP can differ)
+        if weight_semi:
+            return "SEMI COMPLETE MATCH"
         return "PARTIAL MATCH"
 
     # ══════════════════════════════════════════════════════════════

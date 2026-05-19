@@ -409,12 +409,13 @@ def scrape_city(pincode, city, ):
                 return
 
             if platform == "jiomart":
-                # New Jiomart: category scrape → master file → unified match (no PDP)
-                print(f"\n⚙️  {city} — jiomart pipeline (category scrape)", flush=True)
-                run("test_jiomart_pdp.py", ["--all", "--pincode", pincode], use_venv=True, retries=0, timeout=1800)
-                run("unified_matcher.py", [pincode, "jiomart"], timeout=600)
-                run("stage4_image_match.py", [pincode, "jiomart"], timeout=600)
-                run("stage5_barcode_match.py", [pincode, "jiomart"], timeout=600)
+                # Jiomart: mapping-based URL fetch + search for unmapped
+                # Step 1: Fetch AM pricing from BQ (latestproductpricingtracker)
+                # Step 2: Mapped items → URL open → SP/MRP (fast)
+                # Step 3: Unmapped items → search on Jiomart → match → save mapping
+                print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
+                run("jiomart_fetch_prices.py", ["--pincode", pincode, "--tabs", "2"],
+                    use_venv=True, retries=1, timeout=3600)
                 print(f"  ✅ {city} jiomart complete", flush=True)
                 return
 
