@@ -301,6 +301,7 @@ async def main():
     csv_path = None
     state_filter = None
     retry_na = False      # --retry-na: only re-search NA items from previous run
+    mapped_only = False   # --mapped-only: skip search, only URL fetch (daily mode)
     prev_results_path = None
 
     for i, a in enumerate(args):
@@ -312,6 +313,8 @@ async def main():
             state_filter = args[i + 1]
         elif a == "--retry-na":
             retry_na = True
+        elif a == "--mapped-only":
+            mapped_only = True
         elif a == "--prev" and i + 1 < len(args):
             prev_results_path = args[i + 1]
         elif a == "--tabs" and i + 1 < len(args):
@@ -550,6 +553,24 @@ async def main():
     # ══════════════════════════════════════════════════════════
     #  PART 2: Search for unmapped items (4 tabs parallel)
     # ══════════════════════════════════════════════════════════
+
+    if mapped_only:
+        # Daily mode: skip search entirely, mark unmapped as NA
+        print(f"\n--- Part 2: SKIPPED (--mapped-only, {len(unmapped_items)} unmapped = NA) ---", flush=True)
+        for ic, am in unmapped_items.items():
+            am_mrp_val = parse_num(mrp_map.get(ic, {}).get("mrp")) or parse_num(am.get("mrp"))
+            results[ic] = {
+                "item_code": ic,
+                "am_name": am.get("display_name"),
+                "am_brand": am.get("brand"),
+                "am_unit": f"{am.get('unit_value', '')} {am.get('unit', '')}".strip(),
+                "am_mrp": am_mrp_val,
+                "match_status": "NA",
+                "match_score": 0,
+                "match_reason": "unmapped_daily_skip",
+                "match_flags": "",
+            }
+        unmapped_items = {}  # skip search below
 
     if unmapped_items:
         print(f"\n--- Part 2: Search for {len(unmapped_items)} unmapped items ({NUM_TABS} tabs) ---", flush=True)

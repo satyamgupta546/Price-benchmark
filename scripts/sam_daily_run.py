@@ -414,8 +414,8 @@ def scrape_city(pincode, city, ):
                 # Step 2: Mapped items → URL open → SP/MRP (fast)
                 # Step 3: Unmapped items → search on Jiomart → match → save mapping
                 print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
-                run("jiomart_fetch_prices.py", ["--pincode", pincode, "--tabs", "4"],
-                    use_venv=True, retries=1, timeout=3600)
+                run("jiomart_fetch_prices.py", ["--pincode", pincode, "--tabs", "4", "--mapped-only"],
+                    use_venv=True, retries=1, timeout=1800)
                 print(f"  ✅ {city} jiomart complete", flush=True)
                 return
 
