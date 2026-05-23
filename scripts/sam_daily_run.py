@@ -409,12 +409,15 @@ def scrape_city(pincode, city, ):
                 return
 
             if platform == "jiomart":
-                # Jiomart: mapping-based URL fetch + search for unmapped
-                # Step 1: Fetch AM pricing from BQ (latestproductpricingtracker)
-                # Step 2: Mapped items → URL open → SP/MRP (fast)
-                # Step 3: Unmapped items → search on Jiomart → match → save mapping
+                # Jiomart: mapping-based URL fetch for HD products
                 print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
-                run("jiomart_fetch_prices.py", ["--pincode", pincode, "--tabs", "4", "--mapped-only"],
+                city_state = _cities_config["cities"].get(pincode, {}).get("state", "")
+                hd_csv = str(DATA / "hd_assortment.csv")
+                jm_args = ["--pincode", pincode, "--tabs", "4", "--mapped-only",
+                           "--csv", hd_csv]
+                if city_state:
+                    jm_args += ["--state", city_state]
+                run("jiomart_fetch_prices.py", jm_args,
                     use_venv=True, retries=1, timeout=1800)
                 print(f"  ✅ {city} jiomart complete", flush=True)
                 return
