@@ -604,7 +604,7 @@ async def main():
             except asyncio.QueueEmpty:
                 break
 
-            # Brand search
+            # Brand search (with rate-limit retry)
             brand_results = []
             async with _search_cache_lock:
                 cached = search_cache.get(brand_name)
@@ -613,12 +613,21 @@ async def main():
             elif brand_name:
                 try:
                     brand_results = await search_jiomart(page, brand_name, max_pages=3)
+                    # Clean brand retry if special chars
                     if not brand_results:
                         clean_brand = re.sub(r'[-–\'\"&/]', ' ', brand_name).strip()
                         clean_brand = re.sub(r'\s+', ' ', clean_brand)
                         if clean_brand != brand_name:
                             brand_results = await search_jiomart(page, clean_brand, max_pages=3)
                             searched += 1
+                    # Rate limit retry: 0 results = likely blocked, wait and retry
+                    if not brand_results:
+                        await asyncio.sleep(random.uniform(5, 10))
+                        brand_results = await search_jiomart(page, brand_name, max_pages=3)
+                        if not brand_results:
+                            # Final retry with longer wait
+                            await asyncio.sleep(random.uniform(10, 15))
+                            brand_results = await search_jiomart(page, brand_name, max_pages=2)
                     searched += 1
                     print(f"[{gi+1}/{total_groups}] T{worker_id} Brand: \"{brand_name}\" → "
                           f"{len(brand_results)} ({len(items)} items)", flush=True)
@@ -655,6 +664,10 @@ async def main():
                     if name_results is None:
                         try:
                             name_results = await search_jiomart(page, search_term, max_pages=2)
+                            # Rate limit retry
+                            if not name_results:
+                                await asyncio.sleep(random.uniform(5, 8))
+                                name_results = await search_jiomart(page, search_term, max_pages=2)
                             searched += 1
                         except Exception:
                             name_results = []
