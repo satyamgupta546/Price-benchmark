@@ -418,7 +418,7 @@ def scrape_city(pincode, city, ):
                 if city_state:
                     jm_args += ["--state", city_state]
                 run("jiomart_fetch_prices.py", jm_args,
-                    use_venv=True, retries=1, timeout=1800)
+                    use_venv=True, retries=0, timeout=7200)
                 print(f"  ✅ {city} jiomart complete", flush=True)
                 return
 
