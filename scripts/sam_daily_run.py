@@ -413,7 +413,7 @@ def scrape_city(pincode, city, ):
                 print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
                 city_state = _cities_config["cities"].get(pincode, {}).get("state", "")
                 hd_csv = str(DATA / "hd_assortment.csv")
-                jm_args = ["--pincode", pincode, "--tabs", "4", "--mapped-only",
+                jm_args = ["--pincode", pincode, "--tabs", "4",
                            "--csv", hd_csv]
                 if city_state:
                     jm_args += ["--state", city_state]

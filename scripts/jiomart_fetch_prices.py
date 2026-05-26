@@ -35,8 +35,6 @@ from unified_matcher import UnifiedMatchingEngine
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA = PROJECT_ROOT / "data"
-MAPPING_PATH = DATA / "am_jiomart_mapping.json"
-
 PINCODE_LOCATION = {
     "834002": {"pincode": "834002", "city": "RANCHI", "state": "JHARKHAND", "lat": "23.3441", "lon": "85.3096"},
     "712232": {"pincode": "712232", "city": "KOLKATA", "state": "WEST BENGAL", "lat": "22.5726", "lon": "88.3639"},
@@ -47,15 +45,22 @@ PINCODE_LOCATION = {
 }
 
 
-def load_mapping():
-    if MAPPING_PATH.exists():
-        return json.load(open(MAPPING_PATH))
+def load_mapping(pincode):
+    """Load pincode-specific mapping. Fallback to old shared file for migration."""
+    path = DATA / f"am_jiomart_mapping_{pincode}.json"
+    if path.exists():
+        return json.load(open(path))
+    # Migration: first run — copy from old shared mapping
+    old_path = DATA / "am_jiomart_mapping.json"
+    if old_path.exists():
+        return json.load(open(old_path))
     return {}
 
 
-def save_mapping(mapping):
-    MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(MAPPING_PATH, "w") as f:
+def save_mapping(mapping, pincode):
+    path = DATA / f"am_jiomart_mapping_{pincode}.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w") as f:
         json.dump(mapping, f, indent=2, ensure_ascii=False, default=str)
 
 
@@ -347,7 +352,7 @@ async def main():
     elif mrp_1808_path.exists():
         mrp_map = json.load(open(mrp_1808_path))
         print(f"MRP source: model 1808 (fallback) — {len(mrp_map)} items")
-    mapping = load_mapping()
+    mapping = load_mapping(pincode)
     ean_map = json.load(open(DATA / "ean_map.json")) if (DATA / "ean_map.json").exists() else {}
     now = datetime.now().isoformat()
 
@@ -737,7 +742,7 @@ async def main():
 
         # Checkpoint at end of worker
         async with _lock:
-            save_mapping(mapping)
+            save_mapping(mapping, pincode)
             matched_so_far = sum(1 for r in results.values() if r["match_status"] != "NA")
             print(f"  [worker {worker_id} done] {len(results)}/{total}, "
                   f"{matched_so_far} matched", flush=True)
@@ -756,8 +761,8 @@ async def main():
         print(f"\nMerged: {len(prev_matched)} prev matched + {len(results) - len(prev_matched)} new")
 
     # ── Save everything ──
-    save_mapping(mapping)
-    print(f"Mapping saved: {len(mapping)} entries → {MAPPING_PATH.name}")
+    save_mapping(mapping, pincode)
+    print(f"Mapping saved: {len(mapping)} entries → am_jiomart_mapping_{pincode}.json")
 
     # Save results JSON (single file, all results)
     ts = datetime.now().strftime("%Y-%m-%d_%H%M%S")
