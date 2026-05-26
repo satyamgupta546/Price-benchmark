@@ -824,7 +824,19 @@ def main():
     pincode_arg = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "all"
     skip_scrape = "--no-scrape" in sys.argv
 
-    pincodes = CITIES if pincode_arg == "all" else {pincode_arg: CITIES.get(pincode_arg, pincode_arg)}
+    # Support state filter: python sam_daily_run.py --state JH
+    state_filter = None
+    for i, a in enumerate(sys.argv):
+        if a == "--state" and i + 1 < len(sys.argv):
+            state_filter = sys.argv[i + 1].upper()
+
+    if state_filter:
+        pincodes = {pin: cfg["name"] for pin, cfg in _cities_config["cities"].items()
+                    if cfg.get("state", "").upper() == state_filter}
+    elif pincode_arg == "all":
+        pincodes = CITIES
+    else:
+        pincodes = {pincode_arg: CITIES.get(pincode_arg, pincode_arg)}
 
     print(f"{'═' * 60}")
     print(f"  SAM DAILY RUN — {DATE} {NOW}")
@@ -918,40 +930,9 @@ def main():
                 print(f"  ⚠️ {msg}", flush=True)
         push_to_bigquery(csv_path, list(pincodes.keys()))
     else:
-        # Normal mode: cities in PARALLEL batches (3 at a time), then generate + push
-        city_list = list(pincodes.items())
-        BATCH_SIZE = 3
-        city_results = {}  # pin → city_rows
-        _results_lock = threading.Lock()
-
-        def process_city_thread(pin, city, idx):
-            try:
-                rows = process_city(pin, city, am_map, mrp_maps, idx, len(pincodes))
-                with _results_lock:
-                    city_results[pin] = rows
-            except Exception as e:
-                print(f"  ❌ {city} crashed: {str(e)[:100]}", flush=True)
-                with _results_lock:
-                    city_results[pin] = []
-
-        for batch_start in range(0, len(city_list), BATCH_SIZE):
-            batch = city_list[batch_start:batch_start + BATCH_SIZE]
-            batch_names = ", ".join(c for _, c in batch)
-            print(f"\n{'═' * 60}", flush=True)
-            print(f"  BATCH: {batch_names} (parallel)", flush=True)
-            print(f"{'═' * 60}", flush=True)
-
-            threads = []
-            for i, (pin, city) in enumerate(batch, batch_start + 1):
-                t = threading.Thread(target=process_city_thread, args=(pin, city, i))
-                threads.append(t)
-                t.start()
-            for t in threads:
-                t.join()
-
-        # Collect results in order
-        for pin, city in pincodes.items():
-            city_rows = city_results.get(pin, [])
+        # Normal mode: per-city scrape → generate → push to BQ
+        for i, (pin, city) in enumerate(pincodes.items(), 1):
+            city_rows = process_city(pin, city, am_map, mrp_maps, i, len(pincodes))
             all_rows.extend(city_rows)
             b_ok = sum(1 for r in city_rows if r[18])
             j_ok = sum(1 for r in city_rows if r[25])
