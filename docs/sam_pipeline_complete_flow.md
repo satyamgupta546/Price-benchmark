@@ -55,28 +55,42 @@ fetch_latest_mrp() → Metabase API → model 1808 (db 3)
 
 ---
 
-## STEP 2: City Processing (Sequential per city, Parallel per platform)
+## STEP 2: City Processing (2-step BQ push per city)
 
-Each city calls `process_city()` which does:
+Each city runs in `process_city()` with 2-step push:
 
 ```
 process_city(pin, city)
-├── scrape_city()          ← Blinkit + Jiomart + DMart in PARALLEL (threading)
-├── generate_city_data()   ← merge all data + compute status
-├── validate_data()        ← sanity checks
-├── push_to_bigquery()     ← dedup DELETE + APPEND
-└── backup_to_gcs()        ← gs://sam-price-data/{date}/{pin}.csv
+├── Step 1: BLINKIT (fast, ~30 min)
+│   ├── scrape_blinkit_city()    ← Chromium, 8 tabs
+│   ├── generate_city_data()     ← merge Blinkit data
+│   ├── push_to_bigquery()       ← Blinkit data available in BQ immediately
+│   └── backup_to_gcs()
+│
+└── Step 2: JIOMART (slow, search + fetch)
+    ├── scrape_jiomart_city()    ← Firefox, 4 tabs, search + URL fetch
+    ├── generate_city_data()     ← re-generate with Jiomart data included
+    └── push_to_bigquery()       ← UPDATE BQ with Jiomart columns
 ```
 
-### scrape_city() — 3 platforms in parallel threads
+### Hosting: State-wise Cloud Run Jobs (parallel)
+
+```
+sam-daily-jh  → 8 AM IST → Ranchi, Hazaribagh, Jamshedpur
+sam-daily-wb  → 8 AM IST → Kolkata
+sam-daily-cg  → 8 AM IST → Raipur, Bilaspur
+sam-daily     → PAUSED (backup, all cities)
+```
+
+All 3 jobs run parallel on separate containers (8 CPU / 32Gi each).
 
 ---
 
-### BLINKIT Pipeline
+### BLINKIT Pipeline (scrape_blinkit_city)
 
 ```
 1. scrape_blinkit_pdps.py [pincode] [8 tabs]
-   ├── Load URLs from: url_database.json + Anakin (fallback)
+   ├── Load URLs from: url_database.json
    ├── Launch Chromium (headless, 8 parallel tabs)
    ├── Set location: localStorage 'location' JSON + cookies (__pincode, gr_1_lat, gr_1_lon)
    ├── Visit each PDP URL → extract: name, SP, MRP, stock, unit
@@ -85,28 +99,34 @@ process_city(pin, city)
    └── Output: data/sam/blinkit_pdp_{pincode}_{date}.json
 
 2. compare_pdp.py [pincode]   ← Stage 1: Exact Join
-   ├── item_code se direct join (Anakin ↔ SAM PDP)
-   ├── No fuzzy matching, just price comparison
-   └── Output: comparison report
-
-3. unified_matcher.py [pincode] blinkit  ← Stage 2+3: Unified Match (replaces cascade+stage3)
+3. unified_matcher.py [pincode] blinkit  ← Stage 2+3: Unified Match
 4. stage4_image_match.py [pincode] blinkit  ← Stage 4: Image
-5. stage5_barcode_match.py [pincode] blinkit  ← Stage 5: Barcode
+5. stage5_barcode_match.py [pincode] blinkit  ← Stage 5: Barcode (5min timeout)
 ```
 
-### JIOMART Pipeline
+### JIOMART Pipeline (scrape_jiomart_city → jiomart_fetch_prices.py)
 
 ```
-1. test_jiomart_pdp.py --all --pincode [pincode]
-   ├── Firefox browser (Akamai blocks Chromium)
-   ├── Category scrape: /categories → 94 grocery sub-cats → visit each
-   ├── Product data: dataLayer + DOM parsing
-   ├── Save to jiomart_product_master.json (permanent store)
-   └── Output: data/sam/jiomart_category_{pincode}_latest.json
+1. Load pincode-wise mapping: am_jiomart_mapping_{pincode}.json
+2. Load HD assortment CSV → filter by state
+3. Split: mapped items (URL saved) vs unmapped items (NA)
 
-2. unified_matcher.py [pincode] jiomart  ← Stage 2+3: Unified Match
-3. stage4_image_match.py [pincode] jiomart
-4. stage5_barcode_match.py [pincode] jiomart
+4. Part 1: Mapped items → open saved URL → fetch SP/MRP (fast, ~5 min)
+   ├── Firefox browser, 4 tabs parallel
+   ├── DOM extract: currentPrice, originalPrice
+   └── Update mapping with latest prices
+
+5. Part 2: Unmapped items → Jiomart search (slow)
+   ├── Brand search first (grouped)
+   ├── Name search fallback for NA items
+   ├── Rate limit retry: 3 attempts with 5-15s wait
+   ├── UnifiedMatchingEngine: brand + weight + name + MRP matching
+   └── Save new URLs to mapping permanently
+
+6. Output:
+   ├── am_jiomart_mapping_{pincode}.json (permanent, pincode-wise)
+   ├── data/sam/jiomart_pdp_{pincode}_{ts}.json (PDP-compatible for generate_city_data)
+   └── data/jiomart_prices_{pincode}_{ts}.json (full results)
 ```
 
 ### DMART Pipeline
@@ -477,12 +497,31 @@ Deduplication: seen_pids set prevents same product appearing twice
 
 ---
 
-## Script Run Order (per platform per city)
+## Script Run Order (per city, 2-step push)
 
 ```
-Blinkit:  scrape_blinkit_pdps → compare_pdp → unified_matcher → stage4_image_match → stage5_barcode_match
-Jiomart:  test_jiomart_pdp --all → unified_matcher → stage4_image_match → stage5_barcode_match
-DMart:    scrape_dmart (API only, matching done inline in generate_city_data)
+Step 1 (Blinkit → BQ push):
+  scrape_blinkit_pdps → compare_pdp → unified_matcher → stage4 → stage5 → generate → BQ push
+
+Step 2 (Jiomart → BQ update):
+  jiomart_fetch_prices (mapping URL fetch + search NA) → generate → BQ update
+
+DMart: scrape_dmart (API only, matching done inline in generate_city_data)
+```
+
+## Cloud Run Jobs (state-wise, parallel)
+
+```
+sam-daily-jh  → python sam_daily_run.py --state JH  (Ranchi, Hazaribagh, Jamshedpur)
+sam-daily-wb  → python sam_daily_run.py --state WB  (Kolkata)
+sam-daily-cg  → python sam_daily_run.py --state CG  (Raipur, Bilaspur)
+
+All 3 triggered at 8 AM IST daily, run on separate containers.
+Config: 8 CPU / 32Gi RAM / 4hr timeout each.
+
+Jiomart mapping: pincode-wise (am_jiomart_mapping_{pincode}.json)
+  - First run: search all items, build mapping
+  - Daily: URL fetch for mapped, search only NA items
 ```
 
 ---
