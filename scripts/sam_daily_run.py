@@ -385,73 +385,47 @@ def fetch_all_anakin(pincodes):
         print(f"  ✅ Anakin: {city} ({pin})", flush=True)
 
 
-def scrape_city(pincode, city, ):
-    """Run full pipeline for one city — both platforms."""
-    print(f"\n{'─' * 60}", flush=True)
-    print(f"  {city} ({pincode})", flush=True)
-    print(f"{'─' * 60}", flush=True)
-
-    # Platform availability from config/cities.json
-    city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit", "jiomart"})
-
-    def run_platform(platform):
-        if platform not in city_platforms:
-            print(f"  ⏭️  {platform} not available in {city}", flush=True)
-            return
-        try:
-            if platform == "dmart":
-                if pincode not in DMART_STORE_IDS:
-                    print(f"  ⏭️  DMart not available for {city} ({pincode})", flush=True)
-                    return
-                print(f"\n⚙️  {city} — dmart pipeline (API)", flush=True)
-                run("scrape_dmart.py", [pincode], retries=2)
-                print(f"  ✅ {city} dmart complete", flush=True)
-                return
-
-            if platform == "jiomart":
-                # Jiomart: mapping-based URL fetch for HD products
-                print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
-                city_state = _cities_config["cities"].get(pincode, {}).get("state", "")
-                hd_csv = str(DATA / "hd_assortment.csv")
-                jm_args = ["--pincode", pincode, "--tabs", "4",
-                           "--csv", hd_csv]
-                if city_state:
-                    jm_args += ["--state", city_state]
-                run("jiomart_fetch_prices.py", jm_args,
-                    use_venv=True, retries=0, timeout=18000)
-                print(f"  ✅ {city} jiomart complete", flush=True)
-                return
-
-            print(f"\n⚙️  {city} — {platform} pipeline", flush=True)
-            if platform == "blinkit":
-                run("scrape_blinkit_pdps.py", [pincode, "8"], use_venv=True, retries=1, critical=True)
-                partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
-                if partial.exists():
-                    partial.unlink()
-                run("compare_pdp.py", [pincode])
-
-            run("unified_matcher.py", [pincode, platform], timeout=600)
-            run("stage4_image_match.py", [pincode, platform])
-            run("stage5_barcode_match.py", [pincode, platform], timeout=300, retries=0)
-            print(f"  ✅ {city} {platform} complete", flush=True)
-        except Exception as e:
-            error = f"{city} {platform} crashed: {str(e)[:200]}"
-            print(f"  ❌ {error}", flush=True)
-            RUN_ERRORS.append(error)
-
-    # Run ALL platforms in PARALLEL
-    threads = [
-        threading.Thread(target=run_platform, args=("blinkit",)),
-        threading.Thread(target=run_platform, args=("jiomart",)),
-        threading.Thread(target=run_platform, args=("dmart",)),
-    ]
-    for t in threads:
-        t.start()
-    for t in threads:
-        t.join()
-
-    # Save new URLs to database after scrape
+def scrape_blinkit_city(pincode, city):
+    """Run Blinkit pipeline for one city (fast, ~30 min)."""
+    city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit"})
+    if "blinkit" not in city_platforms:
+        print(f"  ⏭️  blinkit not available in {city}", flush=True)
+        return
+    try:
+        print(f"\n⚙️  {city} — blinkit pipeline", flush=True)
+        run("scrape_blinkit_pdps.py", [pincode, "8"], use_venv=True, retries=1, critical=True)
+        partial = DATA / "sam" / f"blinkit_pdp_{pincode}_latest_partial.json"
+        if partial.exists():
+            partial.unlink()
+        run("compare_pdp.py", [pincode])
+        run("unified_matcher.py", [pincode, "blinkit"], timeout=600)
+        run("stage4_image_match.py", [pincode, "blinkit"])
+        run("stage5_barcode_match.py", [pincode, "blinkit"], timeout=300, retries=0)
+        print(f"  ✅ {city} blinkit complete", flush=True)
+    except Exception as e:
+        print(f"  ❌ {city} blinkit crashed: {str(e)[:200]}", flush=True)
+        RUN_ERRORS.append(f"{city} blinkit: {str(e)[:150]}")
     save_urls_to_database(pincode)
+
+
+def scrape_jiomart_city(pincode, city):
+    """Run Jiomart pipeline for one city (slow, search + fetch)."""
+    city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit"})
+    if "jiomart" not in city_platforms:
+        print(f"  ⏭️  jiomart not available in {city}", flush=True)
+        return
+    try:
+        print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
+        city_state = _cities_config["cities"].get(pincode, {}).get("state", "")
+        hd_csv = str(DATA / "hd_assortment.csv")
+        jm_args = ["--pincode", pincode, "--tabs", "4", "--csv", hd_csv]
+        if city_state:
+            jm_args += ["--state", city_state]
+        run("jiomart_fetch_prices.py", jm_args, use_venv=True, retries=0, timeout=18000)
+        print(f"  ✅ {city} jiomart complete", flush=True)
+    except Exception as e:
+        print(f"  ❌ {city} jiomart crashed: {str(e)[:200]}", flush=True)
+        RUN_ERRORS.append(f"{city} jiomart: {str(e)[:150]}")
 
 
 # ── Step 3: Compute status + generate output ──
@@ -712,51 +686,56 @@ def generate_excel(rows, city, pincode):
 
 
 def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
-    """Scrape one city → generate data → validate → push to BQ. Returns city_rows."""
+    """
+    2-step push:
+      Step 1: Blinkit scrape → generate → push to BQ (fast, ~30 min)
+      Step 2: Jiomart fetch → update BQ with Jiomart data (slow, runs after)
+    """
     print(f"\n{'═' * 60}", flush=True)
     print(f"  CITY {city_index}/{total_cities}: {city} ({pin})", flush=True)
     print(f"{'═' * 60}", flush=True)
 
-    # 1. Scrape (Anakin already fetched)
-    try:
-        scrape_city(pin, city, )
-    except Exception as e:
-        print(f"  ❌ {city} scrape crashed: {e}", flush=True)
-        RUN_ERRORS.append(f"{city} ({pin}) scrape crashed: {str(e)[:150]}")
-        try:
-            print(f"  🔄 Retrying {city}...", flush=True)
-            scrape_city(pin, city, )
-            print(f"  ✅ {city} recovered on retry!", flush=True)
-        except Exception as e2:
-            print(f"  ❌ {city} failed again: {e2}", flush=True)
-            RUN_ERRORS.append(f"{city} ({pin}) failed on retry: {str(e2)[:150]}")
-            return []
-
-    # 2. Generate data
     wh = WAREHOUSE_MAP.get(pin, "WRHS_1")
     mrp_map = mrp_maps.get(wh, {})
-    city_rows = generate_city_data(pin, city, am_map, mrp_map)
-    print(f"  ✅ {city}: {len(city_rows)} rows generated", flush=True)
 
-    # 3. Validate
+    # ── Step 1: Blinkit → generate → push (fast) ──
+    print(f"\n  📦 Step 1: Blinkit scrape + push", flush=True)
+    scrape_blinkit_city(pin, city)
+
+    city_rows = generate_city_data(pin, city, am_map, mrp_map)
+    print(f"  ✅ {city}: {len(city_rows)} rows generated (Blinkit)", flush=True)
+
     valid, messages = validate_data(city_rows, [pin])
     if not valid:
-        print(f"  ⚠️  {city} validation warnings:", flush=True)
         for msg in messages:
-            print(f"    {msg}", flush=True)
-    else:
-        print(f"  ✅ {city} validation passed", flush=True)
+            print(f"    ⚠️ {msg}", flush=True)
 
-    # 4. Write city CSV + push to BQ
     city_csv_path = DATA / f"bq_upload_{pin}.csv"
     with open(city_csv_path, "w", newline="") as f:
         w = csv.writer(f)
         for row in city_rows:
             w.writerow(row)
-
     push_to_bigquery(city_csv_path, [pin])
     backup_to_gcs(city_csv_path, pin)
-    print(f"  ✅ {city} pushed to BQ + GCS ({len(city_rows)} rows)", flush=True)
+    print(f"  ✅ {city} Blinkit pushed to BQ ({len(city_rows)} rows)", flush=True)
+
+    # ── Step 2: Jiomart → re-generate → update BQ (slow) ──
+    print(f"\n  📦 Step 2: Jiomart fetch + update BQ", flush=True)
+    scrape_jiomart_city(pin, city)
+
+    # Re-generate with Jiomart data included
+    city_rows = generate_city_data(pin, city, am_map, mrp_map)
+    jio_count = sum(1 for r in city_rows if r[25])  # jio_sp at index 25
+    print(f"  ✅ {city}: {len(city_rows)} rows with Jiomart ({jio_count} jio_sp)", flush=True)
+
+    # Update BQ (delete today's data for this pincode, re-push with Jiomart)
+    city_csv_path2 = DATA / f"bq_upload_{pin}_jio.csv"
+    with open(city_csv_path2, "w", newline="") as f:
+        w = csv.writer(f)
+        for row in city_rows:
+            w.writerow(row)
+    push_to_bigquery(city_csv_path2, [pin])
+    print(f"  ✅ {city} Jiomart updated in BQ ({jio_count} jio prices)", flush=True)
 
     return city_rows
 
