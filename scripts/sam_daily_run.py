@@ -413,12 +413,12 @@ def scrape_city(pincode, city, ):
                 print(f"\n⚙️  {city} — jiomart pipeline (fetch prices)", flush=True)
                 city_state = _cities_config["cities"].get(pincode, {}).get("state", "")
                 hd_csv = str(DATA / "hd_assortment.csv")
-                jm_args = ["--pincode", pincode, "--tabs", "4",
+                jm_args = ["--pincode", pincode, "--tabs", "4", "--mapped-only",
                            "--csv", hd_csv]
                 if city_state:
                     jm_args += ["--state", city_state]
                 run("jiomart_fetch_prices.py", jm_args,
-                    use_venv=True, retries=1, timeout=7200)
+                    use_venv=True, retries=1, timeout=1800)
                 print(f"  ✅ {city} jiomart complete", flush=True)
                 return
 
@@ -432,7 +432,7 @@ def scrape_city(pincode, city, ):
 
             run("unified_matcher.py", [pincode, platform], timeout=600)
             run("stage4_image_match.py", [pincode, platform])
-            run("stage5_barcode_match.py", [pincode, platform], timeout=600)
+            run("stage5_barcode_match.py", [pincode, platform], timeout=300, retries=0)
             print(f"  ✅ {city} {platform} complete", flush=True)
         except Exception as e:
             error = f"{city} {platform} crashed: {str(e)[:200]}"
@@ -918,11 +918,41 @@ def main():
                 print(f"  ⚠️ {msg}", flush=True)
         push_to_bigquery(csv_path, list(pincodes.keys()))
     else:
-        # Normal mode: per-city scrape → generate → push to BQ
-        for i, (pin, city) in enumerate(pincodes.items(), 1):
-            city_rows = process_city(pin, city, am_map, mrp_maps, i, len(pincodes))
+        # Normal mode: cities in PARALLEL batches (3 at a time), then generate + push
+        city_list = list(pincodes.items())
+        BATCH_SIZE = 3
+        city_results = {}  # pin → city_rows
+        _results_lock = threading.Lock()
+
+        def process_city_thread(pin, city, idx):
+            try:
+                rows = process_city(pin, city, am_map, mrp_maps, idx, len(pincodes))
+                with _results_lock:
+                    city_results[pin] = rows
+            except Exception as e:
+                print(f"  ❌ {city} crashed: {str(e)[:100]}", flush=True)
+                with _results_lock:
+                    city_results[pin] = []
+
+        for batch_start in range(0, len(city_list), BATCH_SIZE):
+            batch = city_list[batch_start:batch_start + BATCH_SIZE]
+            batch_names = ", ".join(c for _, c in batch)
+            print(f"\n{'═' * 60}", flush=True)
+            print(f"  BATCH: {batch_names} (parallel)", flush=True)
+            print(f"{'═' * 60}", flush=True)
+
+            threads = []
+            for i, (pin, city) in enumerate(batch, batch_start + 1):
+                t = threading.Thread(target=process_city_thread, args=(pin, city, i))
+                threads.append(t)
+                t.start()
+            for t in threads:
+                t.join()
+
+        # Collect results in order
+        for pin, city in pincodes.items():
+            city_rows = city_results.get(pin, [])
             all_rows.extend(city_rows)
-            # Build summary incrementally
             b_ok = sum(1 for r in city_rows if r[18])
             j_ok = sum(1 for r in city_rows if r[25])
             d_ok = sum(1 for r in city_rows if len(r) > 32 and r[32])
