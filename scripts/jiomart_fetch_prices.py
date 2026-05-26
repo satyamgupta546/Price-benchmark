@@ -45,22 +45,20 @@ PINCODE_LOCATION = {
 }
 
 
-def load_mapping(pincode):
-    """Load pincode-specific mapping. Fallback to old shared file for migration."""
-    path = DATA / f"am_jiomart_mapping_{pincode}.json"
-    if path.exists():
-        return json.load(open(path))
-    # Migration: first run — copy from old shared mapping
-    old_path = DATA / "am_jiomart_mapping.json"
-    if old_path.exists():
-        return json.load(open(old_path))
+MAPPING_PATH = DATA / "am_jiomart_mapping.json"
+
+
+def load_mapping(pincode=None):
+    """Load shared mapping (URLs same across cities)."""
+    if MAPPING_PATH.exists():
+        return json.load(open(MAPPING_PATH))
     return {}
 
 
-def save_mapping(mapping, pincode):
-    path = DATA / f"am_jiomart_mapping_{pincode}.json"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w") as f:
+def save_mapping(mapping, pincode=None):
+    """Save shared mapping."""
+    MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(MAPPING_PATH, "w") as f:
         json.dump(mapping, f, indent=2, ensure_ascii=False, default=str)
 
 
