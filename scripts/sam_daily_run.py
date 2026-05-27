@@ -539,6 +539,10 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 mrp = p.get("sam_mrp")
                 stock = "available" if p.get("sam_in_stock") else "out_of_stock"
                 unit = p.get("sam_unit")
+                # Pick URL from PDP if available (new jiomart_fetch_prices URLs)
+                pdp_url = p.get("jiomart_product_url") or p.get("blinkit_product_url")
+                if pdp_url:
+                    url = pdp_url
             elif ic in cas_m:
                 m = cas_m[ic]
                 name = m.get("sam_product_name")
