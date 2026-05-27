@@ -739,35 +739,54 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
         client = bigquery.Client(project=BQ_PROJECT)
         live_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
 
-        updated = 0
+        # Build temp CSV with jio data only
+        jio_rows = []
         for row in city_rows:
-            ic = row[4]   # item_code
-            j_url = row[21]   # jio_url
-            j_name = row[22]  # jio_name
-            j_unit = row[23]  # jio_unit
-            j_mrp = row[24]   # jio_mrp
-            j_sp = row[25]    # jio_sp
-            j_stock = row[26] # jio_stock
-            j_status = row[27] # jio_status
-
+            ic = row[4]
+            j_sp = row[25]
             if j_sp is None:
                 continue
+            jio_rows.append({
+                "item_code": ic, "jio_url": row[21] or "", "jio_name": row[22] or "",
+                "jio_unit": row[23] or "", "jio_mrp": row[24], "jio_sp": j_sp,
+                "jio_stock": row[26] or "", "jio_status": row[27] or "",
+            })
 
-            # UPDATE only where jio_sp is NULL (don't overwrite existing good data)
-            sql = f"""UPDATE `{live_table}`
-SET jio_url = '{j_url or ''}',
-    jio_name = '{str(j_name or '').replace("'", "''")[:200]}',
-    jio_unit = '{j_unit or ''}',
-    jio_mrp = {j_mrp if j_mrp else 'NULL'},
-    jio_sp = {j_sp},
-    jio_stock = '{j_stock or ''}',
-    jio_status = '{j_status or ''}'
-WHERE date = '{DATE}' AND pincode = '{pin}' AND item_code = {ic}
-AND (jio_sp IS NULL)"""
-            client.query(sql).result()
-            updated += 1
+        if jio_rows:
+            # Batch UPDATE using MERGE — only update rows where jio_sp IS NULL
+            # First load jio data to temp table, then MERGE
+            temp_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_jio_temp_{pin}"
+            job_config = bigquery.LoadJobConfig(
+                schema=[
+                    bigquery.SchemaField("item_code", "INTEGER"),
+                    bigquery.SchemaField("jio_url", "STRING"),
+                    bigquery.SchemaField("jio_name", "STRING"),
+                    bigquery.SchemaField("jio_unit", "STRING"),
+                    bigquery.SchemaField("jio_mrp", "FLOAT"),
+                    bigquery.SchemaField("jio_sp", "FLOAT"),
+                    bigquery.SchemaField("jio_stock", "STRING"),
+                    bigquery.SchemaField("jio_status", "STRING"),
+                ],
+                write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
+            )
+            client.load_table_from_json(jio_rows, temp_table, job_config=job_config).result()
 
-        print(f"  ✅ {city} Jiomart: {updated} rows updated in BQ (existing data untouched)", flush=True)
+            # MERGE — update only where jio_sp IS NULL (don't overwrite existing)
+            merge_sql = f"""MERGE `{live_table}` T
+USING `{temp_table}` S
+ON T.date = '{DATE}' AND T.pincode = '{pin}' AND T.item_code = S.item_code
+WHEN MATCHED AND T.jio_sp IS NULL THEN UPDATE SET
+  T.jio_url = S.jio_url, T.jio_name = S.jio_name, T.jio_unit = S.jio_unit,
+  T.jio_mrp = S.jio_mrp, T.jio_sp = S.jio_sp,
+  T.jio_stock = S.jio_stock, T.jio_status = S.jio_status"""
+            client.query(merge_sql).result()
+
+            # Cleanup temp table
+            client.delete_table(temp_table, not_found_ok=True)
+
+            print(f"  ✅ {city} Jiomart: {len(jio_rows)} rows merged in BQ (existing data untouched)", flush=True)
+        else:
+            print(f"  ⚠️ {city} Jiomart: no jio prices to update", flush=True)
     except Exception as e:
         print(f"  ❌ Jiomart BQ update error: {str(e)[:200]}", flush=True)
 
