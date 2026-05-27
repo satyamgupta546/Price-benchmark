@@ -94,7 +94,25 @@ async def init_browser(pw, pincode):
 # ══════════════════════════════════════════════════════════════
 
 async def fetch_price_from_url(page, url):
-    """Open a Jiomart product URL, extract latest SP and MRP."""
+    """Open a Jiomart product URL, intercept price API JSON, extract SP and MRP."""
+    price_data = {}
+    catalog_data = {}
+
+    async def on_response(response):
+        nonlocal price_data, catalog_data
+        try:
+            resp_url = response.url
+            if "sizes/price" in resp_url and response.status == 200:
+                body = await response.json()
+                price_data = body
+            elif "/catalog/v1.0/products/" in resp_url and "sizes" not in resp_url and response.status == 200:
+                body = await response.json()
+                catalog_data = body
+        except Exception:
+            pass
+
+    page.on("response", on_response)
+
     try:
         await page.goto(url, wait_until="domcontentloaded", timeout=20000)
     except Exception:
@@ -102,24 +120,60 @@ async def fetch_price_from_url(page, url):
             await asyncio.sleep(2)
             await page.goto(url, wait_until="domcontentloaded", timeout=25000)
         except Exception:
+            page.remove_listener("response", on_response)
             return None, None, None, False
 
-    await asyncio.sleep(2)
+    # Wait for price API to fire
+    for _ in range(8):
+        if price_data:
+            break
+        await asyncio.sleep(0.5)
 
-    # Extract from DOM
-    data = await page.evaluate(r'''() => {
-        const sp_el = document.querySelector('[class*=currentPrice], [class*=sellingPrice]');
-        const mrp_el = document.querySelector('[class*=originalPrice], [class*=strikePrice]');
-        const name_el = document.querySelector('h1, [class*=productTitle]');
-        const sp = sp_el ? parseFloat(sp_el.textContent.replace(/[₹,\s]/g, '')) : null;
-        const mrp = mrp_el ? parseFloat(mrp_el.textContent.replace(/[₹,\s]/g, '')) : null;
-        const name = name_el ? name_el.textContent.trim() : '';
-        // Check if product is available (no "out of stock" message)
-        const oos = document.querySelector('[class*=outOfStock], [class*=soldOut]');
-        return {sp: sp || null, mrp: mrp || sp || null, name, in_stock: !oos};
-    }''')
+    page.remove_listener("response", on_response)
 
-    return data.get("sp"), data.get("mrp"), data.get("name"), data.get("in_stock", True)
+    # Extract from price API JSON
+    sp = None
+    mrp = None
+    in_stock = True
+    name = ""
+
+    if price_data:
+        price_info = price_data.get("price", {})
+        sp = price_info.get("effective", {}).get("min") or price_info.get("effective")
+        mrp = price_info.get("marked", {}).get("min") or price_info.get("marked")
+        # Handle nested price structure
+        if isinstance(sp, dict):
+            sp = sp.get("min") or sp.get("value")
+        if isinstance(mrp, dict):
+            mrp = mrp.get("min") or mrp.get("value")
+        try:
+            sp = float(sp) if sp else None
+            mrp = float(mrp) if mrp else None
+        except (ValueError, TypeError):
+            sp = mrp = None
+        stock = price_data.get("quantity", 1)
+        in_stock = stock > 0 if isinstance(stock, (int, float)) else True
+
+    if catalog_data:
+        name = catalog_data.get("name", "")
+
+    # Fallback to DOM if API didn't fire
+    if sp is None:
+        dom_data = await page.evaluate(r'''() => {
+            const sp_el = document.querySelector('[class*=currentPrice], [class*=sellingPrice]');
+            const mrp_el = document.querySelector('[class*=originalPrice], [class*=strikePrice]');
+            const name_el = document.querySelector('h1, [class*=productTitle]');
+            const sp = sp_el ? parseFloat(sp_el.textContent.replace(/[₹,\s]/g, '')) : null;
+            const mrp = mrp_el ? parseFloat(mrp_el.textContent.replace(/[₹,\s]/g, '')) : null;
+            const n = name_el ? name_el.textContent.trim() : '';
+            return {sp: sp || null, mrp: mrp || sp || null, name: n};
+        }''')
+        sp = dom_data.get("sp")
+        mrp = dom_data.get("mrp")
+        if not name:
+            name = dom_data.get("name", "")
+
+    return sp, mrp, name, in_stock
 
 
 # ══════════════════════════════════════════════════════════════
