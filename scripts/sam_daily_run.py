@@ -723,23 +723,53 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
     backup_to_gcs(city_csv_path, pin)
     print(f"  ✅ {city} Blinkit pushed to BQ ({len(city_rows)} rows)", flush=True)
 
-    # ── Step 2: Jiomart → re-generate → update BQ (slow) ──
+    # ── Step 2: Jiomart → fetch → UPDATE only jio columns in BQ (don't touch existing data) ──
     print(f"\n  📦 Step 2: Jiomart fetch + update BQ", flush=True)
     scrape_jiomart_city(pin, city)
 
-    # Re-generate with Jiomart data included
+    # Re-generate to get Jiomart data
     city_rows = generate_city_data(pin, city, am_map, mrp_map)
     jio_count = sum(1 for r in city_rows if r[25])  # jio_sp at index 25
-    print(f"  ✅ {city}: {len(city_rows)} rows with Jiomart ({jio_count} jio_sp)", flush=True)
+    print(f"  ✅ {city}: {jio_count} jio prices found", flush=True)
 
-    # Update BQ (delete today's data for this pincode, re-push with Jiomart)
-    city_csv_path2 = DATA / f"bq_upload_{pin}_jio.csv"
-    with open(city_csv_path2, "w", newline="") as f:
-        w = csv.writer(f)
+    # UPDATE only jio columns in BQ — don't delete existing data
+    # Priority: keep existing data if already present (first run wins)
+    try:
+        from google.cloud import bigquery
+        client = bigquery.Client(project=BQ_PROJECT)
+        live_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
+
+        updated = 0
         for row in city_rows:
-            w.writerow(row)
-    push_to_bigquery(city_csv_path2, [pin])
-    print(f"  ✅ {city} Jiomart updated in BQ ({jio_count} jio prices)", flush=True)
+            ic = row[4]   # item_code
+            j_url = row[21]   # jio_url
+            j_name = row[22]  # jio_name
+            j_unit = row[23]  # jio_unit
+            j_mrp = row[24]   # jio_mrp
+            j_sp = row[25]    # jio_sp
+            j_stock = row[26] # jio_stock
+            j_status = row[27] # jio_status
+
+            if j_sp is None:
+                continue
+
+            # UPDATE only where jio_sp is NULL (don't overwrite existing good data)
+            sql = f"""UPDATE `{live_table}`
+SET jio_url = '{j_url or ''}',
+    jio_name = '{str(j_name or '').replace("'", "''")[:200]}',
+    jio_unit = '{j_unit or ''}',
+    jio_mrp = {j_mrp if j_mrp else 'NULL'},
+    jio_sp = {j_sp},
+    jio_stock = '{j_stock or ''}',
+    jio_status = '{j_status or ''}'
+WHERE date = '{DATE}' AND pincode = '{pin}' AND item_code = {ic}
+AND (jio_sp IS NULL)"""
+            client.query(sql).result()
+            updated += 1
+
+        print(f"  ✅ {city} Jiomart: {updated} rows updated in BQ (existing data untouched)", flush=True)
+    except Exception as e:
+        print(f"  ❌ Jiomart BQ update error: {str(e)[:200]}", flush=True)
 
     return city_rows
 
