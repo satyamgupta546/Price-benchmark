@@ -68,7 +68,7 @@
       "name": "Kolkata",
       "state": "WB",
       "warehouse": "WRHS_10",
-      "platforms": ["blinkit", "jiomart"],
+      "platforms": ["blinkit", "jiomart", "dealshare"],
       "anakin_available": true,
       "est_products": 2600
     },

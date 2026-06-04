@@ -428,6 +428,21 @@ def scrape_jiomart_city(pincode, city):
         RUN_ERRORS.append(f"{city} jiomart: {str(e)[:150]}")
 
 
+def scrape_dealshare_city(pincode, city):
+    """Run DealShare pipeline for one city (fast, API only, ~30 sec)."""
+    city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit"})
+    if "dealshare" not in city_platforms:
+        print(f"  ⏭️  dealshare not available in {city}", flush=True)
+        return
+    try:
+        print(f"\n⚙️  {city} — dealshare pipeline (API)", flush=True)
+        run("scrape_dealshare.py", [pincode, "--match"], retries=1, timeout=300)
+        print(f"  ✅ {city} dealshare complete", flush=True)
+    except Exception as e:
+        print(f"  ❌ {city} dealshare crashed: {str(e)[:200]}", flush=True)
+        RUN_ERRORS.append(f"{city} dealshare: {str(e)[:150]}")
+
+
 # ── Step 3: Compute status + generate output ──
 # Status computation now uses UnifiedMatchingEngine (unified_matcher.py)
 
@@ -505,8 +520,31 @@ def generate_city_data(pincode, city, am_map, mrp_map):
     if dmart_files:
         d = json.load(open(dmart_files[-1]))
         for p in d.get("products", []):
-            # Match by brand + name fuzzy (DMart doesn't use Anakin item_codes)
             dmart_map[p.get("product_name", "")] = p
+
+    # Load DealShare match data
+    ds_map = {}
+    ds_match_files = sorted([f for f in DATA.glob(f"dealshare_match_{pincode}_*.json")])
+    if ds_match_files:
+        ds_data = json.load(open(ds_match_files[-1]))
+        ds_products = json.load(open(DATA / "dealshare_product_master.json")) if (DATA / "dealshare_product_master.json").exists() else {}
+        for m in ds_data.get("matches", []):
+            ic = m.get("item_code")
+            if ic and m.get("ds_sp"):
+                # Find URL from product master
+                ds_url = ""
+                for pid, p in ds_products.items():
+                    if p.get("title") == m.get("ds_name"):
+                        ds_url = p.get("url", "")
+                        break
+                ds_map[ic] = {
+                    "name": m.get("ds_name"),
+                    "sp": m.get("ds_sp"),
+                    "mrp": m.get("ds_mrp"),
+                    "url": ds_url,
+                    "status": m.get("match_status"),
+                    "unit": "",
+                }
 
     rows = []
     for ic in sorted(am_map.keys(), key=lambda x: int(x) if x.isdigit() else 0):
@@ -625,6 +663,16 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                 d_stock = "available" if best_match.get("in_stock") else "out_of_stock"
                 d_status = compute_status(am, am_mrp, d_sp, d_mrp, d_name, {}, "dmart")
 
+        # DealShare data
+        ds = ds_map.get(ic, {})
+        ds_url = ds.get("url")
+        ds_name = ds.get("name")
+        ds_unit = ds.get("unit")
+        ds_mrp = ds.get("mrp")
+        ds_sp = ds.get("sp")
+        ds_stock = "available" if ds_sp else None
+        ds_status = ds.get("status") if ds_sp else None
+
         rows.append([
             DATE, NOW, city, pincode, int(ic) if ic.isdigit() else ic,
             am.get("display_name"), am.get("master_category"), am.get("brand"), am.get("marketed_by"),
@@ -633,6 +681,7 @@ def generate_city_data(pincode, city, am_map, mrp_map):
             j_url, j_name, j_unit, j_mrp, j_sp, j_stock, j_status,
             d_url, d_name, d_unit, d_mrp, d_sp, d_stock, d_status,
             am.get("sub_variant"), am.get("variant"), am.get("pack_size"),
+            ds_url, ds_name, ds_unit, ds_mrp, ds_sp, ds_stock, ds_status,
         ])
     return rows
 
@@ -722,6 +771,9 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
     push_to_bigquery(city_csv_path, [pin])
     backup_to_gcs(city_csv_path, pin)
     print(f"  ✅ {city} Blinkit pushed to BQ ({len(city_rows)} rows)", flush=True)
+
+    # ── Step 1.5: DealShare (fast, API only, ~30 sec) ──
+    scrape_dealshare_city(pin, city)
 
     # ── Step 2: Jiomart → fetch → UPDATE only jio columns in BQ (don't touch existing data) ──
     print(f"\n  📦 Step 2: Jiomart fetch + update BQ", flush=True)

@@ -1,0 +1,28 @@
+{
+  "api_url": "https://services.dealshare.in/feedservice/api/v1/get-page",
+  "categories": {
+    "719": "Grocery & Packaged Food",
+    "720": "Personal Care",
+    "721": "Cleaning & Home Care",
+    "722": "Home & Kitchen",
+    "726": "Dairy, Frozen & Bakery",
+    "727": "Fruits & Vegetables"
+  },
+  "fmcg_categories": ["719", "720", "721", "726", "727"],
+  "pincodes": {
+    "700001": {"city": "Kolkata", "state": "WB"},
+    "712232": {"city": "Kolkata (Howrah)", "state": "WB"}
+  },
+  "headers": {
+    "appVersion": "1.1.9",
+    "businessModel": "B2C",
+    "channel": "APP",
+    "deviceType": "desktop",
+    "palId": "670",
+    "platform": "web"
+  },
+  "pagination": {
+    "cursor_increment": 5,
+    "delay_between_pages_sec": 0.3
+  }
+}
