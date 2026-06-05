@@ -868,6 +868,8 @@ def push_to_bigquery(csv_path, pincodes):
         job_config = bigquery.LoadJobConfig(
             source_format=bigquery.SourceFormat.CSV,
             write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+            allow_quoted_newlines=True,
+            max_bad_records=50,
         )
         with open(csv_path, "rb") as f:
             client.load_table_from_file(f, live_table, job_config=job_config).result()
@@ -880,6 +882,8 @@ def push_to_bigquery(csv_path, pincodes):
         job_config = bigquery.LoadJobConfig(
             source_format=bigquery.SourceFormat.CSV,
             write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+            allow_quoted_newlines=True,
+            max_bad_records=50,
         )
         with open(csv_path, "rb") as f:
             client.load_table_from_file(f, history_table, job_config=job_config).result()
