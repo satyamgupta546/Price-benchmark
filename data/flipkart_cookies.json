@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Network-Type",
+    "value": "4g",
+    "domain": ".flipkart.com",
+    "path": "/account",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "T",
+    "value": "TI178056841213200133976000812888471038344505202970831671431106741940",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1812104412.243811,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "at",
+    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ2Yjk5NDViLWZmYTEtNGQ5ZC1iZDQyLTFkN2RmZTU4ZGNmYSJ9.eyJleHAiOjE3ODIyOTY0MTIsImlhdCI6MTc4MDU2ODQxMiwiaXNzIjoia2V2bGFyIiwianRpIjoiY2RiM2Q3ZDYtMDBmYi00MTEwLWE0NzMtMGIwZGYwMzNkNThmIiwidHlwZSI6IkFUIiwiZElkIjoiVEkxNzgwNTY4NDEyMTMyMDAxMzM5NzYwMDA4MTI4ODg0NzEwMzgzNDQ1MDUyMDI5NzA4MzE2NzE0MzExMDY3NDE5NDAiLCJrZXZJZCI6IlZJRjMxMDg4MTdCRjA0NEIyNzlGMTI1NjI3RTgzM0FFQjkiLCJ0SWQiOiJtYXBpIiwidnMiOiJMTyIsInoiOiJDSCIsIm0iOnRydWUsImdlbiI6NH0.Hx7zOM33HSResZksvvW_HgI2B6H2rdx3f2hfMRcAiPs",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796120416.489739,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "rt",
+    "value": "null",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796120416.489798,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "K-ACTION",
+    "value": "null",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796346888.243958,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ud",
+    "value": "3.SP0ce73iy-9UIHfyFoQdCcO3EU7CI6_czdf7l1XSkSGBSamvtwRGS9qZ8UUhubL7LOLHH5atdWoEd5-U4S86MCO6vUvmEzDqKdew5YlLy_J_OnXwtYovr04Yd7g5mmhXqlJyAQhMpzEksorq2_-TCg",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796346888.243965,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "demdex",
+    "value": "00429689256023350362348331133112212834",
+    "domain": ".demdex.net",
+    "path": "/",
+    "expires": 1796120412.730553,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "AMCVS_17EB401053DAF4840A490D4C%40AdobeOrg",
+    "value": "1",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "AMCV_17EB401053DAF4840A490D4C%40AdobeOrg",
+    "value": "-227196251%7CMCIDTS%7C20609%7CMCMID%7C00408307062927263862350692037076782636%7CMCAAMLH-1781173212%7C12%7CMCAAMB-1781173212%7C6G1ynYcLPuiQxYZrsz_pkqfLG9yMXBpb2zX5dvJdYQJzPXImdj0y%7CMCOPTOUT-1780575612s%7CNONE%7CMCAID%7CNONE",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1815128412.951022,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "vd",
+    "value": "VIF3108817BF044B279F125627E833AEB9-1780568413063-1.1780568413.1780568413.151406334",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796120413.086204,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "S",
+    "value": "d1t13Pz8/TT9ucz9oPwhXPz8/PyMa5ZKobw3rrQsH1WRKFwSiwiw56B0y9LOYgABmqdCsLWmcOQxH9G8U2dGCCcdgPw==",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796120416.489811,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "SN",
+    "value": "VIF3108817BF044B279F125627E833AEB9.TOK1EB6B97D83B243E398384FE6BA754308.1780568416384.LO",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": 1796120416.489825,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "s_sq",
+    "value": "flipkart-prd%3D%2526pid%253Dwww.flipkart.com%25253Aaccount%25253Alogin%2526pidt%253D1%2526oid%253DVerify%2526oidt%253D3%2526ot%253DSUBMIT",
+    "domain": ".flipkart.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

@@ -428,6 +428,20 @@ def scrape_jiomart_city(pincode, city):
         RUN_ERRORS.append(f"{city} jiomart: {str(e)[:150]}")
 
 
+def scrape_flipkart_minutes_city(pincode, city):
+    """Run Flipkart Minutes pipeline (Chromium, cookies, ~5 min)."""
+    city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit"})
+    if "flipkart_minutes" not in city_platforms:
+        return
+    try:
+        print(f"\n⚙️  {city} — flipkart minutes pipeline", flush=True)
+        run("scrape_flipkart_minutes.py", [pincode, "--match"], use_venv=False, retries=0, timeout=600)
+        print(f"  ✅ {city} flipkart minutes complete", flush=True)
+    except Exception as e:
+        print(f"  ❌ {city} flipkart minutes: {str(e)[:100]}", flush=True)
+        RUN_ERRORS.append(f"{city} flipkart_minutes: {str(e)[:100]}")
+
+
 def scrape_dealshare_city(pincode, city):
     """Run DealShare pipeline for one city (fast, API only, ~30 sec)."""
     city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit"})
@@ -542,6 +556,23 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                     "sp": m.get("ds_sp"),
                     "mrp": m.get("ds_mrp"),
                     "url": ds_url,
+                    "status": m.get("match_status"),
+                    "unit": "",
+                }
+
+    # Load Flipkart Minutes match data
+    fk_map = {}
+    fk_match_files = sorted([f for f in DATA.glob(f"flipkart_minutes_match_{pincode}_*.json")])
+    if fk_match_files:
+        fk_data = json.load(open(fk_match_files[-1]))
+        for m in fk_data.get("matches", []):
+            ic = m.get("item_code")
+            if ic and m.get("fk_sp"):
+                fk_map[ic] = {
+                    "name": m.get("fk_name"),
+                    "sp": m.get("fk_sp"),
+                    "mrp": m.get("fk_mrp"),
+                    "url": "",
                     "status": m.get("match_status"),
                     "unit": "",
                 }
@@ -673,6 +704,16 @@ def generate_city_data(pincode, city, am_map, mrp_map):
         ds_stock = "available" if ds_sp else None
         ds_status = ds.get("status") if ds_sp else None
 
+        # Flipkart Minutes data
+        fk = fk_map.get(ic, {})
+        fk_url = fk.get("url")
+        fk_name = fk.get("name")
+        fk_unit = fk.get("unit")
+        fk_mrp = fk.get("mrp")
+        fk_sp = fk.get("sp")
+        fk_stock = "available" if fk_sp else None
+        fk_status = fk.get("status") if fk_sp else None
+
         rows.append([
             DATE, NOW, city, pincode, int(ic) if ic.isdigit() else ic,
             am.get("display_name"), am.get("master_category"), am.get("brand"), am.get("marketed_by"),
@@ -682,6 +723,7 @@ def generate_city_data(pincode, city, am_map, mrp_map):
             d_url, d_name, d_unit, d_mrp, d_sp, d_stock, d_status,
             am.get("sub_variant"), am.get("variant"), am.get("pack_size"),
             ds_url, ds_name, ds_unit, ds_mrp, ds_sp, ds_stock, ds_status,
+            fk_url, fk_name, fk_unit, fk_mrp, fk_sp, fk_stock, fk_status,
         ])
     return rows
 
@@ -772,8 +814,9 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
     backup_to_gcs(city_csv_path, pin)
     print(f"  ✅ {city} Blinkit pushed to BQ ({len(city_rows)} rows)", flush=True)
 
-    # ── Step 1.5: DealShare (fast, API only, ~30 sec) ──
+    # ── Step 1.5: DealShare + Flipkart Minutes (fast) ──
     scrape_dealshare_city(pin, city)
+    scrape_flipkart_minutes_city(pin, city)
 
     # ── Step 2: Jiomart → fetch → UPDATE only jio columns in BQ (don't touch existing data) ──
     print(f"\n  📦 Step 2: Jiomart fetch + update BQ", flush=True)

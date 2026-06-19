@@ -60,7 +60,7 @@
       "name": "Ranchi",
       "state": "JH",
       "warehouse": "WRHS_1",
-      "platforms": ["blinkit", "jiomart"],
+      "platforms": ["blinkit", "jiomart", "flipkart_minutes"],
       "anakin_available": true,
       "est_products": 2400
     },

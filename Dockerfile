@@ -28,6 +28,7 @@ RUN mkdir -p data/anakin data/sam data/comparisons data/mappings output
 COPY data/mappings/ ./data/mappings/
 COPY data/jiomart_product_master.json ./data/jiomart_product_master.json
 COPY data/am_jiomart_mapping.json ./data/am_jiomart_mapping.json
+COPY data/flipkart_cookies.json ./data/flipkart_cookies.json
 COPY data/hd_assortment.csv ./data/hd_assortment.csv
 
 # Environment
