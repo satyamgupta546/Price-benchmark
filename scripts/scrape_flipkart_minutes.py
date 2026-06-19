@@ -34,8 +34,8 @@ PINCODE_COORDS = {
     "834008": {"lat": 23.3869, "lon": 85.3202, "label": "Gandhi Nagar, Kanke, Ranchi"},
     "834002": {"lat": 23.3441, "lon": 85.3096, "label": "Ranchi"},
     "700001": {"lat": 22.5726, "lon": 88.3639, "label": "Kolkata"},
-    "712232": {"lat": 22.5726, "lon": 88.3639, "label": "Kolkata"},
-    "492001": {"lat": 21.2514, "lon": 81.6296, "label": "Raipur"},
+    "712232": {"lat": 22.5850, "lon": 88.3200, "label": "Kolkata Howrah"},
+    "492001": {"lat": 21.2514, "lon": 81.6296, "label": "Raipur (not available)"},
     "831001": {"lat": 22.8046, "lon": 86.2029, "label": "Jamshedpur"},
 }
 
@@ -427,23 +427,73 @@ async def main():
     await browser.close()
     await pw.stop()
 
-    # Match with AM products
+    # Match with AM products using ALL logic (same as Blinkit/Jiomart)
     if do_match and products:
+        import csv
         from unified_matcher import UnifiedMatchingEngine
-        from utils import parse_num
+        from utils import parse_num, normalize
 
         am_map = json.load(open(DATA / "am_product_master.json")) if (DATA / "am_product_master.json").exists() else {}
         ean_map = json.load(open(DATA / "ean_map.json")) if (DATA / "ean_map.json").exists() else {}
+
+        # MRP source: latestproductpricingtracker (same as Jiomart)
         pricing_path = DATA / "am_pricing_wrhs_1.json"
         mrp_map = json.load(open(pricing_path)) if pricing_path.exists() else {}
+        print(f"  MRP source: am_pricing ({len(mrp_map)} items)", flush=True)
 
-        # Build pool
+        # Load HD assortment — match only HD products (same as Jiomart)
+        hd_csv = DATA / "hd_assortment.csv"
+        hd_items = {}
+        if hd_csv.exists():
+            with open(hd_csv, newline="", encoding="utf-8-sig") as f:
+                for row in csv.DictReader(f):
+                    # Filter by state based on pincode
+                    state = row.get("State", "").strip()
+                    ic = str(row.get("Item Code", "")).strip()
+                    if ic:
+                        am = am_map.get(ic, {})
+                        hd_items[ic] = {
+                            "item_code": ic,
+                            "display_name": row.get("Item Name", "") or am.get("display_name", ""),
+                            "brand": row.get("Brand", "") or am.get("brand", ""),
+                            "master_category": row.get("Master Catgory", "").strip() or am.get("master_category", ""),
+                            "product_type": row.get("Product Type", "") or am.get("product_type", ""),
+                            "unit": am.get("unit", ""),
+                            "unit_value": am.get("unit_value"),
+                            "mrp": am.get("mrp"),
+                        }
+            print(f"  HD items: {len(hd_items)}", flush=True)
+
+        # Use HD items if available, else all AM
+        target = hd_items if hd_items else {
+            ic: am for ic, am in am_map.items()
+            if am.get("master_category") in {"STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"}
+        }
+
+        # Build pool with better brand extraction
         pool = []
         for p in products:
+            name = p["name"]
+            brand = p.get("brand", "")
+
+            # Better brand: if first word is generic, try extracting known brand
+            generic_words = {"red", "green", "yellow", "black", "white", "indian",
+                             "premium", "fresh", "organic", "natural", "pure",
+                             "jeera", "toor", "urad", "moong", "chana", "sugar",
+                             "salt", "rice", "atta", "dal", "oil"}
+            if brand.lower() in generic_words or not brand:
+                # Try matching with known AM brands
+                name_lower = normalize(name)
+                for ic, am in target.items():
+                    am_brand = (am.get("brand") or "").strip()
+                    if am_brand and am_brand.lower() in name_lower:
+                        brand = am_brand
+                        break
+
             pool.append({
                 "product_id": p.get("product_id", ""),
-                "product_name": p["name"],
-                "brand": p.get("brand", ""),
+                "product_name": name,
+                "brand": brand,
                 "price": p["sp"],
                 "mrp": p.get("mrp"),
                 "unit": p.get("unit", ""),
@@ -456,11 +506,8 @@ async def main():
         from collections import Counter
         status_counts = Counter()
         matched = []
-        valid_cats = {"STPLS", "FMCG", "FMCGF", "FMCGNF", "GM"}
 
-        for ic, am in am_map.items():
-            if am.get("master_category") not in valid_cats:
-                continue
+        for ic, am in target.items():
             mrp_rec = mrp_map.get(ic)
             am_mrp = parse_num(mrp_rec.get("mrp")) if mrp_rec else parse_num(am.get("mrp"))
             result = engine.match(am, am_mrp)
@@ -469,23 +516,29 @@ async def main():
                 matched.append({
                     "item_code": ic,
                     "am_name": am.get("display_name"),
+                    "am_brand": am.get("brand"),
                     "fk_name": result.product.get("product_name"),
                     "fk_sp": result.product.get("price"),
                     "fk_mrp": result.product.get("mrp"),
+                    "fk_unit": result.product.get("unit"),
                     "match_status": result.status,
                     "match_score": round(result.score, 3),
+                    "match_reason": result.reason,
+                    "match_flags": ", ".join(result.flags) if result.flags else "",
                 })
 
-        print(f"\n  Match results:")
+        total = sum(status_counts.values())
+        print(f"\n  Match results ({total} items):")
         for s, c in status_counts.most_common():
-            print(f"    {s:25s} {c}")
-        print(f"  Total matched: {len(matched)}")
+            print(f"    {s:25s} {c:5d}  ({c/total*100:.1f}%)")
+        print(f"  Total matched: {len(matched)} ({len(matched)/total*100:.1f}%)")
 
         match_path = DATA / f"flipkart_minutes_match_{pincode}_{ts}.json"
         with open(match_path, "w") as f:
             json.dump({
                 "pincode": pincode,
                 "total_matched": len(matched),
+                "total_items": total,
                 "status_counts": dict(status_counts),
                 "matches": matched,
             }, f, indent=2, default=str)

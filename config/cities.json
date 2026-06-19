@@ -68,7 +68,7 @@
       "name": "Kolkata",
       "state": "WB",
       "warehouse": "WRHS_10",
-      "platforms": ["blinkit", "jiomart", "dealshare"],
+      "platforms": ["blinkit", "jiomart", "dealshare", "flipkart_minutes"],
       "anakin_available": true,
       "est_products": 2600
     },
@@ -84,7 +84,7 @@
       "name": "Hazaribagh",
       "state": "JH",
       "warehouse": "WRHS_1",
-      "platforms": ["blinkit"],
+      "platforms": ["blinkit", "flipkart_minutes"],
       "anakin_available": true,
       "est_products": 1200
     },
@@ -92,7 +92,7 @@
       "name": "Bilaspur",
       "state": "CG",
       "warehouse": "WRHS_2",
-      "platforms": ["blinkit", "jiomart"],
+      "platforms": ["blinkit", "jiomart", "flipkart_minutes"],
       "anakin_available": false,
       "est_products": 0,
       "_note": "New city — no Anakin data, needs search-based discovery"
