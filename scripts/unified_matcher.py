@@ -134,12 +134,18 @@ class UnifiedMatchingEngine:
         frozenset({"mustard", "sunflower", "groundnut", "soybean",
                     "olive", "coconut", "sesame", "kachi",
                     "refined", "filtered"}),                        # oil
-        frozenset({"toned", "skimmed", "standardized", "fullcream"}),  # milk
+        frozenset({"toned", "skimmed", "standardized", "fullcream"}),  # milk type
         frozenset({"basmati", "kolam", "sona", "ponni", "gobindo"}),   # rice
         frozenset({"multigrain", "wholewheat", "maida",
                     "besan", "sooji", "ragi", "atta"}),             # flour
         frozenset({"red", "yellow", "kashmiri", "bydagi"}),         # chilli/spice
         frozenset({"iodized", "rock", "pink", "sendha"}),           # salt
+        frozenset({"ghee", "butter", "lassi", "cheese", "paneer",
+                    "curd", "buttermilk", "shrikhand", "cream"}),   # dairy products
+        frozenset({"shampoo", "conditioner", "serum",
+                    "soap", "bodywash", "facewash", "handwash"}),   # personal care
+        frozenset({"toothpaste", "toothbrush", "mouthwash"}),       # oral care
+        frozenset({"detergent", "softener", "bleach", "stiffener"}), # laundry
     ]
 
     # ── Combo markers (skip these products entirely) ──
