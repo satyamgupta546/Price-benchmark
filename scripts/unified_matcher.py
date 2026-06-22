@@ -146,6 +146,12 @@ class UnifiedMatchingEngine:
                     "soap", "bodywash", "facewash", "handwash"}),   # personal care
         frozenset({"toothpaste", "toothbrush", "mouthwash"}),       # oral care
         frozenset({"detergent", "softener", "bleach", "stiffener"}), # laundry
+        frozenset({"mango", "mixed", "orange", "apple", "pomegranate",
+                    "guava", "pineapple", "strawberry", "lemon", "litchi"}),  # fruit flavors
+        frozenset({"ketchup", "sauce", "chutney", "mayonnaise", "vinegar"}),  # condiments
+        frozenset({"jam", "marmalade", "honey", "syrup"}),           # spreads
+        frozenset({"oatmeal", "chocochip", "cashew", "bourbon",
+                    "cream", "digestive", "marie"}),                  # biscuit types
     ]
 
     # ── Combo markers (skip these products entirely) ──
