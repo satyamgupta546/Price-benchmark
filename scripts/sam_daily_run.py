@@ -793,97 +793,32 @@ def process_city(pin, city, am_map, mrp_maps, city_index, total_cities):
     wh = WAREHOUSE_MAP.get(pin, "WRHS_1")
     mrp_map = mrp_maps.get(wh, {})
 
-    # ── Step 1: Blinkit → generate → push (fast) ──
-    print(f"\n  📦 Step 1: Blinkit scrape + push", flush=True)
+    def _generate_and_push(label):
+        """Generate data from all scraped so far + push to BQ."""
+        city_rows = generate_city_data(pin, city, am_map, mrp_map)
+        city_csv_path = DATA / f"bq_upload_{pin}.csv"
+        with open(city_csv_path, "w", newline="") as f:
+            w = csv.writer(f)
+            for row in city_rows:
+                w.writerow(row)
+        push_to_bigquery(city_csv_path, [pin])
+        b = sum(1 for r in city_rows if r[18])
+        j = sum(1 for r in city_rows if r[25])
+        print(f"  ✅ {city} {label} → BQ ({len(city_rows)} rows, blinkit:{b} jio:{j})", flush=True)
+        return city_rows
+
+    # ── Scrape + push incrementally ──
     scrape_blinkit_city(pin, city)
+    _generate_and_push("Blinkit")
 
-    city_rows = generate_city_data(pin, city, am_map, mrp_map)
-    print(f"  ✅ {city}: {len(city_rows)} rows generated (Blinkit)", flush=True)
-
-    valid, messages = validate_data(city_rows, [pin])
-    if not valid:
-        for msg in messages:
-            print(f"    ⚠️ {msg}", flush=True)
-
-    city_csv_path = DATA / f"bq_upload_{pin}.csv"
-    with open(city_csv_path, "w", newline="") as f:
-        w = csv.writer(f)
-        for row in city_rows:
-            w.writerow(row)
-    push_to_bigquery(city_csv_path, [pin])
-    backup_to_gcs(city_csv_path, pin)
-    print(f"  ✅ {city} Blinkit pushed to BQ ({len(city_rows)} rows)", flush=True)
-
-    # ── Step 1.5: DealShare + Flipkart Minutes (fast) ──
     scrape_dealshare_city(pin, city)
     scrape_flipkart_minutes_city(pin, city)
+    _generate_and_push("DealShare+Flipkart")
 
-    # ── Step 2: Jiomart → fetch → UPDATE only jio columns in BQ (don't touch existing data) ──
-    print(f"\n  📦 Step 2: Jiomart fetch + update BQ", flush=True)
     scrape_jiomart_city(pin, city)
+    city_rows = _generate_and_push("Jiomart (final)")
 
-    # Re-generate to get Jiomart data
-    city_rows = generate_city_data(pin, city, am_map, mrp_map)
-    jio_count = sum(1 for r in city_rows if r[25])  # jio_sp at index 25
-    print(f"  ✅ {city}: {jio_count} jio prices found", flush=True)
-
-    # UPDATE only jio columns in BQ — don't delete existing data
-    # Priority: keep existing data if already present (first run wins)
-    try:
-        from google.cloud import bigquery
-        client = bigquery.Client(project=BQ_PROJECT)
-        live_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_price_live"
-
-        # Build temp CSV with jio data only
-        jio_rows = []
-        for row in city_rows:
-            ic = row[4]
-            j_sp = row[25]
-            if j_sp is None:
-                continue
-            jio_rows.append({
-                "item_code": ic, "jio_url": row[21] or "", "jio_name": row[22] or "",
-                "jio_unit": row[23] or "", "jio_mrp": row[24], "jio_sp": j_sp,
-                "jio_stock": row[26] or "", "jio_status": row[27] or "",
-            })
-
-        if jio_rows:
-            # Batch UPDATE using MERGE — only update rows where jio_sp IS NULL
-            # First load jio data to temp table, then MERGE
-            temp_table = f"{BQ_PROJECT}.{BQ_DATASET}.sam_jio_temp_{pin}"
-            job_config = bigquery.LoadJobConfig(
-                schema=[
-                    bigquery.SchemaField("item_code", "INTEGER"),
-                    bigquery.SchemaField("jio_url", "STRING"),
-                    bigquery.SchemaField("jio_name", "STRING"),
-                    bigquery.SchemaField("jio_unit", "STRING"),
-                    bigquery.SchemaField("jio_mrp", "FLOAT"),
-                    bigquery.SchemaField("jio_sp", "FLOAT"),
-                    bigquery.SchemaField("jio_stock", "STRING"),
-                    bigquery.SchemaField("jio_status", "STRING"),
-                ],
-                write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-            )
-            client.load_table_from_json(jio_rows, temp_table, job_config=job_config).result()
-
-            # MERGE — update only where jio_sp IS NULL (don't overwrite existing)
-            merge_sql = f"""MERGE `{live_table}` T
-USING `{temp_table}` S
-ON T.date = '{DATE}' AND T.pincode = '{pin}' AND T.item_code = S.item_code
-WHEN MATCHED AND T.jio_sp IS NULL THEN UPDATE SET
-  T.jio_url = S.jio_url, T.jio_name = S.jio_name, T.jio_unit = S.jio_unit,
-  T.jio_mrp = S.jio_mrp, T.jio_sp = S.jio_sp,
-  T.jio_stock = S.jio_stock, T.jio_status = S.jio_status"""
-            client.query(merge_sql).result()
-
-            # Cleanup temp table
-            client.delete_table(temp_table, not_found_ok=True)
-
-            print(f"  ✅ {city} Jiomart: {len(jio_rows)} rows merged in BQ (existing data untouched)", flush=True)
-        else:
-            print(f"  ⚠️ {city} Jiomart: no jio prices to update", flush=True)
-    except Exception as e:
-        print(f"  ❌ Jiomart BQ update error: {str(e)[:200]}", flush=True)
+    backup_to_gcs(DATA / f"bq_upload_{pin}.csv", pin)
 
     return city_rows
 
