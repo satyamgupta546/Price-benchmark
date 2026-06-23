@@ -428,14 +428,29 @@ def scrape_jiomart_city(pincode, city):
         RUN_ERRORS.append(f"{city} jiomart: {str(e)[:150]}")
 
 
+# Flipkart Minutes pincode mapping (FK needs specific pincode for geolocation)
+FK_PINCODE_MAP = {
+    "834002": "834008",  # Ranchi → 834008 (Gandhi Nagar, Kanke)
+}
+
+
 def scrape_flipkart_minutes_city(pincode, city):
     """Run Flipkart Minutes pipeline (Chromium, cookies, ~5 min)."""
     city_platforms = CITY_PLATFORMS.get(pincode, {"blinkit"})
     if "flipkart_minutes" not in city_platforms:
         return
     try:
-        print(f"\n⚙️  {city} — flipkart minutes pipeline", flush=True)
-        run("scrape_flipkart_minutes.py", [pincode, "--match"], use_venv=False, retries=0, timeout=600)
+        fk_pin = FK_PINCODE_MAP.get(pincode, pincode)
+        print(f"\n⚙️  {city} — flipkart minutes pipeline (pin:{fk_pin})", flush=True)
+        run("scrape_flipkart_minutes.py", [fk_pin, "--match"], use_venv=False, retries=0, timeout=600)
+        # Copy match file to original pincode name (for generate_city_data)
+        if fk_pin != pincode:
+            import glob
+            fk_files = sorted(glob.glob(str(DATA / f"flipkart_minutes_match_{fk_pin}_*.json")))
+            if fk_files:
+                import shutil
+                dest = str(fk_files[-1]).replace(f"_{fk_pin}_", f"_{pincode}_")
+                shutil.copy2(fk_files[-1], dest)
         print(f"  ✅ {city} flipkart minutes complete", flush=True)
     except Exception as e:
         print(f"  ❌ {city} flipkart minutes: {str(e)[:100]}", flush=True)
