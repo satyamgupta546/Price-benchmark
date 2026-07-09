@@ -159,6 +159,15 @@ def _extract_from_json(data, results, depth=0):
             brand = data.get("brand") or data.get("brandName") or ""
             pid = data.get("productId") or data.get("id") or ""
             img = data.get("image") or data.get("imageUrl") or ""
+            link = (data.get("url") or data.get("link") or data.get("smartUrl")
+                    or data.get("baseUrl") or data.get("pageUri") or "")
+            if isinstance(link, dict):
+                link = link.get("url") or link.get("href") or ""
+            link = str(link or "").strip()
+            if link.startswith("/"):
+                link = "https://www.flipkart.com" + link
+            if not link.startswith("http"):
+                link = f"https://www.flipkart.com/p/itm?pid={pid}" if pid else ""
 
             # Parse price if nested
             if isinstance(price, dict):
@@ -177,6 +186,7 @@ def _extract_from_json(data, results, depth=0):
                         "mrp": mrp_val if mrp_val and mrp_val != sp_val else None,
                         "unit": str(unit).strip(),
                         "product_id": str(pid),
+                        "url": link[:300],
                         "image": str(img)[:200] if img else "",
                     })
             except (ValueError, TypeError):
@@ -298,9 +308,18 @@ async def _extract_from_dom(page):
             const sp = prices.length > 0 ? Math.min(...prices) : null;
             const mrp = prices.length > 1 ? Math.max(...prices) : null;
 
+            // Product link: nearest wrapping/descendant anchor pointing to a PDP
+            let url = '';
+            const a = card.closest('a[href]') || card.querySelector('a[href*="/p/"]') || card.querySelector('a[href]');
+            if (a) {
+                let href = a.getAttribute('href') || '';
+                if (href.startsWith('/')) href = location.origin + href;
+                if (href.startsWith('http')) url = href.slice(0, 300);
+            }
+
             if (sp && !seen.has(name)) {
                 seen.add(name);
-                results.push({name, sp, mrp: mrp !== sp ? mrp : null, unit, brand});
+                results.push({name, sp, mrp: mrp !== sp ? mrp : null, unit, brand, url});
             }
         }
         return results;
@@ -497,6 +516,7 @@ async def main():
                 "price": p["sp"],
                 "mrp": p.get("mrp"),
                 "unit": p.get("unit", ""),
+                "url": p.get("url", ""),
                 "in_stock": True,
             })
 
@@ -521,6 +541,7 @@ async def main():
                     "fk_sp": result.product.get("price"),
                     "fk_mrp": result.product.get("mrp"),
                     "fk_unit": result.product.get("unit"),
+                    "fk_url": result.product.get("url", ""),
                     "match_status": result.status,
                     "match_score": round(result.score, 3),
                     "match_reason": result.reason,

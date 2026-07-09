@@ -587,9 +587,9 @@ def generate_city_data(pincode, city, am_map, mrp_map):
                     "name": m.get("fk_name"),
                     "sp": m.get("fk_sp"),
                     "mrp": m.get("fk_mrp"),
-                    "url": "",
+                    "url": m.get("fk_url", ""),
                     "status": m.get("match_status"),
-                    "unit": "",
+                    "unit": m.get("fk_unit"),
                 }
 
     rows = []
