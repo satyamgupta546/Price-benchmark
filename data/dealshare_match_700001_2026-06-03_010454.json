@@ -1,0 +1,1714 @@
+{
+  "pincode": "700001",
+  "matched_at": "2026-06-03T01:04:54.510770",
+  "total_matched": 189,
+  "status_counts": {
+    "NA": 3445,
+    "PARTIAL MATCH": 90,
+    "SEMI COMPLETE MATCH": 82,
+    "COMPLETE MATCH": 17
+  },
+  "matches": [
+    {
+      "item_code": "3287",
+      "am_name": "Everest Shahi Paneer Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.562
+    },
+    {
+      "item_code": "1279",
+      "am_name": "Catch Black Salt Powder - 200g",
+      "ds_name": "Catch Black Salt Sprinkler - 200 Gm",
+      "ds_sp": 42.0,
+      "ds_mrp": 47.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.689
+    },
+    {
+      "item_code": "2555",
+      "am_name": "MDH Haldi Powder - 100g",
+      "ds_name": "Mdh Haldi Powder - 100 Gm",
+      "ds_sp": 37.0,
+      "ds_mrp": 48.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.955
+    },
+    {
+      "item_code": "2554",
+      "am_name": "MDH Garam Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.905
+    },
+    {
+      "item_code": "1615",
+      "am_name": "Aashirvaad Shudh Chakki Atta - 10Kg",
+      "ds_name": "Aashirvaad Shudh Chakki Atta - 10 Kg",
+      "ds_sp": 441.0,
+      "ds_mrp": 476.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.925
+    },
+    {
+      "item_code": "35217",
+      "am_name": "Britannia Tiger Krunch Chocochip Biscuits | 400g | Pack of 1",
+      "ds_name": "Britannia Good Day Chocochip Cookies - 400 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 150.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.545
+    },
+    {
+      "item_code": "13607",
+      "am_name": "Lion Qyno Dates - 500g - Buy 1 Get 1 Free",
+      "ds_name": "Lion Seeded Dates 500 Gm (Buy 1 Get 1 Free) - 1 Kg",
+      "ds_sp": 186.0,
+      "ds_mrp": 222.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.771
+    },
+    {
+      "item_code": "2541",
+      "am_name": "Everest Turmeric Powder - 100g",
+      "ds_name": "Everest Chhole Masala - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "13919",
+      "am_name": "Catch Turmeric Powder - 50g",
+      "ds_name": "Catch Chat Masala Sprinklers - 50 Gm",
+      "ds_sp": 40.0,
+      "ds_mrp": 45.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.407
+    },
+    {
+      "item_code": "27816",
+      "am_name": "India Gate Basmati Rice Feast Rozzana 1 Kg",
+      "ds_name": "India Gate Classic Basmati Rice - 1 Kg",
+      "ds_sp": 197.0,
+      "ds_mrp": 253.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.795
+    },
+    {
+      "item_code": "30265",
+      "am_name": "Surf Excel Matic Top Load Liquid Detergent Pouch | 2L | Pack of 1",
+      "ds_name": "Surf Excel Matic Liquid Detergent Front Load Pouch - 2 Ltr",
+      "ds_sp": 329.0,
+      "ds_mrp": 395.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.786
+    },
+    {
+      "item_code": "95828",
+      "am_name": "JK Jeera Powder - 100g",
+      "ds_name": "Mdh Jeera Powder - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 93.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.837
+    },
+    {
+      "item_code": "3302",
+      "am_name": "MDH Chunky Chat Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.625
+    },
+    {
+      "item_code": "2514",
+      "am_name": "MDH Kashmiri Mirch Pure - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.408
+    },
+    {
+      "item_code": "2680",
+      "am_name": "Fortune Refined Soyabean Oil - 4.35Kg",
+      "ds_name": "Fortune Sunlite Refined Sunflower Oil - 4.35 Kg",
+      "ds_sp": 955.0,
+      "ds_mrp": 1155.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.725
+    },
+    {
+      "item_code": "71617",
+      "am_name": "Unibic Delight Fruit & Nut Cookies | 450g | Pack of 1",
+      "ds_name": "Unibic Fruit & Nut Cookies - 450 Gm",
+      "ds_sp": 78.0,
+      "ds_mrp": 180.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.718
+    },
+    {
+      "item_code": "1090",
+      "am_name": "Britannia Marie Gold Biscuits | 277g | Pack of 1",
+      "ds_name": "Britannia 50-50 Maska Chaska Biscuits - 300 Gm",
+      "ds_sp": 84.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.591
+    },
+    {
+      "item_code": "1094",
+      "am_name": "Britannia Milk Bikis Biscuits | 280g | Pack of 1",
+      "ds_name": "Britannia 50-50 Maska Chaska Biscuits - 300 Gm",
+      "ds_sp": 84.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.591
+    },
+    {
+      "item_code": "1306",
+      "am_name": "Catch Red Chilli Powder - 200g",
+      "ds_name": "Catch Iodised Table Salt Sprinkler - 200 Gm",
+      "ds_sp": 46.0,
+      "ds_mrp": 50.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.493
+    },
+    {
+      "item_code": "2654",
+      "am_name": "Tata Sampann Toor Dal Unpolished Pouch - 1kg",
+      "ds_name": "Tata Rock Salt - 1 Kg",
+      "ds_sp": 92.0,
+      "ds_mrp": 99.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.459
+    },
+    {
+      "item_code": "68048",
+      "am_name": "Everest Cumin Powder - 100g",
+      "ds_name": "Everest Pav Bhaji Masala - 100 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.536
+    },
+    {
+      "item_code": "95028",
+      "am_name": "Sobisco Jeera Cream Cracker 250 g",
+      "ds_name": "Sobisco Premium Coconut Crunchy Cookies - 255 Gm",
+      "ds_sp": 30.0,
+      "ds_mrp": 40.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.456
+    },
+    {
+      "item_code": "3277",
+      "am_name": "Everest Pav Bhaji Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.557
+    },
+    {
+      "item_code": "37908",
+      "am_name": "Catch Raita Masala Sprinklers - 50g - Can",
+      "ds_name": "Catch Chat Masala Sprinklers - 50 Gm",
+      "ds_sp": 40.0,
+      "ds_mrp": 45.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.732
+    },
+    {
+      "item_code": "95831",
+      "am_name": "JK Royal Garam Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.723
+    },
+    {
+      "item_code": "35682",
+      "am_name": "Odonil Jasmine Mist Air Freshener | 72g | Pack of 1",
+      "ds_name": "Odonil Jasmine Mist Air Freshener Block - 72 Gm (Flavour: Common)",
+      "ds_sp": 86.0,
+      "ds_mrp": 90.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.673
+    },
+    {
+      "item_code": "8296",
+      "am_name": "Hit Fly Killer Spray 400ml | Pack of 1",
+      "ds_name": "Hit Lime Flying Insect Killer Spray - 400 Ml",
+      "ds_sp": 264.0,
+      "ds_mrp": 270.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "1308",
+      "am_name": "Catch Red Chilli Powder - 100g",
+      "ds_name": "Catch Jeera Powder - 100 Gm",
+      "ds_sp": 70.0,
+      "ds_mrp": 93.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.642
+    },
+    {
+      "item_code": "12882",
+      "am_name": "Daawat Biryani Basmati Rice 1 Kg",
+      "ds_name": "Daawat Biryani Basmati Rice - 1 Kg",
+      "ds_sp": 231.0,
+      "ds_mrp": 250.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "2528",
+      "am_name": "Everest Chicken Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.508
+    },
+    {
+      "item_code": "73484",
+      "am_name": "Catch Chat Masala Powder Sprinkler - 50g",
+      "ds_name": "Catch Chat Masala Sprinklers - 50 Gm",
+      "ds_sp": 40.0,
+      "ds_mrp": 45.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.833
+    },
+    {
+      "item_code": "104271",
+      "am_name": "Britannia Cheese Slices | 400g | Pack of 1",
+      "ds_name": "Britannia Good Day Chocochip Cookies - 400 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 150.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.494
+    },
+    {
+      "item_code": "72148",
+      "am_name": "Dhara Refined Sunflower Oil - 4.20 Kg",
+      "ds_name": "Dhara Soyabean Oil (Jar) - 4.2 Kg",
+      "ds_sp": 835.0,
+      "ds_mrp": 925.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.594
+    },
+    {
+      "item_code": "2512",
+      "am_name": "Everest White Pepper Powder - 50g - Carton",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.732
+    },
+    {
+      "item_code": "14732",
+      "am_name": "India Gate Mini Mogra Broken Basmati Rice Akki 5 kg",
+      "ds_name": "India Gate Mogra Basmati Rice - 5 Kg",
+      "ds_sp": 359.0,
+      "ds_mrp": 490.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.8
+    },
+    {
+      "item_code": "28470",
+      "am_name": "Emami Healthy & Tasty Ultra Lite Refined Soyabean Oil - 730g",
+      "ds_name": "Chambal Refined Soyabean Oil - 750 Gm",
+      "ds_sp": 139.0,
+      "ds_mrp": 167.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.637
+    },
+    {
+      "item_code": "12495",
+      "am_name": "Surf Excel Easy Wash Liquid | 1 Ltr | Pack of 1",
+      "ds_name": "Surf Excel Matic Top Load Liquid Detergent - 1 Ltr",
+      "ds_sp": 199.0,
+      "ds_mrp": 225.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.637
+    },
+    {
+      "item_code": "76871",
+      "am_name": "Unibic Chocolate Chip Cookies | 67.5g | Pack of 1",
+      "ds_name": "Unibic Choco Chip Cookies - 67.5 Gm",
+      "ds_sp": 18.0,
+      "ds_mrp": 27.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.795
+    },
+    {
+      "item_code": "2533",
+      "am_name": "Everest Kitchen King Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.469
+    },
+    {
+      "item_code": "4949",
+      "am_name": "Tata Salt - 1kg",
+      "ds_name": "Tata Pink Salt - 1 Kg",
+      "ds_sp": 74.0,
+      "ds_mrp": 80.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.812
+    },
+    {
+      "item_code": "13639",
+      "am_name": "Comfort After Wash Lily Fresh Fabric Conditioner | 860ml | Pack of 1",
+      "ds_name": "Comfort After Wash Lily Fresh Fabric Conditioner - 860 Ml (Pink)",
+      "ds_sp": 189.0,
+      "ds_mrp": 235.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.903
+    },
+    {
+      "item_code": "2722",
+      "am_name": "Fortune Sulphurless Sugar - 1 Kg",
+      "ds_name": "Fortune Biryani Special Basmati Rice - 1 Kg",
+      "ds_sp": 147.0,
+      "ds_mrp": 210.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.479
+    },
+    {
+      "item_code": "95367",
+      "am_name": "Whole Grain Basmati Rice 1 Kg Loose",
+      "ds_name": "Surbhi Bhimseni Camphor Container - 50 Gm",
+      "ds_sp": 90.0,
+      "ds_mrp": 145.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.405
+    },
+    {
+      "item_code": "23686",
+      "am_name": "India Gate Rozanna Basmati Rice 5Kg",
+      "ds_name": "India Gate Rozana Basmati Rice - 5 Kg",
+      "ds_sp": 437.0,
+      "ds_mrp": 620.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.914
+    },
+    {
+      "item_code": "12870",
+      "am_name": "Lion Desert King Dates - 500g",
+      "ds_name": "Lion Deseeded Dates (Refill Pack) - 500 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 145.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.646
+    },
+    {
+      "item_code": "2693",
+      "am_name": "Fortune Refined Sunflower Oil - 4.35 Kg",
+      "ds_name": "Fortune Sunlite Refined Sunflower Oil - 4.35 Kg",
+      "ds_sp": 955.0,
+      "ds_mrp": 1155.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.902
+    },
+    {
+      "item_code": "3304",
+      "am_name": "MDH Pav Bhaji Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.652
+    },
+    {
+      "item_code": "4286",
+      "am_name": "Surf Excel Easy Wash Detergent Powder | 1 Kg | Pack of 1",
+      "ds_name": "Surf Excel Easy Wash Powder - 500 Gm x 2",
+      "ds_sp": 128.0,
+      "ds_mrp": 142.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.689
+    },
+    {
+      "item_code": "30322",
+      "am_name": "Britannia Good Day Chocochip Cookies | 400g | Pack of 1",
+      "ds_name": "Britannia Good Day Chocochip Cookies - 400 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 150.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.851
+    },
+    {
+      "item_code": "35727",
+      "am_name": "Surf Excel Matic Front Load Liquid Detergent Pouch | 2L | Pack of 1",
+      "ds_name": "Surf Excel Matic Liquid Detergent Front Load Pouch - 2 Ltr",
+      "ds_sp": 329.0,
+      "ds_mrp": 395.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.874
+    },
+    {
+      "item_code": "10412",
+      "am_name": "Lizol Floral 3in1 Disinfectant Surface Cleaner 975ml",
+      "ds_name": "Lizol Floral Disinfectant Floor Cleaner - 1 Ltr",
+      "ds_sp": 205.0,
+      "ds_mrp": 246.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.763
+    },
+    {
+      "item_code": "2507",
+      "am_name": "Everest Kashmirilal Chilli Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.629
+    },
+    {
+      "item_code": "76434",
+      "am_name": "Good Knight Flash Mosquito Repellent Refill | 45ml x 2 | Pack of 2",
+      "ds_name": "Good Knight Active Cartridge Twin Pack - 90 Ml",
+      "ds_sp": 156.0,
+      "ds_mrp": 165.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.472
+    },
+    {
+      "item_code": "3273",
+      "am_name": "Everest Jaljira Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.644
+    },
+    {
+      "item_code": "4248",
+      "am_name": "Lizol Citrus Surface Cleaner | 975ml | Pack of 1",
+      "ds_name": "Lizol Disinfectant Floor Cleaner (Citrus) - 1 Ltr",
+      "ds_sp": 199.0,
+      "ds_mrp": 246.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.539
+    },
+    {
+      "item_code": "3275",
+      "am_name": "Everest Pani Puri Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.557
+    },
+    {
+      "item_code": "14684",
+      "am_name": "India Gate Classic Basmati Rice - 1Kg",
+      "ds_name": "India Gate Classic Basmati Rice - 1 Kg",
+      "ds_sp": 197.0,
+      "ds_mrp": 253.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.93
+    },
+    {
+      "item_code": "84141",
+      "am_name": "Tata Tea Premium Leaf | 1 kg | Pack of 1",
+      "ds_name": "Tata Rock Salt - 1 Kg",
+      "ds_sp": 92.0,
+      "ds_mrp": 99.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.509
+    },
+    {
+      "item_code": "1297",
+      "am_name": "Catch Magic Chat Masala Bottle - 100g",
+      "ds_name": "Catch Chicken Masala - 100 Gm",
+      "ds_sp": 68.0,
+      "ds_mrp": 95.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.677
+    },
+    {
+      "item_code": "2534",
+      "am_name": "Everest Kitchen King Masala - 100g",
+      "ds_name": "Everest Chhole Masala - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 90.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "2552",
+      "am_name": "MDH Chicken Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.682
+    },
+    {
+      "item_code": "3278",
+      "am_name": "Everest Hingraj Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.678
+    },
+    {
+      "item_code": "1316",
+      "am_name": "Catch Sprinklers Iodized Table Salt - 200g",
+      "ds_name": "Catch Iodised Table Salt Sprinkler - 200 Gm",
+      "ds_sp": 46.0,
+      "ds_mrp": 50.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.914
+    },
+    {
+      "item_code": "13001",
+      "am_name": "Catch Premium Pink Rock Salt - 1Kg",
+      "ds_name": "Catch Premium Pink Rock Salt - 1 Kg",
+      "ds_sp": 101.0,
+      "ds_mrp": 130.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.923
+    },
+    {
+      "item_code": "95858",
+      "am_name": "JK Panch Foran - 100g",
+      "ds_name": "Sampoorti Panch Foran - 100 Gm",
+      "ds_sp": 30.0,
+      "ds_mrp": 50.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.681
+    },
+    {
+      "item_code": "2517",
+      "am_name": "MDH Lal Mirch Powder - 100g",
+      "ds_name": "Mdh Lal Mirch Powder - 100 Gm",
+      "ds_sp": 55.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.962
+    },
+    {
+      "item_code": "89556",
+      "am_name": "Lion Arabian Dates - 250g - Buy 1 Get 1 Free",
+      "ds_name": "Lion Deseeded Dates (Refill Pack) - 500 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 145.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.462
+    },
+    {
+      "item_code": "13646",
+      "am_name": "Godrej Hit Anti Roach Gel | 20g | Pack of 1",
+      "ds_name": "Hit Anti Roach Cockroach Gel - 20 Gm",
+      "ds_sp": 190.0,
+      "ds_mrp": 199.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.63
+    },
+    {
+      "item_code": "29523",
+      "am_name": "India Gate Tibar Basmati Rice 1 Kg",
+      "ds_name": "India Gate Dubar Basmati Rice - 1 Kg",
+      "ds_sp": 128.0,
+      "ds_mrp": 167.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.824
+    },
+    {
+      "item_code": "18350",
+      "am_name": "Daawat Basmati Rice Rozana Gold 5 Kg",
+      "ds_name": "Daawat Premium Devaaya Basmati Rice - 5 Kg",
+      "ds_sp": 436.0,
+      "ds_mrp": 845.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.684
+    },
+    {
+      "item_code": "3300",
+      "am_name": "MDH Chana Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.714
+    },
+    {
+      "item_code": "90513",
+      "am_name": "White Crystal Sugar Loose - 1Kg",
+      "ds_name": "Shubhkart Surabhi Pure Camphor Container - 50 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 100.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "9970",
+      "am_name": "Everest Shahi Biryani Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.492
+    },
+    {
+      "item_code": "86457",
+      "am_name": "JK Black Pepper Whole - 100g",
+      "ds_name": "Catch Sprinklers Black Pepper - 100 Gm",
+      "ds_sp": 175.0,
+      "ds_mrp": 195.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.645
+    },
+    {
+      "item_code": "4329",
+      "am_name": "Good Knight Power Activ+ Refills | 45ml | Pack of 2",
+      "ds_name": "Good Knight Active Cartridge Twin Pack - 90 Ml",
+      "ds_sp": 156.0,
+      "ds_mrp": 165.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.6
+    },
+    {
+      "item_code": "1293",
+      "am_name": "Catch Kashmiri Mirch Powder - 50g",
+      "ds_name": "Catch Chat Masala Sprinklers - 50 Gm",
+      "ds_sp": 40.0,
+      "ds_mrp": 45.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.462
+    },
+    {
+      "item_code": "69665",
+      "am_name": "Comfort After Wash Anti Bacterial Fabric Conditioner | 860ml | Pack of 1",
+      "ds_name": "Comfort After Wash Lily Fresh Fabric Conditioner - 860 Ml (Pink)",
+      "ds_sp": 189.0,
+      "ds_mrp": 235.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.719
+    },
+    {
+      "item_code": "2551",
+      "am_name": "MDH Chicken Masala - 100g",
+      "ds_name": "Mdh Chicken Masala - 100 Gm",
+      "ds_sp": 67.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.917
+    },
+    {
+      "item_code": "2522",
+      "am_name": "Everest Jeera Finest Quality Pure Cumin Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.554
+    },
+    {
+      "item_code": "101028",
+      "am_name": "Dragon King Veg Hakka Noodles | 1.05 Kg | Pack of 1",
+      "ds_name": "Haryana King Classic Basmati Rice (1 Kg + 100 Gm Free) - 1.1 Kg",
+      "ds_sp": 133.0,
+      "ds_mrp": 290.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.404
+    },
+    {
+      "item_code": "104388",
+      "am_name": "Pure Nutrition Pomace Olive Oil - 1L",
+      "ds_name": "Jivo Pomace Olive Oil - 1 Ltr",
+      "ds_sp": 513.0,
+      "ds_mrp": 1049.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.689
+    },
+    {
+      "item_code": "1302",
+      "am_name": "Catch Coriander Powder - 100g",
+      "ds_name": "Catch Jeera Powder - 100 Gm",
+      "ds_sp": 70.0,
+      "ds_mrp": 93.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.731
+    },
+    {
+      "item_code": "2526",
+      "am_name": "MDH Jeera Powder - 100g",
+      "ds_name": "Mdh Jeera Powder - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 93.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.955
+    },
+    {
+      "item_code": "1101",
+      "am_name": "Britannia Nutri Choice Digestive Biscuits 250g+30g Extra",
+      "ds_name": "Britannia 50-50 Maska Chaska Biscuits - 300 Gm",
+      "ds_sp": 84.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.58
+    },
+    {
+      "item_code": "2506",
+      "am_name": "Everest Kashmirilal Chilli Powder - 100g",
+      "ds_name": "Everest Pav Bhaji Masala - 100 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.609
+    },
+    {
+      "item_code": "1099",
+      "am_name": "Britannia Nutri Choice Classic Lite Biscuits | 295g | Pack of 1",
+      "ds_name": "Britannia 50-50 Maska Chaska Biscuits - 300 Gm",
+      "ds_sp": 84.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.544
+    },
+    {
+      "item_code": "12833",
+      "am_name": "Tata Tea Agni | 1 Kg | Pack of 1",
+      "ds_name": "Tata Rock Salt - 1 Kg",
+      "ds_sp": 92.0,
+      "ds_mrp": 99.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.553
+    },
+    {
+      "item_code": "3298",
+      "am_name": "MDH Shahi Paneer Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.571
+    },
+    {
+      "item_code": "95840",
+      "am_name": "JK Haldi Powder - 100g",
+      "ds_name": "Mdh Haldi Powder - 100 Gm",
+      "ds_sp": 37.0,
+      "ds_mrp": 48.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.837
+    },
+    {
+      "item_code": "95833",
+      "am_name": "JK Shahi Garam Masala Powder - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.704
+    },
+    {
+      "item_code": "2651",
+      "am_name": "Tata Sampann Channa Dal Pouch - 1 Kg",
+      "ds_name": "Tata Rock Salt - 1 Kg",
+      "ds_sp": 92.0,
+      "ds_mrp": 99.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.566
+    },
+    {
+      "item_code": "81575",
+      "am_name": "Saffola Active Health Losorb Refined Oil - 850g",
+      "ds_name": "Saffola Active Oil - 850 Gm",
+      "ds_sp": 155.0,
+      "ds_mrp": 208.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.657
+    },
+    {
+      "item_code": "2553",
+      "am_name": "MDH Garam Masala - 100g",
+      "ds_name": "Mdh Sabji Masala - 100 Gm",
+      "ds_sp": 79.0,
+      "ds_mrp": 82.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.773
+    },
+    {
+      "item_code": "8049",
+      "am_name": "Surf Excel Matic Liquid Top Load 1 Ltr",
+      "ds_name": "Surf Excel Matic Top Load Liquid Detergent - 1 Ltr",
+      "ds_sp": 199.0,
+      "ds_mrp": 225.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.884
+    },
+    {
+      "item_code": "3061",
+      "am_name": "Keya Pasta Seasoning - 45g",
+      "ds_name": "Keya Pasta Seasoning - 45 Gm",
+      "ds_sp": 94.0,
+      "ds_mrp": 139.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.96
+    },
+    {
+      "item_code": "37961",
+      "am_name": "Lion Qyno Dates Value Pack \u2013 Buy 250g Get 250g Extra",
+      "ds_name": "Lion Deseeded Dates (Refill Pack) - 500 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 145.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.568
+    },
+    {
+      "item_code": "23509",
+      "am_name": "Catch Black Pepper Sprinkler - 50g",
+      "ds_name": "Catch Chat Masala Sprinklers - 50 Gm",
+      "ds_sp": 40.0,
+      "ds_mrp": 45.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.576
+    },
+    {
+      "item_code": "104140",
+      "am_name": "Trishul Germonil Premium Liquid Disinfectant Floor Cleaner | 1L | Pack of 1",
+      "ds_name": "Lizol Floral Disinfectant Floor Cleaner - 1 Ltr",
+      "ds_sp": 205.0,
+      "ds_mrp": 246.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.638
+    },
+    {
+      "item_code": "3264",
+      "am_name": "Everest Coriander Powder - 200g",
+      "ds_name": "Everest Turmeric Powder - 200 Gm",
+      "ds_sp": 86.0,
+      "ds_mrp": 96.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.61
+    },
+    {
+      "item_code": "1091",
+      "am_name": "Britannia Marie Gold | 400g | Pack of 1",
+      "ds_name": "Britannia Good Day Chocochip Cookies - 400 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 150.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.436
+    },
+    {
+      "item_code": "97860",
+      "am_name": "Shubhkart Darshana Kapoor Ashtagandha | 50g | Pack of 1",
+      "ds_name": "Shubhkart Surabhi Pure Camphor Container - 50 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 100.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.433
+    },
+    {
+      "item_code": "75585",
+      "am_name": "Britannia 50 50 Maska Chaska Biscuits | 300g | Pack of 1",
+      "ds_name": "Britannia 50-50 Maska Chaska Biscuits - 300 Gm",
+      "ds_sp": 84.0,
+      "ds_mrp": 90.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.854
+    },
+    {
+      "item_code": "2504",
+      "am_name": "Everest Black Pepper Powder - 100g",
+      "ds_name": "Everest Pav Bhaji Masala - 100 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.54
+    },
+    {
+      "item_code": "2550",
+      "am_name": "MDH Biryani Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.682
+    },
+    {
+      "item_code": "17416",
+      "am_name": "Unibic Sugar Free Oatmeal 67.5g",
+      "ds_name": "Unibic Choco Chip Cookies - 67.5 Gm",
+      "ds_sp": 18.0,
+      "ds_mrp": 27.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.469
+    },
+    {
+      "item_code": "3256",
+      "am_name": "Catch Ginger Garlic Paste Pouch - 200g",
+      "ds_name": "Catch Iodised Table Salt Sprinkler - 200 Gm",
+      "ds_sp": 46.0,
+      "ds_mrp": 50.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.519
+    },
+    {
+      "item_code": "18435",
+      "am_name": "India Gate Super Basmati Rice 5 Kg",
+      "ds_name": "India Gate Super Basmati Rice - 5 Kg",
+      "ds_sp": 744.0,
+      "ds_mrp": 1082.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "3281",
+      "am_name": "Everest Rajma Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "24299",
+      "am_name": "India Gate Brown Rice 1 Kg",
+      "ds_name": "India Gate Dubar Basmati Rice - 1 Kg",
+      "ds_sp": 128.0,
+      "ds_mrp": 167.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.767
+    },
+    {
+      "item_code": "97166",
+      "am_name": "Britannia Good Day Fruit & Nut Cookies | 450g | Pack of 1",
+      "ds_name": "Unibic Fruit & Nut Cookies - 450 Gm",
+      "ds_sp": 78.0,
+      "ds_mrp": 180.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.61
+    },
+    {
+      "item_code": "2536",
+      "am_name": "Everest Meat Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "13633",
+      "am_name": "Surf Excel Quick Wash Detergent Powder | 1 kg | Pack of 1",
+      "ds_name": "Surf Excel Easy Wash Powder - 500 Gm x 2",
+      "ds_sp": 128.0,
+      "ds_mrp": 142.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.615
+    },
+    {
+      "item_code": "2531",
+      "am_name": "Everest Garam Masala - 100g",
+      "ds_name": "Everest Chhole Masala - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 90.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.792
+    },
+    {
+      "item_code": "12911",
+      "am_name": "Lion Kimia Dates - 500g",
+      "ds_name": "Lion Deseeded Dates (Refill Pack) - 500 Gm",
+      "ds_sp": 112.0,
+      "ds_mrp": 145.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.542
+    },
+    {
+      "item_code": "75390",
+      "am_name": "Harpic Drain Xpert Powder | 50g | Pack of 1",
+      "ds_name": "Harpic Drain Xpert Powder - 50 Gm",
+      "ds_sp": 29.0,
+      "ds_mrp": 33.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.8
+    },
+    {
+      "item_code": "3259",
+      "am_name": "Everest Chaat Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "3246",
+      "am_name": "Nutrela Soya Chunks - 200g",
+      "ds_name": "Nutrela Soya Chunks - 200 Gm",
+      "ds_sp": 41.0,
+      "ds_mrp": 47.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.92
+    },
+    {
+      "item_code": "68660",
+      "am_name": "JK Black Pepper Whole - 50g",
+      "ds_name": "Eagle Black Pepper Powder - 50 Gm",
+      "ds_sp": 37.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.679
+    },
+    {
+      "item_code": "3262",
+      "am_name": "Everest Chhole Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.483
+    },
+    {
+      "item_code": "2537",
+      "am_name": "Everest Turmeric Powder - 200g",
+      "ds_name": "Everest Turmeric Powder - 200 Gm",
+      "ds_sp": 86.0,
+      "ds_mrp": 96.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.931
+    },
+    {
+      "item_code": "10702",
+      "am_name": "Odonil Lavender Air Freshner 48g",
+      "ds_name": "Odonil Air Freshener Lavender Meadows - 48 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 58.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.827
+    },
+    {
+      "item_code": "1103",
+      "am_name": "Britannia Nutri Choice Thin Arrowroot Biscuits | 300g | Pack of 1",
+      "ds_name": "Britannia 50-50 Maska Chaska Biscuits - 300 Gm",
+      "ds_sp": 84.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.571
+    },
+    {
+      "item_code": "30243",
+      "am_name": "Surf Excel Quick Wash Detergent Powder 2 kg",
+      "ds_name": "Surf Excel Matic Front Load Detergent Powder - 2 Kg",
+      "ds_sp": 499.0,
+      "ds_mrp": 600.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.696
+    },
+    {
+      "item_code": "1303",
+      "am_name": "Catch Coriander Powder - 200g",
+      "ds_name": "Catch Iodised Table Salt Sprinkler - 200 Gm",
+      "ds_sp": 46.0,
+      "ds_mrp": 50.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.529
+    },
+    {
+      "item_code": "3268",
+      "am_name": "Everest Dry Mango Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.656
+    },
+    {
+      "item_code": "3305",
+      "am_name": "MDH Peacock Kasoori Methi - 25g",
+      "ds_name": "Mdh Kasoori Methi - 25 Gm",
+      "ds_sp": 29.0,
+      "ds_mrp": 30.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.808
+    },
+    {
+      "item_code": "12903",
+      "am_name": "Lion Arabian Dates - 500g - Buy 1 Get 1 Free",
+      "ds_name": "Lion Arabian Dates 500 Gm (Buy 1 Get 1 Free) - 1 Kg",
+      "ds_sp": 226.0,
+      "ds_mrp": 284.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.897
+    },
+    {
+      "item_code": "9188",
+      "am_name": "Daawat Basmati Rice Rozana Super 1 Kg",
+      "ds_name": "Daawat Rozana Super Basmati Rice - 1 Kg",
+      "ds_sp": 71.0,
+      "ds_mrp": 100.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "3260",
+      "am_name": "Everest Chaat Masala - 100g",
+      "ds_name": "Everest Chhole Masala - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 90.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.792
+    },
+    {
+      "item_code": "37423",
+      "am_name": "Tata Rock Salt - 1 Kg",
+      "ds_name": "Tata Rock Salt - 1 Kg",
+      "ds_sp": 92.0,
+      "ds_mrp": 99.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "1317",
+      "am_name": "Catch Turmeric Powder - 200g",
+      "ds_name": "Catch Iodised Table Salt Sprinkler - 200 Gm",
+      "ds_sp": 46.0,
+      "ds_mrp": 50.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.478
+    },
+    {
+      "item_code": "71616",
+      "am_name": "Unibic Delight Choco Chip Cookies | 450g | Pack of 1",
+      "ds_name": "Unibic Fruit & Nut Cookies - 450 Gm",
+      "ds_sp": 78.0,
+      "ds_mrp": 180.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.582
+    },
+    {
+      "item_code": "12872",
+      "am_name": "Comfort Morning Fresh (Blue) Fabric Conditioner | 860ml | Pack of 1",
+      "ds_name": "Comfort After Wash Morning Fresh Fabric Conditioner - 860 Ml",
+      "ds_sp": 185.0,
+      "ds_mrp": 235.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.807
+    },
+    {
+      "item_code": "4947",
+      "am_name": "Tata Lite Low Sodium Iodised Salt - 1Kg",
+      "ds_name": "Tata Pink Salt - 1 Kg",
+      "ds_sp": 74.0,
+      "ds_mrp": 80.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.536
+    },
+    {
+      "item_code": "9999",
+      "am_name": "MDH Dhania Powder - 100g",
+      "ds_name": "Mdh Haldi Powder - 100 Gm",
+      "ds_sp": 37.0,
+      "ds_mrp": 48.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.844
+    },
+    {
+      "item_code": "2505",
+      "am_name": "Everest Black Pepper Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.938
+    },
+    {
+      "item_code": "2606",
+      "am_name": "Fortune Biryani Special Basmati Rice Pouch - 1Kg",
+      "ds_name": "Fortune Biryani Special Basmati Rice - 1 Kg",
+      "ds_sp": 147.0,
+      "ds_mrp": 210.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.897
+    },
+    {
+      "item_code": "2559",
+      "am_name": "MDH Meat Ka Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.682
+    },
+    {
+      "item_code": "2618",
+      "am_name": "Fortune Chakki Fresh Atta - 10Kg",
+      "ds_name": "Fortune Mini Mogra Basmati Rice - 10 Kg",
+      "ds_sp": 460.0,
+      "ds_mrp": 700.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.507
+    },
+    {
+      "item_code": "8337",
+      "am_name": "Nutrela Soya Mini Chunk - 200g",
+      "ds_name": "Nutrela Mini Soya Chunk - 200 Gm",
+      "ds_sp": 46.0,
+      "ds_mrp": 47.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.931
+    },
+    {
+      "item_code": "74090",
+      "am_name": "Odonil Air Freshener Lavendar Meadows 72g",
+      "ds_name": "Odonil Jasmine Mist Air Freshener Block - 72 Gm (Flavour: Common)",
+      "ds_sp": 86.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.574
+    },
+    {
+      "item_code": "2532",
+      "am_name": "Everest Garam Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "76403",
+      "am_name": "Unibic Cashew Badam Cookies | 450g | Pack of 1",
+      "ds_name": "Unibic Fruit & Nut Cookies - 450 Gm",
+      "ds_sp": 78.0,
+      "ds_mrp": 180.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.575
+    },
+    {
+      "item_code": "34490",
+      "am_name": "India Gate Basmati Rice Mogra 10Kg",
+      "ds_name": "India Gate Mogra Basmati Rice - 10 Kg",
+      "ds_sp": 677.0,
+      "ds_mrp": 915.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.928
+    },
+    {
+      "item_code": "12223",
+      "am_name": "Daawat Pulav Basmati Rice 1 Kg",
+      "ds_name": "Daawat Pulav Basmati Rice - 1 Kg",
+      "ds_sp": 127.0,
+      "ds_mrp": 177.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "1287",
+      "am_name": "Catch Ginger Paste - 100g",
+      "ds_name": "Catch Jeera Powder - 100 Gm",
+      "ds_sp": 70.0,
+      "ds_mrp": 93.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "2516",
+      "am_name": "MDH Kashmiri Chilli Powder - 100g",
+      "ds_name": "Mdh Haldi Powder - 100 Gm",
+      "ds_sp": 37.0,
+      "ds_mrp": 48.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.704
+    },
+    {
+      "item_code": "13923",
+      "am_name": "Unibic Snappers Indi Spice Biscuits | 280g | Pack of 1",
+      "ds_name": "Unibic Snapper Cream n Onion Potato Crackers - 280 Gm",
+      "ds_sp": 69.0,
+      "ds_mrp": 144.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.455
+    },
+    {
+      "item_code": "2611",
+      "am_name": "India Gate Dubar Basmati Rice 1 Kg",
+      "ds_name": "India Gate Dubar Basmati Rice - 1 Kg",
+      "ds_sp": 128.0,
+      "ds_mrp": 167.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "77176",
+      "am_name": "Britannia Good Day Butter Cookies 526g Family Pack",
+      "ds_name": "Britannia Good Day Cashew Cookies - 526 Gm",
+      "ds_sp": 83.0,
+      "ds_mrp": 120.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.756
+    },
+    {
+      "item_code": "12451",
+      "am_name": "Odonil Air Freshener Jasmine Mint 48 g",
+      "ds_name": "Odonil Air Freshener Lavender Meadows - 48 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 58.0,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.765
+    },
+    {
+      "item_code": "101771",
+      "am_name": "Sunlight Matic Liquid Detergent | 2L | Pack of 1",
+      "ds_name": "Ariel Matic Front Load Liquid Detergent (Pouch) - 2 Ltr",
+      "ds_sp": 365.0,
+      "ds_mrp": 395.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.611
+    },
+    {
+      "item_code": "2497",
+      "am_name": "Tata Tea Gold Pouch | 1 Kg | Pack of 1",
+      "ds_name": "Tata Rock Salt - 1 Kg",
+      "ds_sp": 92.0,
+      "ds_mrp": 99.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.528
+    },
+    {
+      "item_code": "1307",
+      "am_name": "Catch Turmeric Powder - 100g",
+      "ds_name": "Catch Jeera Powder - 100 Gm",
+      "ds_sp": 70.0,
+      "ds_mrp": 93.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.627
+    },
+    {
+      "item_code": "4399",
+      "am_name": "Little's Pulls Soft Cleansing Baby Wipes | 80 Units | Pack of 1",
+      "ds_name": "Tulips Refreshing 20 Wet Wipes Summer Fresh, Alcohol-Free | pH Balanced, Soft Cleansing, Travel & Daily Use",
+      "ds_sp": 49.0,
+      "ds_mrp": 70.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.478
+    },
+    {
+      "item_code": "81471",
+      "am_name": "Catch Kasuri Methi - 100g",
+      "ds_name": "Catch Meat Masala - 100 Gm",
+      "ds_sp": 75.0,
+      "ds_mrp": 98.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.681
+    },
+    {
+      "item_code": "2560",
+      "am_name": "MDH Haldi Powder - 500g",
+      "ds_name": "Mdh Haldi Powder - 500 Gm",
+      "ds_sp": 154.0,
+      "ds_mrp": 230.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.955
+    },
+    {
+      "item_code": "2556",
+      "am_name": "MDH Kitchen King Mix Spices Powder - 100g",
+      "ds_name": "Mdh Deggi Mirch Powder - 100 Gm",
+      "ds_sp": 83.0,
+      "ds_mrp": 120.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.588
+    },
+    {
+      "item_code": "2539",
+      "am_name": "Everest Tandoori Chicken Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.529
+    },
+    {
+      "item_code": "16921",
+      "am_name": "Britannia Good Day Cashew Cookies | 565g | Pack of 1",
+      "ds_name": "Britannia Good Day Cashew Cookies - 526 Gm",
+      "ds_sp": 83.0,
+      "ds_mrp": 120.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.818
+    },
+    {
+      "item_code": "97864",
+      "am_name": "Shubhkart Darshana Chandan Tika | 40g | Pack of 1",
+      "ds_name": "Shubhkart Darshana Kumkum Powder - 50 Gm",
+      "ds_sp": 12.0,
+      "ds_mrp": 20.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.554
+    },
+    {
+      "item_code": "4898",
+      "am_name": "Unibic Fruit And Nut Cookies | 67.5g | Pack of 1",
+      "ds_name": "Unibic Choco Chip Cookies - 67.5 Gm",
+      "ds_sp": 18.0,
+      "ds_mrp": 27.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.545
+    },
+    {
+      "item_code": "28765",
+      "am_name": "India Gate Basmati Rice Mini Mogra 10 Kg",
+      "ds_name": "India Gate Mini Mogra Basmati Rice - 10 Kg",
+      "ds_sp": 559.0,
+      "ds_mrp": 735.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "3288",
+      "am_name": "Everest Tikhalal Chilli Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.567
+    },
+    {
+      "item_code": "3263",
+      "am_name": "Everest Coriander Powder - 100g",
+      "ds_name": "Everest Chhole Masala - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.561
+    },
+    {
+      "item_code": "3282",
+      "am_name": "Everest Sabji Masala - 100g",
+      "ds_name": "Everest Pav Bhaji Masala - 100 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.714
+    },
+    {
+      "item_code": "17854",
+      "am_name": "Unibic Cashew Badam Cookies | 270 g | Pack of 1",
+      "ds_name": "Unibic Snapper Cream n Onion Potato Crackers - 280 Gm",
+      "ds_sp": 69.0,
+      "ds_mrp": 144.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.426
+    },
+    {
+      "item_code": "3257",
+      "am_name": "Everest Dry Ginger Powder - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.71
+    },
+    {
+      "item_code": "2509",
+      "am_name": "Everest Tikhalal Chilli Powder - 100g",
+      "ds_name": "Everest Chhole Masala - 100 Gm",
+      "ds_sp": 65.0,
+      "ds_mrp": 90.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.635
+    },
+    {
+      "item_code": "13922",
+      "am_name": "Unibic Snappers Cream & Onion Biscuits | 280g | Pack of 1",
+      "ds_name": "Unibic Snapper Cream n Onion Potato Crackers - 280 Gm",
+      "ds_sp": 69.0,
+      "ds_mrp": 144.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.725
+    },
+    {
+      "item_code": "2562",
+      "am_name": "MDH Sambar Masala - 50g",
+      "ds_name": "Mdh Garam Masala - 50 Gm",
+      "ds_sp": 52.0,
+      "ds_mrp": 60.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.651
+    },
+    {
+      "item_code": "29942",
+      "am_name": "India Gate Basmati Rice Select 1 kg",
+      "ds_name": "India Gate Dubar Basmati Rice - 1 Kg",
+      "ds_sp": 128.0,
+      "ds_mrp": 167.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.812
+    },
+    {
+      "item_code": "11212",
+      "am_name": "Lizol Jasmine Surface Cleaner 975ml",
+      "ds_name": "Lizol Disinfectant Floor Cleaner (Citrus) - 1 Ltr",
+      "ds_sp": 199.0,
+      "ds_mrp": 246.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.525
+    },
+    {
+      "item_code": "67866",
+      "am_name": "Vim Lemon Dishwash Liquid Gel 2 Ltr Refill Pouch",
+      "ds_name": "Beco Floor Cleaner Liquid Refill - 2 Ltr",
+      "ds_sp": 215.0,
+      "ds_mrp": 375.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.558
+    },
+    {
+      "item_code": "18308",
+      "am_name": "India Gate Basmati Mogra Rice 5 Kg",
+      "ds_name": "India Gate Mogra Basmati Rice - 5 Kg",
+      "ds_sp": 359.0,
+      "ds_mrp": 490.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 1.0
+    },
+    {
+      "item_code": "101194",
+      "am_name": "Comfort After Wash Morning Fresh Fabric Conditioner Refill Pouch | 2L | Pack of 1",
+      "ds_name": "Comfort Fabric Conditioner Morning Fresh - 2 Ltr",
+      "ds_sp": 379.0,
+      "ds_mrp": 435.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.683
+    },
+    {
+      "item_code": "3285",
+      "am_name": "Everest Sambhar Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.475
+    },
+    {
+      "item_code": "12875",
+      "am_name": "Ramadan Arabian Dates - 500g - Buy 1 Get 1 Free",
+      "ds_name": "Lion Arabian Dates 500 Gm (Buy 1 Get 1 Free) - 1 Kg",
+      "ds_sp": 226.0,
+      "ds_mrp": 284.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.822
+    },
+    {
+      "item_code": "3283",
+      "am_name": "Everest Sabji Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.456
+    },
+    {
+      "item_code": "80730",
+      "am_name": "Royal Gold Super Soft Napkin Tissue Paper Napkin | 90 Pulls | Pack of 1",
+      "ds_name": "Home First Paper Napkin 1 Ply, 27 x 30 cm, 100 Pulls | Soft, Absorbent, Disposable, Large Table Tissue for Kitchen & Parties",
+      "ds_sp": 39.0,
+      "ds_mrp": 65.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.418
+    },
+    {
+      "item_code": "96240",
+      "am_name": "Premier Silky 1-Ply Napkin | 27\u00d727 cm | 90 Pulls | Pack of 1",
+      "ds_name": "Home First Paper Napkin 1 Ply, 27 x 30 cm, 100 Pulls | Soft, Absorbent, Disposable, Large Table Tissue for Kitchen & Parties",
+      "ds_sp": 39.0,
+      "ds_mrp": 65.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.414
+    },
+    {
+      "item_code": "104793",
+      "am_name": "Senu Disinfectant Floral Surface Cleaner - 975ml",
+      "ds_name": "Lizol Floral Disinfectant Floor Cleaner - 1 Ltr",
+      "ds_sp": 205.0,
+      "ds_mrp": 246.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.681
+    },
+    {
+      "item_code": "104792",
+      "am_name": "Senu Disinfectant Citrus Surface Cleaner - 975ml",
+      "ds_name": "Lizol Disinfectant Floor Cleaner (Citrus) - 1 Ltr",
+      "ds_sp": 199.0,
+      "ds_mrp": 246.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.681
+    },
+    {
+      "item_code": "43132",
+      "am_name": "Urad Dal White Wash - 500g",
+      "ds_name": "Sampoorti Urad Dal White - 500 Gm",
+      "ds_sp": 79.0,
+      "ds_mrp": 115.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.655
+    },
+    {
+      "item_code": "13533",
+      "am_name": "Everest Chicken Biryani Masala - 50g",
+      "ds_name": "Everest Black Pepper Powder - 50 Gm",
+      "ds_sp": 82.0,
+      "ds_mrp": 92.0,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.507
+    },
+    {
+      "item_code": "86221",
+      "am_name": "Daawat Rozana Gold Basmati Rice 1 Kg",
+      "ds_name": "Daawat Rozana Super Basmati Rice - 1 Kg",
+      "ds_sp": 71.0,
+      "ds_mrp": 100.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.849
+    },
+    {
+      "item_code": "77835",
+      "am_name": "Daawat Rozana Niki Basmati Rice 10 Kg",
+      "ds_name": "Daawat Sehat/Rozana Mini Mogra 2Nd Basmati Rice - 10 Kg",
+      "ds_sp": 425.0,
+      "ds_mrp": 545.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.778
+    },
+    {
+      "item_code": "77836",
+      "am_name": "Daawat Rozana Tini Basmati Rice 10 Kg",
+      "ds_name": "Daawat Sehat/Rozana Mini Mogra 2Nd Basmati Rice - 10 Kg",
+      "ds_sp": 425.0,
+      "ds_mrp": 545.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.756
+    },
+    {
+      "item_code": "70239",
+      "am_name": "Daawat Rozana Mini Basmati Rice 10kg",
+      "ds_name": "Daawat Sehat/Rozana Mini Mogra 2Nd Basmati Rice - 10 Kg",
+      "ds_sp": 425.0,
+      "ds_mrp": 545.0,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.764
+    }
+  ]
+}

@@ -1,0 +1,3633 @@
+{
+  "pincode": "834008",
+  "scraped_at": "2026-06-05T18:48:51.804544",
+  "total": 518,
+  "products": [
+    {
+      "name": "Maaza Mango Drink Original Flavor",
+      "sp": 30,
+      "mrp": 35,
+      "unit": "600 ml",
+      "brand": "Maaza"
+    },
+    {
+      "name": "Maggi 2-Minute Favourite Masala Taste, Made With Choicest Quality Spices Instant Noodles Vegetarian",
+      "sp": 152,
+      "mrp": 180,
+      "unit": "12 x 70 g",
+      "brand": "Maggi"
+    },
+    {
+      "name": "Ariel Topload stain Fresh Liquid Detergent",
+      "sp": 537,
+      "mrp": 765,
+      "unit": "4 kg",
+      "brand": "Ariel"
+    },
+    {
+      "name": "Surf excel Matic Top Load | Liquid Detergent | 2L Refill pouch | Remove Stains Fresh Liquid Detergent",
+      "sp": 302,
+      "mrp": 338,
+      "unit": "2 L",
+      "brand": "Surf"
+    },
+    {
+      "name": "Tide Plus Detergent Powder (Jasmine & Rose)",
+      "sp": 845,
+      "mrp": 1179,
+      "unit": "10 kg",
+      "brand": "Tide"
+    },
+    {
+      "name": "Thums Up Soft Drink PET Bottle",
+      "sp": 32,
+      "mrp": 40,
+      "unit": "750 ml PET Bottle",
+      "brand": "Thums"
+    },
+    {
+      "name": "FORTUNE Sugar",
+      "sp": 279,
+      "mrp": 370,
+      "unit": "5 kg",
+      "brand": "FORTUNE"
+    },
+    {
+      "name": "Maaza Original",
+      "sp": 73,
+      "mrp": 99,
+      "unit": "1.75 L",
+      "brand": "Maaza"
+    },
+    {
+      "name": "sprite PET Bottle",
+      "sp": 81,
+      "mrp": 95,
+      "unit": "2 L PET Bottle",
+      "brand": "sprite"
+    },
+    {
+      "name": "Coca-Cola PET Bottle",
+      "sp": 72,
+      "mrp": 85,
+      "unit": "2 L PET Bottle",
+      "brand": "Coca-Cola"
+    },
+    {
+      "name": "FORTUNE Chakki Fresh Atta",
+      "sp": 459,
+      "mrp": 507,
+      "unit": "10 kg",
+      "brand": "FORTUNE"
+    },
+    {
+      "name": "Pepsi Soft Drink Plastic Bottle",
+      "sp": 35,
+      "mrp": 40,
+      "unit": "750 ml Plastic Bottle",
+      "brand": "Pepsi"
+    },
+    {
+      "name": "Classic Wheat Flour Atta by Flipkart Grocery",
+      "sp": 367,
+      "mrp": 570,
+      "unit": "10 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic Whole Cashews by Flipkart Grocery",
+      "sp": 917,
+      "mrp": 1400,
+      "unit": "1 x 1 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic Almonds by Flipkart Grocery",
+      "sp": 488,
+      "mrp": 740,
+      "unit": "1 x 500 g",
+      "brand": "Classic"
+    },
+    {
+      "name": "Jeera Rice / Gobindbhog Steam Rice",
+      "sp": 965,
+      "mrp": 985,
+      "unit": "5 kg",
+      "brand": "Jeera"
+    },
+    {
+      "name": "MiRiNDA Soft Drink PET Bottle",
+      "sp": 36,
+      "mrp": 40,
+      "unit": "750 ml PET Bottle",
+      "brand": "MiRiNDA"
+    },
+    {
+      "name": "7UP Soft Drink PET Bottle",
+      "sp": 36,
+      "mrp": 40,
+      "unit": "750 ml PET Bottle",
+      "brand": "7UP"
+    },
+    {
+      "name": "DHARA Kachi Ghani Mustard Oil Pouch",
+      "sp": 177,
+      "mrp": 250,
+      "unit": "1 L",
+      "brand": "DHARA"
+    },
+    {
+      "name": "Sunfeast Dark Fantasy Yumfills Cookie Cake Biscuit",
+      "sp": 77,
+      "mrp": 170,
+      "unit": "242 g",
+      "brand": "Sunfeast"
+    },
+    {
+      "name": "Rooh Afza Sharbat Rose",
+      "sp": 156,
+      "mrp": 165,
+      "unit": "750 ml, Pack of 1",
+      "brand": "Rooh"
+    },
+    {
+      "name": "PARLE G Original Gluco Biscuits Plain Biscuit",
+      "sp": 80,
+      "mrp": 100,
+      "unit": "800 g",
+      "brand": "PARLE"
+    },
+    {
+      "name": "Quaker Oats Pouch",
+      "sp": 152,
+      "mrp": 210,
+      "unit": "1 kg",
+      "brand": "Quaker"
+    },
+    {
+      "name": "FROOTI Pet drink",
+      "sp": 74,
+      "mrp": 110,
+      "unit": "2000 ml",
+      "brand": "FROOTI"
+    },
+    {
+      "name": "Tata Tea Gold Gold Tea Pouch Black Tea Pouch",
+      "sp": 215,
+      "mrp": 270,
+      "unit": "500 g",
+      "brand": "Tata"
+    },
+    {
+      "name": "Schweppes Indian Tonic Water Contains Quinine Can",
+      "sp": 59,
+      "mrp": 60,
+      "unit": "300 ml Can",
+      "brand": "Schweppes"
+    },
+    {
+      "name": "Coca-Cola Original Taste Soft Drink Can",
+      "sp": 39,
+      "mrp": 40,
+      "unit": "300 ml Can",
+      "brand": "Coca-Cola"
+    },
+    {
+      "name": "Mountain Dew Soft Drink PET Bottle",
+      "sp": 81,
+      "mrp": 100,
+      "unit": "2250 ml PET Bottle",
+      "brand": "Mountain"
+    },
+    {
+      "name": "Hell Energy Classic Sports Drink",
+      "sp": 51,
+      "mrp": 60,
+      "unit": "250 ml, Classic Flavored",
+      "brand": "Hell"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar, No Calories Soft Drink Can",
+      "sp": 38,
+      "mrp": 40,
+      "unit": "300 ml Can",
+      "brand": "Coca-Cola"
+    },
+    {
+      "name": "Tata Salt Free Flowing and Iodised Namak, Vacuum Evaporated Iodized Salt",
+      "sp": 26,
+      "mrp": 30,
+      "unit": "1 kg",
+      "brand": "Tata"
+    },
+    {
+      "name": "FORTUNE health physically refined Rice Bran Oil Pouch",
+      "sp": 154,
+      "mrp": 199,
+      "unit": "870 g",
+      "brand": "FORTUNE"
+    },
+    {
+      "name": "Tata Sampann High in Fibre (Thick) Poha",
+      "sp": 82,
+      "mrp": 119,
+      "unit": "1 kg",
+      "brand": "Tata"
+    },
+    {
+      "name": "Tata Sampann Yellow Toor/Arhar Dal (Split)",
+      "sp": 167,
+      "mrp": 244,
+      "unit": "1 kg",
+      "brand": "Tata"
+    },
+    {
+      "name": "Medium Poha",
+      "sp": 46,
+      "mrp": 60,
+      "unit": "0.5 kg",
+      "brand": "Medium"
+    },
+    {
+      "name": "Baskati Rice (Boiled)",
+      "sp": 336,
+      "mrp": 450,
+      "unit": "5 kg",
+      "brand": "Baskati"
+    },
+    {
+      "name": "Basmati Tibar Rice Steam Rice",
+      "sp": 84,
+      "mrp": 115,
+      "unit": "1 kg",
+      "brand": "Basmati"
+    },
+    {
+      "name": "Sona Masoori Rice (Steam)",
+      "sp": 289,
+      "mrp": 440,
+      "unit": "5 kg",
+      "brand": "Sona"
+    },
+    {
+      "name": "Dudheswar Rice Steam Rice",
+      "sp": 60,
+      "mrp": 90,
+      "unit": "1 kg",
+      "brand": "Dudheswar"
+    },
+    {
+      "name": "Baskati Rice",
+      "sp": 75,
+      "mrp": 110,
+      "unit": "1 kg",
+      "brand": "Baskati"
+    },
+    {
+      "name": "Parmal Rice (Long Grain)",
+      "sp": 213,
+      "mrp": 320,
+      "unit": "5 kg",
+      "brand": "Parmal"
+    },
+    {
+      "name": "Minikit Rice",
+      "sp": 661,
+      "mrp": 750,
+      "unit": "10 kg",
+      "brand": "Minikit"
+    },
+    {
+      "name": "Lizol Kitchen Power Liquid Spray Kitchen Cleaner",
+      "sp": 174,
+      "mrp": 225,
+      "unit": "450 ml",
+      "brand": "Lizol"
+    },
+    {
+      "name": "Harpic Disinfectant | Bathroom Cleaner | Floral",
+      "sp": 172,
+      "mrp": 230,
+      "unit": "1 L",
+      "brand": "Harpic"
+    },
+    {
+      "name": "Tide Plus Jasmine & Rose Detergent washing powder value pack Detergent Powder (Jasmine & Rose)",
+      "sp": 639,
+      "mrp": 720,
+      "unit": "7 kg",
+      "brand": "Tide"
+    },
+    {
+      "name": "Ghadi Hand Wash Detergent Powder (Advanced)",
+      "sp": 67,
+      "mrp": 74,
+      "unit": "1 kg",
+      "brand": "Ghadi"
+    },
+    {
+      "name": "Classic by Flipkart Grocery Chana Dal (Split)",
+      "sp": 96,
+      "mrp": 160,
+      "unit": "1 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic by Flipkart Grocery Toor/Arhar Dal (Split)",
+      "sp": 150,
+      "mrp": 290,
+      "unit": "1 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic Cumin Seeds by Flipkart Grocery",
+      "sp": 40,
+      "mrp": 60,
+      "unit": "100 g",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic Saunf Green by Flipkart Grocery",
+      "sp": 33,
+      "mrp": 50,
+      "unit": "100 g",
+      "brand": "Classic"
+    },
+    {
+      "name": "Toor/Arhar Dal (Split)",
+      "sp": 132,
+      "mrp": 200,
+      "unit": "1 kg",
+      "brand": "Toor/Arhar"
+    },
+    {
+      "name": "Classic Saunf Big by Flipkart Grocery",
+      "sp": 72,
+      "mrp": 80,
+      "unit": "200 g",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic by Flipkart Grocery Thick Poha",
+      "sp": 31,
+      "mrp": 60,
+      "unit": "0.5 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic by Flipkart Grocery Yellow Moong Dal (Split)",
+      "sp": 127,
+      "mrp": 200,
+      "unit": "1 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Classic by Flipkart Grocery Masoor Dal (Whole)",
+      "sp": 95,
+      "mrp": 170,
+      "unit": "1 kg",
+      "brand": "Classic"
+    },
+    {
+      "name": "Catch Ginger Garlic Paste",
+      "sp": 23,
+      "mrp": 47,
+      "unit": "200 g",
+      "brand": "Catch"
+    },
+    {
+      "name": "zoff Cumin Seeds",
+      "sp": 40,
+      "mrp": 65,
+      "unit": "100 g",
+      "brand": "zoff"
+    },
+    {
+      "name": "Catch Cumin Whole",
+      "sp": 52,
+      "mrp": 68,
+      "unit": "100 g",
+      "brand": "Catch"
+    },
+    {
+      "name": "Catch Sprinklers Chat Masala",
+      "sp": 79,
+      "mrp": 90,
+      "unit": "100 g",
+      "brand": "Catch"
+    },
+    {
+      "name": "Catch Kashmiri Mirch Powder",
+      "sp": 93,
+      "mrp": 120,
+      "unit": "100 g",
+      "brand": "Catch"
+    },
+    {
+      "name": "Catch Sabzi Masala Powder",
+      "sp": 52,
+      "mrp": 78,
+      "unit": "100 g",
+      "brand": "Catch"
+    },
+    {
+      "name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "sp": 175,
+      "mrp": 235,
+      "unit": "500 g",
+      "brand": "Tata"
+    },
+    {
+      "name": "zoff Cassia Bark",
+      "sp": 53,
+      "mrp": 74,
+      "unit": "100 g",
+      "brand": "zoff"
+    },
+    {
+      "name": "4700BC Himalayan Salt Caramel Popcorn",
+      "sp": 16,
+      "mrp": 30,
+      "unit": "30 g",
+      "brand": "4700BC"
+    },
+    {
+      "name": "TAALI Protein Puffs | Masala Puff, Roasted Snack, Corn & Jowar, No Palm Oil,No Maida Chips",
+      "sp": 38,
+      "mrp": 60,
+      "unit": "60 g",
+      "brand": "TAALI"
+    },
+    {
+      "name": "4700BC Caramel Popcorn",
+      "sp": 39,
+      "mrp": 50,
+      "unit": "60 g",
+      "brand": "4700BC"
+    },
+    {
+      "name": "4700BC Belgian Choco Caramel Popcorn",
+      "sp": 28,
+      "mrp": 60,
+      "unit": "60 g",
+      "brand": "4700BC"
+    },
+    {
+      "name": "Colgate Strong Teeth Indias No.1 Toothpaste Anticavity Toothpaste - 200g + 200g + 100g Toothpaste",
+      "sp": 238,
+      "mrp": 310,
+      "unit": "500 g",
+      "brand": "Colgate"
+    },
+    {
+      "name": "Colgate Visible White Toothpaste, Teeth Whitening Starts in 1 week (200g + 40g) Toothpaste",
+      "sp": 186,
+      "mrp": 378,
+      "unit": "240 g",
+      "brand": "Colgate"
+    },
+    {
+      "name": "Colgate MaxFresh Toothpaste, Blue Gel Paste with Menthol: Peppermint Ice (Combo Pack) Toothpaste",
+      "sp": 168,
+      "mrp": 299,
+      "unit": "300 g, Pack of 2",
+      "brand": "Colgate"
+    },
+    {
+      "name": "Colgate Visible White Purple Tooth paste, Color-Corrects Yellow Tones on 1st Use^ Toothpaste",
+      "sp": 186,
+      "mrp": 395,
+      "unit": "240 g",
+      "brand": "Colgate"
+    },
+    {
+      "name": "Colgate Total Advanced Health Antibacterial Toothpaste, Whole Mouth Health Toothpaste",
+      "sp": 63,
+      "mrp": 80,
+      "unit": "80 g",
+      "brand": "Colgate"
+    },
+    {
+      "name": "Colgate Strong Teeth and Anticavity Toothpaste",
+      "sp": 79,
+      "mrp": 99,
+      "unit": "150 g",
+      "brand": "Colgate"
+    },
+    {
+      "name": "Colgate Sensitive Bristles Ultra Soft Toothbrush",
+      "sp": 50,
+      "mrp": 62,
+      "unit": "",
+      "brand": "Colgate"
+    },
+    {
+      "name": "PATANJALI Dant Kanti Medicated Oral Gel for Teeth Whitening Toothpaste",
+      "sp": 39,
+      "mrp": 53,
+      "unit": "100 g",
+      "brand": "PATANJALI"
+    },
+    {
+      "name": "Dettol Germ Protection ph-Balanced Liquid Refill, Skincare Hand Wash Refill Pouch",
+      "sp": 87,
+      "mrp": 109,
+      "unit": "675 ml",
+      "brand": "Dettol"
+    },
+    {
+      "name": "Colgate Visible White Purple , Color-Corrects Yellow Tones on 1st Use and Toothbrush Toothpaste",
+      "sp": 131,
+      "mrp": 198,
+      "unit": "120 g",
+      "brand": "Colgate"
+    },
+    {
+      "name": "PATANJALI Pure Honey, No Sugar Added, Unprocessed and Organic Honey, Shahed",
+      "sp": 79,
+      "mrp": 110,
+      "unit": "250 g",
+      "brand": "PATANJALI"
+    },
+    {
+      "name": "PATANJALI Chakki Atta, Whole Wheat with Bran, Genhu ka Atta, Organic Flour",
+      "sp": 243,
+      "mrp": 265,
+      "unit": "5 kg",
+      "brand": "PATANJALI"
+    },
+    {
+      "name": "Kapiva Organic Honey | 100% Natural | Strengthens Immunity & Aids Digestion |",
+      "sp": 364,
+      "mrp": 449,
+      "unit": "500 g",
+      "brand": "Kapiva"
+    },
+    {
+      "name": "Natureland Organics Himalayan Rock Salt",
+      "sp": 35,
+      "mrp": 50,
+      "unit": "500 g",
+      "brand": "Natureland"
+    },
+    {
+      "name": "24 Mantra Organic Gur/Shakkar Powder Jaggery",
+      "sp": 67,
+      "mrp": 90,
+      "unit": "500 g",
+      "brand": "24"
+    },
+    {
+      "name": "PATANJALI Bandhani Hing/Asafoetida, Organic Heeng Powder",
+      "sp": 57,
+      "mrp": 65,
+      "unit": "25 g",
+      "brand": "PATANJALI"
+    },
+    {
+      "name": "DHAMPUR GREEN Organic jaggery Powder Powder Jaggery",
+      "sp": 70,
+      "mrp": 99,
+      "unit": "800 g",
+      "brand": "DHAMPUR"
+    },
+    {
+      "name": "Organic Tattva Buckwheat (Kuttu) Flour",
+      "sp": 87,
+      "mrp": 95,
+      "unit": "250 g",
+      "brand": "Organic"
+    },
+    {
+      "name": "24 mantra ORGANIC Organic Fenugreek Seeds/Methi Dana/Menthi Ginja",
+      "sp": 33,
+      "mrp": 48,
+      "unit": "100 g",
+      "brand": "24"
+    },
+    {
+      "name": "Organic Tattva Mot Matki (Whole)",
+      "sp": 66,
+      "mrp": 70,
+      "unit": "500 g",
+      "brand": "Organic"
+    },
+    {
+      "name": "Gowardhan Pure Cow Ghee Plastic Bottle",
+      "sp": 775,
+      "mrp": 830,
+      "unit": "1 L",
+      "brand": "Gowardhan"
+    },
+    {
+      "name": "Gowardhan Pure Cow Ghee Pouch",
+      "sp": 765,
+      "mrp": 810,
+      "unit": "1 L",
+      "brand": "Gowardhan"
+    },
+    {
+      "name": "BRITANNIA Pure Cow Ghee Tin",
+      "sp": 705,
+      "mrp": 830,
+      "unit": "1 L",
+      "brand": "BRITANNIA"
+    },
+    {
+      "name": "Baidyanath Cow Ghee Tetrapack",
+      "sp": 538,
+      "mrp": 708,
+      "unit": "900 ml",
+      "brand": "Baidyanath"
+    },
+    {
+      "name": "RED COW Ghee Plastic Bottle",
+      "sp": 73,
+      "mrp": 85,
+      "unit": "100 ml",
+      "brand": "RED"
+    },
+    {
+      "name": "Amul Cow Ghee, Tetrapack",
+      "sp": 644,
+      "mrp": 705,
+      "unit": "1 L",
+      "brand": "Amul"
+    },
+    {
+      "name": "PATANJALI Pure Danedar Cow Ghee with Rich Aroma, Natural & Healthy, Tetrapack Ghee Box",
+      "sp": 174,
+      "mrp": 178,
+      "unit": "200 ml",
+      "brand": "PATANJALI"
+    },
+    {
+      "name": "Red Cow Dairy Ghee Plastic Bottle",
+      "sp": 152,
+      "mrp": 160,
+      "unit": "200 ml",
+      "brand": "Red"
+    },
+    {
+      "name": "TOTAL Frozen Chicken Precut",
+      "sp": 115,
+      "mrp": 185,
+      "unit": "500 g",
+      "brand": "TOTAL"
+    },
+    {
+      "name": "BRITANNIA Winkin Cow Sweet Lassi",
+      "sp": 15,
+      "mrp": 20,
+      "unit": "180 ml",
+      "brand": "BRITANNIA"
+    },
+    {
+      "name": "BRITANNIA Winkin Cow Mango Sweet Lassi",
+      "sp": 21,
+      "mrp": 25,
+      "unit": "180 ml",
+      "brand": "BRITANNIA"
+    },
+    {
+      "name": "Fresh Meat House Premium Frozen Chicken Curry Cut",
+      "sp": 166,
+      "mrp": 185,
+      "unit": "500 g",
+      "brand": "Fresh"
+    },
+    {
+      "name": "BRITANNIA Chocolicious Thick Milkshake Chocolate",
+      "sp": 25,
+      "mrp": 40,
+      "unit": "180 ml",
+      "brand": "BRITANNIA"
+    },
+    {
+      "name": "Moreish Classic Sliced White Bread",
+      "sp": 42,
+      "mrp": 50,
+      "unit": "400 g",
+      "brand": "Moreish"
+    },
+    {
+      "name": "DR CUBES 1 KG PACKET Regular Cubes",
+      "sp": 47,
+      "mrp": 85,
+      "unit": "1000 g",
+      "brand": "DR"
+    },
+    {
+      "name": "MOTHER DAIRY Kesar Elaichi Flavoured Milk",
+      "sp": 22,
+      "mrp": 30,
+      "unit": "180 ml",
+      "brand": "MOTHER"
+    },
+    {
+      "name": "Winkin Cow Bourbon Milkshake Chocolate",
+      "sp": 25,
+      "mrp": 40,
+      "unit": "180 ml",
+      "brand": "Winkin"
+    },
+    {
+      "name": "Dlecta Plain Processed cheese Spread",
+      "sp": 69,
+      "mrp": 99,
+      "unit": "150 g",
+      "brand": "Dlecta"
+    },
+    {
+      "name": "Go Pizza Cheese Block",
+      "sp": 104,
+      "mrp": 155,
+      "unit": "200 g",
+      "brand": "Go"
+    },
+    {
+      "name": "Dlecta 10 Slices Processed cheese",
+      "sp": 113,
+      "mrp": 180,
+      "unit": "200 g",
+      "brand": "Dlecta"
+    },
+    {
+      "name": "D'lecta 100% Mozzarella cheese",
+      "sp": 109,
+      "mrp": 155,
+      "unit": "200 g",
+      "brand": "D'lecta"
+    },
+    {
+      "name": "Britannia The Laughing Cow 10 cubes Processed cheese",
+      "sp": 112,
+      "mrp": 140,
+      "unit": "200 g",
+      "brand": "Britannia"
+    },
+    {
+      "name": "McCain Samosa Cheese Pizza",
+      "sp": 139,
+      "mrp": 147,
+      "unit": "240 g",
+      "brand": "McCain"
+    },
+    {
+      "name": "Go 8 cubes Processed cheese",
+      "sp": 117,
+      "mrp": 155,
+      "unit": "200 g",
+      "brand": "Go"
+    },
+    {
+      "name": "Britannia The Laughing Cow 10 Slices Processed cheese",
+      "sp": 120,
+      "mrp": 145,
+      "unit": "180 g",
+      "brand": "Britannia"
+    },
+    {
+      "name": "Go Plain Processed cheese Block",
+      "sp": 104,
+      "mrp": 200,
+      "unit": "200 g",
+      "brand": "Go"
+    },
+    {
+      "name": "TOTAL Frozen Chicken Drumstick",
+      "sp": 190,
+      "mrp": 265,
+      "unit": "500 g",
+      "brand": "TOTAL"
+    },
+    {
+      "name": "TOTAL Frozen Chicken Breast Boneless",
+      "sp": 197,
+      "mrp": 275,
+      "unit": "500 g",
+      "brand": "TOTAL"
+    },
+    {
+      "name": "Japfa Best Frozen Mackerel Whole",
+      "sp": 254,
+      "mrp": 299,
+      "unit": "500 g, Pack of 1",
+      "brand": "Japfa"
+    },
+    {
+      "name": "Japfa Best Frozen Tilapia Strips Fillets",
+      "sp": 220,
+      "mrp": 259,
+      "unit": "300 g, Pack of 1",
+      "brand": "Japfa"
+    },
+    {
+      "name": "JAPAFA BEST Frozen Chicken Mince",
+      "sp": 228,
+      "mrp": 269,
+      "unit": "450 g",
+      "brand": "JAPAFA"
+    },
+    {
+      "name": "Fresh Meat House Premium Frozen Chicken Breast Boneless",
+      "sp": 229,
+      "mrp": 255,
+      "unit": "500 g",
+      "brand": "Fresh"
+    },
+    {
+      "name": "TOTAL Frozen Breast Boneless",
+      "sp": 264,
+      "mrp": 275,
+      "unit": "500 g",
+      "brand": "TOTAL"
+    },
+    {
+      "name": "Blueberry Imported",
+      "sp": 161,
+      "mrp": 369,
+      "unit": "125 g",
+      "brand": "Blueberry"
+    },
+    {
+      "name": "Grapes Red Globe",
+      "sp": 120,
+      "mrp": 239,
+      "unit": "250 g",
+      "brand": "Grapes"
+    },
+    {
+      "name": "Daadi's Motichoor Ghee Laddoo Box",
+      "sp": 131,
+      "mrp": 170,
+      "unit": "200 g",
+      "brand": "Daadi's"
+    },
+    {
+      "name": "Daadi's Kaju Katli Box",
+      "sp": 192,
+      "mrp": 250,
+      "unit": "200 g",
+      "brand": "Daadi's"
+    },
+    {
+      "name": "GO DESi Crushed Peanut Chikki, With Goodness of Jaggery, Sweets Pouch",
+      "sp": 51,
+      "mrp": 60,
+      "unit": "100 g",
+      "brand": "GO"
+    },
+    {
+      "name": "Amul Kaju Katri Box",
+      "sp": 488,
+      "mrp": 525,
+      "unit": "500 g",
+      "brand": "Amul"
+    },
+    {
+      "name": "Sweet Karam Coffee Peanut Chikki Bites Pouch",
+      "sp": 80,
+      "mrp": 99,
+      "unit": "150 g",
+      "brand": "Sweet"
+    },
+    {
+      "name": "GO DESi Dry Fruit Chikki, With 5 Premium Dry Fruits, With Goodness of Jaggery, Sweets Sachet",
+      "sp": 38,
+      "mrp": 45,
+      "unit": "28 g",
+      "brand": "GO"
+    },
+    {
+      "name": "Amul Gulab Jamun Tin",
+      "sp": 245,
+      "mrp": 270,
+      "unit": "1 kg",
+      "brand": "Amul"
+    },
+    {
+      "name": "PRABHUJI PURE FOOD Besan Laddu Box",
+      "sp": 125,
+      "mrp": 259,
+      "unit": "336 g",
+      "brand": "PRABHUJI"
+    },
+    {
+      "name": "Daadi's Dhoodh Peda Ghee 200g Tray",
+      "sp": 145,
+      "mrp": 190,
+      "unit": "200 g",
+      "brand": "Daadi's"
+    },
+    {
+      "name": "Pillsbury Chocolate Pancake Mix 80 g",
+      "sp": 56,
+      "mrp": 59,
+      "unit": "80 g",
+      "brand": "Pillsbury"
+    },
+    {
+      "name": "MTR Gulab Jamun Mix 350 g",
+      "sp": 122,
+      "mrp": 129,
+      "unit": "350 g",
+      "brand": "MTR"
+    },
+    {
+      "name": "Pillsbury Chocolate Pancake Mix 500 g",
+      "sp": 217,
+      "mrp": 310,
+      "unit": "500 g",
+      "brand": "Pillsbury"
+    },
+    {
+      "name": "WeiKFiELD Falooda Strawberry Mix Flavour|Rich, Smooth & Creamy|Delicious & Authentic Taste 200 g",
+      "sp": 39,
+      "mrp": 90,
+      "unit": "200 g",
+      "brand": "WeiKFiELD"
+    },
+    {
+      "name": "Gits Gulab Jamun Instant Dessert Mix 500 g",
+      "sp": 173,
+      "mrp": 217,
+      "unit": "500 g",
+      "brand": "Gits"
+    },
+    {
+      "name": "WeiKFiELD Falooda Kesar Pista Mix Flavour|Rich, Smooth & Creamy| Delicious&Authentic Taste 200 g",
+      "sp": 51,
+      "mrp": 90,
+      "unit": "200 g",
+      "brand": "WeiKFiELD"
+    },
+    {
+      "name": "Kwality Vanilla Ice Cream Mix 100 g",
+      "sp": 51,
+      "mrp": 60,
+      "unit": "100 g",
+      "brand": "Kwality"
+    },
+    {
+      "name": "Betty Crocker Complete Pancake Mix, Classic 250 g",
+      "sp": 156,
+      "mrp": 195,
+      "unit": "250 g",
+      "brand": "Betty"
+    },
+    {
+      "name": "ME & MILLETS Pancake - Raspberry Flavour 150 g",
+      "sp": 118,
+      "mrp": 169,
+      "unit": "150 g",
+      "brand": "ME"
+    },
+    {
+      "name": "Mandarin Orange",
+      "sp": 65,
+      "mrp": 137,
+      "unit": "250 g",
+      "brand": "Mandarin"
+    },
+    {
+      "name": "Orange Navel Imported",
+      "sp": 63,
+      "mrp": 121,
+      "unit": "",
+      "brand": "Orange"
+    },
+    {
+      "name": "Dragon Fruit",
+      "sp": 83,
+      "mrp": 166,
+      "unit": "",
+      "brand": "Dragon"
+    },
+    {
+      "name": "Hass Avocado - Regular",
+      "sp": 94,
+      "mrp": 185,
+      "unit": "155 g, 140-170g",
+      "brand": "Hass"
+    },
+    {
+      "name": "Lettuce Iceberg",
+      "sp": 79,
+      "mrp": 121,
+      "unit": "",
+      "brand": "Lettuce"
+    },
+    {
+      "name": "Sweet Corn Peeled Peeled",
+      "sp": 42,
+      "mrp": 64,
+      "unit": "200 g",
+      "brand": "Sweet"
+    },
+    {
+      "name": "Coconut Chunks Cut",
+      "sp": 61,
+      "mrp": 90,
+      "unit": "100 g",
+      "brand": "Coconut"
+    },
+    {
+      "name": "Moreish Brown Bread",
+      "sp": 46,
+      "mrp": 55,
+      "unit": "400 g",
+      "brand": "Moreish"
+    },
+    {
+      "name": "Moreish Pizza Base",
+      "sp": 24,
+      "mrp": 40,
+      "unit": "200 g",
+      "brand": "Moreish"
+    },
+    {
+      "name": "Nasta White Bread",
+      "sp": 20,
+      "mrp": 23,
+      "unit": "200 g",
+      "brand": "Nasta"
+    },
+    {
+      "name": "Nasta Milk Bread",
+      "sp": 36,
+      "mrp": 40,
+      "unit": "350 g",
+      "brand": "Nasta"
+    },
+    {
+      "name": "Moreish Sandwich Multigrain Bread Multigrain Bread",
+      "sp": 58,
+      "mrp": 65,
+      "unit": "450 g",
+      "brand": "Moreish"
+    },
+    {
+      "name": "Nasta Brown Bread",
+      "sp": 40,
+      "mrp": 45,
+      "unit": "350 g",
+      "brand": "Nasta"
+    },
+    {
+      "name": "Nasta Mini Pao Plain Bread",
+      "sp": 27,
+      "mrp": 30,
+      "unit": "250 g",
+      "brand": "Nasta"
+    },
+    {
+      "name": "Moreish Brown Sandwich Bread",
+      "sp": 53,
+      "mrp": 60,
+      "unit": "450 g",
+      "brand": "Moreish"
+    },
+    {
+      "name": "Amul NA Sweet Lassi",
+      "sp": 25,
+      "mrp": null,
+      "unit": "250 ml",
+      "brand": "Amul"
+    },
+    {
+      "name": "Amul Masti Spiced Buttermilk",
+      "sp": 70,
+      "mrp": null,
+      "unit": "1 L",
+      "brand": "Amul"
+    },
+    {
+      "name": "MOTHER DAIRY NA Sweet Lassi",
+      "sp": 17,
+      "mrp": 20,
+      "unit": "180 ml",
+      "brand": "MOTHER"
+    },
+    {
+      "name": "Aashirvaad Mango  Sweet Lassi",
+      "sp": 9,
+      "mrp": 10,
+      "unit": "135 ml",
+      "brand": "Aashirvaad"
+    },
+    {
+      "name": "Cavin's Rose Sweet Lassi",
+      "sp": 22,
+      "mrp": 25,
+      "unit": "180 ml",
+      "brand": "Cavin's"
+    },
+    {
+      "name": "BELLAVITA Luxury Perfume Gift Set with Long Lasting Fragrance Eau De Parfum Perfume  -  80 ml",
+      "sp": 538,
+      "mrp": 849,
+      "unit": "80 ml",
+      "brand": "BELLAVITA"
+    },
+    {
+      "name": "PANTENE Hair Science Deep Repair Shampoo with Vitamin B",
+      "sp": 175,
+      "mrp": 214,
+      "unit": "180 ml",
+      "brand": "PANTENE"
+    },
+    {
+      "name": "NYCIL Germ Expert Cool Herbal Prickly Heat & Cooling Herbal Powder",
+      "sp": 132,
+      "mrp": 159,
+      "unit": "210 g",
+      "brand": "NYCIL"
+    },
+    {
+      "name": "Parachute Advansed Gold Coconut Hair Oil, Made with Pure Coconut Oil, Vitamin E Hair Oil",
+      "sp": 214,
+      "mrp": 400,
+      "unit": "400 ml",
+      "brand": "Parachute"
+    },
+    {
+      "name": "Dabur Premium Rose Skin Women",
+      "sp": 46,
+      "mrp": 56,
+      "unit": "120 ml",
+      "brand": "Dabur"
+    },
+    {
+      "name": "Dabur Gulabari Premium Rose Water | No Paraben | Cleanses, Hydrates & Moisturises Skin Women",
+      "sp": 91,
+      "mrp": 135,
+      "unit": "400 ml",
+      "brand": "Dabur"
+    },
+    {
+      "name": "glow and lovely Renew Bright Multivitamin Serum in Cream",
+      "sp": 64,
+      "mrp": 70,
+      "unit": "25 g",
+      "brand": "glow"
+    },
+    {
+      "name": "The Plant Fix Plix Rosemary Hair Growth Advanced Hair Spray for fuller, thicker hair Hair Styler",
+      "sp": 175,
+      "mrp": 225,
+      "unit": "100 ml",
+      "brand": "The"
+    },
+    {
+      "name": "AZAH Reusable Face Razor For Women Facial Hair | Eyebrows, Upper Lip,Peach Fuzz,Chin|, Women",
+      "sp": 83,
+      "mrp": 119,
+      "unit": "",
+      "brand": "AZAH"
+    },
+    {
+      "name": "Flipkart Supermart Premium 2 ply Facial Tissues",
+      "sp": 186,
+      "mrp": 450,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Minimalist 2% Salicylic Acid  For Oily Skin | Sulphate Free, Anti Face Cleanser With Lha & Zinc For Acne Or Pimples Face Wash",
+      "sp": 269,
+      "mrp": 299,
+      "unit": "100 ml",
+      "brand": "Minimalist"
+    },
+    {
+      "name": "Cetaphil Gentle Skin Cleanser With Mild, Non Irritating Formula For Dry to Normal, Sensitive Skin Face Wash",
+      "sp": 389,
+      "mrp": 459,
+      "unit": "118 ml",
+      "brand": "Cetaphil"
+    },
+    {
+      "name": "NIVEA Natural Glow, Even Tone & Smooth Skin, with Vitamin C & 0% Alcohol - For Women Deodorant Roll-on  -  For Women",
+      "sp": 135,
+      "mrp": 249,
+      "unit": "50 ml",
+      "brand": "NIVEA"
+    },
+    {
+      "name": "The Derma Co Sali-Cinamide Anti-Acne with 2% Salicylic Acid & 2% Niacinamide Face Wash",
+      "sp": 209,
+      "mrp": 249,
+      "unit": "80 ml",
+      "brand": "The"
+    },
+    {
+      "name": "Simple Kind to Skin Refreshing Facial Wash Face Wash",
+      "sp": 233,
+      "mrp": 275,
+      "unit": "100 ml",
+      "brand": "Simple"
+    },
+    {
+      "name": "Vaseline Intensive Care Deep Restore Moisturizing Lotion",
+      "sp": 322,
+      "mrp": 515,
+      "unit": "400 ml",
+      "brand": "Vaseline"
+    },
+    {
+      "name": "NIVEA Body Milk, Lotion Moisturizer, with Deep Moisture Serum, Hyaluron & Almond Oil",
+      "sp": 547,
+      "mrp": 949,
+      "unit": "625 ml",
+      "brand": "NIVEA"
+    },
+    {
+      "name": "everteen Period Care XXL Soft with Neem-Safflower - 1 Pack (40 Pads) Sanitary Pad",
+      "sp": 211,
+      "mrp": 399,
+      "unit": "1 Pack",
+      "brand": "everteen"
+    },
+    {
+      "name": "Nivea Men Fresh Ocean, Antibacterial 48h Protection, Long Lasting, Fresh Ocean Extracts Deodorant Spray  -  For Men",
+      "sp": 203,
+      "mrp": 299,
+      "unit": "150 ml",
+      "brand": "Nivea"
+    },
+    {
+      "name": "Vaseline Deep Moisture Body Lotion with Ceramide Hyaluron|10X More |For Dry Skin",
+      "sp": 326,
+      "mrp": 750,
+      "unit": "600 ml",
+      "brand": "Vaseline"
+    },
+    {
+      "name": "Parachute Advansed Deep Nourish Body Lotion for Women & Men, 100% Natural",
+      "sp": 169,
+      "mrp": 425,
+      "unit": "400 ml",
+      "brand": "Parachute"
+    },
+    {
+      "name": "Whisper Super Absorbent Period Panty, 6 L-XL Pants Sanitary Pad",
+      "sp": 160,
+      "mrp": 325,
+      "unit": "6 L",
+      "brand": "Whisper"
+    },
+    {
+      "name": "POND's Bright Beauty With Niacinamide Vitamin B3 For Anti Dullness Face Wash",
+      "sp": 283,
+      "mrp": 475,
+      "unit": "200 g",
+      "brand": "POND's"
+    },
+    {
+      "name": "Dabur Almond Hair Oil | Provides Damage Protection | With Keratin &10X Vitamin E Hair Oil",
+      "sp": 224,
+      "mrp": 309,
+      "unit": "485 ml",
+      "brand": "Dabur"
+    },
+    {
+      "name": "WishCare Sunscreen - SPF 50 PA+++ Sunscreen Body Lotion|In-Vivo Tested|For Women & Men|No White Cast",
+      "sp": 370,
+      "mrp": 499,
+      "unit": "200 ml",
+      "brand": "WishCare"
+    },
+    {
+      "name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "sp": 128,
+      "mrp": 310,
+      "unit": "135 ml",
+      "brand": "Engage"
+    },
+    {
+      "name": "Dermatouch Sunscreen - SPF 50 PA++++ Multivitamin Gel | UVA-UVB Protection | Zero White Cast",
+      "sp": 186,
+      "mrp": 349,
+      "unit": "50 g",
+      "brand": "Dermatouch"
+    },
+    {
+      "name": "Adrenex CYPHER Deodorant Spray  -  For Men",
+      "sp": 64,
+      "mrp": 250,
+      "unit": "150 ml",
+      "brand": "Adrenex"
+    },
+    {
+      "name": "PARK AVENUE Good Morning After Shave Lotion",
+      "sp": 114,
+      "mrp": 135,
+      "unit": "50 ml",
+      "brand": "PARK"
+    },
+    {
+      "name": "Foxtale Super Glow Moisturiser With 4% VitC-Niacinamide Complex For Brighter Skin",
+      "sp": 355,
+      "mrp": 445,
+      "unit": "50 ml",
+      "brand": "Foxtale"
+    },
+    {
+      "name": "Dot & Key Retinol+Ceramide Night Repair Cream,with Hyaluronic Smooths Wrinkles Fine Lines",
+      "sp": 488,
+      "mrp": 599,
+      "unit": "60 ml",
+      "brand": "Dot"
+    },
+    {
+      "name": "TRESemme Smooth Shine Shampoo,with silk protein",
+      "sp": 304,
+      "mrp": 490,
+      "unit": "340 ml",
+      "brand": "TRESemme"
+    },
+    {
+      "name": "Minimalist Sunscreen - SPF 50 PA++++ Lightweight Niacinamide Broad Spectrum SunCream |No White Cast |Men&Women",
+      "sp": 367,
+      "mrp": 399,
+      "unit": "50 g",
+      "brand": "Minimalist"
+    },
+    {
+      "name": "BARE ANATOMY Rosemary Water Spray for Hair Growth, Thickness & Hairfall Control, 100% Natural Hair Styler",
+      "sp": 322,
+      "mrp": 399,
+      "unit": "200 ml",
+      "brand": "BARE"
+    },
+    {
+      "name": "Dot & Key Barrier Repair + Hydrating With Probiotic,Ceremide,Cleanses Skin From Dirt&Oil Face Wash",
+      "sp": 200,
+      "mrp": 249,
+      "unit": "100 ml",
+      "brand": "Dot"
+    },
+    {
+      "name": "Chemist at Play Exfoliating Body Wash - Lactic Acid, Salicylic Acid | Shower Gel for Women & Men",
+      "sp": 329,
+      "mrp": 399,
+      "unit": "236 ml",
+      "brand": "Chemist"
+    },
+    {
+      "name": "Chemist at Play 5% AHA Underarm Roll On, Lactic Acid Deodrants - Aqua Fragrance Deodorant Roll-on  -  For Men & Women",
+      "sp": 331,
+      "mrp": 399,
+      "unit": "40 ml",
+      "brand": "Chemist"
+    },
+    {
+      "name": "Nua Pimple patch | Hydrocolloid and Salicylic Acid",
+      "sp": 110,
+      "mrp": 159,
+      "unit": "14.5 g",
+      "brand": "Nua"
+    },
+    {
+      "name": "deconstruct Sunscreen - SPF 50 PA++++ | Lightweight Gel Sunscreen |In-Vivo Tested | Non Greasy | For Men & Women |",
+      "sp": 499,
+      "mrp": 559,
+      "unit": "80 g",
+      "brand": "deconstruct"
+    },
+    {
+      "name": "Plum 3% Niacinamide & Rice Water Alcohol-Free Toner, Tightens Pores, Brightens Skin Men & Women",
+      "sp": 380,
+      "mrp": 440,
+      "unit": "150 ml",
+      "brand": "Plum"
+    },
+    {
+      "name": "Dot & Key CICA,for Acne Prone Skin, 2% Salicylic with Green Tea,For Oily & Sensitive Skin Face Wash",
+      "sp": 200,
+      "mrp": 249,
+      "unit": "100 ml",
+      "brand": "Dot"
+    },
+    {
+      "name": "Mamaearth Rice Water & Niacinamide  Face Wash",
+      "sp": 240,
+      "mrp": 285,
+      "unit": "100 ml",
+      "brand": "Mamaearth"
+    },
+    {
+      "name": "BEARDO De-Tan Glycolic & Latic Acid, Niacinamide & Coffee Tan removal Exfoliates Men Face Wash",
+      "sp": 135,
+      "mrp": 199,
+      "unit": "50 ml",
+      "brand": "BEARDO"
+    },
+    {
+      "name": "PATANJALI Saundarya Anti-Acne & Pimple, Removes Dirt & Excess Oil Face Wash",
+      "sp": 95,
+      "mrp": 105,
+      "unit": "100 g",
+      "brand": "PATANJALI"
+    },
+    {
+      "name": "SENSODYNE Fresh Gel , for daily sensitivity protection. Toothpaste",
+      "sp": 111,
+      "mrp": 135,
+      "unit": "75 g",
+      "brand": "SENSODYNE"
+    },
+    {
+      "name": "Flipkart SmartBuy 100% Pure Cotton Buds with Paper Stick",
+      "sp": 23,
+      "mrp": 80,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Nihar Naturals Shanti Amla and Badam Hair Oil",
+      "sp": 66,
+      "mrp": 99,
+      "unit": "300 ml",
+      "brand": "Nihar"
+    },
+    {
+      "name": "Flipkart SmartBuy Anti-Bacterial Lemongrass & Bergamot Moisturising Hand Wash Refill Pouch",
+      "sp": 59,
+      "mrp": 109,
+      "unit": "750 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Wild Stone Edge Perfume Eau de Parfum Eau de Parfum  -  50 ml",
+      "sp": 250,
+      "mrp": 499,
+      "unit": "50 ml",
+      "brand": "Wild"
+    },
+    {
+      "name": "PARK AVENUE Amazon Woods Eau de Parfum  -  120 ml",
+      "sp": 211,
+      "mrp": 349,
+      "unit": "120 ml",
+      "brand": "PARK"
+    },
+    {
+      "name": "Wild Stone Night Rider Eau de Parfum for Men Eau de Parfum  -  30 ml",
+      "sp": 128,
+      "mrp": 249,
+      "unit": "30 ml",
+      "brand": "Wild"
+    },
+    {
+      "name": "BEARDO Godfather Perfume | Premium, Strong & Long Lasting Fragrance | Aromatic | Gift Eau de Parfum  -  20 ml",
+      "sp": 167,
+      "mrp": 349,
+      "unit": "20 ml",
+      "brand": "BEARDO"
+    },
+    {
+      "name": "SET WET Signature Eau de Parfum ICE 100 ml Eau de Parfum  -  100 ml",
+      "sp": 169,
+      "mrp": 625,
+      "unit": "100 ml",
+      "brand": "SET"
+    },
+    {
+      "name": "Wild Stone Edge I Eau de Parfum Eau de Parfum  -  100 ml",
+      "sp": 417,
+      "mrp": 699,
+      "unit": "100 ml",
+      "brand": "Wild"
+    },
+    {
+      "name": "THE MAN COMPANY Signature Perfume Duo 20ml X 2 Pack | Luxury Gift Set for Men Eau de Parfum  -  40 ml",
+      "sp": 126,
+      "mrp": 498,
+      "unit": "20 ml",
+      "brand": "THE"
+    },
+    {
+      "name": "Engage On Cool Marine Pocket Perfume  -  17 ml",
+      "sp": 59,
+      "mrp": 70,
+      "unit": "17 ml",
+      "brand": "Engage"
+    },
+    {
+      "name": "BEARDO Whisky Smoke Bourbon Perfume EDP|Oriental, Woody, Leathery|Strong & Long Lasting Eau de Parfum  -  50 ml",
+      "sp": 354,
+      "mrp": 999,
+      "unit": "50 ml",
+      "brand": "BEARDO"
+    },
+    {
+      "name": "FOGG Men Spray Scent Tycoon Perfume, Long-Lasting Perfume  -  30 ml",
+      "sp": 107,
+      "mrp": 170,
+      "unit": "30 ml",
+      "brand": "FOGG"
+    },
+    {
+      "name": "Clinic Plus Strong & Long, Healthy Hair Shampoo with Milk protein & Multivitamins",
+      "sp": 551,
+      "mrp": 1343,
+      "unit": "1 L",
+      "brand": "Clinic"
+    },
+    {
+      "name": "Gillette Guard Manual Shaving Razor Blades -12 Cartridges + 1 Razor, Men",
+      "sp": 159,
+      "mrp": 178,
+      "unit": "",
+      "brand": "Gillette"
+    },
+    {
+      "name": "everteen combo 40 XXL Soft Period Care & Menstrual Cramps Roll-On(5ml) Sanitary Pad",
+      "sp": 218,
+      "mrp": 399,
+      "unit": "5 ml",
+      "brand": "everteen"
+    },
+    {
+      "name": "Pears 98% Pure Glycerin Pure & Gentle Bodywash",
+      "sp": 250,
+      "mrp": 460,
+      "unit": "750 ml",
+      "brand": "Pears"
+    },
+    {
+      "name": "Sanfe Instant Glow Rose Facial Mask 100% fruit extracts, Korean Mask | 1pc",
+      "sp": 45,
+      "mrp": 49,
+      "unit": "25 g",
+      "brand": "Sanfe"
+    },
+    {
+      "name": "SUNSILK Luscious Thick & Long Shampoo",
+      "sp": 528,
+      "mrp": 1192,
+      "unit": "1 L",
+      "brand": "SUNSILK"
+    },
+    {
+      "name": "HEAD & SHOULDERS Anti-Hairfall Shampoo for Dandruff-Free & Stronger Hair",
+      "sp": 561,
+      "mrp": 999,
+      "unit": "650 ml",
+      "brand": "HEAD"
+    },
+    {
+      "name": "Everyuth Naturals Exfoliating Walnut- Scrub",
+      "sp": 171,
+      "mrp": 210,
+      "unit": "100 g",
+      "brand": "Everyuth"
+    },
+    {
+      "name": "Lakmé Blush & Glow Strawberry Sheet Mask|| 25 ml",
+      "sp": 65,
+      "mrp": 100,
+      "unit": "25 ml",
+      "brand": "Lakmé"
+    },
+    {
+      "name": "Sanfe Instant Tan Removal Exfoliating Gel | Face & Body Detan Scrub",
+      "sp": 371,
+      "mrp": 399,
+      "unit": "100 g",
+      "brand": "Sanfe"
+    },
+    {
+      "name": "RAAGA PROFESSIONAL De-Tan Cream with and Milk (12g x 6 sachets)",
+      "sp": 350,
+      "mrp": 414,
+      "unit": "72 g",
+      "brand": "RAAGA"
+    },
+    {
+      "name": "Sanfe Instant Detan Charcoal Facial Mask | For radiant & glowin skin",
+      "sp": 45,
+      "mrp": 49,
+      "unit": "25 ml",
+      "brand": "Sanfe"
+    },
+    {
+      "name": "LOTUS White Glow Insta Glow Fairnes Facial Kit 40 g",
+      "sp": 227,
+      "mrp": 325,
+      "unit": "40 g",
+      "brand": "LOTUS"
+    },
+    {
+      "name": "mCaffeine Coffee Body for Tan Removal & Exfoliation, Get Glowing Soft Skin Men Women Scrub",
+      "sp": 195,
+      "mrp": 279,
+      "unit": "55 g",
+      "brand": "mCaffeine"
+    },
+    {
+      "name": "Everyuth Naturals Golden Glow 24K Gold Sheet Mask",
+      "sp": 62,
+      "mrp": 125,
+      "unit": "25 ml",
+      "brand": "Everyuth"
+    },
+    {
+      "name": "Sanfe Instant Depigmentation Vitamin C Facial Mask | For radiant & glowing skin",
+      "sp": 47,
+      "mrp": 49,
+      "unit": "25 ml",
+      "brand": "Sanfe"
+    },
+    {
+      "name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "sp": 171,
+      "mrp": 378,
+      "unit": "300 ml",
+      "brand": "Parachute"
+    },
+    {
+      "name": "DOVE Deep Repair Treatment Hair Mask For Damaged Hair",
+      "sp": 198,
+      "mrp": 249,
+      "unit": "120 ml",
+      "brand": "DOVE"
+    },
+    {
+      "name": "Dabur Amla for Long, Healthy & Strong Hair Oil",
+      "sp": 172,
+      "mrp": 300,
+      "unit": "550 ml",
+      "brand": "Dabur"
+    },
+    {
+      "name": "Parachute 100% Pure Coconut Hair Oil (thengai ennai) Hair Oil",
+      "sp": 272,
+      "mrp": 349,
+      "unit": "600 ml",
+      "brand": "Parachute"
+    },
+    {
+      "name": "Parachute Advansed Jasmine Gold Healthy shine with Vit E Hair Oil",
+      "sp": 134,
+      "mrp": 215,
+      "unit": "300 ml",
+      "brand": "Parachute"
+    },
+    {
+      "name": "Navratna Cool Ayurvedic Hair Oil",
+      "sp": 77,
+      "mrp": 89,
+      "unit": "90 ml",
+      "brand": "Navratna"
+    },
+    {
+      "name": "Dabur Almond Oil | Provides Hair Damage Protection | Non Sticky Formula Hair Oil",
+      "sp": 105,
+      "mrp": 230,
+      "unit": "290 ml",
+      "brand": "Dabur"
+    },
+    {
+      "name": "Pilgrim Patua 10X Keratin Hair Smoothening Shampoo for Men & Women|Frizzy & Dry Hair",
+      "sp": 279,
+      "mrp": 345,
+      "unit": "200 ml",
+      "brand": "Pilgrim"
+    },
+    {
+      "name": "FACES CANADA Comfy Matte Wow Liquid Lipstick | Highly Pigmented | Long Lasting",
+      "sp": 235,
+      "mrp": 299,
+      "unit": "",
+      "brand": "FACES"
+    },
+    {
+      "name": "Dabur For Nourished & Smooth Hair Intense Nourishment Helps in Hair Strenghtening",
+      "sp": 217,
+      "mrp": 662,
+      "unit": "650 ml",
+      "brand": "Dabur"
+    },
+    {
+      "name": "FACES CANADA Weightless Stay Matte Powder | Oil Control Compact",
+      "sp": 141,
+      "mrp": 199,
+      "unit": "",
+      "brand": "FACES"
+    },
+    {
+      "name": "BLUE HEAVEN Intense Matte Lipstik Choco Swirl (307)",
+      "sp": 72,
+      "mrp": 100,
+      "unit": "",
+      "brand": "BLUE"
+    },
+    {
+      "name": "Lakmé Forever Matte  Compact",
+      "sp": 196,
+      "mrp": 245,
+      "unit": "",
+      "brand": "Lakmé"
+    },
+    {
+      "name": "Engage On Classic Woody Pocket Perfume  -  17 ml",
+      "sp": 56,
+      "mrp": 70,
+      "unit": "17 ml",
+      "brand": "Engage"
+    },
+    {
+      "name": "Veet Professional Waxing Kit for Normal Skin Strips",
+      "sp": 107,
+      "mrp": 129,
+      "unit": "",
+      "brand": "Veet"
+    },
+    {
+      "name": "Gillette Venus Comfortglide Hair Removal Razor for Women with Avocado Oils &Freesia Scent, Women",
+      "sp": 287,
+      "mrp": 375,
+      "unit": "",
+      "brand": "Gillette"
+    },
+    {
+      "name": "Gillette Venus Bikini sensitive hair removal, Women",
+      "sp": 156,
+      "mrp": 175,
+      "unit": "",
+      "brand": "Gillette"
+    },
+    {
+      "name": "Bombae Flexi Body Razors for Women - 3 | Hair Remover for Arms, Underarms, Bikini, Legs, Women",
+      "sp": 141,
+      "mrp": 250,
+      "unit": "",
+      "brand": "Bombae"
+    },
+    {
+      "name": "BOMBAY SHAVING COMPANY Flexi Stud Razor for Men with Comfort Pivot & Aloe Strip, Men",
+      "sp": 103,
+      "mrp": 125,
+      "unit": "",
+      "brand": "BOMBAY"
+    },
+    {
+      "name": "Veet Pure Hair Removal Dry Skin Cream",
+      "sp": 97,
+      "mrp": 115,
+      "unit": "30 g",
+      "brand": "Veet"
+    },
+    {
+      "name": "Veet Half Body Waxing Kit for Sensitive Skin Strips",
+      "sp": 114,
+      "mrp": 129,
+      "unit": "",
+      "brand": "Veet"
+    },
+    {
+      "name": "Namyaa Hair Removing for Intimate Skin with After Wax Soothing Serum Cream",
+      "sp": 110,
+      "mrp": 160,
+      "unit": "60 g",
+      "brand": "Namyaa"
+    },
+    {
+      "name": "Fem Fairness Naturals Gold Hair Removal Cream - 60g (40g + 20g) | For All Skin Type Cream",
+      "sp": 74,
+      "mrp": 85,
+      "unit": "60 g",
+      "brand": "Fem"
+    },
+    {
+      "name": "Sanfe Instant Depigmentation Lemon Facial Mask 100% fruit extracts, Korean Mask | 1pc",
+      "sp": 45,
+      "mrp": 49,
+      "unit": "25 g",
+      "brand": "Sanfe"
+    },
+    {
+      "name": "The Face Shop Rice Water Bright Foaming Cleanser,  for glowing skin & even skin tone Face Wash",
+      "sp": 539,
+      "mrp": 625,
+      "unit": "100 ml",
+      "brand": "The"
+    },
+    {
+      "name": "The Face Shop Real Nature Aloe Mask Sheet Mask",
+      "sp": 84,
+      "mrp": 100,
+      "unit": "20 g",
+      "brand": "The"
+    },
+    {
+      "name": "The Face Shop Real Nature Green Tea Mask Sheet Mask",
+      "sp": 76,
+      "mrp": 100,
+      "unit": "20 g",
+      "brand": "The"
+    },
+    {
+      "name": "Quench Bubble Sheet Mask with matcha green Tea Antioxidants",
+      "sp": 83,
+      "mrp": 129,
+      "unit": "21 ml",
+      "brand": "Quench"
+    },
+    {
+      "name": "TRESemme Keratin Smooth Shampoo",
+      "sp": 146,
+      "mrp": 172,
+      "unit": "180 ml",
+      "brand": "TRESemme"
+    },
+    {
+      "name": "PARK AVENUE Classic Lather Shaving Cream",
+      "sp": 50,
+      "mrp": 65,
+      "unit": "84 g",
+      "brand": "PARK"
+    },
+    {
+      "name": "Engage W2 Perfume Body Spray  -  For Women",
+      "sp": 148,
+      "mrp": 240,
+      "unit": "120 ml",
+      "brand": "Engage"
+    },
+    {
+      "name": "DOVE Dryness Care Conditioner",
+      "sp": 178,
+      "mrp": 285,
+      "unit": "175 ml",
+      "brand": "DOVE"
+    },
+    {
+      "name": "Nivea Men Fresh Active, Antibacterial 72h Protection, 0% Alcohol, Fresh Ocean Extracts Deodorant Roll-on  -  For Men",
+      "sp": 149,
+      "mrp": 249,
+      "unit": "50 ml",
+      "brand": "Nivea"
+    },
+    {
+      "name": "Pilgrim Advanced Hair Growth Serum With Rosemary & Korean Black Rice For Men & Women",
+      "sp": 756,
+      "mrp": 995,
+      "unit": "50 ml",
+      "brand": "Pilgrim"
+    },
+    {
+      "name": "Sanfe Hair Removal Spray Foam - Spray Away Spray",
+      "sp": 180,
+      "mrp": 199,
+      "unit": "25 ml",
+      "brand": "Sanfe"
+    },
+    {
+      "name": "mCaffeine Men & Women, Skin Brightening, De-Tan, Remove Blackheads Coffee face Scrub",
+      "sp": 160,
+      "mrp": 229,
+      "unit": "75 g",
+      "brand": "mCaffeine"
+    },
+    {
+      "name": "TRESemme Hairfall Defense+ Shampoo",
+      "sp": 151,
+      "mrp": 172,
+      "unit": "180 ml",
+      "brand": "TRESemme"
+    },
+    {
+      "name": "Vaseline Original Skin Protecting Jelly",
+      "sp": 91,
+      "mrp": 95,
+      "unit": "40 g",
+      "brand": "Vaseline"
+    },
+    {
+      "name": "NIVEA Body Lotion for Very Dry Skin, Nourishing Body Milk with 2x Almond Oil, For Men & Women",
+      "sp": 96,
+      "mrp": 120,
+      "unit": "120 ml",
+      "brand": "NIVEA"
+    },
+    {
+      "name": "Vaseline Intensive Care Deep Moisture Body Lotion",
+      "sp": 64,
+      "mrp": 90,
+      "unit": "85 ml",
+      "brand": "Vaseline"
+    },
+    {
+      "name": "Vaseline Healthy Bright Sun+Pollution Protection Body Lotion SPF30, Reduces Tan",
+      "sp": 311,
+      "mrp": 675,
+      "unit": "400 ml",
+      "brand": "Vaseline"
+    },
+    {
+      "name": "BAJAJ Almond Drops Nourishing Body Lotion with Almond Butter, 72 Hr Moisture Retention",
+      "sp": 411,
+      "mrp": 620,
+      "unit": "600 ml",
+      "brand": "BAJAJ"
+    },
+    {
+      "name": "Cara Mia Milk Nourishing Body Lotion",
+      "sp": 79,
+      "mrp": 349,
+      "unit": "400 ml",
+      "brand": "Cara"
+    },
+    {
+      "name": "Vaseline Gluta Hya Dewy Radiance",
+      "sp": 224,
+      "mrp": 350,
+      "unit": "200 ml",
+      "brand": "Vaseline"
+    },
+    {
+      "name": "FOGG Impressio & Perfume Scent With Long Lasting Eau de Parfum  -  100 ml",
+      "sp": 388,
+      "mrp": 650,
+      "unit": "100 ml",
+      "brand": "FOGG"
+    },
+    {
+      "name": "FOGG Xtremo Perfume Scent With II Long Lasting Eau de Parfum  -  100 ml",
+      "sp": 400,
+      "mrp": 650,
+      "unit": "100 ml",
+      "brand": "FOGG"
+    },
+    {
+      "name": "BELLAVITA White Oud, Long Lasting , Unisex Eau de Parfum  -  20 ml",
+      "sp": 141,
+      "mrp": 449,
+      "unit": "20 ml",
+      "brand": "BELLAVITA"
+    },
+    {
+      "name": "Origami Facial Tissues Pack of 1, 200 Pulls, 2 Ply - Soft Pack",
+      "sp": 92,
+      "mrp": 125,
+      "unit": "",
+      "brand": "Origami"
+    },
+    {
+      "name": "THE MAN COMPANY BLANC Roll On for Men 55ml Deodorant Roll-on  -  For Men",
+      "sp": 190,
+      "mrp": 299,
+      "unit": "55 ml",
+      "brand": "THE"
+    },
+    {
+      "name": "Rexona Shower Fresh Underarm Roll On Deodorant For Women (PO3) Deodorant Roll-on  -  For Women",
+      "sp": 509,
+      "mrp": 570,
+      "unit": "150 ml, Pack of 3",
+      "brand": "Rexona"
+    },
+    {
+      "name": "Dot & Key Ceramide & Peptide Barrier Repair Lip Balm Spf , Pa+++|Warm Nude Caramel",
+      "sp": 172,
+      "mrp": 249,
+      "unit": "",
+      "brand": "Dot"
+    },
+    {
+      "name": "FACES CANADA Ultime Pro Splash Nail Enamel | Glossy | Quick Drying | Long Lasting | 8ml, Need Sunglasses 16",
+      "sp": 121,
+      "mrp": 129,
+      "unit": "8 ml",
+      "brand": "FACES"
+    },
+    {
+      "name": "Flipkart SmartBuy Chopper 650 ML Vegetable & Fruit Chopper",
+      "sp": 122,
+      "mrp": 1299,
+      "unit": "650 ML",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart Supermart Toilet brush Double Hockey (Length - 46 cm)",
+      "sp": 66,
+      "mrp": 199,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "GALA No Dust XL Plastic Dry Broom",
+      "sp": 151,
+      "mrp": 225,
+      "unit": "",
+      "brand": "GALA"
+    },
+    {
+      "name": "Flipkart Supermart Wet & Dry Mop",
+      "sp": 141,
+      "mrp": 599,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart SmartBuy Wet Kitchen Wet Microfiber, Sponge Cleaning Cloth",
+      "sp": 122,
+      "mrp": 299,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart Supermart Floor Cleaning Cloth Pocha (Regular) -PO4 Dry Cotton Cleaning Cloth",
+      "sp": 75,
+      "mrp": 199,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart Supermart Grass Dry Broom",
+      "sp": 113,
+      "mrp": 199,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Decent Home Cotton Double Fitted (Elastic) 240 TC Floral 1 Bedsheet with 2 Pillow Covers",
+      "sp": 241,
+      "mrp": 2249,
+      "unit": "",
+      "brand": "Decent"
+    },
+    {
+      "name": "Raymond Home Microfibre Sleeping Pillow Pack of 2 Solid",
+      "sp": 329,
+      "mrp": 799,
+      "unit": "",
+      "brand": "Raymond"
+    },
+    {
+      "name": "Fezora Microfiber 500 GSM Bath, Beach, Sport Towel",
+      "sp": 181,
+      "mrp": 799,
+      "unit": "",
+      "brand": "Fezora"
+    },
+    {
+      "name": "Odomos Attack mosquito killer racquet Electric Insect Killer Indoor",
+      "sp": 338,
+      "mrp": 599,
+      "unit": "",
+      "brand": "Odomos"
+    },
+    {
+      "name": "EVEREADY Ultima Alkaline, 400% Longer Lasting  Battery",
+      "sp": 45,
+      "mrp": 52,
+      "unit": "",
+      "brand": "EVEREADY"
+    },
+    {
+      "name": "DURACELL Alkaline AA, Everyday Devices, Clock, Toy, Remote  Battery",
+      "sp": 47,
+      "mrp": 49,
+      "unit": "",
+      "brand": "DURACELL"
+    },
+    {
+      "name": "Flipkart SmartBuy Electric Insect Killer Indoor, Outdoor",
+      "sp": 236,
+      "mrp": 990,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "CLOTHOLOGY Cotton Double Flat 144 TC Printed 1 Bedsheet with 2 Pillow Covers",
+      "sp": 241,
+      "mrp": 2999,
+      "unit": "",
+      "brand": "CLOTHOLOGY"
+    },
+    {
+      "name": "Flipkart SmartBuy BOTMOSAICP1BLU 1000 ml Plastic Bottle",
+      "sp": 36,
+      "mrp": 299,
+      "unit": "1000 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "ELEGANT WEAVERS Microfiber Double Flat 144 TC Solid 1 Bedsheet with 2 Pillow Covers",
+      "sp": 379,
+      "mrp": 999,
+      "unit": "",
+      "brand": "ELEGANT"
+    },
+    {
+      "name": "ELEGANT WEAVERS Microfiber Single Flat 144 TC Printed 1 Bedsheet with 2 Pillow Covers",
+      "sp": 236,
+      "mrp": 799,
+      "unit": "",
+      "brand": "ELEGANT"
+    },
+    {
+      "name": "ELEGANT WEAVERS Microfiber Double Flat 144 TC Printed 1 Bedsheet with 2 Pillow Covers",
+      "sp": 287,
+      "mrp": 799,
+      "unit": "",
+      "brand": "ELEGANT"
+    },
+    {
+      "name": "Flipkart SmartBuy BOTMOSAICP1GRY 1000 ml Plastic Bottle",
+      "sp": 43,
+      "mrp": 299,
+      "unit": "1000 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart SmartBuy BOTMULTP6 1000 ml Plastic Bottle",
+      "sp": 229,
+      "mrp": 1278,
+      "unit": "1000 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Pigeon Inox Plus 900 ml Steel Bottle",
+      "sp": 217,
+      "mrp": 325,
+      "unit": "900 ml",
+      "brand": "Pigeon"
+    },
+    {
+      "name": "Pack of 6, Red, Green, Blue, Pink, Orange, Grey",
+      "sp": 749,
+      "mrp": 1182,
+      "unit": "",
+      "brand": "Pack"
+    },
+    {
+      "name": "Go24 Electro 1000, Hot&Cold ISI Certified Thermosteel Water Bottle, Leakproof 980 ml Steel Flask",
+      "sp": 849,
+      "mrp": 1099,
+      "unit": "980 ml",
+      "brand": "Go24"
+    },
+    {
+      "name": "Flipkart Supermart Blue Plastic Water Bottle 500ml 500 ml Plastic Bottle",
+      "sp": 47,
+      "mrp": 99,
+      "unit": "500 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart SmartBuy BOTMOSAICP1PNK 1000 ml Plastic Bottle",
+      "sp": 60,
+      "mrp": 299,
+      "unit": "1000 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Vartanu Printed Party Bag",
+      "sp": 82,
+      "mrp": 200,
+      "unit": "",
+      "brand": "Vartanu"
+    },
+    {
+      "name": "Wipro Aries 6W Rechargeable LED with 3 grade dimming|Touch control|Upto 5 Hrs backup Table Lamp",
+      "sp": 747,
+      "mrp": 1399,
+      "unit": "",
+      "brand": "Wipro"
+    },
+    {
+      "name": "Wipro 5W Rechargeable Table Lamp with Pen Stand|Touch Control|3 Dim Modes|Type C port Table Lamp",
+      "sp": 729,
+      "mrp": 1090,
+      "unit": "",
+      "brand": "Wipro"
+    },
+    {
+      "name": "Aluminium, Non-stick, Induction Bottom",
+      "sp": 850,
+      "mrp": 900,
+      "unit": "",
+      "brand": "Aluminium,"
+    },
+    {
+      "name": "Hawkins Non Stick Dosa Tava (NDT28) Tawa 28 cm diameter",
+      "sp": 1341,
+      "mrp": 1490,
+      "unit": "",
+      "brand": "Hawkins"
+    },
+    {
+      "name": "Prestige Omega Marble Tawa 25 cm diameter",
+      "sp": 750,
+      "mrp": 800,
+      "unit": "",
+      "brand": "Prestige"
+    },
+    {
+      "name": "BERGNER Tripro Triply Tadka Pan / Vagar Pan with Induction Bottom, Tadka Pan 12 cm diameter 0.4 L capacity",
+      "sp": 581,
+      "mrp": 695,
+      "unit": "0.4 L",
+      "brand": "BERGNER"
+    },
+    {
+      "name": "Kreme Series Flat Dosa (Non Induction) Tawa 25 cm diameter",
+      "sp": 279,
+      "mrp": 850,
+      "unit": "",
+      "brand": "Kreme"
+    },
+    {
+      "name": "Hawkins Non Stick Dosa Tava (NDT33) Tawa 33 cm diameter",
+      "sp": 1616,
+      "mrp": 1795,
+      "unit": "",
+      "brand": "Hawkins"
+    },
+    {
+      "name": "OMORTEX Rectangular Classy 3 Section With 1 Spoon & 1 Fork 3 Containers Plastic Office Lunch Box",
+      "sp": 189,
+      "mrp": 699,
+      "unit": "1500 ml",
+      "brand": "OMORTEX"
+    },
+    {
+      "name": "BOROSIL Teal Universal Bag, 4 Pc (320ml x 2 Square + 240ml x 2 Round) Office Tiifin 4 Containers Glass Office Lunch Box",
+      "sp": 799,
+      "mrp": 1925,
+      "unit": "1120 ml",
+      "brand": "BOROSIL"
+    },
+    {
+      "name": "J K INTERNATIONAL Students Sealed Leakage Proof Stainless Steel with Spoon 4 Containers Stainless Steel School Lunch Box",
+      "sp": 484,
+      "mrp": 1999,
+      "unit": "1000 ml",
+      "brand": "J"
+    },
+    {
+      "name": "OMORTEX Section Lock Lunch Box For College, School, Office 3 Containers Plastic Office Lunch Box",
+      "sp": 135,
+      "mrp": 599,
+      "unit": "1400 ml",
+      "brand": "OMORTEX"
+    },
+    {
+      "name": "Classic Essentials Supreme Microwave Safe Set of 5 with Bottle|Bag & Cutlery 5 Containers Stainless Steel Office Lunch Box",
+      "sp": 538,
+      "mrp": 1999,
+      "unit": "1250 ml",
+      "brand": "Classic"
+    },
+    {
+      "name": "Flipkart SmartBuy Steel Luncbox Blue 3 Containers Stainless Steel School Lunch Box",
+      "sp": 194,
+      "mrp": 499,
+      "unit": "1240 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart SmartBuy Steel Luncbox Green 3 Containers Stainless Steel School Lunch Box",
+      "sp": 194,
+      "mrp": 465,
+      "unit": "1300 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "BOROSIL Teal Bag, 3 Pc (320 ml x 2 + 240ml x 1 ), Office Tiifin 3 Containers Glass Office Lunch Box",
+      "sp": 636,
+      "mrp": 1415,
+      "unit": "880 ml",
+      "brand": "BOROSIL"
+    },
+    {
+      "name": "OMORTEX Rectangular Classy 3 Section Lunch Box With 1 Spoon & 1 Fork 3 Containers Plastic Office Lunch Box",
+      "sp": 171,
+      "mrp": 699,
+      "unit": "1500 ml",
+      "brand": "OMORTEX"
+    },
+    {
+      "name": "BOROSIL Teal Lunch Box with Bag, 2 Pc (400 ml x 2 Round),Vertical Office Tiifin 2 Containers Glass Office Lunch Box",
+      "sp": 518,
+      "mrp": 1165,
+      "unit": "800 ml",
+      "brand": "BOROSIL"
+    },
+    {
+      "name": "Flipkart SmartBuy Leak Proof Fridge 1000 ml Plastic Bottle",
+      "sp": 38,
+      "mrp": 299,
+      "unit": "1000 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart Supermart Brown Plastic Water Bottle,1000 ml ,Pack of 4 (4X 1000ml) 1 L Plastic Bottle",
+      "sp": 122,
+      "mrp": 499,
+      "unit": "1000 ml",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "EVEREADY 10 W Basic Standard B22 LED Bulb",
+      "sp": 123,
+      "mrp": 398,
+      "unit": "",
+      "brand": "EVEREADY"
+    },
+    {
+      "name": "EVEREADY 12 W Basic Standard B22 LED Bulb",
+      "sp": 94,
+      "mrp": 199,
+      "unit": "",
+      "brand": "EVEREADY"
+    },
+    {
+      "name": "HAVELLS 9 W Basic Standard B22 LED Bulb",
+      "sp": 139,
+      "mrp": 300,
+      "unit": "",
+      "brand": "HAVELLS"
+    },
+    {
+      "name": "HAVELLS 9 W Basic Round B22 LED Bulb",
+      "sp": 55,
+      "mrp": 150,
+      "unit": "",
+      "brand": "HAVELLS"
+    },
+    {
+      "name": "EVEREADY 10 W Basic Round B22 LED Bulb",
+      "sp": 49,
+      "mrp": 199,
+      "unit": "",
+      "brand": "EVEREADY"
+    },
+    {
+      "name": "HALONIX 50 W Basic Round B22 LED Bulb",
+      "sp": 464,
+      "mrp": 999,
+      "unit": "",
+      "brand": "HALONIX"
+    },
+    {
+      "name": "PHILIPS 20 W Basic T-Bulb B22 LED Bulb",
+      "sp": 426,
+      "mrp": 700,
+      "unit": "",
+      "brand": "PHILIPS"
+    },
+    {
+      "name": "IWS Solid Single Fleece Blanket for  AC Room",
+      "sp": 109,
+      "mrp": 599,
+      "unit": "",
+      "brand": "IWS"
+    },
+    {
+      "name": "Fezora Microfiber 500 GSM Bath, Sport, Beach Towel",
+      "sp": 217,
+      "mrp": 799,
+      "unit": "",
+      "brand": "Fezora"
+    },
+    {
+      "name": "Fezora Microfiber 500 GSM Bath Towel",
+      "sp": 217,
+      "mrp": 799,
+      "unit": "",
+      "brand": "Fezora"
+    },
+    {
+      "name": "JOCKEY Cotton 500 GSM Face Towel",
+      "sp": 335,
+      "mrp": 349,
+      "unit": "",
+      "brand": "JOCKEY"
+    },
+    {
+      "name": "JOCKEY Cotton 500 GSM Bath Towel",
+      "sp": 799,
+      "mrp": null,
+      "unit": "",
+      "brand": "JOCKEY"
+    },
+    {
+      "name": "BELOMODA King Size Double bed Polyester Washable Adults Mosquito Net",
+      "sp": 539,
+      "mrp": 2000,
+      "unit": "",
+      "brand": "BELOMODA"
+    },
+    {
+      "name": "Kolar Full Blue 6 Feet x 4 Feet Premium Single Bed Machardani, Strong and Foldable Polyester Washable Adults Mosquito Net",
+      "sp": 509,
+      "mrp": 1500,
+      "unit": "",
+      "brand": "Kolar"
+    },
+    {
+      "name": "Swastik Premium Pure Camphor | Ideal for Pooja, Aroma & Air Purification",
+      "sp": 34,
+      "mrp": 50,
+      "unit": "25 g",
+      "brand": "Swastik"
+    },
+    {
+      "name": "Shubhkart Darshana Kumkum Powder - 50 Gms",
+      "sp": 19,
+      "mrp": 20,
+      "unit": "50 g",
+      "brand": "Shubhkart"
+    },
+    {
+      "name": "Swastik 100% Organic and Premium Bhimseni Camphor JarFor Puja & Aroma",
+      "sp": 172,
+      "mrp": 290,
+      "unit": "100 g",
+      "brand": "Swastik"
+    },
+    {
+      "name": "Swastik Bhimseni Camphor - 100% Pure Kapoor for Pooja & Aarti, Zero Residue",
+      "sp": 33,
+      "mrp": 50,
+      "unit": "10 g",
+      "brand": "Swastik"
+    },
+    {
+      "name": "Shubhkart Darshana Moli Roll (Milan) - 20 Gms",
+      "sp": 19,
+      "mrp": 20,
+      "unit": "20 g",
+      "brand": "Shubhkart"
+    },
+    {
+      "name": "Cycle Pure Om Shanthi Chandan Tika, 25 gms",
+      "sp": 22,
+      "mrp": 25,
+      "unit": "25 g",
+      "brand": "Cycle"
+    },
+    {
+      "name": "Shubhkart Darshana Gangajal - 100 ML Pouch",
+      "sp": 18,
+      "mrp": 20,
+      "unit": "100 ml",
+      "brand": "Shubhkart"
+    },
+    {
+      "name": "Swastik 100% Natural Pure Camphor Tablets | For Pooja, Diffuser & Air Freshening",
+      "sp": 126,
+      "mrp": 180,
+      "unit": "100 g",
+      "brand": "Swastik"
+    },
+    {
+      "name": "Shubhkart Tejas Premium Candles Candle",
+      "sp": 49,
+      "mrp": 75,
+      "unit": "",
+      "brand": "Shubhkart"
+    },
+    {
+      "name": "IRIS Fragranced Mercury Shot Glass Candle Trio Candle",
+      "sp": 272,
+      "mrp": 349,
+      "unit": "",
+      "brand": "IRIS"
+    },
+    {
+      "name": "IRIS Unscented Tealight Candle",
+      "sp": 118,
+      "mrp": 149,
+      "unit": "",
+      "brand": "IRIS"
+    },
+    {
+      "name": "IRIS Lavender Fragranced Ribbed Jar Candle",
+      "sp": 116,
+      "mrp": 149,
+      "unit": "",
+      "brand": "IRIS"
+    },
+    {
+      "name": "Flipkart SmartBuy Tealight Candle",
+      "sp": 108,
+      "mrp": 300,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "Flipkart Supermart Floating Candle",
+      "sp": 60,
+      "mrp": null,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "XBEY Adhesive Hooks, Detachable Self Adhesive Wall Screw Hooks, Punch-Free Hook 6",
+      "sp": 113,
+      "mrp": 796,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "XBEY Self Adhesive Wall Hooks Heavy Duty Nail Free Sticky Hanger Hook 10",
+      "sp": 85,
+      "mrp": 658,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "XBEY Space Saver Compression Sealer with Manual Pump Hanging Travel Storage Vacuum Bags",
+      "sp": 357,
+      "mrp": 1500,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "Flipkart SmartBuy Wet and Dry Cloth Hanging Rope Nylon Clothesline",
+      "sp": 84,
+      "mrp": 149,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "XBEY Heavy Duty Rust Free Cloth Peg/Clothes Clip/Cloth Drying Pins Plastic Cloth Clips",
+      "sp": 170,
+      "mrp": 599,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "XBEY Single Coat Hooks Without Drilling Sticker Heavy Items Wall Hangers Hook 8",
+      "sp": 122,
+      "mrp": 739,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "XBEY Multipurpose Clothes Pins for Indoor and Outdoor Use Plastic Cloth Clips",
+      "sp": 141,
+      "mrp": 799,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "Flipkart SmartBuy Heavy Duty Plastic Cloth Clips",
+      "sp": 46,
+      "mrp": 140,
+      "unit": "",
+      "brand": "Flipkart"
+    },
+    {
+      "name": "XBEY Rope for Drying Clothes/Clothesline, Length 5.5 Meter Polyester Retractable Clothesline",
+      "sp": 119,
+      "mrp": 799,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "XBEY Plastic Cloth Clips",
+      "sp": 160,
+      "mrp": 599,
+      "unit": "",
+      "brand": "XBEY"
+    },
+    {
+      "name": "HIMALAYA Gentle Baby Powder",
+      "sp": 205,
+      "mrp": 302,
+      "unit": "400 g",
+      "brand": "HIMALAYA"
+    },
+    {
+      "name": "HIMALAYA Baby Prickly Heat Powder",
+      "sp": 75,
+      "mrp": 112,
+      "unit": "100 g",
+      "brand": "HIMALAYA"
+    },
+    {
+      "name": "Miss & Chief by Flipkart Baby Wipes with Aloe Vera and Vitamin E",
+      "sp": 132,
+      "mrp": 540,
+      "unit": "",
+      "brand": "Miss"
+    },
+    {
+      "name": "Huggies Comfy Baby Diaper Pants, Upto 50% Faster Absorption - XL",
+      "sp": 575,
+      "mrp": 842,
+      "unit": "",
+      "brand": "Huggies"
+    },
+    {
+      "name": "Huggies Comfy Baby Diaper Pants, Upto 50% Faster Absorption - M",
+      "sp": 575,
+      "mrp": 842,
+      "unit": "",
+      "brand": "Huggies"
+    },
+    {
+      "name": "TEDDYY Easy Diaper Pants with Rash Protection and 3x Faster absorption Technology - M",
+      "sp": 446,
+      "mrp": 949,
+      "unit": "",
+      "brand": "TEDDYY"
+    },
+    {
+      "name": "HIMALAYA Baby Shampoo Hibiscus",
+      "sp": 239,
+      "mrp": 390,
+      "unit": "400 ml",
+      "brand": "HIMALAYA"
+    },
+    {
+      "name": "Little Angel Easy Dry Diaper Pants with 12 hrs absorption Large Size, 9-14 Kgs - L",
+      "sp": 515,
+      "mrp": 1029,
+      "unit": "",
+      "brand": "Little"
+    },
+    {
+      "name": "LuvLap Diaper Pants Large (LG) 9 to 14Kg, 62 Count, Baby Diaper Pants, with Aloe Vera Lotion for rash protection, with upto 12 Hour protection - L",
+      "sp": 562,
+      "mrp": 949,
+      "unit": "14 Kg",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "TEDDYY Easy Diaper Pants with Rash Protection and 3x Faster absorption Technology - L",
+      "sp": 429,
+      "mrp": 949,
+      "unit": "",
+      "brand": "TEDDYY"
+    },
+    {
+      "name": "BUMTUM Baby Diaper Pants Double Layer Leakage Protection high Absorb Technology - L",
+      "sp": 221,
+      "mrp": 374,
+      "unit": "",
+      "brand": "BUMTUM"
+    },
+    {
+      "name": "BUMTUM Baby Diaper Pants with Double Leakage Protection(22 Count, XX-Large Pack of 1) - XXL",
+      "sp": 221,
+      "mrp": 374,
+      "unit": "",
+      "brand": "BUMTUM"
+    },
+    {
+      "name": "LuvLap Diaper Pants Extra Large (XL) 12 to 17Kg, 54 Count, Baby Diaper Pants, with Aloe Vera Lotion for rash protection, with upto 12 Hour protection - XL",
+      "sp": 590,
+      "mrp": 949,
+      "unit": "17 Kg",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "MamyPoko Pants All Night Absorb,Coco Care & 12hr Leakage Protection - L",
+      "sp": 550,
+      "mrp": 899,
+      "unit": "",
+      "brand": "MamyPoko"
+    },
+    {
+      "name": "Wowper Baby Diaper Pants Medium Size Diapers | up to 12 hrs Absorption | 7-12 Kg - M",
+      "sp": 512,
+      "mrp": 1029,
+      "unit": "12 Kg",
+      "brand": "Wowper"
+    },
+    {
+      "name": "Pampers Active Baby Taped Diapers with Adjustable Fit - L",
+      "sp": 1540,
+      "mrp": 1730,
+      "unit": "",
+      "brand": "Pampers"
+    },
+    {
+      "name": "Pampers Diaper Pants - S(31 Pieces) - S",
+      "sp": 251,
+      "mrp": 374,
+      "unit": "",
+      "brand": "Pampers"
+    },
+    {
+      "name": "Pampers Diaper Pants - XL(20 Pieces) - XL",
+      "sp": 261,
+      "mrp": 389,
+      "unit": "",
+      "brand": "Pampers"
+    },
+    {
+      "name": "Pampers Premium Care Pant Style Baby Diapers - XXXL",
+      "sp": 812,
+      "mrp": 1399,
+      "unit": "",
+      "brand": "Pampers"
+    },
+    {
+      "name": "Mothercare All We Know Baby Hair Oil | With Goodness of Olive Oil & Chamomile Extract Hair Oil",
+      "sp": 265,
+      "mrp": 329,
+      "unit": "300 ml",
+      "brand": "Mothercare"
+    },
+    {
+      "name": "Morisons Baby Dreams Cottony Soft Diaper Pants - Small - S",
+      "sp": 983,
+      "mrp": null,
+      "unit": "",
+      "brand": "Morisons"
+    },
+    {
+      "name": "JOHNSON'S Baby Hair Oil",
+      "sp": 501,
+      "mrp": 532,
+      "unit": "400 ml",
+      "brand": "JOHNSON'S"
+    },
+    {
+      "name": "Amulspray Infant Food",
+      "sp": 475,
+      "mrp": null,
+      "unit": "1000 g, Upto 24 Months",
+      "brand": "Amulspray"
+    },
+    {
+      "name": "Classmate Pulse Regular Notebook Single Line 300 Pages",
+      "sp": 124,
+      "mrp": 165,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Pulse Book-size Notebook Unruled 180 Pages",
+      "sp": 59,
+      "mrp": 76,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Pulse Book-size Notebook Single Line 180 Pages",
+      "sp": 57,
+      "mrp": 76,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Pulse A4 Notebook Unruled 180 Pages",
+      "sp": 73,
+      "mrp": 95,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Notebook Book-size Notebook Ruled 128 Pages",
+      "sp": 24,
+      "mrp": 25,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Notebook Book-size Notebook Unruled 72 Pages",
+      "sp": 19,
+      "mrp": 20,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Notebook Book-size Notebook Ruled 120 Pages",
+      "sp": 28,
+      "mrp": 34,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Pulse A4 Notebook Single Line 300 Pages",
+      "sp": 145,
+      "mrp": 180,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "Classmate Practical Notebook Assorted Notebook Single Rule 100 Pages",
+      "sp": 50,
+      "mrp": 62,
+      "unit": "",
+      "brand": "Classmate"
+    },
+    {
+      "name": "PARKER Vector Standard Chrome Trim Ball Pen With Keychain Pen Gift Set",
+      "sp": 243,
+      "mrp": 430,
+      "unit": "",
+      "brand": "PARKER"
+    },
+    {
+      "name": "PARKER Classic Gold Ball Pen",
+      "sp": 543,
+      "mrp": 750,
+      "unit": "",
+      "brand": "PARKER"
+    },
+    {
+      "name": "PARKER Gift Set | Note Book with Jotter Stainless Steel Gold Trim | Ball Pen",
+      "sp": 622,
+      "mrp": 829,
+      "unit": "",
+      "brand": "PARKER"
+    },
+    {
+      "name": "PARKER Jotter Stainless Steel, Gold Trim Ball Pen",
+      "sp": 332,
+      "mrp": 540,
+      "unit": "",
+      "brand": "PARKER"
+    },
+    {
+      "name": "PARKER Beta Neo Fountain Pen",
+      "sp": 137,
+      "mrp": 180,
+      "unit": "",
+      "brand": "PARKER"
+    },
+    {
+      "name": "PIERRE CARDIN Musk Titanium Finish Exclusive Metal Body With Blister Pack Ball Pen",
+      "sp": 232,
+      "mrp": 300,
+      "unit": "",
+      "brand": "PIERRE"
+    },
+    {
+      "name": "PARKER Quink Ink Bottle",
+      "sp": 94,
+      "mrp": 120,
+      "unit": "",
+      "brand": "PARKER"
+    },
+    {
+      "name": "PIERRE CARDIN Golden Eye Matte Black Finish Exclusive | Metal Body With Attractive Look Fountain Pen",
+      "sp": 288,
+      "mrp": 330,
+      "unit": "",
+      "brand": "PIERRE"
+    },
+    {
+      "name": "PIERRE CARDIN Triumph Ball Pen",
+      "sp": 130,
+      "mrp": 150,
+      "unit": "",
+      "brand": "PIERRE"
+    },
+    {
+      "name": "PIERRE CARDIN Kriss White Gold Finish Exclusive Metal Body With Crystal Studded Blister Pack Ball Pen",
+      "sp": 253,
+      "mrp": 275,
+      "unit": "",
+      "brand": "PIERRE"
+    },
+    {
+      "name": "Chicco Baby Moisturizing Wet Wipes with Aloe Vera and Chamomile",
+      "sp": 66,
+      "mrp": 99,
+      "unit": "",
+      "brand": "Chicco"
+    },
+    {
+      "name": "Chicco Strawberry Flavour 1-6Y, Fluoride & Preservative-Free Toothpaste",
+      "sp": 101,
+      "mrp": 159,
+      "unit": "50 g",
+      "brand": "Chicco"
+    },
+    {
+      "name": "Little's Soft Cleansing Baby Wipes with Aloe Vera, Jojoba Oil and Vitamin E, Lid Pack",
+      "sp": 227,
+      "mrp": 660,
+      "unit": "",
+      "brand": "Little's"
+    },
+    {
+      "name": "LuvLap Adaptable 2 in 1 Potty Training Seat for 1+Yr child with Detachable Potty Bowl Potty Seat",
+      "sp": 443,
+      "mrp": 735,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "Cub Care Baby Wipes with Aloe Vera, Jojoba Oil, Vitamin E and Paraben Free",
+      "sp": 174,
+      "mrp": 447,
+      "unit": "",
+      "brand": "Cub"
+    },
+    {
+      "name": "Cub Care Baby Wipes with Aloe Vera, Jojoba Oil, Vitamin E, Paraben Free",
+      "sp": 69,
+      "mrp": 149,
+      "unit": "",
+      "brand": "Cub"
+    },
+    {
+      "name": "HIMALAYA Kids Orange Toothpaste",
+      "sp": 84,
+      "mrp": 133,
+      "unit": "80 g",
+      "brand": "HIMALAYA"
+    },
+    {
+      "name": "J K INTERNATIONAL 2 in 1 Xylophone and Piano Toy",
+      "sp": 157,
+      "mrp": 999,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "KOBBET Dancing Monkey Musical Toys for Tumble Toy with Voice Control Light & Sound Toys",
+      "sp": 205,
+      "mrp": 1071,
+      "unit": "",
+      "brand": "KOBBET"
+    },
+    {
+      "name": "J K INTERNATIONAL Rechargeable Toys Talking Cactus Baby Toys for Kids Dancing Cactus Toys",
+      "sp": 292,
+      "mrp": 999,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "KOBBET Talking Tom Cat Toy for Kids Speaking Repeats What You Say - Best Gift set toys",
+      "sp": 359,
+      "mrp": 899,
+      "unit": "",
+      "brand": "KOBBET"
+    },
+    {
+      "name": "J K INTERNATIONAL Learning Pillow Cloth Book with English and Hindi Cushion Cotton Books",
+      "sp": 144,
+      "mrp": 2999,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "Miss & Chief 5 Layer Plastic Stack, Drop and Go Ball Drop Multicolor",
+      "sp": 159,
+      "mrp": 730,
+      "unit": "",
+      "brand": "Miss"
+    },
+    {
+      "name": "Wembley Spider Web Shooter Toys for Kids Boys Real Gadget Toys Gloves Launcher Wrist Toy",
+      "sp": 143,
+      "mrp": 399,
+      "unit": "",
+      "brand": "Wembley"
+    },
+    {
+      "name": "Miss & Chief Baby First Blocks Color & Shape Toy Educational Sorting Box for Kids",
+      "sp": 134,
+      "mrp": 750,
+      "unit": "",
+      "brand": "Miss"
+    },
+    {
+      "name": "J K INTERNATIONAL Tent House for Baby Boy Girl Play House for 4-12 Yrs Kids Children",
+      "sp": 312,
+      "mrp": 2999,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "J K INTERNATIONAL New Arrival Jumbo Size Extremely Light Weight , Water Proof Doll House Kids Play Tent House for Girls and Boys",
+      "sp": 287,
+      "mrp": 1599,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "KOBBET Intelligence Book for English Letters & Words Learning Book Fun Educational Toys",
+      "sp": 285,
+      "mrp": 629,
+      "unit": "",
+      "brand": "KOBBET"
+    },
+    {
+      "name": "KOBBET 36Pcs ABCD Alphabet Puzzle Foam Mat for Interlocking Learning Alphabet & Number",
+      "sp": 62,
+      "mrp": 449,
+      "unit": "36 Pcs",
+      "brand": "KOBBET"
+    },
+    {
+      "name": "J K INTERNATIONAL Pop it Toy Set Atcan 4 Pcs Combo Popping Toys",
+      "sp": 124,
+      "mrp": 499,
+      "unit": "4 Pcs",
+      "brand": "J"
+    },
+    {
+      "name": "LuvLap Bunny Silicone Food/Fruit Nibbler with Extra Mesh, Soft Pacifier & feeder Feeder",
+      "sp": 171,
+      "mrp": 209,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "LuvLap Elegant Baby Comb & Brush Set with Soft bristles, Grooming Set, 0M+,",
+      "sp": 144,
+      "mrp": 229,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "VEGA Boutique Wooden Comb for Men & Women, Styling & Daily Hair Care (HMWC-06)",
+      "sp": 171,
+      "mrp": 179,
+      "unit": "",
+      "brand": "VEGA"
+    },
+    {
+      "name": "JOHNSON'S BABY Rice Cream, with Milk extracts and Vitamin E to replenish moisture, pH Balanced",
+      "sp": 345,
+      "mrp": 420,
+      "unit": "",
+      "brand": "JOHNSON'S"
+    },
+    {
+      "name": "Eduway Non Magnetic 1.5x2 Ft. Double Sided Whiteboard with Duster and Marker | Front Dry Erase Marker & Reverse Chalk Board | Glossy Surface |Robust Aluminum Frame|(45x60 cms) Whiteboards",
+      "sp": 428,
+      "mrp": 999,
+      "unit": "",
+      "brand": "Eduway"
+    },
+    {
+      "name": "Eduway Non Magnetic Wooden Multipurpose Portable Whiteboard Study Laptop Table with 1 Duster and 1 Marker Whiteboards",
+      "sp": 819,
+      "mrp": 1999,
+      "unit": "",
+      "brand": "Eduway"
+    },
+    {
+      "name": "Eduway Non Magnetic Regular Wooden Duster Dirtproof Perfect Clean For Blackboard & Durable|Ideal for Teacher, Office, Kids|Pack of 1 Dusters",
+      "sp": 63,
+      "mrp": 299,
+      "unit": "",
+      "brand": "Eduway"
+    },
+    {
+      "name": "LuvLap Manual Breast Pump, 3 Level Suction Adjustment, 2pcs pads free  - Manual",
+      "sp": 581,
+      "mrp": 799,
+      "unit": "2 pcs",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "LuvLap Ultra Thin Honeycomb Disposable, High Absorbent, Nursing Breast Pad",
+      "sp": 157,
+      "mrp": 269,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "LuvLap Anti-Colic Essential Teat/Nipple for Slim/Regular Neck Bottle, 3m+ Medium Flow Nipple",
+      "sp": 120,
+      "mrp": 180,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "LuvLap Adore Breast Pump with 2 Phase Pumping, with Rechargeable Battery  - Electric",
+      "sp": 3399,
+      "mrp": 3995,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "LuvLap Anti-Colic Essential Teat/Nipple for Slim/Regular Neck Bottle, 9m+ Variable Flow Nipple",
+      "sp": 120,
+      "mrp": 180,
+      "unit": "",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "LuvLap Anti-Colic Natura Flo Teat/for Wide Neck Bottle, 4pcs, 9m+ Variable Flow Nipple",
+      "sp": 145,
+      "mrp": 220,
+      "unit": "4 pcs",
+      "brand": "LuvLap"
+    },
+    {
+      "name": "Post-It Magic Cubes 200 Sheets Pop-up, 4 Colors",
+      "sp": 143,
+      "mrp": 175,
+      "unit": "",
+      "brand": "Post-It"
+    },
+    {
+      "name": "Neel Plastic Transparent Stick File Folder Set-1 for A4 Paper Holder Storage Case Organizer",
+      "sp": 29,
+      "mrp": 399,
+      "unit": "",
+      "brand": "Neel"
+    },
+    {
+      "name": "Neel Polypropylene A4 Size Transparent White Button File | Transparent Document Organizer Folder |",
+      "sp": 39,
+      "mrp": 699,
+      "unit": "",
+      "brand": "Neel"
+    },
+    {
+      "name": "Post-It Color 12 Sheets Flags, 5 Colors",
+      "sp": 124,
+      "mrp": 160,
+      "unit": "",
+      "brand": "Post-It"
+    },
+    {
+      "name": "Ondesk Essentials Plastic 2D Ring Binder File",
+      "sp": 118,
+      "mrp": 175,
+      "unit": "",
+      "brand": "Ondesk"
+    },
+    {
+      "name": "Neel PVC Presentation Display Book File | Made of 1 mm Virgin PP Sheet |20-Bound Top",
+      "sp": 78,
+      "mrp": 699,
+      "unit": "",
+      "brand": "Neel"
+    },
+    {
+      "name": "J K INTERNATIONAL 5 Compartments Plastic Modular Drawer",
+      "sp": 677,
+      "mrp": 2999,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "J K INTERNATIONAL 6 Compartments Plastic Modular Drawer",
+      "sp": 760,
+      "mrp": 2999,
+      "unit": "",
+      "brand": "J"
+    },
+    {
+      "name": "Scotch Super Sticky Notes, 2X Sticking Power, 90 Sheets 3 in x 3 in, 5 Pads/Pack, 90 Sheets/Pad (neon Colour), 5 Colors",
+      "sp": 188,
+      "mrp": 399,
+      "unit": "",
+      "brand": "Scotch"
+    },
+    {
+      "name": "Yogabar 10g Protein Bar Blueberry Blast, Gluten-Free, Healthy Protein Snacks Protein Bars",
+      "sp": 47,
+      "mrp": 65,
+      "unit": "50 g, Blueberry Blast",
+      "brand": "Yogabar"
+    },
+    {
+      "name": "Yogabar 12g chocolate Protein Bar, Gluten-Free, Healthy Snacks (Pack of 1) Protein Bars",
+      "sp": 56,
+      "mrp": 105,
+      "unit": "50 g, Chocolate",
+      "brand": "Yogabar"
+    },
+    {
+      "name": "Dettol First Aid, Surface Disinfection and Personal Hygiene Antiseptic Liquid",
+      "sp": 143,
+      "mrp": 159,
+      "unit": "250.0 ml x Pack of 1",
+      "brand": "Dettol"
+    },
+    {
+      "name": "B-FIT Regular Pant Style Adult Diapers - M",
+      "sp": 219,
+      "mrp": 535,
+      "unit": "",
+      "brand": "B-FIT"
+    },
+    {
+      "name": "B-FIT Regular Pant Style Adult Diapers - L",
+      "sp": 239,
+      "mrp": 585,
+      "unit": "",
+      "brand": "B-FIT"
+    },
+    {
+      "name": "Savlon Antiseptic Liquid For Cuts Bathing Laundry Disinfection Value Pack 1000ml Antiseptic Liquid",
+      "sp": 311,
+      "mrp": 374,
+      "unit": "1000.0 ml x Pack of 1",
+      "brand": "Savlon"
+    },
+    {
+      "name": "Dettol Antiseptic Liquid for First Aid, Surface Disinfection and Personal Hygiene, Antiseptic Liquid",
+      "sp": 489,
+      "mrp": 537,
+      "unit": "1300.0 ml x Pack of 1",
+      "brand": "Dettol"
+    },
+    {
+      "name": "Savlon Antiseptic Disinfectant Liquid, For First Aid, Personal Hygiene & Home Hygiene Antiseptic Liquid",
+      "sp": 124,
+      "mrp": 210,
+      "unit": "500.0 ml x Pack of 1",
+      "brand": "Savlon"
+    },
+    {
+      "name": "KareIn Classic Pant Style Adult Diapers - XL",
+      "sp": 260,
+      "mrp": 560,
+      "unit": "",
+      "brand": "KareIn"
+    },
+    {
+      "name": "B-FIT Regular Pant Style Adult Diapers - XL",
+      "sp": 239,
+      "mrp": 635,
+      "unit": "",
+      "brand": "B-FIT"
+    },
+    {
+      "name": "AASHIRVAAD Shudh Chakki Atta",
+      "sp": 454,
+      "mrp": 514,
+      "unit": "10 kg",
+      "brand": "AASHIRVAAD"
+    },
+    {
+      "name": "Agro Fresh Whole Wheat Atta",
+      "sp": 212,
+      "mrp": 270,
+      "unit": "5 kg",
+      "brand": "Agro"
+    },
+    {
+      "name": "Zeeba Everyday, Perfect for Everyday Cooking (Cooked length upto 14mm*) Basmati Rice",
+      "sp": 339,
+      "mrp": 570,
+      "unit": "5 kg",
+      "brand": "Zeeba"
+    },
+    {
+      "name": "FORTUNE Xpert Pro Immunity Blended Oil Pouch",
+      "sp": 160,
+      "mrp": 190,
+      "unit": "850 g",
+      "brand": "FORTUNE"
+    },
+    {
+      "name": "FORTUNE Xpert Pro Sugar Conscious Blended Oil Pouch",
+      "sp": 170,
+      "mrp": 220,
+      "unit": "1 L",
+      "brand": "FORTUNE"
+    },
+    {
+      "name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "sp": 166,
+      "mrp": 215,
+      "unit": "800 g",
+      "brand": "FORTUNE"
+    },
+    {
+      "name": "Saffola Active Rice Bran & Soyabean Refined Cooking Oil Rich in Omega 3 & Oryzanol Blended Oil Pouch",
+      "sp": 162,
+      "mrp": 208,
+      "unit": "930 ml",
+      "brand": "Saffola"
+    },
+    {
+      "name": "Tata Simply Better Cold Pressed, Pure and Unrefined Mustard Oil PET Bottle",
+      "sp": 251,
+      "mrp": 325,
+      "unit": "1 L",
+      "brand": "Tata"
+    },
+    {
+      "name": "DHAMPURE Sulphurless Sugar",
+      "sp": 289,
+      "mrp": 315,
+      "unit": "5 kg Pouch",
+      "brand": "DHAMPURE"
+    },
+    {
+      "name": "DHAMPURE Mineral Sugar",
+      "sp": 71,
+      "mrp": 99,
+      "unit": "1 kg Pouch",
+      "brand": "DHAMPURE"
+    },
+    {
+      "name": "Classic by Flipkart Grocery sugar Sugar",
+      "sp": 60,
+      "mrp": 100,
+      "unit": "1 kg Pouch",
+      "brand": "Classic"
+    },
+    {
+      "name": "Nanihaal Mishri Dana Sugar",
+      "sp": 22,
+      "mrp": 30,
+      "unit": "100 g Pouch",
+      "brand": "Nanihaal"
+    },
+    {
+      "name": "MAI RASOI Diamond Mishri Dana / Crystal Sugar",
+      "sp": 17,
+      "mrp": 27,
+      "unit": "100 g Pouch",
+      "brand": "MAI"
+    },
+    {
+      "name": "Natureland Organics Sugar",
+      "sp": 109,
+      "mrp": 150,
+      "unit": "1 kg Pouch",
+      "brand": "Natureland"
+    },
+    {
+      "name": "Tata Salt Himalayan Rock Pink Salt, With Natural Trace Minerals, Low Sodium, Premium Himalayan Pink Salt",
+      "sp": 109,
+      "mrp": 120,
+      "unit": "1 kg",
+      "brand": "Tata"
+    },
+    {
+      "name": "Catch Sprinklers Iodized Salt",
+      "sp": 27,
+      "mrp": 30,
+      "unit": "100 g",
+      "brand": "Catch"
+    },
+    {
+      "name": "Tata Salt Pink Salt, for Everyday Cooking Himalayan Pink Salt",
+      "sp": 76,
+      "mrp": 80,
+      "unit": "1 kg",
+      "brand": "Tata"
+    },
+    {
+      "name": "LIFEBUOY Ice Bath Soap Bar with Menthol & Cool Sense Actives|For Rapid Heat Relief|125gX5",
+      "sp": 164,
+      "mrp": 272,
+      "unit": "5x125 g",
+      "brand": "LIFEBUOY"
+    },
+    {
+      "name": "Pilgrim Australian Tea Tree Hair Shampoo for Dandruff|Itchy Scalp|Men and Women",
+      "sp": 279,
+      "mrp": 345,
+      "unit": "200 ml",
+      "brand": "Pilgrim"
+    },
+    {
+      "name": "HEAD & SHOULDERS Anti Dandruff Shampoo Cool Menthol For Men & Women",
+      "sp": 252,
+      "mrp": 395,
+      "unit": "340 ml",
+      "brand": "HEAD"
+    },
+    {
+      "name": "Clinic Plus Strong & Long Health shampoo",
+      "sp": 127,
+      "mrp": 140,
+      "unit": "175 ml",
+      "brand": "Clinic"
+    },
+    {
+      "name": "HEAD & SHOULDERS Anti- Hairfall Anti-Dandruff Shampoo,",
+      "sp": 674,
+      "mrp": 1414,
+      "unit": "1 L",
+      "brand": "HEAD"
+    },
+    {
+      "name": "HEAD & SHOULDERS Anti-Hairfall Shampoo",
+      "sp": 245,
+      "mrp": 395,
+      "unit": "340 ml",
+      "brand": "HEAD"
+    },
+    {
+      "name": "Dabur Almond Intense Repair Shampoo",
+      "sp": 299,
+      "mrp": 999,
+      "unit": "1 L",
+      "brand": "Dabur"
+    },
+    {
+      "name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "sp": 22,
+      "mrp": 30,
+      "unit": "70 g",
+      "brand": "BRITANNIA"
+    },
+    {
+      "name": "ORION Choco Pie Cream Filled Biscuit",
+      "sp": 22,
+      "mrp": 45,
+      "unit": "50 g",
+      "brand": "ORION"
+    },
+    {
+      "name": "BRITANNIA Nice Time Coconut Cookies Biscuit",
+      "sp": 19,
+      "mrp": 25,
+      "unit": "138 g",
+      "brand": "BRITANNIA"
+    },
+    {
+      "name": "Lay's Classic Salted Chips",
+      "sp": 19,
+      "mrp": 20,
+      "unit": "40 g",
+      "brand": "Lay's"
+    },
+    {
+      "name": "Bingo Original Style Salt Sprinkled Chips",
+      "sp": 131,
+      "mrp": 150,
+      "unit": "3x85 g",
+      "brand": "Bingo"
+    },
+    {
+      "name": "Society Elaichi-Adrak Tea Pouch",
+      "sp": 210,
+      "mrp": 250,
+      "unit": "250 g Pouch",
+      "brand": "Society"
+    },
+    {
+      "name": "CITYGOLD Pyari Chai Tea Pouch",
+      "sp": 233,
+      "mrp": 240,
+      "unit": "1 kg Pouch",
+      "brand": "CITYGOLD"
+    },
+    {
+      "name": "Amul Gold Milk",
+      "sp": 35,
+      "mrp": null,
+      "unit": "500 ml",
+      "brand": "Amul"
+    },
+    {
+      "name": "Amul Shakti Milk",
+      "sp": 32,
+      "mrp": null,
+      "unit": "500 ml",
+      "brand": "Amul"
+    },
+    {
+      "name": "Amul Moti Toned Milk",
+      "sp": 32,
+      "mrp": 33,
+      "unit": "450 ml",
+      "brand": "Amul"
+    },
+    {
+      "name": "Sudha Gold Milk",
+      "sp": 34,
+      "mrp": null,
+      "unit": "500 ml",
+      "brand": "Sudha"
+    },
+    {
+      "name": "Sudha Healthy Toned Milk",
+      "sp": 28,
+      "mrp": null,
+      "unit": "500 ml",
+      "brand": "Sudha"
+    },
+    {
+      "name": "Sudha Shakti Milk",
+      "sp": 31,
+      "mrp": null,
+      "unit": "500 ml",
+      "brand": "Sudha"
+    },
+    {
+      "name": "Amul Taaza Toned Milk",
+      "sp": 17,
+      "mrp": null,
+      "unit": "200 ml",
+      "brand": "Amul"
+    },
+    {
+      "name": "Gowardhan Pure Cow Ghee Box",
+      "sp": 765,
+      "mrp": 810,
+      "unit": "1 L Box",
+      "brand": "Gowardhan"
+    },
+    {
+      "name": "Annapurna Cow Ghee Ghee Plastic Bottle",
+      "sp": 687,
+      "mrp": 790,
+      "unit": "1 L Plastic Bottle",
+      "brand": "Annapurna"
+    },
+    {
+      "name": "Ching's Secret Desi Chinese Schezwan Fried Rice Masala, 20g, Authentic Schezwan Flavour,",
+      "sp": 8,
+      "mrp": 10,
+      "unit": "20 g",
+      "brand": "Ching's"
+    },
+    {
+      "name": "Maggi Veg Atta now with Masala Taste, Made with ONLY ATTA flour Instant Noodles Vegetarian",
+      "sp": 29,
+      "mrp": 30,
+      "unit": "72.5 g",
+      "brand": "Maggi"
+    },
+    {
+      "name": "Real Fruit Juice Mixed",
+      "sp": 19,
+      "mrp": 20,
+      "unit": "180 ml",
+      "brand": "Real"
+    },
+    {
+      "name": "Pran Litchi Fruit Drink",
+      "sp": 9,
+      "mrp": 10,
+      "unit": "125 ml",
+      "brand": "Pran"
+    },
+    {
+      "name": "Bisleri Mineral Water",
+      "sp": 19,
+      "mrp": 20,
+      "unit": "1 L",
+      "brand": "Bisleri"
+    },
+    {
+      "name": "Aquafina Treated Water",
+      "sp": 17,
+      "mrp": 18,
+      "unit": "",
+      "brand": "Aquafina"
+    },
+    {
+      "name": "Storia Tender Coconut Water -No Added Sugar, Low Calorie",
+      "sp": 98,
+      "mrp": 178,
+      "unit": "1 L",
+      "brand": "Storia"
+    },
+    {
+      "name": "BUMTUM Superlock Diapers Pants with Superlock Gel Technology |Coconut Extracts - XL",
+      "sp": 483,
+      "mrp": 999,
+      "unit": "",
+      "brand": "BUMTUM"
+    },
+    {
+      "name": "Pampers Complete Skin Comfort Pants, Anti-rash blanket, Lotion with VitaminE & Aloe Vera - New Born",
+      "sp": 800,
+      "mrp": 1159,
+      "unit": "",
+      "brand": "Pampers"
+    },
+    {
+      "name": "Pampers Premium Care, 360 Cottony Softness__S - M",
+      "sp": 92,
+      "mrp": null,
+      "unit": "",
+      "brand": "Pampers"
+    },
+    {
+      "name": "Cuddles - Super Pants Baby Diaper 2X Softer Super Dry Comfort Quick Max Absorption Upto 12 Hrs - New Born",
+      "sp": 182,
+      "mrp": 421,
+      "unit": "",
+      "brand": "Cuddles"
+    },
+    {
+      "name": "Morisons Baby Dreams Cottony Soft Diaper Pants - Medium - M",
+      "sp": 455,
+      "mrp": 983,
+      "unit": "",
+      "brand": "Morisons"
+    },
+    {
+      "name": "Cuddles - Super Pants Baby Diaper 2X Softer Super Dry Comfort Quick Max Absorption Upto 12 Hrs - L",
+      "sp": 488,
+      "mrp": 1031,
+      "unit": "",
+      "brand": "Cuddles"
+    }
+  ]
+}

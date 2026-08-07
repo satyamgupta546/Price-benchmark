@@ -1,0 +1,4107 @@
+{
+  "pincode": "834008",
+  "total_matched": 455,
+  "status_counts": {
+    "NA": 3179,
+    "PARTIAL MATCH": 337,
+    "SEMI COMPLETE MATCH": 90,
+    "COMPLETE MATCH": 28
+  },
+  "matches": [
+    {
+      "item_code": "1279",
+      "am_name": "Catch Black Salt Powder - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.415
+    },
+    {
+      "item_code": "2464",
+      "am_name": "Bru Pure Coffee Powder 25g",
+      "fk_name": "BRU Gold Edition 100% Pure Coffee Instant Coffee",
+      "fk_sp": 81,
+      "fk_mrp": 99,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.521
+    },
+    {
+      "item_code": "4732",
+      "am_name": "Himalaya Neem Face Wash | 200ml | Buy 1 Get 1 Free",
+      "fk_name": "HIMALAYA Gentle Baby Wash with chickpea",
+      "fk_sp": 230,
+      "fk_mrp": 350,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.518
+    },
+    {
+      "item_code": "3362",
+      "am_name": "Pedigree Daily Food For Puppy Chicken & Rice In Gravy | 70g | Pack of 1",
+      "fk_name": "PEDIGREE Gravy Chicken, Liver Chunks 70 g Wet Adult Dog Food",
+      "fk_sp": 46,
+      "fk_mrp": 50,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.597
+    },
+    {
+      "item_code": "71612",
+      "am_name": "Britannia 50 50 Potazos Spicy Flavoured Biscuits 71.5g",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.482
+    },
+    {
+      "item_code": "102969",
+      "am_name": "Masterchow Hot & Spicy Schezwan Chutney | 250g | Pack of 1",
+      "fk_name": "Delish by Flipkart Schezwan Hot and Spicy Sauce Chutney Paste",
+      "fk_sp": 42,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.602
+    },
+    {
+      "item_code": "71600",
+      "am_name": "Tata Sampann Chana Dal Fine Besan - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.454
+    },
+    {
+      "item_code": "935",
+      "am_name": "Amul Spray Instant Milk Food 1 Kg pouch",
+      "fk_name": "Amulspray Infant Food",
+      "fk_sp": 475,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "1443",
+      "am_name": "Dabur Gulabari Premium Rose Water | 400ml | Pack of 1",
+      "fk_name": "Dabur Gulabari Premium Rose Water | No Paraben | Cleanses, Hydrates & Moisturises Skin Women",
+      "fk_sp": 91,
+      "fk_mrp": 135,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.597
+    },
+    {
+      "item_code": "69702",
+      "am_name": "Catch Sprinkler Table Salt - 100g - Can",
+      "fk_name": "Catch Sprinklers Iodized Salt",
+      "fk_sp": 27,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.625
+    },
+    {
+      "item_code": "1104",
+      "am_name": "Britannia Nutri Choice 5 Grain | 200g | Pack of 1",
+      "fk_name": "Britannia The Laughing Cow 10 cubes Processed cheese",
+      "fk_sp": 112,
+      "fk_mrp": 140,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.433
+    },
+    {
+      "item_code": "1051",
+      "am_name": "Britannia 50-50 Timepass Salted Biscuits | 142g | Pack of 1",
+      "fk_name": "BRITANNIA Nice Time Coconut Cookies Biscuit",
+      "fk_sp": 19,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.592
+    },
+    {
+      "item_code": "33036",
+      "am_name": "Weikfield Mango Falooda Mix | 200g | Pack of 1",
+      "fk_name": "WeiKFiELD Falooda Strawberry Mix Flavour|Rich, Smooth & Creamy|Delicious & Authentic Taste 200 g",
+      "fk_sp": 39,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.481
+    },
+    {
+      "item_code": "9948",
+      "am_name": "Gits Gulab Jamun Mix 500g",
+      "fk_name": "Gits Gulab Jamun Instant Dessert Mix 500 g",
+      "fk_sp": 173,
+      "fk_mrp": 217,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.746
+    },
+    {
+      "item_code": "11211",
+      "am_name": "Lizol Jasmine Surface Cleaner 500ml",
+      "fk_name": "Lizol Kitchen Power Liquid Spray Kitchen Cleaner",
+      "fk_sp": 174,
+      "fk_mrp": 225,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.506
+    },
+    {
+      "item_code": "4972",
+      "am_name": "Himani Cool Hair Oil Navratna 90ml",
+      "fk_name": "Navratna Cool Ayurvedic Hair Oil",
+      "fk_sp": 77,
+      "fk_mrp": 89,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.697
+    },
+    {
+      "item_code": "2541",
+      "am_name": "Everest Turmeric Powder - 100g",
+      "fk_name": "EVEREST Meat Masala",
+      "fk_sp": 78,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.468
+    },
+    {
+      "item_code": "1343",
+      "am_name": "Coca Cola | 300ml | Pack of 1",
+      "fk_name": "Coca-Cola Original Taste Soft Drink Can",
+      "fk_sp": 39,
+      "fk_mrp": 40,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.469
+    },
+    {
+      "item_code": "96346",
+      "am_name": "Joy Skin Fruits Brightening Face Wash | 100ml | Buy 1 Get 1 Free",
+      "fk_name": "Joy Skin Fruits Super Soft Moisturizer (Berries + Active Vitamin E)",
+      "fk_sp": 269,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.407
+    },
+    {
+      "item_code": "873",
+      "am_name": "Amul Pure Ghee Refill Pack - 1L",
+      "fk_name": "Amul Cow Ghee, Tetrapack",
+      "fk_sp": 644,
+      "fk_mrp": 705,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.538
+    },
+    {
+      "item_code": "22658",
+      "am_name": "Joy Pure Aloe Multi Benefit Skin Cream 200ml",
+      "fk_name": "Joy Skin Fruits Super Soft Moisturizer (Berries + Active Vitamin E)",
+      "fk_sp": 269,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.449
+    },
+    {
+      "item_code": "27816",
+      "am_name": "India Gate Basmati Rice Feast Rozzana 1 Kg",
+      "fk_name": "INDIA GATE Flavourful & Fine Dubar | Long & Slender Grains | Naturally Aged Basmati Rice (Long Grain, Polished)",
+      "fk_sp": 127,
+      "fk_mrp": 159,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.451
+    },
+    {
+      "item_code": "11207",
+      "am_name": "Harpic Lemon Bathroom Cleaner | 500ml | Pack of 1",
+      "fk_name": "Harpic Disinfectant Bathroom Cleaner Liquid Lemon",
+      "fk_sp": 111,
+      "fk_mrp": 120,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.638
+    },
+    {
+      "item_code": "938",
+      "am_name": "Amul Taaza Toned Milk - 200ml",
+      "fk_name": "Amul Taaza Toned Milk",
+      "fk_sp": 17,
+      "fk_mrp": null,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.875
+    },
+    {
+      "item_code": "30265",
+      "am_name": "Surf Excel Matic Top Load Liquid Detergent Pouch | 2L | Pack of 1",
+      "fk_name": "Surf excel Matic Top Load | Liquid Detergent | 2L Refill pouch | Remove Stains Fresh Liquid Detergent",
+      "fk_sp": 302,
+      "fk_mrp": 338,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.654
+    },
+    {
+      "item_code": "97083",
+      "am_name": "Schweppes Original Ginger Ale | 300ml | Pack of 1",
+      "fk_name": "Schweppes Original Ginger Ale Flavoured Soft Drink Can",
+      "fk_sp": 58,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.586
+    },
+    {
+      "item_code": "16621",
+      "am_name": "Tata Sampann Unpolished Kala Chana - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.469
+    },
+    {
+      "item_code": "4939",
+      "am_name": "Real Mixed Fruit Power | 1 Ltr | Pack of 1",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.452
+    },
+    {
+      "item_code": "15771",
+      "am_name": "Nivea Men Fresh Active Long Lasting Deo 150ml",
+      "fk_name": "Nivea Men Fresh Ocean, Antibacterial 48h Protection, Long Lasting, Fresh Ocean Extracts Deodorant Spray  -  For Men",
+      "fk_sp": 203,
+      "fk_mrp": 299,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.497
+    },
+    {
+      "item_code": "4115",
+      "am_name": "Godrej No. 1 Sandal Turmeric Soap | 100g x 5 Pcs | Pack of 5",
+      "fk_name": "Godrej Yummiez Chicken Nuggets 500g",
+      "fk_sp": 328,
+      "fk_mrp": 346,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "102533",
+      "am_name": "Ghadi Smart Matic Detergent | 1kg | Pack of 1",
+      "fk_name": "Ghadi Hand Wash Detergent Powder (Advanced)",
+      "fk_sp": 67,
+      "fk_mrp": 74,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.537
+    },
+    {
+      "item_code": "18143",
+      "am_name": "Ganesh Whole Wheat Chakki Atta - 5Kg",
+      "fk_name": "Agro Fresh Whole Wheat Atta",
+      "fk_sp": 212,
+      "fk_mrp": 270,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.721
+    },
+    {
+      "item_code": "1326",
+      "am_name": "Clean & Clear Foaming Face Wash | 100ml | Pack of 1",
+      "fk_name": "The Face Shop Rice Water Bright Foaming Cleanser,  for glowing skin & even skin tone Face Wash",
+      "fk_sp": 539,
+      "fk_mrp": 625,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "1206",
+      "am_name": "Engage Tease Deodorant for Women | 150ml | Pack of 1",
+      "fk_name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "fk_sp": 128,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.532
+    },
+    {
+      "item_code": "4830",
+      "am_name": "Britannia Good Day Butter Cookies | 200g | Pack of 1",
+      "fk_name": "Britannia The Laughing Cow 10 cubes Processed cheese",
+      "fk_sp": 112,
+      "fk_mrp": 140,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "2494",
+      "am_name": "Tata Tea Elaichi Chai 250g | Pack of 1",
+      "fk_name": "Society Elaichi-Adrak Tea Pouch",
+      "fk_sp": 210,
+      "fk_mrp": 250,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.537
+    },
+    {
+      "item_code": "43036",
+      "am_name": "Organic Tattva Organic Rajma Chitra 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.486
+    },
+    {
+      "item_code": "9944",
+      "am_name": "Navratna Ayurvedic Oil Extra Thanda 90ml",
+      "fk_name": "Navratna Cool Ayurvedic Hair Oil",
+      "fk_sp": 77,
+      "fk_mrp": 89,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "1575",
+      "am_name": "Dove Intense Repair Shampoo 180ml",
+      "fk_name": "DOVE Intense Repair Conditioner",
+      "fk_sp": 179,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.625
+    },
+    {
+      "item_code": "11712",
+      "am_name": "Vaseline Intensive Care Deep Moisture 200ml",
+      "fk_name": "Vaseline Gluta Hya Dewy Radiance",
+      "fk_sp": 224,
+      "fk_mrp": 350,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "1306",
+      "am_name": "Catch Red Chilli Powder - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "2654",
+      "am_name": "Tata Sampann Toor Dal Unpolished Pouch - 1kg",
+      "fk_name": "Tata Sampann Yellow Toor/Arhar Dal (Split)",
+      "fk_sp": 167,
+      "fk_mrp": 244,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.585
+    },
+    {
+      "item_code": "104218",
+      "am_name": "CRAX Cheese Balls - 70g",
+      "fk_name": "CRAX Cheese Balls Puff Snacks Chips",
+      "fk_sp": 27,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.607
+    },
+    {
+      "item_code": "68048",
+      "am_name": "Everest Cumin Powder - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.511
+    },
+    {
+      "item_code": "100914",
+      "am_name": "Sunfeast Dark Fantasy Choco Fills | 230g | Pack of 1",
+      "fk_name": "Sunfeast Dark Fantasy Yumfills Cookie Cake Biscuit",
+      "fk_sp": 77,
+      "fk_mrp": 170,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.531
+    },
+    {
+      "item_code": "70387",
+      "am_name": "Organic Tattva Organic Kabuli Chana - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.571
+    },
+    {
+      "item_code": "115",
+      "am_name": "Ching\u2019s Secret Hot Garlic Noodles | 240g | Pack of 1",
+      "fk_name": "Ching's Secret Hot Garlic Flavour, Desi Chinese Flavour Instant Noodles Vegetarian",
+      "fk_sp": 65,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.527
+    },
+    {
+      "item_code": "14440",
+      "am_name": "On1y Pasta Seasoning - 30g",
+      "fk_name": "On1y Pasta Mix",
+      "fk_sp": 84,
+      "fk_mrp": 99,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.579
+    },
+    {
+      "item_code": "97276",
+      "am_name": "Pou Chong Kim Green Chilli Sauce | 600g | Pack of 1",
+      "fk_name": "Flipkart Supermart Red, Green Chilli, Soya Sauce",
+      "fk_sp": 80,
+      "fk_mrp": 205,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.43
+    },
+    {
+      "item_code": "69140",
+      "am_name": "Wild Stone Edge Perfume Eau de Parfum 50ml",
+      "fk_name": "Wild Stone Edge Perfume Eau de Parfum Eau de Parfum  -  50 ml",
+      "fk_sp": 250,
+      "fk_mrp": 499,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.808
+    },
+    {
+      "item_code": "1308",
+      "am_name": "Catch Red Chilli Powder - 100g",
+      "fk_name": "Catch Sabzi Masala Powder",
+      "fk_sp": 52,
+      "fk_mrp": 78,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.566
+    },
+    {
+      "item_code": "12882",
+      "am_name": "Daawat Biryani Basmati Rice 1 Kg",
+      "fk_name": "Daawat Gobindo Bhog Gobindobhog Rice",
+      "fk_sp": 227,
+      "fk_mrp": 275,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.441
+    },
+    {
+      "item_code": "4246",
+      "am_name": "Harpic Floral Bathroom Cleaner | 500ml | Pack of 1",
+      "fk_name": "Harpic Disinfectant Bathroom Cleaner Floral",
+      "fk_sp": 111,
+      "fk_mrp": 120,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.674
+    },
+    {
+      "item_code": "103107",
+      "am_name": "Glow & Lovely Re-new Bright Multivitamin Serum in Cream Vita B,C,E | 25g | Pack of 1",
+      "fk_name": "glow and lovely Renew Bright Multivitamin Serum in Cream",
+      "fk_sp": 64,
+      "fk_mrp": 70,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.761
+    },
+    {
+      "item_code": "70881",
+      "am_name": "Ponds Magic Freshness Talcum Powder | 80g | Pack of 1",
+      "fk_name": "Pond`s Dreamflower Fragrant Talc",
+      "fk_sp": 93,
+      "fk_mrp": 102,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.42
+    },
+    {
+      "item_code": "13232",
+      "am_name": "Britannia Nutri Choice Digestive High Fibre 192g",
+      "fk_name": "Britannia The Laughing Cow 10 cubes Processed cheese",
+      "fk_sp": 112,
+      "fk_mrp": 140,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "10279",
+      "am_name": "Patanjali Special Chyawanprash | 1Kg | Pack of 1",
+      "fk_name": "PATANJALI Chyawanprash 1kg, Immunity Booster, 35+ Herbs, Builds Stamina, No Sugar Added",
+      "fk_sp": 220,
+      "fk_mrp": 262,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.508
+    },
+    {
+      "item_code": "66348",
+      "am_name": "Parle G Original Glucose Biscuit | 800g | Pack of 1",
+      "fk_name": "PARLE G Original Gluco Biscuits Plain Biscuit",
+      "fk_sp": 80,
+      "fk_mrp": 100,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.674
+    },
+    {
+      "item_code": "4934",
+      "am_name": "Real Fruit Juice Pomegranate | 1 Ltr | Pack of 1",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.588
+    },
+    {
+      "item_code": "9219",
+      "am_name": "Hair & Care Non Sticky Hair Oil For Damage Repair Aloe Vera Olive Oil & Green Tea 200ml",
+      "fk_name": "BARE ANATOMY Rosemary Water Spray for Hair Growth, Thickness & Hairfall Control, 100% Natural Hair Styler",
+      "fk_sp": 322,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.448
+    },
+    {
+      "item_code": "70388",
+      "am_name": "Organic Tattva Organic Mix Dal - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.585
+    },
+    {
+      "item_code": "10816",
+      "am_name": "Colgate Vedshakti Toothpaste 140g",
+      "fk_name": "Colgate Strong Teeth and Anticavity Toothpaste",
+      "fk_sp": 79,
+      "fk_mrp": 99,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.481
+    },
+    {
+      "item_code": "71025",
+      "am_name": "Organic Tattva Organic Whole Wheat Flour - 5Kg",
+      "fk_name": "PATANJALI Chakki Atta, Whole Wheat with Bran, Genhu ka Atta, Organic Flour",
+      "fk_sp": 243,
+      "fk_mrp": 265,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.539
+    },
+    {
+      "item_code": "926",
+      "am_name": "Amul Pure Ghee Tin - 1 Ltr",
+      "fk_name": "Amul Cow Ghee, Tetrapack",
+      "fk_sp": 644,
+      "fk_mrp": 705,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.553
+    },
+    {
+      "item_code": "103971",
+      "am_name": "WickedGud Schezwan Instant Noodles Family Pack | 240g | Pack of 1",
+      "fk_name": "Ching's Secret Schezwan, Desi Chinese Noodles Instant Noodles Vegetarian",
+      "fk_sp": 65,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.515
+    },
+    {
+      "item_code": "9878",
+      "am_name": "Shree Bhajan Whole Wheat Atta - 5Kg",
+      "fk_name": "Agro Fresh Whole Wheat Atta",
+      "fk_sp": 212,
+      "fk_mrp": 270,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.7
+    },
+    {
+      "item_code": "14723",
+      "am_name": "Mamaearth Ubtan Face Wash 100ml",
+      "fk_name": "Mamaearth Rice Water & Niacinamide  Face Wash",
+      "fk_sp": 240,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.603
+    },
+    {
+      "item_code": "103403",
+      "am_name": "Parachute Advansed Gold Keratin Coconut Hair Oil | 300ml | Pack of 1",
+      "fk_name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "fk_sp": 171,
+      "fk_mrp": 378,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.677
+    },
+    {
+      "item_code": "67129",
+      "am_name": "Ponds Bright Beauty Vitamin B3 Face Wash 200g",
+      "fk_name": "POND's Bright Beauty With Niacinamide Vitamin B3 For Anti Dullness Face Wash",
+      "fk_sp": 283,
+      "fk_mrp": 475,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.678
+    },
+    {
+      "item_code": "3361",
+      "am_name": "Pedigree Daily Food For Adult Dogs Chicken & Liver Chunks | 70g | Pack of 1",
+      "fk_name": "PEDIGREE Gravy Chicken, Liver Chunks 70 g Wet Adult Dog Food",
+      "fk_sp": 46,
+      "fk_mrp": 50,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.766
+    },
+    {
+      "item_code": "10530",
+      "am_name": "Wild Stone Ultra Sensual Body Perfume | 50ml | Pack of 1",
+      "fk_name": "Wild Stone Edge Perfume Eau de Parfum Eau de Parfum  -  50 ml",
+      "fk_sp": 250,
+      "fk_mrp": 499,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.514
+    },
+    {
+      "item_code": "12906",
+      "am_name": "Nivea Men Deep Impact Freshness Roll On Deodorant 50ml",
+      "fk_name": "Nivea Men Fresh Active, Antibacterial 72h Protection, 0% Alcohol, Fresh Ocean Extracts Deodorant Roll-on  -  For Men",
+      "fk_sp": 149,
+      "fk_mrp": 249,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.519
+    },
+    {
+      "item_code": "91240",
+      "am_name": "Mamaearth Multani Mitti Face Wash 100 ml",
+      "fk_name": "Mamaearth Rice Water & Niacinamide  Face Wash",
+      "fk_sp": 240,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.561
+    },
+    {
+      "item_code": "97913",
+      "am_name": "D'lecta Cheese Cubes - 200g",
+      "fk_name": "D'lecta 100% Mozzarella cheese",
+      "fk_sp": 109,
+      "fk_mrp": 155,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.63
+    },
+    {
+      "item_code": "33004",
+      "am_name": "Ponds Dream Flower Fragant Talcum Powder 80g",
+      "fk_name": "Pond`s Dreamflower Fragrant Talc",
+      "fk_sp": 93,
+      "fk_mrp": 102,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.789
+    },
+    {
+      "item_code": "886",
+      "am_name": "Amul Homogenised Standardised Milk - 1Ltr",
+      "fk_name": "Amul Masti Spiced Buttermilk",
+      "fk_sp": 70,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.507
+    },
+    {
+      "item_code": "27354",
+      "am_name": "Parachute Coconut Oil Bottle | 300ml | Pack of 1",
+      "fk_name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "fk_sp": 171,
+      "fk_mrp": 378,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.513
+    },
+    {
+      "item_code": "16337",
+      "am_name": "Lays Wafer Style Sundried Chilli Flavour Potato Chips 40g",
+      "fk_name": "Lay's Classic Salted Chips",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.41
+    },
+    {
+      "item_code": "79079",
+      "am_name": "Storia 100% Tender Coconut Water | 1 Ltr | Pack of 1",
+      "fk_name": "Storia Tender Coconut Water -No Added Sugar, Low Calorie",
+      "fk_sp": 98,
+      "fk_mrp": 178,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.653
+    },
+    {
+      "item_code": "43034",
+      "am_name": "Organic Tattva Moong Dal Yellow Split - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.583
+    },
+    {
+      "item_code": "12520",
+      "am_name": "Ariel Matic Top Load Detergent Powder 1Kg",
+      "fk_name": "Ariel Power Gel Top Load Removes 100 Stains in 1 Wash Fresh Liquid Detergent",
+      "fk_sp": 157,
+      "fk_mrp": 179,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.547
+    },
+    {
+      "item_code": "96576",
+      "am_name": "Knorr Green Chilli Sauce Pouch 200g",
+      "fk_name": "Knorr Green Chilli Sauce",
+      "fk_sp": 46,
+      "fk_mrp": 55,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.814
+    },
+    {
+      "item_code": "903",
+      "am_name": "Amul Masti Spiced Butter Milk - 200 ml",
+      "fk_name": "Amul Taaza Toned Milk",
+      "fk_sp": 17,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.456
+    },
+    {
+      "item_code": "95367",
+      "am_name": "Whole Grain Basmati Rice 1 Kg Loose",
+      "fk_name": "Heritage Platinum Basmati Rice (Long Grain)",
+      "fk_sp": 129,
+      "fk_mrp": 269,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.605
+    },
+    {
+      "item_code": "97409",
+      "am_name": "Colagate Total 12 Advance Health Toothpaste 150g With Toothbrush 1N",
+      "fk_name": "Colgate Strong Teeth and Anticavity Toothpaste",
+      "fk_sp": 79,
+      "fk_mrp": 99,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.513
+    },
+    {
+      "item_code": "3661",
+      "am_name": "Nivea Nourishing Bodymilk Hydra Liquid 24 Hr Long lasting & Intense Dry Skin 120ml",
+      "fk_name": "NIVEA Body Lotion for Very Dry Skin, Nourishing Body Milk with 2x Almond Oil, For Men & Women",
+      "fk_sp": 96,
+      "fk_mrp": 120,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.485
+    },
+    {
+      "item_code": "12131",
+      "am_name": "Dettol Sensitive Liquid Handwash 675ml",
+      "fk_name": "Dettol Germ Protection ph-Balanced Liquid Refill, Skincare Hand Wash Refill Pouch",
+      "fk_sp": 87,
+      "fk_mrp": 109,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.424
+    },
+    {
+      "item_code": "13631",
+      "am_name": "Tresemme Smooth & Shine Conditioner | 190ml | Pack of 1",
+      "fk_name": "TRESemme Keratin Smooth Shampoo",
+      "fk_sp": 146,
+      "fk_mrp": 172,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.55
+    },
+    {
+      "item_code": "4150",
+      "am_name": "Mysore Sandal Gold Soap 125g",
+      "fk_name": "MYSORE SANDAL Soap",
+      "fk_sp": 54,
+      "fk_mrp": 63,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.783
+    },
+    {
+      "item_code": "11215",
+      "am_name": "Harpic Floral Bathroom Cleaner | 1 Ltr | Pack of 1",
+      "fk_name": "Harpic Disinfectant | Bathroom Cleaner | Floral",
+      "fk_sp": 172,
+      "fk_mrp": 230,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.674
+    },
+    {
+      "item_code": "3911",
+      "am_name": "Tresemme Keratin Smooth Argan Oil Shampoo | 180ml | Pack of 1",
+      "fk_name": "TRESemme Keratin Smooth Shampoo",
+      "fk_sp": 146,
+      "fk_mrp": 172,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.705
+    },
+    {
+      "item_code": "37232",
+      "am_name": "Engage W1 Perfume Spray For Women 120ml",
+      "fk_name": "Engage W2 Perfume Body Spray  -  For Women",
+      "fk_sp": 148,
+      "fk_mrp": 240,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.857
+    },
+    {
+      "item_code": "73772",
+      "am_name": "Dhara Filtered Groundnut Oil - 1L",
+      "fk_name": "DHARA Kachi Ghani Mustard Oil Pouch",
+      "fk_sp": 177,
+      "fk_mrp": 250,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.424
+    },
+    {
+      "item_code": "14724",
+      "am_name": "Mamaearth Vitamin C Face Wash With Vitamin C & Turmeric For Skin Illumination 100ml",
+      "fk_name": "Mamaearth Rice Water & Niacinamide  Face Wash",
+      "fk_sp": 240,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.472
+    },
+    {
+      "item_code": "3849",
+      "am_name": "Pantene Hairfall Control Shampoo 180ml",
+      "fk_name": "PANTENE Hair Science Deep Repair Shampoo with Vitamin B",
+      "fk_sp": 175,
+      "fk_mrp": 214,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.473
+    },
+    {
+      "item_code": "927",
+      "am_name": "Amul Pure Ghee Tetra Pack - 1Ltr",
+      "fk_name": "Amul Cow Ghee, Tetrapack",
+      "fk_sp": 644,
+      "fk_mrp": 705,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.566
+    },
+    {
+      "item_code": "2428",
+      "am_name": "Gowardhan Pure Ghee Tetra Pack - 1L",
+      "fk_name": "Gowardhan Pure Cow Ghee Pouch",
+      "fk_sp": 765,
+      "fk_mrp": 810,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.742
+    },
+    {
+      "item_code": "71055",
+      "am_name": "Britannia Vita Marie Gold Biscuits | 150g | Pack of 1",
+      "fk_name": "BRITANNIA Nice Time Coconut Cookies Biscuit",
+      "fk_sp": 19,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.543
+    },
+    {
+      "item_code": "11947",
+      "am_name": "Patanjali Dant Kanti Natural Toothpaste | 100g | Pack of 1",
+      "fk_name": "PATANJALI Dant Kanti Medicated Oral Gel for Teeth Whitening Toothpaste",
+      "fk_sp": 39,
+      "fk_mrp": 53,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.597
+    },
+    {
+      "item_code": "2427",
+      "am_name": "Gowardhan Cow Ghee Jar - 1 L",
+      "fk_name": "Gowardhan Pure Cow Ghee Box",
+      "fk_sp": 765,
+      "fk_mrp": 810,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.792
+    },
+    {
+      "item_code": "9961",
+      "am_name": "Real Fruit Power Orange | 1 Ltr | Pack of 1",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "4251",
+      "am_name": "Lizol Citrus Surface Cleaner | 500ml | Pack of 1",
+      "fk_name": "Lizol Kitchen Power Liquid Spray Kitchen Cleaner",
+      "fk_sp": 174,
+      "fk_mrp": 225,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.413
+    },
+    {
+      "item_code": "70602",
+      "am_name": "Organic Tattva Organic Jaggery Powder - 500g",
+      "fk_name": "24 Mantra Organic Gur/Shakkar Powder Jaggery",
+      "fk_sp": 67,
+      "fk_mrp": 90,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.698
+    },
+    {
+      "item_code": "76418",
+      "am_name": "Too Yumm Potato Stix Aloo Chaat | 70g | Pack of 1",
+      "fk_name": "Too Yumm! Munchy Masala Karare, 60% Less Saturated Fats, No Palm Oil Chips",
+      "fk_sp": 14,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.417
+    },
+    {
+      "item_code": "13906",
+      "am_name": "Tata Sampann Unpolished Chana Dal - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "95794",
+      "am_name": "Lalbaba Gobindo Bhog Rice 1 Kg",
+      "fk_name": "Daawat Gobindo Bhog Gobindobhog Rice",
+      "fk_sp": 227,
+      "fk_mrp": 275,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.636
+    },
+    {
+      "item_code": "67616",
+      "am_name": "Colgate Max Fresh Toothpaste 81g",
+      "fk_name": "Colgate Total Advanced Health Antibacterial Toothpaste, Whole Mouth Health Toothpaste",
+      "fk_sp": 63,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.414
+    },
+    {
+      "item_code": "107",
+      "am_name": "Chings Secret Red Chilli Sauce | 200g | Pack of 1",
+      "fk_name": "Ching's Secret Green Chilli Sauce, Bold and Flavourful Sauce",
+      "fk_sp": 51,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.615
+    },
+    {
+      "item_code": "68662",
+      "am_name": "JK Jeera Cumin Seeds - 100g",
+      "fk_name": "zoff Cumin Seeds",
+      "fk_sp": 40,
+      "fk_mrp": 65,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.537
+    },
+    {
+      "item_code": "874",
+      "am_name": "Amul Cow Ghee Tin - 1Ltr",
+      "fk_name": "Amul Cow Ghee, Tetrapack",
+      "fk_sp": 644,
+      "fk_mrp": 705,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "2501",
+      "am_name": "Tata Tea Premium Tea | 500g | Pouch | Pack of 1",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "1216",
+      "am_name": "Engage M1 Perfume Spray for Men 120ml",
+      "fk_name": "Engage W2 Perfume Body Spray  -  For Women",
+      "fk_sp": 148,
+      "fk_mrp": 240,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "43529",
+      "am_name": "Sunfeast Dark Fantasy Vanilla Creme Biscuit 83g Pack Of 3 249g",
+      "fk_name": "Sunfeast Dark Fantasy Yumfills Cookie Cake Biscuit",
+      "fk_sp": 77,
+      "fk_mrp": 170,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.661
+    },
+    {
+      "item_code": "99703",
+      "am_name": "Baba Good Boy Steam Katarni Special Jeera Rice 5kg",
+      "fk_name": "Jeera Rice / Gobindbhog Steam Rice",
+      "fk_sp": 965,
+      "fk_mrp": 985,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.561
+    },
+    {
+      "item_code": "70383",
+      "am_name": "Organic Tattva Organic Masoor Malka Whole - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.632
+    },
+    {
+      "item_code": "3567",
+      "am_name": "Himalaya Baby Cream 200ml",
+      "fk_name": "HIMALAYA Nourishing Skin Cream",
+      "fk_sp": 161,
+      "fk_mrp": 245,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.509
+    },
+    {
+      "item_code": "1092",
+      "am_name": "Britannia Marie Gold Biscuits | 64 g | Pack of 1",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.51
+    },
+    {
+      "item_code": "70384",
+      "am_name": "Organic Tattva Organic Arhar Tur Dal - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.507
+    },
+    {
+      "item_code": "13107",
+      "am_name": "Himalaya Aloe Vera Face Gel 100ml",
+      "fk_name": "HIMALAYA Gentle Baby Shampoo Hibiscus & Chickpea",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.43
+    },
+    {
+      "item_code": "97910",
+      "am_name": "D'lecta Cheese Slices - 200g",
+      "fk_name": "D'lecta 100% Mozzarella cheese",
+      "fk_sp": 109,
+      "fk_mrp": 155,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.691
+    },
+    {
+      "item_code": "35727",
+      "am_name": "Surf Excel Matic Front Load Liquid Detergent Pouch | 2L | Pack of 1",
+      "fk_name": "Surf excel Matic Top Load | Liquid Detergent | 2L Refill pouch | Remove Stains Fresh Liquid Detergent",
+      "fk_sp": 302,
+      "fk_mrp": 338,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.633
+    },
+    {
+      "item_code": "68159",
+      "am_name": "Bambino Ginger Garlic Paste - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.737
+    },
+    {
+      "item_code": "28808",
+      "am_name": "Real Fruit Power Masala Mixed Fruit - 1L",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.613
+    },
+    {
+      "item_code": "12917",
+      "am_name": "Dove Hair Fall Rescue Conditioner | 175ml | Pack of 1",
+      "fk_name": "DOVE Dryness Care Conditioner",
+      "fk_sp": 178,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.538
+    },
+    {
+      "item_code": "13011",
+      "am_name": "Gits Rice Idli Mix | 500g | Pack of 1",
+      "fk_name": "Gits Gulab Jamun Instant Dessert Mix 500 g",
+      "fk_sp": 173,
+      "fk_mrp": 217,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "88674",
+      "am_name": "Frooti Mango Drink - 2L",
+      "fk_name": "FROOTI Pet drink",
+      "fk_sp": 74,
+      "fk_mrp": 110,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.703
+    },
+    {
+      "item_code": "17122",
+      "am_name": "Sensodyne Sensitivity & Gum Toothpaste 70g",
+      "fk_name": "SENSODYNE Fresh Gel , for daily sensitivity protection. Toothpaste",
+      "fk_sp": 111,
+      "fk_mrp": 135,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.68
+    },
+    {
+      "item_code": "1205",
+      "am_name": "Engage Spell Deodorant for Women 150ml",
+      "fk_name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "fk_sp": 128,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.586
+    },
+    {
+      "item_code": "30509",
+      "am_name": "Nissin Hot & Spicy Korean Chicken Flavour 80g",
+      "fk_name": "Nissin Geki Korean Ramen Spicy Cheese Flavoured Instant Noodles Instant Noodles Vegetarian",
+      "fk_sp": 47,
+      "fk_mrp": 55,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.496
+    },
+    {
+      "item_code": "4703",
+      "am_name": "Everyuth Naturals Walnut Scrub - 100g",
+      "fk_name": "Everyuth Naturals Exfoliating Walnut- Scrub",
+      "fk_sp": 171,
+      "fk_mrp": 210,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.779
+    },
+    {
+      "item_code": "9233",
+      "am_name": "Ariel Matic Front Load Detergent Powder Pouch | 1 Kg | Pack of 1",
+      "fk_name": "Ariel Power Gel Top Load Removes 100 Stains in 1 Wash Fresh Liquid Detergent",
+      "fk_sp": 157,
+      "fk_mrp": 179,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.515
+    },
+    {
+      "item_code": "28892",
+      "am_name": "Nivea Men Fresh Ocean 48h Deodorant Spray 150ml",
+      "fk_name": "Nivea Men Fresh Ocean, Antibacterial 48h Protection, Long Lasting, Fresh Ocean Extracts Deodorant Spray  -  For Men",
+      "fk_sp": 203,
+      "fk_mrp": 299,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.529
+    },
+    {
+      "item_code": "97917",
+      "am_name": "D'lecta 100% Mozzarella Cheese Block - 200g",
+      "fk_name": "D'lecta 100% Mozzarella cheese",
+      "fk_sp": 109,
+      "fk_mrp": 155,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.841
+    },
+    {
+      "item_code": "4123",
+      "am_name": "Himalaya Refreshing Baby Soap | 125g | Pack of 1",
+      "fk_name": "HIMALAYA Refreshing Baby Soap for Summers - 125g Helps Protect From Sweat & Irritation",
+      "fk_sp": 77,
+      "fk_mrp": 93,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.619
+    },
+    {
+      "item_code": "14684",
+      "am_name": "India Gate Classic Basmati Rice - 1Kg",
+      "fk_name": "INDIA GATE Flavourful & Fine Dubar | Long & Slender Grains | Naturally Aged Basmati Rice (Long Grain, Polished)",
+      "fk_sp": 127,
+      "fk_mrp": 159,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.415
+    },
+    {
+      "item_code": "2698",
+      "am_name": "Hathi Kacchi Ghani Mustard Oil - 1Ltr",
+      "fk_name": "DHARA Kachi Ghani Mustard Oil Pouch",
+      "fk_sp": 177,
+      "fk_mrp": 250,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.714
+    },
+    {
+      "item_code": "28809",
+      "am_name": "Real Fruit Power Masala Guava | 1 Ltr | Pack of 1",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.464
+    },
+    {
+      "item_code": "84141",
+      "am_name": "Tata Tea Premium Leaf | 1 kg | Pack of 1",
+      "fk_name": "Tata Sampann Yellow Moong Dal (Split)",
+      "fk_sp": 158,
+      "fk_mrp": 213,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.451
+    },
+    {
+      "item_code": "8343",
+      "am_name": "Patanjali Aloe Vera Juice Fiber 1 Ltr",
+      "fk_name": "PATANJALI Aloe Vera Juice with Fiber, Immunity Booster, Natural Juice",
+      "fk_sp": 168,
+      "fk_mrp": 206,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.635
+    },
+    {
+      "item_code": "1297",
+      "am_name": "Catch Magic Chat Masala Bottle - 100g",
+      "fk_name": "Catch Sprinklers Chat Masala",
+      "fk_sp": 79,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.54
+    },
+    {
+      "item_code": "4807",
+      "am_name": "Parle Krack Jack Sweet & Salty Crackers Biscuit | 69.3g | Pack of 1",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "3569",
+      "am_name": "Himalaya Gentle Baby Lotion 100ml",
+      "fk_name": "HIMALAYA Gentle Baby Shampoo Hibiscus & Chickpea",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.582
+    },
+    {
+      "item_code": "13905",
+      "am_name": "Tata Sampann Unpolished Moong Dal - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "17154",
+      "am_name": "Nivea Roll On Deo Fresh Active 50ml",
+      "fk_name": "Nivea Men Fresh Active, Antibacterial 72h Protection, 0% Alcohol, Fresh Ocean Extracts Deodorant Roll-on  -  For Men",
+      "fk_sp": 149,
+      "fk_mrp": 249,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.448
+    },
+    {
+      "item_code": "85877",
+      "am_name": "Amul Cow Ghee - 500ml - Jar",
+      "fk_name": "Amul Shakti Milk",
+      "fk_sp": 32,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.41
+    },
+    {
+      "item_code": "83737",
+      "am_name": "Parachute Advansed Gold Coconut Hair Oil 280ml",
+      "fk_name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "fk_sp": 171,
+      "fk_mrp": 378,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.678
+    },
+    {
+      "item_code": "2534",
+      "am_name": "Everest Kitchen King Masala - 100g",
+      "fk_name": "EVEREST KITCHEN KING MASALA",
+      "fk_sp": 87,
+      "fk_mrp": 96,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.915
+    },
+    {
+      "item_code": "97858",
+      "am_name": "Shubhkart Darshana Kumkum Powder 20g",
+      "fk_name": "Shubhkart Darshana Janau (Pack Of 4) - 5 Gms",
+      "fk_sp": 17,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.605
+    },
+    {
+      "item_code": "4938",
+      "am_name": "Real Juice Mixed Fruit | 180ml | Pack of 1",
+      "fk_name": "Real Fruit Juice Mixed",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.733
+    },
+    {
+      "item_code": "3667",
+      "am_name": "Nivea Nourishing Lotion Body Milk | 600ml | Pack of 1",
+      "fk_name": "NIVEA Body Milk, Lotion Moisturizer, with Deep Moisture Serum, Hyaluron & Almond Oil",
+      "fk_sp": 547,
+      "fk_mrp": 949,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.453
+    },
+    {
+      "item_code": "33008",
+      "am_name": "Vaseline Aloe Fresh Intensive Care Body Lotion 400ml",
+      "fk_name": "Vaseline Intensive Care Deep Restore Moisturizing Lotion",
+      "fk_sp": 322,
+      "fk_mrp": 515,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.593
+    },
+    {
+      "item_code": "1316",
+      "am_name": "Catch Sprinklers Iodized Table Salt - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.462
+    },
+    {
+      "item_code": "102980",
+      "am_name": "Masterchow Red Chilli Sauce | 200g | Pack of 1",
+      "fk_name": "Flipkart Supermart Red Chilli Sauce",
+      "fk_sp": 27,
+      "fk_mrp": 68,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.494
+    },
+    {
+      "item_code": "4935",
+      "am_name": "Real Fruit Power Apple | 180ml | Pack of 1",
+      "fk_name": "Real Fruit Juice Mixed",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.433
+    },
+    {
+      "item_code": "70593",
+      "am_name": "Organic Tattva Poha 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.556
+    },
+    {
+      "item_code": "10730",
+      "am_name": "Eva Blush Deodorant Body Spray 125ml",
+      "fk_name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "fk_sp": 128,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "8285",
+      "am_name": "Saloni Kachchi Ghani Mustard Oil - 1Ltr",
+      "fk_name": "saloni Kachi Ghani Mustard Oil Pouch",
+      "fk_sp": 187,
+      "fk_mrp": 280,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.822
+    },
+    {
+      "item_code": "81534",
+      "am_name": "Hair & Care Dry Fruit Walnut & Almond Hair Oil 200ml",
+      "fk_name": "BARE ANATOMY Rosemary Water Spray for Hair Growth, Thickness & Hairfall Control, 100% Natural Hair Styler",
+      "fk_sp": 322,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.432
+    },
+    {
+      "item_code": "81379",
+      "am_name": "Prabhuji Besan Laddu Elaichi Flavour | 336g | Pack of 1",
+      "fk_name": "PRABHUJI PURE FOOD Besan Laddu Box",
+      "fk_sp": 125,
+      "fk_mrp": 259,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.565
+    },
+    {
+      "item_code": "37439",
+      "am_name": "Weikfield Falooda Mix Rose | 200g | Pack of 1",
+      "fk_name": "WeiKFiELD Falooda Kesar Pista Mix Flavour|Rich, Smooth & Creamy| Delicious&Authentic Taste 200 g",
+      "fk_sp": 51,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.496
+    },
+    {
+      "item_code": "69057",
+      "am_name": "Britannia NutriChoice Oats Almond & Milk Biscuits | 75g | Pack of 1",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.487
+    },
+    {
+      "item_code": "73321",
+      "am_name": "Joy Skin Fruits Apricot Scrub 200ml",
+      "fk_name": "Joy Skin Fruits Super Soft Moisturizer (Berries + Active Vitamin E)",
+      "fk_sp": 269,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.449
+    },
+    {
+      "item_code": "101522",
+      "am_name": "Cornitos Crusties | Classic Cheese Balls | 52g | Pack of 1",
+      "fk_name": "CORNITOS Cheese and Herbs Nachos Nachos",
+      "fk_sp": 33,
+      "fk_mrp": 35,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.505
+    },
+    {
+      "item_code": "11600",
+      "am_name": "L'Oreal Paris Total Repair 5 Damaged Hair Shampoo | 180ml | Pack of 1",
+      "fk_name": "PANTENE Hair Science Deep Repair Shampoo with Vitamin B",
+      "fk_sp": 175,
+      "fk_mrp": 214,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.483
+    },
+    {
+      "item_code": "10368",
+      "am_name": "Mountain Dew 2.25 Ltr",
+      "fk_name": "Mountain Dew Soft Drink PET Bottle",
+      "fk_sp": 81,
+      "fk_mrp": 100,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.545
+    },
+    {
+      "item_code": "3915",
+      "am_name": "TRESemm\u221a\u00a9 Hair Fall Defense Conditioner | 190ml | Pack of 1",
+      "fk_name": "TRESemme Hairfall Defense+ Shampoo",
+      "fk_sp": 151,
+      "fk_mrp": 172,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.558
+    },
+    {
+      "item_code": "1332",
+      "am_name": "Clinic Plus Strong & Long Health Shampoo | 175ml | Pack of 1",
+      "fk_name": "Clinic Plus Strong & Long Health shampoo",
+      "fk_sp": 127,
+      "fk_mrp": 140,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.826
+    },
+    {
+      "item_code": "29099",
+      "am_name": "Emami Healthy & Tasty Refined Sunflower Oil - 780g",
+      "fk_name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "fk_sp": 169,
+      "fk_mrp": 215,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.562
+    },
+    {
+      "item_code": "3586",
+      "am_name": "Himalaya Baby Massage Oil 200ml",
+      "fk_name": "HIMALAYA Nourishing Skin Cream",
+      "fk_sp": 161,
+      "fk_mrp": 245,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.459
+    },
+    {
+      "item_code": "95824",
+      "am_name": "JK Chat Masala - 100g",
+      "fk_name": "Catch Sprinklers Chat Masala",
+      "fk_sp": 79,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.511
+    },
+    {
+      "item_code": "69071",
+      "am_name": "Go Slice Cheese | 200g | Pack of 1",
+      "fk_name": "Go Pizza Cheese Block",
+      "fk_sp": 104,
+      "fk_mrp": 155,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.51
+    },
+    {
+      "item_code": "3309",
+      "am_name": "Patanjali Bandhani Hing - 25g",
+      "fk_name": "PATANJALI Bandhani Hing/Asafoetida, Organic Heeng Powder",
+      "fk_sp": 57,
+      "fk_mrp": 65,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.585
+    },
+    {
+      "item_code": "4249",
+      "am_name": "Lizol Lavender Floor Cleaner 500ml",
+      "fk_name": "Lizol Kitchen Power Liquid Spray Kitchen Cleaner",
+      "fk_sp": 174,
+      "fk_mrp": 225,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.415
+    },
+    {
+      "item_code": "13057",
+      "am_name": "Tata Sampann Unpolished Kabuli Chana - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.46
+    },
+    {
+      "item_code": "931",
+      "am_name": "Amul Pure Ghee - 500ml Tin",
+      "fk_name": "Amul Gold Milk",
+      "fk_sp": 35,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.421
+    },
+    {
+      "item_code": "103401",
+      "am_name": "Parachute Advansed Gold Biotin & Coconut Hair Oil | 300ml | Pack of 1",
+      "fk_name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "fk_sp": 171,
+      "fk_mrp": 378,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.652
+    },
+    {
+      "item_code": "12092",
+      "am_name": "Prabhuji Ghee Besan Laddu Medium Pack | 336g | Pack of 1",
+      "fk_name": "PRABHUJI PURE FOOD Besan Laddu Box",
+      "fk_sp": 125,
+      "fk_mrp": 259,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.488
+    },
+    {
+      "item_code": "3210",
+      "am_name": "Too Yumm Karare Chilli Achari | 70 g | Pack of 1",
+      "fk_name": "Too Yumm! Munchy Masala Karare, 60% Less Saturated Fats, No Palm Oil Chips",
+      "fk_sp": 14,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "68555",
+      "am_name": "Britannia Good Day Cashew Cookies | 200g | Pack of 1",
+      "fk_name": "Britannia The Laughing Cow 10 cubes Processed cheese",
+      "fk_sp": 112,
+      "fk_mrp": 140,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.54
+    },
+    {
+      "item_code": "13086",
+      "am_name": "Tata Sampann Toor Arhar Dal Unpolished - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "96577",
+      "am_name": "Knorr Red Chilli Sauce Pouch | 200g | Pack of 1",
+      "fk_name": "Knorr Green Chilli Sauce",
+      "fk_sp": 46,
+      "fk_mrp": 55,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.537
+    },
+    {
+      "item_code": "5005",
+      "am_name": "Patanjali Dant Kanti Medicated Toothpaste 100g",
+      "fk_name": "PATANJALI Dant Kanti Medicated Oral Gel for Teeth Whitening Toothpaste",
+      "fk_sp": 39,
+      "fk_mrp": 53,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.707
+    },
+    {
+      "item_code": "97857",
+      "am_name": "Shubhkart Darshana Kumkum Powder | 50g | Pack of 1",
+      "fk_name": "Shubhkart Darshana Kapoor Ashtagandha - 50 Gms",
+      "fk_sp": 50,
+      "fk_mrp": 55,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.622
+    },
+    {
+      "item_code": "5030",
+      "am_name": "Sensodyne Toothpaste Fresh Mint 75g",
+      "fk_name": "SENSODYNE Fresh Gel , for daily sensitivity protection. Toothpaste",
+      "fk_sp": 111,
+      "fk_mrp": 135,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.633
+    },
+    {
+      "item_code": "29523",
+      "am_name": "India Gate Tibar Basmati Rice 1 Kg",
+      "fk_name": "Basmati Tibar Rice Steam Rice",
+      "fk_sp": 84,
+      "fk_mrp": 115,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.635
+    },
+    {
+      "item_code": "18350",
+      "am_name": "Daawat Basmati Rice Rozana Gold 5 Kg",
+      "fk_name": "Daawat Rozana Super Basmati Rice (Medium Grain)",
+      "fk_sp": 344,
+      "fk_mrp": 495,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.716
+    },
+    {
+      "item_code": "3189",
+      "am_name": "Maggi Masala Noodles | 70g | Pack of 1",
+      "fk_name": "Maggi Veg Atta now with Masala Taste, Made with ONLY ATTA flour Instant Noodles Vegetarian",
+      "fk_sp": 29,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.423
+    },
+    {
+      "item_code": "3702",
+      "am_name": "Patanjali Suandrya Aloe Been Tulsi Orange Face Wash 100g",
+      "fk_name": "PATANJALI Saundarya Anti-Acne & Pimple, Removes Dirt & Excess Oil Face Wash",
+      "fk_sp": 95,
+      "fk_mrp": 105,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.54
+    },
+    {
+      "item_code": "1059",
+      "am_name": "Britannia Bourbon Cream Chocolate Flavor Biscuit | 150g | Pack of 1",
+      "fk_name": "BRITANNIA Nice Time Coconut Cookies Biscuit",
+      "fk_sp": 19,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "13620",
+      "am_name": "Harpic Lemon Disinfectant Bathroom Cleaner Liquid | 1L | Pack of 1",
+      "fk_name": "Harpic Disinfectant | Bathroom Cleaner | Floral",
+      "fk_sp": 172,
+      "fk_mrp": 230,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.686
+    },
+    {
+      "item_code": "8087",
+      "am_name": "Ariel Perfect Wash Blue Detergent Powder 1Kg | Pack of 1",
+      "fk_name": "Ariel Power Gel Top Load Removes 100 Stains in 1 Wash Fresh Liquid Detergent",
+      "fk_sp": 157,
+      "fk_mrp": 179,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.508
+    },
+    {
+      "item_code": "16840",
+      "am_name": "On1y Chilli Flakes - 34g",
+      "fk_name": "On1y Chilli Flakes",
+      "fk_sp": 66,
+      "fk_mrp": 99,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.9
+    },
+    {
+      "item_code": "10724",
+      "am_name": "Dabur Chyawanprash | 950g | Pack of 1",
+      "fk_name": "PATANJALI Chyawanprash 1kg, Immunity Booster, 35+ Herbs, Builds Stamina, No Sugar Added",
+      "fk_sp": 220,
+      "fk_mrp": 262,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.417
+    },
+    {
+      "item_code": "11792",
+      "am_name": "Cornitos Nacho Crisps Cheese and Herbs | 60g | Pack of 1",
+      "fk_name": "CORNITOS Cheese and Herbs Nachos Nachos",
+      "fk_sp": 33,
+      "fk_mrp": 35,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.747
+    },
+    {
+      "item_code": "68913",
+      "am_name": "Real Masala Pomegranate Juice - 1L",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.571
+    },
+    {
+      "item_code": "998",
+      "am_name": "Bikaji Soya Sticks Masala Munch 200g",
+      "fk_name": "Bikaji Soya Sticks Masala Munch",
+      "fk_sp": 49,
+      "fk_mrp": 80,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.925
+    },
+    {
+      "item_code": "12090",
+      "am_name": "Saffola Gold Blended Edible Vegetable Oil - 5Ltr",
+      "fk_name": "Saffola Active Rice Bran & Soyabean Refined Cooking Oil Rich in Omega 3 & Oryzanol Blended Oil Jar",
+      "fk_sp": 850,
+      "fk_mrp": 935,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "3205",
+      "am_name": "Smith & Jones Ginger Garlic Paste - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.656
+    },
+    {
+      "item_code": "105",
+      "am_name": "Ching\u2019s Secret Manchurian Noodles | 240g | Pack of 1",
+      "fk_name": "Ching's Secret Schezwan, Desi Chinese Noodles Instant Noodles Vegetarian",
+      "fk_sp": 65,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "3325",
+      "am_name": "Aquafina Drinking Water 1 Ltr",
+      "fk_name": "Aquafina Treated Water",
+      "fk_sp": 17,
+      "fk_mrp": 18,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "104388",
+      "am_name": "Pure Nutrition Pomace Olive Oil - 1L",
+      "fk_name": "Oleev Pomace Olive Oil PET Bottle",
+      "fk_sp": 388,
+      "fk_mrp": 1200,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.537
+    },
+    {
+      "item_code": "96850",
+      "am_name": "Bajaj Almond Drops Nourishing Body Lotion 600ml",
+      "fk_name": "BAJAJ Almond Drops Nourishing Body Lotion with Almond Butter, 72 Hr Moisture Retention",
+      "fk_sp": 411,
+      "fk_mrp": 620,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.652
+    },
+    {
+      "item_code": "2506",
+      "am_name": "Everest Kashmirilal Chilli Powder - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.533
+    },
+    {
+      "item_code": "3222",
+      "am_name": "Gits Gulab Jamun Mix | 200g | Pack of 1",
+      "fk_name": "Gits Khaman Dhokla Instant Snack Mix 180 g",
+      "fk_sp": 52,
+      "fk_mrp": 66,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.571
+    },
+    {
+      "item_code": "3674",
+      "am_name": "Nivea Dark Spot Reduction 10X Whitening Face Wash Tube 50ml",
+      "fk_name": "NIVEA Natural Glow, Even Tone & Smooth Skin, with Vitamin C & 0% Alcohol - For Women Deodorant Roll-on  -  For Women",
+      "fk_sp": 135,
+      "fk_mrp": 249,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.407
+    },
+    {
+      "item_code": "11708",
+      "am_name": "Dove Daily Shine Conditioner | 175ml | Pack of 1",
+      "fk_name": "DOVE Intense Repair Conditioner",
+      "fk_sp": 179,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.56
+    },
+    {
+      "item_code": "1098",
+      "am_name": "Britannia Nice Time Sugar Showered Coconut Biscuits | 136.5g | Pack of 1",
+      "fk_name": "BRITANNIA Nice Time Coconut Cookies Biscuit",
+      "fk_sp": 19,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.631
+    },
+    {
+      "item_code": "95287",
+      "am_name": "Mahakosh Kachi Ghani Mustard Oil - 850g Pouch",
+      "fk_name": "King's Kachi Ghani Pure Mustard Oil Pouch",
+      "fk_sp": 170,
+      "fk_mrp": 205,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.738
+    },
+    {
+      "item_code": "68115",
+      "am_name": "Hell Classic Energy Drink | 250ml Can | Pack of 1",
+      "fk_name": "Hell Energy Classic Sports Drink",
+      "fk_sp": 51,
+      "fk_mrp": 60,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.701
+    },
+    {
+      "item_code": "12833",
+      "am_name": "Tata Tea Agni | 1 Kg | Pack of 1",
+      "fk_name": "CITYGOLD Pyari Chai Tea Pouch",
+      "fk_sp": 233,
+      "fk_mrp": 240,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.421
+    },
+    {
+      "item_code": "3223",
+      "am_name": "Gits Khaman Dhokla Of Mix 180g",
+      "fk_name": "Gits Khaman Dhokla Instant Snack Mix 180 g",
+      "fk_sp": 52,
+      "fk_mrp": 66,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.75
+    },
+    {
+      "item_code": "17139",
+      "am_name": "Haldirams Gulab Jamun Tin | 1 kg | Pack of 1",
+      "fk_name": "Amul Gulab Jamun Tin",
+      "fk_sp": 245,
+      "fk_mrp": 270,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.533
+    },
+    {
+      "item_code": "28709",
+      "am_name": "Organic Tattva Organic Ragi Flour - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "81654",
+      "am_name": "Organic Tattva Mustard Oil - 910g",
+      "fk_name": "Organic Tattva Toor/Arhar Dal (Split)",
+      "fk_sp": 223,
+      "fk_mrp": 365,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.576
+    },
+    {
+      "item_code": "10761",
+      "am_name": "Tresemme Smooth & Shine Shampoo 340ml",
+      "fk_name": "TRESemme Smooth Shine Shampoo,with silk protein",
+      "fk_sp": 304,
+      "fk_mrp": 490,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.732
+    },
+    {
+      "item_code": "3689",
+      "am_name": "Nycil Germ Expert Cool Herbal 150g + Nycil Cool Herbal 50g Free",
+      "fk_name": "NYCIL Germ Expert Cool Herbal Prickly Heat & Cooling Herbal Powder",
+      "fk_sp": 132,
+      "fk_mrp": 159,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.688
+    },
+    {
+      "item_code": "3787",
+      "am_name": "Himalaya Gentle Baby Shampoo 100ml",
+      "fk_name": "HIMALAYA Gentle Baby Shampoo Hibiscus & Chickpea",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.7
+    },
+    {
+      "item_code": "2651",
+      "am_name": "Tata Sampann Channa Dal Pouch - 1 Kg",
+      "fk_name": "Tata Sampann High in Fibre (Thick) Poha",
+      "fk_sp": 82,
+      "fk_mrp": 119,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.563
+    },
+    {
+      "item_code": "103696",
+      "am_name": "India Gate Uplife Gut-Pro Blended Cooking Oil - 810g",
+      "fk_name": "FORTUNE Xpert Pro Immunity Blended Oil Pouch",
+      "fk_sp": 160,
+      "fk_mrp": 190,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.532
+    },
+    {
+      "item_code": "70389",
+      "am_name": "Organic Tattva Organic Suji - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.484
+    },
+    {
+      "item_code": "90441",
+      "am_name": "Britannia Winkin Cow Cafe Frappe Cold Coffee 180 ml",
+      "fk_name": "BRITANNIA Winkin Cow Sweet Lassi",
+      "fk_sp": 15,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.554
+    },
+    {
+      "item_code": "71094",
+      "am_name": "Organic Tattva Foxtail Millet - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.625
+    },
+    {
+      "item_code": "86683",
+      "am_name": "Kissan Fresh Tomato Ketchup | 1.1 Kg | Pack of 1",
+      "fk_name": "Kissan 100% Real Mixed Fruit Jam",
+      "fk_sp": 267,
+      "fk_mrp": 300,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "4993",
+      "am_name": "Parachute Hair Oil Jasmine | 300ml | Pack of 1",
+      "fk_name": "Parachute Advansed Jasmine Gold Healthy shine with Vit E Hair Oil",
+      "fk_sp": 134,
+      "fk_mrp": 215,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.542
+    },
+    {
+      "item_code": "27334",
+      "am_name": "Organic Tattva Organic Sona Masuri Brown 1 Kg",
+      "fk_name": "Organic Tattva Toor/Arhar Dal (Split)",
+      "fk_sp": 223,
+      "fk_mrp": 365,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.475
+    },
+    {
+      "item_code": "24204",
+      "am_name": "Colgate Glow In Dark Toothpaste for Children 80g",
+      "fk_name": "Colgate Total Advanced Health Antibacterial Toothpaste, Whole Mouth Health Toothpaste",
+      "fk_sp": 63,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.409
+    },
+    {
+      "item_code": "3061",
+      "am_name": "Keya Pasta Seasoning - 45g",
+      "fk_name": "keya Pizza Seasoning",
+      "fk_sp": 93,
+      "fk_mrp": 139,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.773
+    },
+    {
+      "item_code": "10284",
+      "am_name": "Doritos Cheese Flavour Nacho Chips | 45g | Pack of 1",
+      "fk_name": "DORITOS Cheese Flavour Nachos",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.727
+    },
+    {
+      "item_code": "3910",
+      "am_name": "Tresemme Hair Fall Defence Shampoo 180ml",
+      "fk_name": "TRESemme Hairfall Defense+ Shampoo",
+      "fk_sp": 151,
+      "fk_mrp": 172,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.767
+    },
+    {
+      "item_code": "11989",
+      "am_name": "Sensodyne Repair And Protect Toothpaste 70g",
+      "fk_name": "SENSODYNE Fresh Gel , for daily sensitivity protection. Toothpaste",
+      "fk_sp": 111,
+      "fk_mrp": 135,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.623
+    },
+    {
+      "item_code": "96531",
+      "am_name": "Shubhkart Tejas Pure Ghee Wicks | 30 Pcs | Pack of 1",
+      "fk_name": "Shubhkart Tejas Pure Ghee Diya 30N for Puja, Festivals & Other Religious Rituals Cotton Wick",
+      "fk_sp": 76,
+      "fk_mrp": 95,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.555
+    },
+    {
+      "item_code": "71378",
+      "am_name": "Beardo Godfather Eau De Perfume 50ml",
+      "fk_name": "BEARDO Whisky Smoke Bourbon Perfume EDP|Oriental, Woody, Leathery|Strong & Long Lasting Eau de Parfum  -  50 ml",
+      "fk_sp": 354,
+      "fk_mrp": 999,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.446
+    },
+    {
+      "item_code": "12171",
+      "am_name": "Head & Shoulders Active Protect 2in1 AntiDandruff Shampoo+Conditioner 340ml",
+      "fk_name": "HEAD & SHOULDERS Anti Dandruff Shampoo Cool Menthol For Men & Women",
+      "fk_sp": 252,
+      "fk_mrp": 395,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.588
+    },
+    {
+      "item_code": "3373",
+      "am_name": "Vaseline Skin Protecting Jelly - 40g",
+      "fk_name": "Vaseline Original Skin Protecting Jelly",
+      "fk_sp": 91,
+      "fk_mrp": 95,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.822
+    },
+    {
+      "item_code": "104189",
+      "am_name": "Mashal Kachi Ghani Mustard Oil 1L (Pouch) | Pack of 1",
+      "fk_name": "King's Kachi Ghani Pure Mustard Oil Pouch",
+      "fk_sp": 170,
+      "fk_mrp": 205,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "104220",
+      "am_name": "Crax Crunchy Pipes Puffs - 73g",
+      "fk_name": "CRAX Crunchy Pipes Salted Puffs Snacks",
+      "fk_sp": 33,
+      "fk_mrp": 60,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.727
+    },
+    {
+      "item_code": "10288",
+      "am_name": "Lays Classic Salted Potato Chips | 48g | Pack of 1",
+      "fk_name": "Lay's India's Magic Masala Chips",
+      "fk_sp": 22,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.436
+    },
+    {
+      "item_code": "23568",
+      "am_name": "Britannia Cheese Slices - 200g - Pack of 10 Units",
+      "fk_name": "Britannia The Laughing Cow 10 Slices Processed cheese",
+      "fk_sp": 120,
+      "fk_mrp": 145,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.673
+    },
+    {
+      "item_code": "11804",
+      "am_name": "Cornitos Nacho Crisps Sweet Chili | 60g | Pack of 1",
+      "fk_name": "CORNITOS Cheese and Herbs Nachos Nachos",
+      "fk_sp": 33,
+      "fk_mrp": 35,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.581
+    },
+    {
+      "item_code": "96128",
+      "am_name": "Safed Stain Wash Detergent Powder 1 Kg",
+      "fk_name": "Ghadi Hand Wash Detergent Powder (Advanced)",
+      "fk_sp": 67,
+      "fk_mrp": 74,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.608
+    },
+    {
+      "item_code": "15865",
+      "am_name": "Tresemme Keratin Smooth With Keratin & Argan Shampoo - 340ml",
+      "fk_name": "TRESemme Smooth Shine Shampoo,with silk protein",
+      "fk_sp": 304,
+      "fk_mrp": 490,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.641
+    },
+    {
+      "item_code": "97860",
+      "am_name": "Shubhkart Darshana Kapoor Ashtagandha | 50g | Pack of 1",
+      "fk_name": "Shubhkart Darshana Kapoor Ashtagandha - 50 Gms",
+      "fk_sp": 50,
+      "fk_mrp": 55,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.842
+    },
+    {
+      "item_code": "23642",
+      "am_name": "Parachute Coconut Oil Bottle | 600ml | Pack of 1",
+      "fk_name": "Parachute 100% Pure Coconut Hair Oil (thengai ennai) Hair Oil",
+      "fk_sp": 272,
+      "fk_mrp": 349,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.529
+    },
+    {
+      "item_code": "2714",
+      "am_name": "Fortune Rice Bran Oil - 750g",
+      "fk_name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "fk_sp": 169,
+      "fk_mrp": 215,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.435
+    },
+    {
+      "item_code": "3439",
+      "am_name": "Himalaya Baby Powder | 400g | Pack of 1",
+      "fk_name": "HIMALAYA Gentle Baby Powder",
+      "fk_sp": 205,
+      "fk_mrp": 302,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.645
+    },
+    {
+      "item_code": "18302",
+      "am_name": "Vaseline Daily Brightening Even Tone Body Lotion 400ml",
+      "fk_name": "Vaseline Intensive Care Deep Restore Moisturizing Lotion",
+      "fk_sp": 322,
+      "fk_mrp": 515,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.545
+    },
+    {
+      "item_code": "75505",
+      "am_name": "Eva Sweet Skin Friendly Deodorant | 150ml | Pack of 1",
+      "fk_name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "fk_sp": 128,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.582
+    },
+    {
+      "item_code": "11158",
+      "am_name": "Head & Shoulder Anti Dandruff Smooth & Silky Shampoo 340ml",
+      "fk_name": "HEAD & SHOULDERS Anti-Hairfall Shampoo",
+      "fk_sp": 245,
+      "fk_mrp": 395,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.689
+    },
+    {
+      "item_code": "97018",
+      "am_name": "Too Yumm Veggie Stix Sour Cream & Onion | 75g | Pack of 1",
+      "fk_name": "Too Yumm! Munchy Masala Karare, 60% Less Saturated Fats, No Palm Oil Chips",
+      "fk_sp": 14,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.43
+    },
+    {
+      "item_code": "2504",
+      "am_name": "Everest Black Pepper Powder - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.407
+    },
+    {
+      "item_code": "4131",
+      "am_name": "Himalaya Neem And Trumeric Soap 75g",
+      "fk_name": "HIMALAYA Kids Orange Toothpaste",
+      "fk_sp": 84,
+      "fk_mrp": 133,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.424
+    },
+    {
+      "item_code": "37425",
+      "am_name": "Tata Sampann Unpolished Masoor Dal Whole - 500g",
+      "fk_name": "Masoor Dal (Whole)",
+      "fk_sp": 43,
+      "fk_mrp": 100,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.525
+    },
+    {
+      "item_code": "70603",
+      "am_name": "Organic Tattva Organic Sugar - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.476
+    },
+    {
+      "item_code": "81653",
+      "am_name": "Organic Tattva Sunflower Unrefined Oil - 910g",
+      "fk_name": "Organic Tattva Toor/Arhar Dal (Split)",
+      "fk_sp": 223,
+      "fk_mrp": 365,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.564
+    },
+    {
+      "item_code": "3256",
+      "am_name": "Catch Ginger Garlic Paste Pouch - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.82
+    },
+    {
+      "item_code": "87641",
+      "am_name": "Bingo Mad Angles Achaari Masti 117-124.8g | Pack of 1",
+      "fk_name": "Bingo Mad Angles Achaari Masti Chips",
+      "fk_sp": 31,
+      "fk_mrp": 50,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.69
+    },
+    {
+      "item_code": "3914",
+      "am_name": "Tresemme Smooth & Shine Shampoo 180ml",
+      "fk_name": "TRESemme Keratin Smooth Shampoo",
+      "fk_sp": 146,
+      "fk_mrp": 172,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.727
+    },
+    {
+      "item_code": "1218",
+      "am_name": "Engage W2 Perfume Spray For Women 120ml | Pack of 1",
+      "fk_name": "Engage W2 Perfume Body Spray  -  For Women",
+      "fk_sp": 148,
+      "fk_mrp": 240,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.782
+    },
+    {
+      "item_code": "5009",
+      "am_name": "Himalaya Herbals Sparkling White Toothpaste gum Expert 80g",
+      "fk_name": "HIMALAYA Kids Orange Toothpaste",
+      "fk_sp": 84,
+      "fk_mrp": 133,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.539
+    },
+    {
+      "item_code": "2620",
+      "am_name": "Patanjali Whole Wheat Atta - 5Kg",
+      "fk_name": "PATANJALI Chakki Atta, Whole Wheat with Bran, Genhu ka Atta, Organic Flour",
+      "fk_sp": 243,
+      "fk_mrp": 265,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.535
+    },
+    {
+      "item_code": "22697",
+      "am_name": "Nivea Women Deodorant Roll On Fresh Natural Long Lasting Freshness & 48h Protection | 50ml | Pack of 1",
+      "fk_name": "Nivea Men Fresh Active, Antibacterial 72h Protection, 0% Alcohol, Fresh Ocean Extracts Deodorant Roll-on  -  For Men",
+      "fk_sp": 149,
+      "fk_mrp": 249,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.549
+    },
+    {
+      "item_code": "18367",
+      "am_name": "Amul Cow Ghee Tetra Pack - 1L",
+      "fk_name": "Amul Cow Ghee, Tetrapack",
+      "fk_sp": 644,
+      "fk_mrp": 705,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.76
+    },
+    {
+      "item_code": "18435",
+      "am_name": "India Gate Super Basmati Rice 5 Kg",
+      "fk_name": "Daawat Rozana Super Basmati Rice (Medium Grain)",
+      "fk_sp": 344,
+      "fk_mrp": 495,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.658
+    },
+    {
+      "item_code": "97082",
+      "am_name": "Schweppes Indian Tonic Water | 300ml | Pack of 1",
+      "fk_name": "Schweppes Indian Tonic Water Contains Quinine Can",
+      "fk_sp": 59,
+      "fk_mrp": 60,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "4310",
+      "am_name": "Vaseline Intensive Care Deep Moisture Body Lotion | 85ml | Pack of 1",
+      "fk_name": "Vaseline Intensive Care Deep Moisture Body Lotion",
+      "fk_sp": 64,
+      "fk_mrp": 90,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.867
+    },
+    {
+      "item_code": "8572",
+      "am_name": "Veet Pure Hair Removal Cream Sensitive Skin 5in1 | 30g | Pack of 1",
+      "fk_name": "Veet Pure Hair Removal Dry Skin Cream",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "1219",
+      "am_name": "Engage Classic Woody Cool Marine Pocket Perfume for Men 17ml",
+      "fk_name": "Engage On Classic Woody Pocket Perfume  -  17 ml",
+      "fk_sp": 56,
+      "fk_mrp": 70,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.788
+    },
+    {
+      "item_code": "92214",
+      "am_name": "DNV Green Chilli Sauce | 200g | Pack of 1",
+      "fk_name": "Knorr Green Chilli Sauce",
+      "fk_sp": 46,
+      "fk_mrp": 55,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.656
+    },
+    {
+      "item_code": "27966",
+      "am_name": "Go Cheese Pizza Blend - 200g",
+      "fk_name": "Go Pizza Cheese Block",
+      "fk_sp": 104,
+      "fk_mrp": 155,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.766
+    },
+    {
+      "item_code": "12824",
+      "am_name": "Vaseline Intensive Care Deep Restore With Pure Oat Extract | 400ml | Pack of 1",
+      "fk_name": "Vaseline Intensive Care Deep Restore Moisturizing Lotion",
+      "fk_sp": 322,
+      "fk_mrp": 515,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.662
+    },
+    {
+      "item_code": "3647",
+      "am_name": "Lotus Whiteglow Skin Whitening & Brightening Gel Creme Spf 25 60g",
+      "fk_name": "LOTUS HERBALS WhiteGlow Skin Whitening and Brightening Nourishing Night Cream",
+      "fk_sp": 360,
+      "fk_mrp": 495,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.714
+    },
+    {
+      "item_code": "83765",
+      "am_name": "Hell Strong Watermelon Energy Drink | 250ml | Pack of 1",
+      "fk_name": "Hell Energy Water Melon Sports Drink",
+      "fk_sp": 50,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.644
+    },
+    {
+      "item_code": "14220",
+      "am_name": "Weikfield Falooda Mix Strawberry | 200g | Pack of 1",
+      "fk_name": "WeiKFiELD Falooda Strawberry Mix Flavour|Rich, Smooth & Creamy|Delicious & Authentic Taste 200 g",
+      "fk_sp": 39,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.551
+    },
+    {
+      "item_code": "95",
+      "am_name": "Chings Secret Dark Soy Sauce | 210g | Pack of 1",
+      "fk_name": "Ching's Secret Green Chilli Sauce, Bold and Flavourful Sauce",
+      "fk_sp": 51,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "2443",
+      "am_name": "Patanjali Honey | 250g | Pack of 1",
+      "fk_name": "PATANJALI Pure Honey, No Sugar Added, Unprocessed and Organic Honey, Shahed",
+      "fk_sp": 79,
+      "fk_mrp": 110,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.431
+    },
+    {
+      "item_code": "76316",
+      "am_name": "Cetaphil Oily Skin Cleanser Sensitive Skin 125ml",
+      "fk_name": "Cetaphil Gentle Skin Cleanser With Mild, Non Irritating Formula For Dry to Normal, Sensitive Skin Face Wash",
+      "fk_sp": 389,
+      "fk_mrp": 459,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.536
+    },
+    {
+      "item_code": "102977",
+      "am_name": "Masterchow Korean Masala Instant Noodles | 94g | Pack of 1",
+      "fk_name": "Yu Korean Ramen Cheesy Veg Carbonara Instant Noodles Vegetarian",
+      "fk_sp": 52,
+      "fk_mrp": 69,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.462
+    },
+    {
+      "item_code": "3566",
+      "am_name": "Himalaya Gentle Baby Cream 100ml",
+      "fk_name": "HIMALAYA Baby Cream",
+      "fk_sp": 172,
+      "fk_mrp": 200,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.745
+    },
+    {
+      "item_code": "15769",
+      "am_name": "Bisleri Water | 1 Ltr | Pack of 1",
+      "fk_name": "Bisleri Mineral Water",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.6
+    },
+    {
+      "item_code": "3383",
+      "am_name": "Himalaya Baby Hair Oil 100ml",
+      "fk_name": "HIMALAYA Baby Cream",
+      "fk_sp": 172,
+      "fk_mrp": 200,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.638
+    },
+    {
+      "item_code": "93936",
+      "am_name": "Moong Dal Yellow - 1Kg Loose",
+      "fk_name": "Classic by Flipkart Grocery Yellow Moong Dal (Split)",
+      "fk_sp": 127,
+      "fk_mrp": 200,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.553
+    },
+    {
+      "item_code": "13002",
+      "am_name": "Himalaya Oil Clear Lemon Face Wash 100ml",
+      "fk_name": "HIMALAYA Baby Cream",
+      "fk_sp": 172,
+      "fk_mrp": 200,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.441
+    },
+    {
+      "item_code": "11970",
+      "am_name": "Head & shoulders 2-in-1 Smooth & Silky Shampoo + Conditioner 340ml",
+      "fk_name": "HEAD & SHOULDERS Anti-Hairfall Shampoo",
+      "fk_sp": 245,
+      "fk_mrp": 395,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.562
+    },
+    {
+      "item_code": "96",
+      "am_name": "Chings Secret Green Chilli Sauce | 190g | Pack of 1",
+      "fk_name": "Ching's Secret Green Chilli Sauce, Bold and Flavourful Sauce",
+      "fk_sp": 51,
+      "fk_mrp": 60,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.698
+    },
+    {
+      "item_code": "13060",
+      "am_name": "Real Fruit Power Mango Juice 1 Ltr",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.655
+    },
+    {
+      "item_code": "2531",
+      "am_name": "Everest Garam Masala - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.638
+    },
+    {
+      "item_code": "986",
+      "am_name": "Bikaji Namkeen Kuch Kuch All In One - 200g",
+      "fk_name": "Bikaji Bhujia No.1",
+      "fk_sp": 46,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.414
+    },
+    {
+      "item_code": "4224",
+      "am_name": "Ariel Matic Front Load Detergent Liquid | 1 Ltr | Pack of 1",
+      "fk_name": "Ariel Front Load Liquid Detergent Lavender Liquid Detergent",
+      "fk_sp": 210,
+      "fk_mrp": 225,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.579
+    },
+    {
+      "item_code": "3570",
+      "am_name": "Himalaya Baby Lotion 200ml",
+      "fk_name": "HIMALAYA Nourishing Skin Cream",
+      "fk_sp": 161,
+      "fk_mrp": 245,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "77976",
+      "am_name": "Organic Tattva Organic Kala Chana - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "10814",
+      "am_name": "Colgate Barbie Toothpaste 80g",
+      "fk_name": "Colgate Total Advanced Health Antibacterial Toothpaste, Whole Mouth Health Toothpaste",
+      "fk_sp": 63,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.425
+    },
+    {
+      "item_code": "4698",
+      "am_name": "Thums Up | 750ml | Pack of 1",
+      "fk_name": "Thums Up Soft Drink PET Bottle",
+      "fk_sp": 32,
+      "fk_mrp": 40,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.481
+    },
+    {
+      "item_code": "76735",
+      "am_name": "Organic Tattva Organic Peanuts - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.462
+    },
+    {
+      "item_code": "2412",
+      "am_name": "Maggi Masala Veg Atta Noodles | 72.5g | Pack of 1",
+      "fk_name": "Maggi Veg Atta now with Masala Taste, Made with ONLY ATTA flour Instant Noodles Vegetarian",
+      "fk_sp": 29,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.507
+    },
+    {
+      "item_code": "1505",
+      "am_name": "Dettol Antiseptic Liquid | 250ml | Pack of 1",
+      "fk_name": "Dettol First Aid, Surface Disinfection and Personal Hygiene Antiseptic Liquid",
+      "fk_sp": 143,
+      "fk_mrp": 159,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.534
+    },
+    {
+      "item_code": "8458",
+      "am_name": "Head & Shoulders Anti Hairfall Shampoo | 340ml | Pack of 1",
+      "fk_name": "HEAD & SHOULDERS Anti-Hairfall Shampoo",
+      "fk_sp": 245,
+      "fk_mrp": 395,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.818
+    },
+    {
+      "item_code": "3057",
+      "am_name": "Dr Oetker Funfoods Veg Mayonnaise Original | 100g | Pack of 1",
+      "fk_name": "FUNFOODS by Dr. Oetker Pizza Topping All-in-One Ketchup",
+      "fk_sp": 35,
+      "fk_mrp": 45,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.541
+    },
+    {
+      "item_code": "96533",
+      "am_name": "Shubhkart Darshana Pooja Ghee Jar | 200ml | Pack of 1",
+      "fk_name": "Shubhkart Darshana Puja Ghee - 200 ML | Non-Edible Puja Ghee for Daily Puja, Festivals",
+      "fk_sp": 58,
+      "fk_mrp": 71,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.585
+    },
+    {
+      "item_code": "2705",
+      "am_name": "Fortune Pure Mustard Oil - 870g Pouch",
+      "fk_name": "FORTUNE Xpert Pro Immunity Blended Oil Pouch",
+      "fk_sp": 160,
+      "fk_mrp": 190,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.658
+    },
+    {
+      "item_code": "90330",
+      "am_name": "Sunrich Refined Sunflower Oil - 750g",
+      "fk_name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "fk_sp": 169,
+      "fk_mrp": 215,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.701
+    },
+    {
+      "item_code": "91392",
+      "am_name": "Organic Tattva Organic Sonamasuri White Rice 1 Kg",
+      "fk_name": "Organic Tattva Toor/Arhar Dal (Split)",
+      "fk_sp": 223,
+      "fk_mrp": 365,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.476
+    },
+    {
+      "item_code": "3978",
+      "am_name": "Gillette Series Shave Sensitive Gel 60g",
+      "fk_name": "Gillette Sensitive Skin with Aloe",
+      "fk_sp": 90,
+      "fk_mrp": 99,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.694
+    },
+    {
+      "item_code": "5028",
+      "am_name": "Sensodyne Toothpaste Fresh Gel | 75g | Pack of 1",
+      "fk_name": "SENSODYNE Fresh Gel , for daily sensitivity protection. Toothpaste",
+      "fk_sp": 111,
+      "fk_mrp": 135,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.654
+    },
+    {
+      "item_code": "80141",
+      "am_name": "Organic Tattva Organic Black Mustard - 100g",
+      "fk_name": "24 mantra ORGANIC Organic Fenugreek Seeds/Methi Dana/Menthi Ginja",
+      "fk_sp": 33,
+      "fk_mrp": 48,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.434
+    },
+    {
+      "item_code": "104222",
+      "am_name": "CRAX Masala Mania Corn Rings - 57g",
+      "fk_name": "CRAX Curls Chatpata Masala Puffs Snacks Puffcorn",
+      "fk_sp": 21,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.45
+    },
+    {
+      "item_code": "937",
+      "am_name": "Amul Taaza Toned Milk Tetra Pack - 1Ltr",
+      "fk_name": "Amul Masti Spiced Buttermilk",
+      "fk_sp": 70,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.431
+    },
+    {
+      "item_code": "91",
+      "am_name": "Chings Schezwan Fried Rice Masala - 20g",
+      "fk_name": "Ching's Secret Desi Chinese Schezwan Fried Rice Masala, 20g, Authentic Schezwan Flavour,",
+      "fk_sp": 8,
+      "fk_mrp": 10,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.607
+    },
+    {
+      "item_code": "8515",
+      "am_name": "Patanjali Amla Juice 1 Ltr",
+      "fk_name": "PATANJALI Aloe Vera Juice with Fiber, Immunity Booster, Natural Juice",
+      "fk_sp": 168,
+      "fk_mrp": 206,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.43
+    },
+    {
+      "item_code": "90",
+      "am_name": "Chings Paneer Chilli Miracle Masala - 20g",
+      "fk_name": "Ching's Secret Desi Chinese Schezwan Fried Rice Masala, 20g, Authentic Schezwan Flavour,",
+      "fk_sp": 8,
+      "fk_mrp": 10,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.5
+    },
+    {
+      "item_code": "10588",
+      "am_name": "Ghadi Detergent Powder | 1 Kg | Pack of 1",
+      "fk_name": "Ghadi Hand Wash Detergent Powder (Advanced)",
+      "fk_sp": 67,
+      "fk_mrp": 74,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.641
+    },
+    {
+      "item_code": "3175",
+      "am_name": "Hersheys Genuine Chocolate Flavour Syrup | 180g | Pack of 1",
+      "fk_name": "HERSHEY'S Chocolate Flavor Syrup Chocolate",
+      "fk_sp": 82,
+      "fk_mrp": 99,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.66
+    },
+    {
+      "item_code": "1303",
+      "am_name": "Catch Coriander Powder - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.538
+    },
+    {
+      "item_code": "92367",
+      "am_name": "Britannia Jim Jam Pops Biscuit | 70g | Pack of 1",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "67402",
+      "am_name": "Secret Temptation Te Amo Aqua Perfume Body Spray 120ml",
+      "fk_name": "Engage W2 Perfume Body Spray  -  For Women",
+      "fk_sp": 148,
+      "fk_mrp": 240,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.457
+    },
+    {
+      "item_code": "96347",
+      "am_name": "Joy Skin Fruits Softening Glow Face Wash | 100ml | Buy 1 Get 1 Free",
+      "fk_name": "Joy Skin Fruits Super Soft Moisturizer (Berries + Active Vitamin E)",
+      "fk_sp": 269,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "17696",
+      "am_name": "Veet Hair Removal Cream For Normal Skin 30g",
+      "fk_name": "Veet Pure Hair Removal Dry Skin Cream",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.8
+    },
+    {
+      "item_code": "8476",
+      "am_name": "Kissan Mixed Fruit Jam | 500g | Pack of 1",
+      "fk_name": "Kissan Mixed Fruit Jam",
+      "fk_sp": 174,
+      "fk_mrp": 190,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.746
+    },
+    {
+      "item_code": "101707",
+      "am_name": "Hell Energy Apple | 250ml | Pack of 1",
+      "fk_name": "Hell Energy Water Melon Sports Drink",
+      "fk_sp": 50,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.493
+    },
+    {
+      "item_code": "100354",
+      "am_name": "Go Cheese Spread Plain - 200g",
+      "fk_name": "Go Plain Processed cheese Block",
+      "fk_sp": 104,
+      "fk_mrp": 200,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.724
+    },
+    {
+      "item_code": "882",
+      "am_name": "Amul Fresh Cream - 250ml",
+      "fk_name": "Amul Lactose Free Milk",
+      "fk_sp": 25,
+      "fk_mrp": 26,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.409
+    },
+    {
+      "item_code": "4685",
+      "am_name": "Mirinda Orange Flavoured 750ml",
+      "fk_name": "MiRiNDA Soft Drink PET Bottle",
+      "fk_sp": 36,
+      "fk_mrp": 40,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.441
+    },
+    {
+      "item_code": "4130",
+      "am_name": "Himalaya Neem & Turmeric Soap 125g",
+      "fk_name": "HIMALAYA Refreshing Baby Soap for Summers - 125g Helps Protect From Sweat & Irritation",
+      "fk_sp": 77,
+      "fk_mrp": 93,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "104215",
+      "am_name": "CRAX Curls Chatpata Masala - 88g",
+      "fk_name": "CRAX Curls Chatpata Masala Puffs Snacks Chips",
+      "fk_sp": 30,
+      "fk_mrp": 60,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.693
+    },
+    {
+      "item_code": "3734",
+      "am_name": "Garnier Color Naturals Burgundy Hair Color Cream 35ml+30g",
+      "fk_name": "Fem Fairness Naturals Gold Hair Removal Cream - 60g (40g + 20g) | For All Skin Type Cream",
+      "fk_sp": 74,
+      "fk_mrp": 85,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.449
+    },
+    {
+      "item_code": "74366",
+      "am_name": "Emami Fair And Handsome Long Lasting Radiance Cream 30g",
+      "fk_name": "Smart and Handsome Long Lasting Radiance Cream|2X Spot Reduction|7 Hrs Brighter Look",
+      "fk_sp": 80,
+      "fk_mrp": 95,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.59
+    },
+    {
+      "item_code": "1570",
+      "am_name": "Dove Anti Dandruff Care Shampoo 180ml",
+      "fk_name": "DOVE Dryness Care Conditioner",
+      "fk_sp": 178,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.455
+    },
+    {
+      "item_code": "1203",
+      "am_name": "Engage Blush Deodorant for Women 150ml",
+      "fk_name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "fk_sp": 128,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.525
+    },
+    {
+      "item_code": "9188",
+      "am_name": "Daawat Basmati Rice Rozana Super 1 Kg",
+      "fk_name": "Daawat Gobindo Bhog Gobindobhog Rice",
+      "fk_sp": 227,
+      "fk_mrp": 275,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.411
+    },
+    {
+      "item_code": "8460",
+      "am_name": "Head & Shoulders Cool Menthol Shampoo 340ml",
+      "fk_name": "HEAD & SHOULDERS Anti Dandruff Shampoo Cool Menthol For Men & Women",
+      "fk_sp": 252,
+      "fk_mrp": 395,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.692
+    },
+    {
+      "item_code": "23501",
+      "am_name": "On1y Oregano Herbs - 10g",
+      "fk_name": "On1y Oregano",
+      "fk_sp": 55,
+      "fk_mrp": 99,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.706
+    },
+    {
+      "item_code": "3260",
+      "am_name": "Everest Chaat Masala - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.723
+    },
+    {
+      "item_code": "10665",
+      "am_name": "Dettol Original Liquid Hand Wash | 650ml | Pack of 1",
+      "fk_name": "Dettol Germ Protection ph-Balanced Liquid Refill, Skincare Hand Wash Refill Pouch",
+      "fk_sp": 87,
+      "fk_mrp": 109,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.531
+    },
+    {
+      "item_code": "10326",
+      "am_name": "Hair & Care Aloe Vera Hair Oil 100ml",
+      "fk_name": "Navratna Cool Ayurvedic Hair Oil",
+      "fk_sp": 77,
+      "fk_mrp": 89,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.485
+    },
+    {
+      "item_code": "70329",
+      "am_name": "Organic Tattva Organic Multigrain Flour - 1Kg",
+      "fk_name": "Organic Tattva Toor/Arhar Dal (Split)",
+      "fk_sp": 223,
+      "fk_mrp": 365,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.513
+    },
+    {
+      "item_code": "87588",
+      "am_name": "Coca-Cola Diet Coke | 300ml | Pack of 1",
+      "fk_name": "Coca-Cola Original Taste Soft Drink Can",
+      "fk_sp": 39,
+      "fk_mrp": 40,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.432
+    },
+    {
+      "item_code": "3853",
+      "am_name": "Pantene Lively Clean Shampoo 200ml",
+      "fk_name": "PANTENE Hair Science Deep Repair Shampoo with Vitamin B",
+      "fk_sp": 175,
+      "fk_mrp": 214,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.449
+    },
+    {
+      "item_code": "14736",
+      "am_name": "Oleev Active Olive Oil - 1L",
+      "fk_name": "Oleev Active Blended Oil Pouch",
+      "fk_sp": 268,
+      "fk_mrp": 295,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.655
+    },
+    {
+      "item_code": "70424",
+      "am_name": "Everyuth Naturals Hydrating & Exfoliating Walnut Apricot Scrub 100g",
+      "fk_name": "Everyuth Naturals Exfoliating Walnut- Scrub",
+      "fk_sp": 171,
+      "fk_mrp": 210,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.785
+    },
+    {
+      "item_code": "97912",
+      "am_name": "D'lecta Process Cheese Block - 200g",
+      "fk_name": "D'lecta 100% Mozzarella cheese",
+      "fk_sp": 109,
+      "fk_mrp": 155,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.645
+    },
+    {
+      "item_code": "8304",
+      "am_name": "Dabur Hair Oil 275ml",
+      "fk_name": "Nihar Naturals Shanti Amla and Badam Hair Oil",
+      "fk_sp": 66,
+      "fk_mrp": 99,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.431
+    },
+    {
+      "item_code": "37423",
+      "am_name": "Tata Rock Salt - 1 Kg",
+      "fk_name": "Tata Sampann Yellow Moong Dal (Split)",
+      "fk_sp": 158,
+      "fk_mrp": 213,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "1317",
+      "am_name": "Catch Turmeric Powder - 200g",
+      "fk_name": "Catch Ginger Garlic Paste",
+      "fk_sp": 23,
+      "fk_mrp": 47,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.431
+    },
+    {
+      "item_code": "10666",
+      "am_name": "Dettol Skincare Liquid Hand Wash | 675ml | Pack of 1",
+      "fk_name": "Dettol Germ Protection ph-Balanced Liquid Refill, Skincare Hand Wash Refill Pouch",
+      "fk_sp": 87,
+      "fk_mrp": 109,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.594
+    },
+    {
+      "item_code": "3579",
+      "am_name": "Himalaya Gentle Baby Wash | 100ml | Pack of 1",
+      "fk_name": "HIMALAYA Gentle Baby Shampoo Hibiscus & Chickpea",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.529
+    },
+    {
+      "item_code": "4947",
+      "am_name": "Tata Lite Low Sodium Iodised Salt - 1Kg",
+      "fk_name": "Tata Salt Free Flowing and Iodised Namak, Vacuum Evaporated Iodized Salt",
+      "fk_sp": 26,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.463
+    },
+    {
+      "item_code": "27270",
+      "am_name": "Organic Tattva Brown Sugar - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.557
+    },
+    {
+      "item_code": "12919",
+      "am_name": "Dove Dryness Care Conditioner 175ml",
+      "fk_name": "DOVE Dryness Care Conditioner",
+      "fk_sp": 178,
+      "fk_mrp": 285,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.906
+    },
+    {
+      "item_code": "2694",
+      "am_name": "Fortune Refined Sunflower Oil - 800g",
+      "fk_name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "fk_sp": 169,
+      "fk_mrp": 215,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.753
+    },
+    {
+      "item_code": "11799",
+      "am_name": "Cornitos Nacho Crisps Sizzlin Jalapeno | 55g | Pack of 1",
+      "fk_name": "CORNITOS Cheese and Herbs Nachos Nachos",
+      "fk_sp": 33,
+      "fk_mrp": 35,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.505
+    },
+    {
+      "item_code": "10696",
+      "am_name": "Dhara Kachi Ghani Mustard Oil - 1 Ltr",
+      "fk_name": "DHARA Kachi Ghani Mustard Oil Pouch",
+      "fk_sp": 177,
+      "fk_mrp": 250,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.829
+    },
+    {
+      "item_code": "28755",
+      "am_name": "Sunfeast Dark Fantasy Yumfills Pie | 242g | Pack of 1",
+      "fk_name": "Sunfeast Dark Fantasy Yumfills Cookie Cake Biscuit",
+      "fk_sp": 77,
+      "fk_mrp": 170,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.646
+    },
+    {
+      "item_code": "8400",
+      "am_name": "Dabur Gulabari Premium Rose Water 120ml",
+      "fk_name": "Dabur Premium Rose Skin Women",
+      "fk_sp": 46,
+      "fk_mrp": 56,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.618
+    },
+    {
+      "item_code": "76449",
+      "am_name": "Bikaji Namkeen Falahari Mix 200g",
+      "fk_name": "Bikaji Soya Sticks Masala Munch",
+      "fk_sp": 49,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "104266",
+      "am_name": "Lotus Herbals Safe Sun Sunscreen Cream SPF30 Pa++ | 100g | Pack of 1",
+      "fk_name": "LOTUS HERBALS Sunscreen - SPF 40 PA+++ SafeSun 3in1 Matte Look Daily Tinted sunscreen",
+      "fk_sp": 356,
+      "fk_mrp": 585,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.648
+    },
+    {
+      "item_code": "97854",
+      "am_name": "Shubhkart Darshana Pooja Ghee | 500ml | Pack of 1",
+      "fk_name": "Shubhkart Darshana Camphor Puja Oil 450 ML",
+      "fk_sp": 96,
+      "fk_mrp": 135,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.667
+    },
+    {
+      "item_code": "68039",
+      "am_name": "Vaseline Original Skin Protecting Jelly 200g",
+      "fk_name": "Vaseline Skin Protecting Jelly",
+      "fk_sp": 445,
+      "fk_mrp": 490,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.811
+    },
+    {
+      "item_code": "27554",
+      "am_name": "Pran Litchi Fruit Drinks 125ml",
+      "fk_name": "Pran Litchi Fruit Drink",
+      "fk_sp": 9,
+      "fk_mrp": 10,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.868
+    },
+    {
+      "item_code": "2618",
+      "am_name": "Fortune Chakki Fresh Atta - 10Kg",
+      "fk_name": "FORTUNE Chakki Fresh Atta",
+      "fk_sp": 459,
+      "fk_mrp": 507,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.909
+    },
+    {
+      "item_code": "100353",
+      "am_name": "Go Four Cheese - 200g",
+      "fk_name": "Go 8 cubes Processed cheese",
+      "fk_sp": 117,
+      "fk_mrp": 155,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.522
+    },
+    {
+      "item_code": "10285",
+      "am_name": "Doritos Sweet Chili Flavour Chips | 45g | Pack of 1",
+      "fk_name": "DORITOS Cheese Flavour Nachos",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.605
+    },
+    {
+      "item_code": "95057",
+      "am_name": "Cetaphil Gentle Skin Cleanser 125 ml",
+      "fk_name": "Cetaphil Moisturising Lotion For All Skin",
+      "fk_sp": 702,
+      "fk_mrp": 789,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.519
+    },
+    {
+      "item_code": "2704",
+      "am_name": "Fortune Premium Kachi Ghani Pure Mustard Oil - 1Ltr Pouch",
+      "fk_name": "FORTUNE Xpert Pro Sugar Conscious Blended Oil Pouch",
+      "fk_sp": 170,
+      "fk_mrp": 220,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.453
+    },
+    {
+      "item_code": "110",
+      "am_name": "Ching\u2019s Secret Schezwan Noodles | 240g | Pack of 1",
+      "fk_name": "Ching's Secret Schezwan, Desi Chinese Noodles Instant Noodles Vegetarian",
+      "fk_sp": 65,
+      "fk_mrp": 80,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.581
+    },
+    {
+      "item_code": "76419",
+      "am_name": "Too Yumm Multigrain Chips Dahi Papdi Chaat | 70g | Pack of 1",
+      "fk_name": "Too Yumm! Munchy Masala Karare, 60% Less Saturated Fats, No Palm Oil Chips",
+      "fk_sp": 14,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.476
+    },
+    {
+      "item_code": "102975",
+      "am_name": "Masterchow Korean Cheese Instant Noodles | 100g | Pack of 1",
+      "fk_name": "Yu Korean Ramen Cheesy Veg Carbonara Instant Noodles Vegetarian",
+      "fk_sp": 52,
+      "fk_mrp": 69,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.542
+    },
+    {
+      "item_code": "11715",
+      "am_name": "Kissan Pineapple Jam | 500g | Pack of 1",
+      "fk_name": "Kissan Mixed Fruit Jam",
+      "fk_sp": 174,
+      "fk_mrp": 190,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "17475",
+      "am_name": "Nissin Hot & Spicy Geki Korean Veg Noodles 80g",
+      "fk_name": "Nissin Geki Korean Ramen Spicy Cheese Flavoured Instant Noodles Instant Noodles Vegetarian",
+      "fk_sp": 47,
+      "fk_mrp": 55,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.582
+    },
+    {
+      "item_code": "875",
+      "am_name": "Amul Cow Ghee Refill Pack - 500ml",
+      "fk_name": "Amul Gold Milk",
+      "fk_sp": 35,
+      "fk_mrp": null,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.4
+    },
+    {
+      "item_code": "70328",
+      "am_name": "Organic Tattva Organic Bajra Flour - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.493
+    },
+    {
+      "item_code": "27223",
+      "am_name": "Organic Tattva Organic Jowar Flour - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.493
+    },
+    {
+      "item_code": "1204",
+      "am_name": "Engage Drizzle Deodorant for Women 150ml",
+      "fk_name": "Engage XX3 Cologne Body, Skin Friendly Deodorant Spray  -  For Men",
+      "fk_sp": 128,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.515
+    },
+    {
+      "item_code": "1365",
+      "am_name": "Colgate Total Whole Mouth Health Antibacterial Toothpaste Advanced Health 120g",
+      "fk_name": "Colgate Visible White Purple , Color-Corrects Yellow Tones on 1st Use and Toothbrush Toothpaste",
+      "fk_sp": 131,
+      "fk_mrp": 198,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.421
+    },
+    {
+      "item_code": "12223",
+      "am_name": "Daawat Pulav Basmati Rice 1 Kg",
+      "fk_name": "Daawat Gobindo Bhog Gobindobhog Rice",
+      "fk_sp": 227,
+      "fk_mrp": 275,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.485
+    },
+    {
+      "item_code": "1287",
+      "am_name": "Catch Ginger Paste - 100g",
+      "fk_name": "Catch Cumin Whole",
+      "fk_sp": 52,
+      "fk_mrp": 68,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.45
+    },
+    {
+      "item_code": "2699",
+      "am_name": "Engine Kachi Ghani Mustard Oil - 1Ltr Pouch",
+      "fk_name": "Engine Mustard Oil Plastic Bottle",
+      "fk_sp": 205,
+      "fk_mrp": 211,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.622
+    },
+    {
+      "item_code": "101519",
+      "am_name": "Cornitos Nachos | Peri Peri | 55g | Pack of 1",
+      "fk_name": "CORNITOS Cheese and Herbs Nachos Nachos",
+      "fk_sp": 33,
+      "fk_mrp": 35,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.513
+    },
+    {
+      "item_code": "83220",
+      "am_name": "Bajaj Almond Drops Non-Sticky Hair Oil | 625ml | Pack of 1",
+      "fk_name": "BAJAJ Almond Drops Nourishing Body Lotion with Almond Butter, 72 Hr Moisture Retention",
+      "fk_sp": 411,
+      "fk_mrp": 620,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.46
+    },
+    {
+      "item_code": "99701",
+      "am_name": "Baba Good Boy Steam Sonam Superior Jeera Rice 5kg",
+      "fk_name": "Jeera Rice / Gobindbhog Steam Rice",
+      "fk_sp": 965,
+      "fk_mrp": 985,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.519
+    },
+    {
+      "item_code": "2611",
+      "am_name": "India Gate Dubar Basmati Rice 1 Kg",
+      "fk_name": "INDIA GATE Flavourful & Fine Dubar | Long & Slender Grains | Naturally Aged Basmati Rice (Long Grain, Polished)",
+      "fk_sp": 127,
+      "fk_mrp": 159,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.478
+    },
+    {
+      "item_code": "1089",
+      "am_name": "Britannia Little Hearts Classic Biscuits | 70g | Pack of 1",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.732
+    },
+    {
+      "item_code": "8396",
+      "am_name": "Colgate Strong Teeth Toothpaste | 250g x 2 | Pack of 2",
+      "fk_name": "Colgate Strong Teeth Indias No.1 Toothpaste Anticavity Toothpaste - 200g + 200g + 100g Toothpaste",
+      "fk_sp": 238,
+      "fk_mrp": 310,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.582
+    },
+    {
+      "item_code": "1102",
+      "am_name": "Britannia Nutri Choice Oatmal Cookies 150g",
+      "fk_name": "BRITANNIA Nice Time Coconut Cookies Biscuit",
+      "fk_sp": 19,
+      "fk_mrp": 25,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.635
+    },
+    {
+      "item_code": "101771",
+      "am_name": "Sunlight Matic Liquid Detergent | 2L | Pack of 1",
+      "fk_name": "Surf excel Matic Top Load | Liquid Detergent | 2L Refill pouch | Remove Stains Fresh Liquid Detergent",
+      "fk_sp": 302,
+      "fk_mrp": 338,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.489
+    },
+    {
+      "item_code": "29933",
+      "am_name": "Real Fruit Power Guava Juice | 180ml | Pack of 1",
+      "fk_name": "Real Fruit Juice Mixed",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.545
+    },
+    {
+      "item_code": "10287",
+      "am_name": "Kurkure Puffcorn Yummy Cheese 52g",
+      "fk_name": "KURKURE Puffcorn Yummy Cheese",
+      "fk_sp": 19,
+      "fk_mrp": 20,
+      "match_status": "COMPLETE MATCH",
+      "match_score": 0.935
+    },
+    {
+      "item_code": "103784",
+      "am_name": "Fortune Soya Health Refined Soyabean Oil - 750g",
+      "fk_name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "fk_sp": 169,
+      "fk_mrp": 215,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.568
+    },
+    {
+      "item_code": "70385",
+      "am_name": "Organic Tattva Organic Chana Dal - 500g",
+      "fk_name": "Organic Tattva Mot Matki (Whole)",
+      "fk_sp": 66,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.507
+    },
+    {
+      "item_code": "13058",
+      "am_name": "Clinic Plus Strong & Thick Shampoo 175ml",
+      "fk_name": "Clinic Plus Strong & Long Health shampoo",
+      "fk_sp": 127,
+      "fk_mrp": 140,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.684
+    },
+    {
+      "item_code": "2497",
+      "am_name": "Tata Tea Gold Pouch | 1 Kg | Pack of 1",
+      "fk_name": "CITYGOLD Pyari Chai Tea Pouch",
+      "fk_sp": 233,
+      "fk_mrp": 240,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.54
+    },
+    {
+      "item_code": "104391",
+      "am_name": "Virgin Olive Oil Pet Bottle - 1000ml",
+      "fk_name": "Oleev Pomace Olive Oil PET Bottle",
+      "fk_sp": 388,
+      "fk_mrp": 1200,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.627
+    },
+    {
+      "item_code": "1307",
+      "am_name": "Catch Turmeric Powder - 100g",
+      "fk_name": "Catch Sabzi Masala Powder",
+      "fk_sp": 52,
+      "fk_mrp": 78,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.549
+    },
+    {
+      "item_code": "9195",
+      "am_name": "V Wash Plus Expert Intimate Hygiene Bottle 100ml",
+      "fk_name": "vwash Plus Expert Intimate Hygiene Wash for Women with pH 3.5 Intimate Wash",
+      "fk_sp": 153,
+      "fk_mrp": 200,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.602
+    },
+    {
+      "item_code": "81471",
+      "am_name": "Catch Kasuri Methi - 100g",
+      "fk_name": "Catch Kashmiri Mirch Powder",
+      "fk_sp": 93,
+      "fk_mrp": 120,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.56
+    },
+    {
+      "item_code": "83963",
+      "am_name": "Colgate Max Fresh Charcoal Cooling Crystals Toothpaste 130g",
+      "fk_name": "Colgate Visible White Purple , Color-Corrects Yellow Tones on 1st Use and Toothbrush Toothpaste",
+      "fk_sp": 131,
+      "fk_mrp": 198,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.474
+    },
+    {
+      "item_code": "102981",
+      "am_name": "Masterchow Green Chilli Sauce | 190g | Pack of 1",
+      "fk_name": "Knorr Green Chilli Sauce",
+      "fk_sp": 46,
+      "fk_mrp": 55,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.588
+    },
+    {
+      "item_code": "16216",
+      "am_name": "Nivea Fresh Natural Deodorant For Women 150ml",
+      "fk_name": "Nivea Men Fresh Ocean, Antibacterial 48h Protection, Long Lasting, Fresh Ocean Extracts Deodorant Spray  -  For Men",
+      "fk_sp": 203,
+      "fk_mrp": 299,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "103402",
+      "am_name": "Parachute Advansed Gold Vitamin E Coconut Hair Oil | 300ml | Pack of 1",
+      "fk_name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "fk_sp": 171,
+      "fk_mrp": 378,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.681
+    },
+    {
+      "item_code": "11787",
+      "am_name": "Cornitos Nacho Crisps Tikka Masala | 60g | Pack of 1",
+      "fk_name": "CORNITOS Cheese and Herbs Nachos Nachos",
+      "fk_sp": 33,
+      "fk_mrp": 35,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.506
+    },
+    {
+      "item_code": "10787",
+      "am_name": "Garnier Bright Complete Vitamin C Serum Cream UV 23g",
+      "fk_name": "glow and lovely Renew Bright Multivitamin Serum in Cream",
+      "fk_sp": 64,
+      "fk_mrp": 70,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "14560",
+      "am_name": "Joy Skin Fruits Fruit Moisturizing Skin Cream | 200ml | Pack of 1",
+      "fk_name": "Joy Skin Fruits Super Soft Moisturizer (Berries + Active Vitamin E)",
+      "fk_sp": 269,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.532
+    },
+    {
+      "item_code": "104219",
+      "am_name": "CRAX Biggies Swiss Cheese - 70g",
+      "fk_name": "CRAX Biggies Swiss Cheese Puffs Snacks",
+      "fk_sp": 30,
+      "fk_mrp": 60,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.746
+    },
+    {
+      "item_code": "10808",
+      "am_name": "Colgate Max Fresh Colling Crystals Toothpaste Blue 150g",
+      "fk_name": "Colgate Strong Teeth and Anticavity Toothpaste",
+      "fk_sp": 79,
+      "fk_mrp": 99,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.554
+    },
+    {
+      "item_code": "13052",
+      "am_name": "Gits Khaman Dhokla Mix | 500g | Pack of 1",
+      "fk_name": "Gits Gulab Jamun Instant Dessert Mix 500 g",
+      "fk_sp": 173,
+      "fk_mrp": 217,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.456
+    },
+    {
+      "item_code": "92137",
+      "am_name": "Bingo Mad Angles VeryPeri Peri 117-124g | Pack of 1",
+      "fk_name": "Bingo Mad Angles Achaari Masti Chips",
+      "fk_sp": 31,
+      "fk_mrp": 50,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "3263",
+      "am_name": "Everest Coriander Powder - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "3633",
+      "am_name": "Lakme Sun Expert SPF 24 Ultra Matte Lotion 100ml",
+      "fk_name": "Lakm\u00e9 Sunscreen - SPF 50 PA+++ 9 To 5 Sun Expert Super Matte",
+      "fk_sp": 408,
+      "fk_mrp": 669,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.602
+    },
+    {
+      "item_code": "3282",
+      "am_name": "Everest Sabji Masala - 100g",
+      "fk_name": "EVEREST Meat Masala",
+      "fk_sp": 78,
+      "fk_mrp": 98,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.727
+    },
+    {
+      "item_code": "3437",
+      "am_name": "Himalaya Gentle Baby Powder 100g",
+      "fk_name": "HIMALAYA Baby Prickly Heat Powder",
+      "fk_sp": 75,
+      "fk_mrp": 112,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.708
+    },
+    {
+      "item_code": "33035",
+      "am_name": "Weikfield Kesar Pista Falooda Mix | 200g | Pack of 1",
+      "fk_name": "WeiKFiELD Falooda Kesar Pista Mix Flavour|Rich, Smooth & Creamy| Delicious&Authentic Taste 200 g",
+      "fk_sp": 51,
+      "fk_mrp": 90,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.529
+    },
+    {
+      "item_code": "1095",
+      "am_name": "Britannia Milk Bikis Biscuits | 66g | Pack of 1",
+      "fk_name": "BRITANNIA Little Hearts Classic Crunch Sweet & Salty Biscuit",
+      "fk_sp": 22,
+      "fk_mrp": 30,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.436
+    },
+    {
+      "item_code": "2509",
+      "am_name": "Everest Tikhalal Chilli Powder - 100g",
+      "fk_name": "EVEREST Chicken Masala",
+      "fk_sp": 79,
+      "fk_mrp": 98,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.526
+    },
+    {
+      "item_code": "37068",
+      "am_name": "Emami 7 In One Oils 300 Ml",
+      "fk_name": "Parachute Advansed Rosemary-enriched Coconut Hair Oil|300 Ml Hair Oil",
+      "fk_sp": 171,
+      "fk_mrp": 378,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.421
+    },
+    {
+      "item_code": "29664",
+      "am_name": "Tata Sampann Unpolished Green Moong Dal Whole - 500g",
+      "fk_name": "Tata Sampann Turmeric Powder With Natural Oils, Haldi Powder",
+      "fk_sp": 175,
+      "fk_mrp": 235,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.459
+    },
+    {
+      "item_code": "10631",
+      "am_name": "Veet Hair Removal Cream Dry Skin 30g",
+      "fk_name": "Veet Pure Hair Removal Dry Skin Cream",
+      "fk_sp": 97,
+      "fk_mrp": 115,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.877
+    },
+    {
+      "item_code": "798",
+      "am_name": "Toor Dal Arhar Dal - 1kg",
+      "fk_name": "Toor/Arhar Dal (Split)",
+      "fk_sp": 132,
+      "fk_mrp": 200,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.762
+    },
+    {
+      "item_code": "93823",
+      "am_name": "Nissin Hot & Spicy Korean Kimchi Flavour Instant Noodles 80 g",
+      "fk_name": "Nissin Geki Korean Ramen Spicy Cheese Flavoured Instant Noodles Instant Noodles Vegetarian",
+      "fk_sp": 47,
+      "fk_mrp": 55,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.644
+    },
+    {
+      "item_code": "29942",
+      "am_name": "India Gate Basmati Rice Select 1 kg",
+      "fk_name": "INDIA GATE Flavourful & Fine Dubar | Long & Slender Grains | Naturally Aged Basmati Rice (Long Grain, Polished)",
+      "fk_sp": 127,
+      "fk_mrp": 159,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.444
+    },
+    {
+      "item_code": "67866",
+      "am_name": "Vim Lemon Dishwash Liquid Gel 2 Ltr Refill Pouch",
+      "fk_name": "Surf excel Matic Top Load | Liquid Detergent | 2L Refill pouch | Remove Stains Fresh Liquid Detergent",
+      "fk_sp": 302,
+      "fk_mrp": 338,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.49
+    },
+    {
+      "item_code": "1497",
+      "am_name": "Denver Imperial Deodorant Spray For Men 150ml | Pack of 1",
+      "fk_name": "Adrenex CYPHER Deodorant Spray  -  For Men",
+      "fk_sp": 64,
+      "fk_mrp": 250,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.624
+    },
+    {
+      "item_code": "10389",
+      "am_name": "MTR Instant Gulab Jamun Mix | 175g | Buy 1 Get 1 Free | Pack of 2",
+      "fk_name": "MTR Gulab Jamun Mix 350 g",
+      "fk_sp": 122,
+      "fk_mrp": 129,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.548
+    },
+    {
+      "item_code": "4085",
+      "am_name": "Ariel Matic Top Load Liquid Detergent | 950g| Pack of 1",
+      "fk_name": "Ariel Power Gel Top Load Removes 100 Stains in 1 Wash Fresh Liquid Detergent",
+      "fk_sp": 157,
+      "fk_mrp": 179,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.609
+    },
+    {
+      "item_code": "101194",
+      "am_name": "Comfort After Wash Morning Fresh Fabric Conditioner Refill Pouch | 2L | Pack of 1",
+      "fk_name": "Surf excel Matic Top Load | Liquid Detergent | 2L Refill pouch | Remove Stains Fresh Liquid Detergent",
+      "fk_sp": 302,
+      "fk_mrp": 338,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.465
+    },
+    {
+      "item_code": "3736",
+      "am_name": "Garnier Color Naturals Cream Natural Black 1 Mini Hair Color 35ml+30g",
+      "fk_name": "Fem Fairness Naturals Gold Hair Removal Cream - 60g (40g + 20g) | For All Skin Type Cream",
+      "fk_sp": 74,
+      "fk_mrp": 85,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.413
+    },
+    {
+      "item_code": "14654",
+      "am_name": "Quaker Oats Pouch | 1 kg | Pack of 1",
+      "fk_name": "Quaker Oats Pouch",
+      "fk_sp": 152,
+      "fk_mrp": 210,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.694
+    },
+    {
+      "item_code": "10531",
+      "am_name": "Wild Stone Hydra Energy 50ml",
+      "fk_name": "Wild Stone Edge Perfume Eau de Parfum Eau de Parfum  -  50 ml",
+      "fk_sp": 250,
+      "fk_mrp": 499,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.424
+    },
+    {
+      "item_code": "114",
+      "am_name": "Chings Veg Manchurian Masala - 20g",
+      "fk_name": "Ching's Secret Desi Chinese Schezwan Fried Rice Masala, 20g, Authentic Schezwan Flavour,",
+      "fk_sp": 8,
+      "fk_mrp": 10,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.41
+    },
+    {
+      "item_code": "22729",
+      "am_name": "Clinic Plus Strength & Shine With Egg Protein Shampoo 340ml",
+      "fk_name": "TRESemme Smooth Shine Shampoo,with silk protein",
+      "fk_sp": 304,
+      "fk_mrp": 490,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.596
+    },
+    {
+      "item_code": "104217",
+      "am_name": "CRAX Natkhat Masala - 88g",
+      "fk_name": "CRAX Curls Chatpata Masala Puffs Snacks Chips",
+      "fk_sp": 30,
+      "fk_mrp": 60,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.471
+    },
+    {
+      "item_code": "76848",
+      "am_name": "Fortune Soya Plus Oil - 840g Pouch",
+      "fk_name": "FORTUNE Sunlite Refined Sunflower Oil Pouch",
+      "fk_sp": 169,
+      "fk_mrp": 215,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.533
+    },
+    {
+      "item_code": "13613",
+      "am_name": "Kissan Mango Jam | 490g | Pack of 1",
+      "fk_name": "Kissan Mixed Fruit Jam",
+      "fk_sp": 174,
+      "fk_mrp": 190,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.491
+    },
+    {
+      "item_code": "5023",
+      "am_name": "Sensodyne Rapid Relief Toothpaste 80g",
+      "fk_name": "SENSODYNE Fresh Gel , for daily sensitivity protection. Toothpaste",
+      "fk_sp": 111,
+      "fk_mrp": 135,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.58
+    },
+    {
+      "item_code": "37064",
+      "am_name": "Mamaearth Tea Tree Face Wash For Acne & Pimples 100 ML",
+      "fk_name": "Mamaearth Rice Water & Niacinamide  Face Wash",
+      "fk_sp": 240,
+      "fk_mrp": 285,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.511
+    },
+    {
+      "item_code": "82804",
+      "am_name": "Pampers Happy Skin Baby Diaper Pants (M, 7-12 kg, 30 Diapers)",
+      "fk_name": "Pampers Diaper Pants - S(31 Pieces) - S",
+      "fk_sp": 251,
+      "fk_mrp": 374,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.527
+    },
+    {
+      "item_code": "4928",
+      "am_name": "Maaza Mango Drink | 600ml | Pack of 1",
+      "fk_name": "Maaza Mango Drink Original Flavor",
+      "fk_sp": 30,
+      "fk_mrp": 35,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.606
+    },
+    {
+      "item_code": "76003",
+      "am_name": "Limca lime & Lemon - 750 ml",
+      "fk_name": "Limca Lime n Lemoni Soft Drink, PET Bottle",
+      "fk_sp": 33,
+      "fk_mrp": 40,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.562
+    },
+    {
+      "item_code": "29815",
+      "am_name": "Amul Buttermilk Masti - 1Ltr",
+      "fk_name": "Amul Masti Spiced Buttermilk",
+      "fk_sp": 70,
+      "fk_mrp": null,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.778
+    },
+    {
+      "item_code": "96345",
+      "am_name": "Joy Skin Fruits Spots & Tan Clear Face Wash | 100ml | Buy 1 Get 1 Free",
+      "fk_name": "Joy Skin Fruits Super Soft Moisturizer (Berries + Active Vitamin E)",
+      "fk_sp": 269,
+      "fk_mrp": 399,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.425
+    },
+    {
+      "item_code": "104791",
+      "am_name": "Senu Disinfectant Floral Surface Cleaner - 500ml",
+      "fk_name": "Harpic Disinfectant Bathroom Cleaner Floral",
+      "fk_sp": 111,
+      "fk_mrp": 120,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.719
+    },
+    {
+      "item_code": "104793",
+      "am_name": "Senu Disinfectant Floral Surface Cleaner - 975ml",
+      "fk_name": "Harpic Disinfectant | Bathroom Cleaner | Floral",
+      "fk_sp": 172,
+      "fk_mrp": 230,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.719
+    },
+    {
+      "item_code": "104792",
+      "am_name": "Senu Disinfectant Citrus Surface Cleaner - 975ml",
+      "fk_name": "Flipkart Supermart Disinfectant Surface Cleaner Lemon",
+      "fk_sp": 94,
+      "fk_mrp": 200,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.626
+    },
+    {
+      "item_code": "4124",
+      "am_name": "Himalaya Refreshing Baby Soap 75g",
+      "fk_name": "HIMALAYA Kids Orange Toothpaste",
+      "fk_sp": 84,
+      "fk_mrp": 133,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.438
+    },
+    {
+      "item_code": "104594",
+      "am_name": "Doctors' Choice Kacchi Ghani Mustard Oil - 1L",
+      "fk_name": "King's Kachi Ghani Pure Mustard Oil Pouch",
+      "fk_sp": 170,
+      "fk_mrp": 205,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.554
+    },
+    {
+      "item_code": "46825",
+      "am_name": "Ag Mark Grade 1 Krishna Kachi Ghani Mustard Oil - 1L - Pouch",
+      "fk_name": "DHARA Kachi Ghani Mustard Oil Pouch",
+      "fk_sp": 177,
+      "fk_mrp": 250,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.681
+    },
+    {
+      "item_code": "11967",
+      "am_name": "Dunar Nawazish Basmati Rice XXXL Extra Long Grain - 1Kg",
+      "fk_name": "INDIA GATE Flavourful & Fine Dubar | Long & Slender Grains | Naturally Aged Basmati Rice (Long Grain, Polished)",
+      "fk_sp": 127,
+      "fk_mrp": 159,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.549
+    },
+    {
+      "item_code": "79794",
+      "am_name": "Doctors' Choice Physically Refined Rice Bran Oil - 1L",
+      "fk_name": "Saffola Active Rice Bran & Soyabean Refined Cooking Oil Rich in Omega 3 & Oryzanol Blended Oil Pouch",
+      "fk_sp": 159,
+      "fk_mrp": 208,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.425
+    },
+    {
+      "item_code": "26556",
+      "am_name": "Real Fruit Power Alphonso Mango Juice - 1L",
+      "fk_name": "Real Fruit Juice - Mosambi",
+      "fk_sp": 107,
+      "fk_mrp": 122,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.594
+    },
+    {
+      "item_code": "33090",
+      "am_name": "Coca Cola Soft Drink PET Bottle | 2L | Pack of 1",
+      "fk_name": "Coca-Cola PET Bottle",
+      "fk_sp": 72,
+      "fk_mrp": 85,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.625
+    },
+    {
+      "item_code": "76793",
+      "am_name": "Sprite Soft Drink - 2L",
+      "fk_name": "sprite PET Bottle",
+      "fk_sp": 81,
+      "fk_mrp": 95,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.541
+    },
+    {
+      "item_code": "72364",
+      "am_name": "Vachan Pure Cow Ghee - 1L",
+      "fk_name": "BRITANNIA Pure Cow Ghee Tin",
+      "fk_sp": 705,
+      "fk_mrp": 830,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.64
+    },
+    {
+      "item_code": "22419",
+      "am_name": "Agrawals 420 Khaman Dhokla Instant | 200g | Pack of 1",
+      "fk_name": "Gits Khaman Dhokla Instant Snack Mix 180 g",
+      "fk_sp": 52,
+      "fk_mrp": 66,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.637
+    },
+    {
+      "item_code": "71442",
+      "am_name": "Shubh Sakhi Whole Wheat Flour Atta - 5Kg",
+      "fk_name": "Agro Fresh Whole Wheat Atta",
+      "fk_sp": 212,
+      "fk_mrp": 270,
+      "match_status": "SEMI COMPLETE MATCH",
+      "match_score": 0.708
+    },
+    {
+      "item_code": "69682",
+      "am_name": "Fortune Filtered Groundnut Oil - 870g",
+      "fk_name": "FORTUNE Xpert Pro Immunity Blended Oil Pouch",
+      "fk_sp": 160,
+      "fk_mrp": 190,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.506
+    },
+    {
+      "item_code": "86221",
+      "am_name": "Daawat Rozana Gold Basmati Rice 1 Kg",
+      "fk_name": "Daawat Gobindo Bhog Gobindobhog Rice",
+      "fk_sp": 227,
+      "fk_mrp": 275,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.528
+    },
+    {
+      "item_code": "68173",
+      "am_name": "Kirti Gold Refined Soyabean Oil - 1 Ltr",
+      "fk_name": "Saffola Active Rice Bran & Soyabean Refined Cooking Oil Rich in Omega 3 & Oryzanol Blended Oil Pouch",
+      "fk_sp": 159,
+      "fk_mrp": 208,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.421
+    },
+    {
+      "item_code": "104501",
+      "am_name": "KPS Kitchen King Whole Wheat Chakki Atta - 5Kg",
+      "fk_name": "Agro Fresh Whole Wheat Atta",
+      "fk_sp": 212,
+      "fk_mrp": 270,
+      "match_status": "PARTIAL MATCH",
+      "match_score": 0.563
+    }
+  ]
+}
